@@ -1,0 +1,12 @@
+ftb-icon {
+  display: block;
+  height: inherit;
+  width:  inherit;
+  svg {
+    display: block;
+    height:  inherit;
+    width:  inherit;
+    fill:  var(--fill);
+    filter: drop-shadow(var(--shadow));
+  }
+}
