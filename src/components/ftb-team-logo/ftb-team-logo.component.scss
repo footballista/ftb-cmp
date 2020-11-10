@@ -1,0 +1,10 @@
+ftb-team-logo {
+  height: 50px;
+  width: 50px;
+  display: inline-flex;
+  background: red;
+  ftb-icon {
+    --fill: yellow;
+    --shadow: 2px 2px 2px black;
+  }
+}
