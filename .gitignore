@@ -20,6 +20,8 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
+src/components.d.ts
+
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
