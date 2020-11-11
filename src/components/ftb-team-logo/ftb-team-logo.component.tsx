@@ -15,10 +15,12 @@ export class FtbTeamLogo {
   @Prop() name: string;
   @Prop() version: number;
   @State() showPlaceholder: boolean = false;
-  private url: string;
+  @State() url: string;
 
   componentWillLoad() {
-    this.url = `https://footballista.ru/api/img/logos/${this.logo}-${this.mode}.png?logoId=${this.version}`;
+    this.url = `https://footballista.ru/api/img/logos/${this.team?.logo || this.logo}-${this.mode}.png?logoId=${
+      this.team?.logoId || this.version
+    }`;
   }
 
   render() {
