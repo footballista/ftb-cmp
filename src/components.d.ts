@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Player } from "ftb-models/dist/models/player.model";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
 import { Team } from "ftb-models/dist/models/team.model";
 import { User } from "ftb-models/dist/models/user.model";
@@ -17,6 +18,11 @@ export namespace Components {
     interface FtbImg {
         "name": string;
         "src": string;
+    }
+    interface FtbPlayerPhoto {
+        "player": Player;
+        "playerId": number;
+        "version": number;
     }
     interface FtbTeamLogo {
         "logo": string;
@@ -50,6 +56,12 @@ declare global {
         prototype: HTMLFtbImgElement;
         new (): HTMLFtbImgElement;
     };
+    interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerPhotoElement: {
+        prototype: HTMLFtbPlayerPhotoElement;
+        new (): HTMLFtbPlayerPhotoElement;
+    };
     interface HTMLFtbTeamLogoElement extends Components.FtbTeamLogo, HTMLStencilElement {
     }
     var HTMLFtbTeamLogoElement: {
@@ -66,6 +78,7 @@ declare global {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
+        "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
     }
@@ -83,6 +96,11 @@ declare namespace LocalJSX {
         "onLoaded"?: (event: CustomEvent<boolean>) => void;
         "src": string;
     }
+    interface FtbPlayerPhoto {
+        "player"?: Player;
+        "playerId"?: number;
+        "version"?: number;
+    }
     interface FtbTeamLogo {
         "logo"?: string;
         "mode"?: FtbTeamLogoMode;
@@ -99,6 +117,7 @@ declare namespace LocalJSX {
         "cmp-showcase": CmpShowcase;
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
+        "ftb-player-photo": FtbPlayerPhoto;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
     }
@@ -110,6 +129,7 @@ declare module "@stencil/core" {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
+            "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
         }

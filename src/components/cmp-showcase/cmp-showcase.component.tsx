@@ -1,6 +1,7 @@
 import { Component, Host, h } from '@stencil/core';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { User } from 'ftb-models/dist/models/user.model';
+import { Player } from 'ftb-models/dist/models/player.model';
 
 /**
  * Test page that demonstrates all existing components
@@ -15,6 +16,7 @@ export class CmpTest {
     const components: Array<{ title: string; elements: Array<{ descr: string; e: any }> }> = [
       this.teamLogo(),
       this.userPhoto(),
+      this.playerPhoto(),
     ];
 
     return (
@@ -71,6 +73,26 @@ export class CmpTest {
         {
           descr: 'Incorrect photo',
           e: () => <ftb-user-photo user-id={-1} version={2}></ftb-user-photo>,
+        },
+      ],
+    };
+  }
+
+  private playerPhoto() {
+    return {
+      title: 'Player photo',
+      elements: [
+        {
+          descr: 'Argument object',
+          e: () => <ftb-player-photo player={new Player({ _id: 1, photoId: 1 })}></ftb-player-photo>,
+        },
+        {
+          descr: 'Separate object',
+          e: () => <ftb-player-photo player-id={1} version={2}></ftb-player-photo>,
+        },
+        {
+          descr: 'Incorrect photo',
+          e: () => <ftb-player-photo player-id={-1} version={2}></ftb-player-photo>,
         },
       ],
     };
