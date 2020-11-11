@@ -2,10 +2,13 @@ ftb-icon {
   display: block;
   height: inherit;
   width: inherit;
+  box-sizing: border-box;
   svg {
     display: block;
     height: inherit;
     width: inherit;
+    border-radius: inherit;
+    box-sizing: border-box;
     fill: var(--fill);
   }
 }

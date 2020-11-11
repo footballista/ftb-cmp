@@ -6,11 +6,13 @@ ftb-img {
     display: block;
     height: inherit;
     width: inherit;
+    border-radius: inherit;
     img {
       display: block;
       opacity: 0;
       height: inherit;
       width: inherit;
+      border-radius: inherit;
       &.loaded {
         opacity: 1;
       }
