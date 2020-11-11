@@ -1,3 +1,20 @@
+## [0.0.3](https://github.com/footballista/ftb-cmp/compare/0.0.2...0.0.3) (2020-11-11)
+
+
+### Bug Fixes
+
+* minor style fixes in ftb-img and ftb-icon ([ef3efad](https://github.com/footballista/ftb-cmp/commit/ef3efad23861bcfbda3e7f32fc2599f61972bb57))
+* team-logo work with model as parameter ([71d5010](https://github.com/footballista/ftb-cmp/commit/71d5010eaba7e97f131030e9d7542c209556739d))
+
+
+### Features
+
+* created showcase component ([b3e6d65](https://github.com/footballista/ftb-cmp/commit/b3e6d65bba81f8cd4ae6761074d216003339742d))
+* ftb-player-photo created ([b62b98b](https://github.com/footballista/ftb-cmp/commit/b62b98b1509f8d831032476bd33c39c6ce7ee343))
+* ftb-user-photo created ([6769f48](https://github.com/footballista/ftb-cmp/commit/6769f4829b576c6173d37b01bf4f64cc496255f5))
+
+
+
 ## 0.0.2 (2020-11-10)
 
 
