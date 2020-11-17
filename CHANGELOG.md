@@ -1,3 +1,12 @@
+## [0.0.4](https://github.com/footballista/ftb-cmp/compare/0.0.3...0.0.4) (2020-11-17)
+
+
+### Features
+
+* created "improving image" component ([ca3f93f](https://github.com/footballista/ftb-cmp/commit/ca3f93f3a289600f85df144842aca2753f456e50))
+
+
+
 ## [0.0.3](https://github.com/footballista/ftb-cmp/compare/0.0.2...0.0.3) (2020-11-11)
 
 
