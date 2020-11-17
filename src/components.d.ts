@@ -19,6 +19,9 @@ export namespace Components {
         "name": string;
         "src": string;
     }
+    interface FtbImprovingImg {
+        "sources": string[];
+    }
     interface FtbPlayerPhoto {
         "player": Player;
         "playerId": number;
@@ -56,6 +59,12 @@ declare global {
         prototype: HTMLFtbImgElement;
         new (): HTMLFtbImgElement;
     };
+    interface HTMLFtbImprovingImgElement extends Components.FtbImprovingImg, HTMLStencilElement {
+    }
+    var HTMLFtbImprovingImgElement: {
+        prototype: HTMLFtbImprovingImgElement;
+        new (): HTMLFtbImprovingImgElement;
+    };
     interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {
     }
     var HTMLFtbPlayerPhotoElement: {
@@ -78,6 +87,7 @@ declare global {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
+        "ftb-improving-img": HTMLFtbImprovingImgElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
@@ -95,6 +105,9 @@ declare namespace LocalJSX {
         "onFailed"?: (event: CustomEvent<boolean>) => void;
         "onLoaded"?: (event: CustomEvent<boolean>) => void;
         "src": string;
+    }
+    interface FtbImprovingImg {
+        "sources": string[];
     }
     interface FtbPlayerPhoto {
         "player"?: Player;
@@ -117,6 +130,7 @@ declare namespace LocalJSX {
         "cmp-showcase": CmpShowcase;
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
+        "ftb-improving-img": FtbImprovingImg;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
@@ -129,6 +143,7 @@ declare module "@stencil/core" {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
+            "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;

@@ -17,6 +17,7 @@ export class CmpTest {
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
+      this.improvingImg(),
     ];
 
     return (
@@ -93,6 +94,26 @@ export class CmpTest {
         {
           descr: 'Incorrect photo',
           e: () => <ftb-player-photo player-id={-1} version={2}></ftb-player-photo>,
+        },
+      ],
+    };
+  }
+
+  private improvingImg() {
+    return {
+      title: 'Improving image',
+      elements: [
+        {
+          descr: 'Simple case',
+          e: () => (
+            <ftb-improving-img
+              sources={[
+                'https://img.youtube.com/vi/ehZwZ-iotGo/default.jpg',
+                'https://img.youtube.com/vi/ehZwZ-iotGo/sddefault.jpg',
+                'https://sun9-72.userapi.com/c855136/v855136020/23a475/AGI_Y0YT3fk.jpg',
+              ]}
+            ></ftb-improving-img>
+          ),
         },
       ],
     };

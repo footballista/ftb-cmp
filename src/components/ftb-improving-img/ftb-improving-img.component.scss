@@ -1,0 +1,14 @@
+ftb-improving-img {
+  img {
+    height: inherit;
+    width: inherit;
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
+  }
+  .service-img {
+    height: 0;
+    width: 0;
+  }
+}
