@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/footballista/ftb-cmp/compare/0.0.4...0.0.5) (2020-11-17)
+
+
+### Bug Fixes
+
+* set default height/width to ftb-improving-img ([1a4cb22](https://github.com/footballista/ftb-cmp/commit/1a4cb2256b369e04c9eb316213e5438297aa06d5))
+
+
+
 ## [0.0.4](https://github.com/footballista/ftb-cmp/compare/0.0.3...0.0.4) (2020-11-17)
 
 
