@@ -1,0 +1,30 @@
+ftb-pagination {
+  .ftb-pagination-items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      flex: 1;
+    }
+  }
+  .ftb-pagination-pages-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    user-select: none;
+    .page {
+      font-size: 13px;
+      padding: 0 5px;
+      cursor: pointer;
+      transition: color 0.2s linear;
+      $selectedColor: cornflowerblue;
+      &:hover {
+        color: $selectedColor;
+      }
+      &.selected {
+        font-size: 16px;
+        color: $selectedColor;
+      }
+    }
+  }
+}

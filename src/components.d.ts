@@ -12,6 +12,8 @@ import { User } from "ftb-models/dist/models/user.model";
 export namespace Components {
     interface CmpShowcase {
     }
+    interface FtbAlertsFeed {
+    }
     interface FtbIcon {
         "svg": string;
     }
@@ -21,6 +23,13 @@ export namespace Components {
     }
     interface FtbImprovingImg {
         "sources": string[];
+    }
+    interface FtbPagination {
+        "itemHeightPx": number;
+        "itemMinWidthPx": number;
+        "items": any[];
+        "renderItem": (item) => string;
+        "rows": number;
     }
     interface FtbPlayerPhoto {
         "player": Player;
@@ -47,6 +56,12 @@ declare global {
         prototype: HTMLCmpShowcaseElement;
         new (): HTMLCmpShowcaseElement;
     };
+    interface HTMLFtbAlertsFeedElement extends Components.FtbAlertsFeed, HTMLStencilElement {
+    }
+    var HTMLFtbAlertsFeedElement: {
+        prototype: HTMLFtbAlertsFeedElement;
+        new (): HTMLFtbAlertsFeedElement;
+    };
     interface HTMLFtbIconElement extends Components.FtbIcon, HTMLStencilElement {
     }
     var HTMLFtbIconElement: {
@@ -64,6 +79,12 @@ declare global {
     var HTMLFtbImprovingImgElement: {
         prototype: HTMLFtbImprovingImgElement;
         new (): HTMLFtbImprovingImgElement;
+    };
+    interface HTMLFtbPaginationElement extends Components.FtbPagination, HTMLStencilElement {
+    }
+    var HTMLFtbPaginationElement: {
+        prototype: HTMLFtbPaginationElement;
+        new (): HTMLFtbPaginationElement;
     };
     interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {
     }
@@ -85,9 +106,11 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "cmp-showcase": HTMLCmpShowcaseElement;
+        "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
         "ftb-improving-img": HTMLFtbImprovingImgElement;
+        "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
@@ -95,6 +118,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CmpShowcase {
+    }
+    interface FtbAlertsFeed {
     }
     interface FtbIcon {
         "svg": string;
@@ -108,6 +133,13 @@ declare namespace LocalJSX {
     }
     interface FtbImprovingImg {
         "sources": string[];
+    }
+    interface FtbPagination {
+        "itemHeightPx": number;
+        "itemMinWidthPx": number;
+        "items": any[];
+        "renderItem": (item) => string;
+        "rows": number;
     }
     interface FtbPlayerPhoto {
         "player"?: Player;
@@ -128,9 +160,11 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "cmp-showcase": CmpShowcase;
+        "ftb-alerts-feed": FtbAlertsFeed;
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
         "ftb-improving-img": FtbImprovingImg;
+        "ftb-pagination": FtbPagination;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
@@ -141,9 +175,11 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
+            "ftb-alerts-feed": LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
+            "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;

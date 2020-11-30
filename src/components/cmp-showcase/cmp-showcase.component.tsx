@@ -2,6 +2,7 @@ import { Component, Host, h } from '@stencil/core';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { User } from 'ftb-models/dist/models/user.model';
 import { Player } from 'ftb-models/dist/models/player.model';
+import range from 'lodash-es/range';
 
 /**
  * Test page that demonstrates all existing components
@@ -13,12 +14,11 @@ import { Player } from 'ftb-models/dist/models/player.model';
 })
 export class CmpTest {
   render() {
-    const components: Array<{ title: string; elements: Array<{ descr: string; e: any }> }> = [
-      this.teamLogo(),
-      this.userPhoto(),
-      this.playerPhoto(),
-      this.improvingImg(),
-    ];
+    const components: Array<{
+      title: string;
+      elements: Array<{ descr: string; e: any }>;
+      caseStyle?: { [key: string]: string };
+    }> = [this.teamLogo(), this.userPhoto(), this.playerPhoto(), this.improvingImg(), this.content()];
 
     return (
       <Host>
@@ -27,7 +27,7 @@ export class CmpTest {
             <h4>{c.title}</h4>
             <div class="elements">
               {c.elements.map(el => (
-                <div class="case">
+                <div class="case" style={c.caseStyle || {}}>
                   {el.e()}
                   <p>{el.descr}</p>
                 </div>
@@ -113,6 +113,58 @@ export class CmpTest {
                 'https://sun9-72.userapi.com/c855136/v855136020/23a475/AGI_Y0YT3fk.jpg',
               ]}
             ></ftb-improving-img>
+          ),
+        },
+      ],
+    };
+  }
+
+  private content() {
+    const renderItem = (item: number) => <div class="pag-item">{item}</div>;
+    const rows = 2;
+    const itemMinWidthPx = 100;
+    const itemHeightPx = 54;
+
+    return {
+      title: 'Pagination',
+      caseStyle: { flex: '1' },
+      elements: [
+        {
+          descr: 'wide',
+          e: () => (
+            <ftb-pagination
+              items={range(12)}
+              renderItem={renderItem}
+              rows={rows}
+              itemMinWidthPx={itemMinWidthPx}
+              itemHeightPx={itemHeightPx}
+            ></ftb-pagination>
+          ),
+        },
+        {
+          descr: 'narrow',
+          e: () => (
+            <ftb-pagination
+              items={range(12)}
+              renderItem={renderItem}
+              rows={rows}
+              itemMinWidthPx={itemMinWidthPx}
+              itemHeightPx={itemHeightPx}
+              style={{ 'max-width': '300px' }}
+            ></ftb-pagination>
+          ),
+        },
+        {
+          descr: 'many pages',
+          e: () => (
+            <ftb-pagination
+              items={range(120)}
+              renderItem={renderItem}
+              rows={rows}
+              itemMinWidthPx={itemMinWidthPx}
+              itemHeightPx={itemHeightPx}
+              style={{ 'max-width': '300px' }}
+            ></ftb-pagination>
           ),
         },
       ],
