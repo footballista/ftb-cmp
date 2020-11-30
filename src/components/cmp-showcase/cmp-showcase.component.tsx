@@ -1,8 +1,9 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h, State } from '@stencil/core';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { User } from 'ftb-models/dist/models/user.model';
 import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
+import { Collection } from 'ftb-models/dist/models/base/collection';
 
 /**
  * Test page that demonstrates all existing components
@@ -13,12 +14,32 @@ import range from 'lodash-es/range';
   shadow: true,
 })
 export class CmpTest {
+  @State() updateSignal = 0;
+
+  private data = {
+    improvingCollection: new Collection({ total: 12, items: range(7) }),
+  };
+
+  componentWillLoad() {
+    setTimeout(() => {
+      this.data.improvingCollection.items = range(12);
+      this.updateSignal++;
+    }, 10000);
+  }
+
   render() {
     const components: Array<{
       title: string;
       elements: Array<{ descr: string; e: any }>;
       caseStyle?: { [key: string]: string };
-    }> = [this.teamLogo(), this.userPhoto(), this.playerPhoto(), this.improvingImg(), this.content()];
+    }> = [
+      this.teamLogo(),
+      this.userPhoto(),
+      this.playerPhoto(),
+      this.improvingImg(),
+      this.pagination(),
+      this.paginationWithCollection(),
+    ];
 
     return (
       <Host>
@@ -119,7 +140,7 @@ export class CmpTest {
     };
   }
 
-  private content() {
+  private pagination() {
     const renderItem = (item: number) => <div class="pag-item">{item}</div>;
     const rows = 2;
     const itemMinWidthPx = 100;
@@ -133,6 +154,7 @@ export class CmpTest {
           descr: 'wide',
           e: () => (
             <ftb-pagination
+              totalItems={12}
               items={range(12)}
               renderItem={renderItem}
               rows={rows}
@@ -145,6 +167,7 @@ export class CmpTest {
           descr: 'narrow',
           e: () => (
             <ftb-pagination
+              totalItems={12}
               items={range(12)}
               renderItem={renderItem}
               rows={rows}
@@ -158,7 +181,50 @@ export class CmpTest {
           descr: 'many pages',
           e: () => (
             <ftb-pagination
+              totalItems={120}
               items={range(120)}
+              renderItem={renderItem}
+              rows={rows}
+              itemMinWidthPx={itemMinWidthPx}
+              itemHeightPx={itemHeightPx}
+              style={{ 'max-width': '300px' }}
+            ></ftb-pagination>
+          ),
+        },
+      ],
+    };
+  }
+
+  private paginationWithCollection() {
+    const renderItem = (item: number) => <div class="pag-item">{item}</div>;
+    const rows = 2;
+    const itemMinWidthPx = 100;
+    const itemHeightPx = 54;
+
+    return {
+      title: 'Pagination with partially loaded collection',
+      caseStyle: { flex: '1' },
+      elements: [
+        {
+          descr: 'loaded 7 of 12',
+          e: () => (
+            <ftb-pagination
+              totalItems={12}
+              items={range(7)}
+              renderItem={renderItem}
+              rows={rows}
+              itemMinWidthPx={itemMinWidthPx}
+              itemHeightPx={itemHeightPx}
+              style={{ 'max-width': '300px' }}
+            ></ftb-pagination>
+          ),
+        },
+        {
+          descr: '7/12, rest loaded in 10 sec.',
+          e: () => (
+            <ftb-pagination
+              totalItems={this.data.improvingCollection.total}
+              items={this.data.improvingCollection.items}
               renderItem={renderItem}
               rows={rows}
               itemMinWidthPx={itemMinWidthPx}

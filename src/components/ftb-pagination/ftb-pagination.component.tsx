@@ -8,13 +8,15 @@ import { AsyncSubject } from 'rxjs';
   shadow: false,
 })
 export class FtbPagination {
-  @Prop() items!: any[];
+  @Prop() totalItems: number;
+  @Prop() items: any[];
   @Prop() rows!: number;
   @Prop() itemMinWidthPx!: number;
   @Prop() itemHeightPx!: number;
   @Prop() renderItem!: (item) => string;
   @State() displayItems: any[];
   @Element() element: HTMLElement;
+  private pageLoaded: boolean;
   private itemMaxWidthPx: number;
   private itemsPerPage: number;
   private wrapperHeight: number;
@@ -31,13 +33,17 @@ export class FtbPagination {
     await this.ready$.toPromise();
   }
 
+  componentWillUpdate() {
+    this.defineDisplayedItems();
+  }
+
   private onResize() {
     const itemsPerRow = Math.floor(this.element.offsetWidth / this.itemMinWidthPx);
     this.itemMaxWidthPx = this.element.offsetWidth / itemsPerRow;
 
     this.itemsPerPage = itemsPerRow * this.rows;
-    this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
-    const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.items.length / itemsPerRow));
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+    const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));
     this.wrapperHeight = this.itemHeightPx * maxDisplayedRows;
     this.defineDisplayedItems();
 
@@ -54,7 +60,14 @@ export class FtbPagination {
 
   private defineDisplayedItems() {
     const offset = this.currentPage * this.itemsPerPage;
-    this.displayItems = this.items.slice(offset, offset + this.itemsPerPage);
+    const limit = offset + this.itemsPerPage;
+    if (this.totalItems === this.items.length || this.items.length >= limit) {
+      this.displayItems = this.items.slice(offset, limit);
+      this.pageLoaded = true;
+    } else {
+      this.displayItems = [];
+      this.pageLoaded = false;
+    }
   }
 
   private getDisplayedPages(): Array<number | null> {
@@ -86,18 +99,24 @@ export class FtbPagination {
     return (
       <Host>
         <div class="ftb-pagination-items-wrapper" style={{ height: this.wrapperHeight + 'px' }}>
-          {this.displayItems.map(i => (
-            <div
-              class="item"
-              style={{
-                'min-width': this.itemMinWidthPx + 'px',
-                'max-width': this.itemMaxWidthPx + 'px',
-                'height': this.itemHeightPx + 'px',
-              }}
-            >
-              {this.renderItem(i)}
+          {this.pageLoaded ? (
+            this.displayItems.map(i => (
+              <div
+                class="item"
+                style={{
+                  'min-width': this.itemMinWidthPx + 'px',
+                  'max-width': this.itemMaxWidthPx + 'px',
+                  'height': this.itemHeightPx + 'px',
+                }}
+              >
+                {this.renderItem(i)}
+              </div>
+            ))
+          ) : (
+            <div class="spinner-container">
+              <ftb-spinner></ftb-spinner>
             </div>
-          ))}
+          )}
         </div>
         {this.totalPages > 1 && (
           <div class="ftb-pagination-pages-wrapper">

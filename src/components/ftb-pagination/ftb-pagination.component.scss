@@ -5,6 +5,16 @@ ftb-pagination {
     .item {
       flex: 1;
     }
+    .spinner-container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      ftb-spinner {
+        --size: 12px;
+      }
+    }
   }
   .ftb-pagination-pages-wrapper {
     display: flex;
@@ -12,8 +22,8 @@ ftb-pagination {
     justify-content: center;
     height: 40px;
     user-select: none;
+    font-size: 13px;
     .page {
-      font-size: 13px;
       padding: 0 5px;
       cursor: pointer;
       transition: color 0.2s linear;

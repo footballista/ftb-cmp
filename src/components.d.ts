@@ -30,11 +30,14 @@ export namespace Components {
         "items": any[];
         "renderItem": (item) => string;
         "rows": number;
+        "totalItems": number;
     }
     interface FtbPlayerPhoto {
         "player": Player;
         "playerId": number;
         "version": number;
+    }
+    interface FtbSpinner {
     }
     interface FtbTeamLogo {
         "logo": string;
@@ -92,6 +95,12 @@ declare global {
         prototype: HTMLFtbPlayerPhotoElement;
         new (): HTMLFtbPlayerPhotoElement;
     };
+    interface HTMLFtbSpinnerElement extends Components.FtbSpinner, HTMLStencilElement {
+    }
+    var HTMLFtbSpinnerElement: {
+        prototype: HTMLFtbSpinnerElement;
+        new (): HTMLFtbSpinnerElement;
+    };
     interface HTMLFtbTeamLogoElement extends Components.FtbTeamLogo, HTMLStencilElement {
     }
     var HTMLFtbTeamLogoElement: {
@@ -112,6 +121,7 @@ declare global {
         "ftb-improving-img": HTMLFtbImprovingImgElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
+        "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
     }
@@ -137,14 +147,17 @@ declare namespace LocalJSX {
     interface FtbPagination {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
-        "items": any[];
+        "items"?: any[];
         "renderItem": (item) => string;
         "rows": number;
+        "totalItems"?: number;
     }
     interface FtbPlayerPhoto {
         "player"?: Player;
         "playerId"?: number;
         "version"?: number;
+    }
+    interface FtbSpinner {
     }
     interface FtbTeamLogo {
         "logo"?: string;
@@ -166,6 +179,7 @@ declare namespace LocalJSX {
         "ftb-improving-img": FtbImprovingImg;
         "ftb-pagination": FtbPagination;
         "ftb-player-photo": FtbPlayerPhoto;
+        "ftb-spinner": FtbSpinner;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
     }
@@ -181,6 +195,7 @@ declare module "@stencil/core" {
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
+            "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
         }
