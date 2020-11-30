@@ -1,0 +1,26 @@
+ftb-tabs {
+  .ftb-tab-titles {
+    display: flex;
+    font-size: 13px;
+    text-transform: uppercase;
+    user-select: none;
+    height: 40px;
+    align-items: center;
+    justify-content: flex-start;
+    .ftb-tab-title {
+      padding: 2.5px 5px;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: all 0.2s linear;
+      border-bottom: 2px solid transparent;
+      &:hover {
+        color: #3b6fc6;
+        border-bottom: 2px solid #6495ed33;
+      }
+      &.selected {
+        color: cornflowerblue;
+        border-bottom: 2px solid cornflowerblue;
+      }
+    }
+  }
+}

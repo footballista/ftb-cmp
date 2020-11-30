@@ -39,6 +39,10 @@ export namespace Components {
     }
     interface FtbSpinner {
     }
+    interface FtbTabs {
+        "hideSingleTab": boolean;
+        "tabs": Array<{ renderTitle: () => string; renderContent: () => string }>;
+    }
     interface FtbTeamLogo {
         "logo": string;
         "mode": FtbTeamLogoMode;
@@ -101,6 +105,12 @@ declare global {
         prototype: HTMLFtbSpinnerElement;
         new (): HTMLFtbSpinnerElement;
     };
+    interface HTMLFtbTabsElement extends Components.FtbTabs, HTMLStencilElement {
+    }
+    var HTMLFtbTabsElement: {
+        prototype: HTMLFtbTabsElement;
+        new (): HTMLFtbTabsElement;
+    };
     interface HTMLFtbTeamLogoElement extends Components.FtbTeamLogo, HTMLStencilElement {
     }
     var HTMLFtbTeamLogoElement: {
@@ -122,6 +132,7 @@ declare global {
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
+        "ftb-tabs": HTMLFtbTabsElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
     }
@@ -159,6 +170,10 @@ declare namespace LocalJSX {
     }
     interface FtbSpinner {
     }
+    interface FtbTabs {
+        "hideSingleTab"?: boolean;
+        "tabs": Array<{ renderTitle: () => string; renderContent: () => string }>;
+    }
     interface FtbTeamLogo {
         "logo"?: string;
         "mode"?: FtbTeamLogoMode;
@@ -180,6 +195,7 @@ declare namespace LocalJSX {
         "ftb-pagination": FtbPagination;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-spinner": FtbSpinner;
+        "ftb-tabs": FtbTabs;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
     }
@@ -196,6 +212,7 @@ declare module "@stencil/core" {
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
+            "ftb-tabs": LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
         }

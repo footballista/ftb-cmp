@@ -39,6 +39,7 @@ export class CmpTest {
       this.improvingImg(),
       this.pagination(),
       this.paginationWithCollection(),
+      this.tabs(),
     ];
 
     return (
@@ -203,7 +204,6 @@ export class CmpTest {
 
     return {
       title: 'Pagination with partially loaded collection',
-      caseStyle: { flex: '1' },
       elements: [
         {
           descr: 'loaded 7 of 12',
@@ -221,16 +221,45 @@ export class CmpTest {
         },
         {
           descr: '7/12, rest loaded in 10 sec.',
+          e: () => this.createImprovedPagination(),
+        },
+      ],
+    };
+  }
+
+  private createImprovedPagination() {
+    const renderItem = (item: number) => <div class="pag-item">{item}</div>;
+    const rows = 2;
+    const itemMinWidthPx = 100;
+    const itemHeightPx = 54;
+
+    return (
+      <ftb-pagination
+        totalItems={this.data.improvingCollection.total}
+        items={this.data.improvingCollection.items}
+        renderItem={renderItem}
+        rows={rows}
+        itemMinWidthPx={itemMinWidthPx}
+        itemHeightPx={itemHeightPx}
+        style={{ 'max-width': '300px', 'min-width': '300px' }}
+      ></ftb-pagination>
+    );
+  }
+
+  private tabs() {
+    return {
+      title: 'Tabs',
+      caseStyle: { 'height': '229px', 'justify-content': 'flex-start' },
+      elements: [
+        {
+          descr: 'With paginated content',
           e: () => (
-            <ftb-pagination
-              totalItems={this.data.improvingCollection.total}
-              items={this.data.improvingCollection.items}
-              renderItem={renderItem}
-              rows={rows}
-              itemMinWidthPx={itemMinWidthPx}
-              itemHeightPx={itemHeightPx}
-              style={{ 'max-width': '300px' }}
-            ></ftb-pagination>
+            <ftb-tabs
+              tabs={[
+                { renderTitle: () => 'First', renderContent: () => this.createImprovedPagination() },
+                { renderTitle: () => 'Second', renderContent: () => <div>second tab</div> },
+              ]}
+            ></ftb-tabs>
           ),
         },
       ],
