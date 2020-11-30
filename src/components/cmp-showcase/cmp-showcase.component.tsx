@@ -37,6 +37,7 @@ export class CmpTest {
       this.userPhoto(),
       this.playerPhoto(),
       this.improvingImg(),
+      this.search(),
       this.pagination(),
       this.paginationWithCollection(),
       this.tabs(),
@@ -246,6 +247,35 @@ export class CmpTest {
     );
   }
 
+  private search() {
+    return {
+      title: 'Search',
+      elements: [
+        {
+          descr: 'Search numbers',
+          e: () => (
+            <ftb-searchable-content
+              items={range(50)}
+              renderItems={items => (
+                <div style={{ 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center' }}>
+                  {items.map(i => (
+                    <span style={{ padding: '0 5px' }}>{i}</span>
+                  ))}
+                </div>
+              )}
+              filterFn={(query, items) => Promise.resolve(items.filter(i => (i + '').includes(query)))}
+              placeholder="Search by number"
+            ></ftb-searchable-content>
+          ),
+        },
+        // {
+        //   descr: 'With category',
+        //   e: () => <ftb-searchable-content></ftb-searchable-content>,
+        // },
+      ],
+    };
+  }
+
   private tabs() {
     return {
       title: 'Tabs',
@@ -262,6 +292,17 @@ export class CmpTest {
             ></ftb-tabs>
           ),
         },
+        // {
+        //   descr: 'With search',
+        //   e: () => (
+        //     <ftb-tabs
+        //       tabs={[
+        //         { renderTitle: () => 'First', renderContent: () => <ftb-searchable-content></ftb-searchable-content> },
+        //         { renderTitle: () => 'Second', renderContent: () => <div>second tab</div> },
+        //       ]}
+        //     ></ftb-tabs>
+        //   ),
+        // },
       ],
     };
   }
