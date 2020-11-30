@@ -19,7 +19,8 @@ export class FtbPagination {
   private pageLoaded: boolean;
   private itemMaxWidthPx: number;
   private itemsPerPage: number;
-  private wrapperHeight: number;
+  private wrapperHeightPx: number;
+  private wrapperWidthPx: number;
   private totalPages: number;
   private currentPage: number = 0;
   private resizeObserver: ResizeObserver;
@@ -38,13 +39,14 @@ export class FtbPagination {
   }
 
   private onResize() {
-    const itemsPerRow = Math.floor(this.element.offsetWidth / this.itemMinWidthPx);
-    this.itemMaxWidthPx = this.element.offsetWidth / itemsPerRow;
+    this.wrapperWidthPx = this.element.offsetWidth || this.itemMinWidthPx;
+    const itemsPerRow = Math.floor(this.wrapperWidthPx / this.itemMinWidthPx);
+    this.itemMaxWidthPx = this.wrapperWidthPx / itemsPerRow;
 
     this.itemsPerPage = itemsPerRow * this.rows;
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));
-    this.wrapperHeight = this.itemHeightPx * maxDisplayedRows;
+    this.wrapperHeightPx = this.itemHeightPx * maxDisplayedRows;
     this.defineDisplayedItems();
 
     this.ready$.next(true);
@@ -98,7 +100,10 @@ export class FtbPagination {
   render() {
     return (
       <Host>
-        <div class="ftb-pagination-items-wrapper" style={{ height: this.wrapperHeight + 'px' }}>
+        <div
+          class="ftb-pagination-items-wrapper"
+          style={{ height: this.wrapperHeightPx + 'px', width: this.wrapperWidthPx + 'px' }}
+        >
           {this.pageLoaded ? (
             this.displayItems.map(i => (
               <div
