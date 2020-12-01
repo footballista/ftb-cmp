@@ -35,6 +35,7 @@ export class FtbPagination {
   }
 
   componentWillUpdate() {
+    this.defineTotalPages();
     this.defineDisplayedItems();
   }
 
@@ -44,9 +45,11 @@ export class FtbPagination {
     this.itemMaxWidthPx = this.wrapperWidthPx / itemsPerRow;
 
     this.itemsPerPage = itemsPerRow * this.rows;
-    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-    const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));
-    this.wrapperHeightPx = this.itemHeightPx * maxDisplayedRows;
+    if (!this.wrapperHeightPx) {
+      const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));
+      this.wrapperHeightPx = this.itemHeightPx * maxDisplayedRows;
+    }
+    this.defineTotalPages();
     this.defineDisplayedItems();
 
     this.ready$.next(true);
@@ -58,6 +61,10 @@ export class FtbPagination {
       this.currentPage = page;
       this.defineDisplayedItems();
     }
+  }
+
+  private defineTotalPages() {
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
   private defineDisplayedItems() {
@@ -123,9 +130,10 @@ export class FtbPagination {
             </div>
           )}
         </div>
-        {this.totalPages > 1 && (
-          <div class="ftb-pagination-pages-wrapper">
-            {this.getDisplayedPages().map(p =>
+
+        <div class={{ 'ftb-pagination-pages-wrapper': true, 'empty': this.totalPages <= 1 }}>
+          {this.totalPages > 1 &&
+            this.getDisplayedPages().map(p =>
               p === null ? (
                 <div>...</div>
               ) : (
@@ -134,8 +142,7 @@ export class FtbPagination {
                 </div>
               ),
             )}
-          </div>
-        )}
+        </div>
       </Host>
     );
   }

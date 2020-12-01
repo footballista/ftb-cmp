@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Player } from "ftb-models/dist/models/player.model";
+import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
 import { Team } from "ftb-models/dist/models/team.model";
 import { User } from "ftb-models/dist/models/user.model";
@@ -38,8 +39,9 @@ export namespace Components {
         "version": number;
     }
     interface FtbSearchableContent {
+        "categories": CategoryInterface[];
         "debounce": number;
-        "filterFn": (query: string, items: any[]) => Promise<any[]>;
+        "filterFn": (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
         "items": any[];
         "placeholder": string;
         "renderItems": (items: any[]) => string;
@@ -183,9 +185,11 @@ declare namespace LocalJSX {
         "version"?: number;
     }
     interface FtbSearchableContent {
+        "categories"?: CategoryInterface[];
         "debounce"?: number;
-        "filterFn": (query: string, items: any[]) => Promise<any[]>;
+        "filterFn": (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
         "items": any[];
+        "onInputKeyDown"?: (event: CustomEvent<KeyboardEvent>) => void;
         "placeholder": string;
         "renderItems": (items: any[]) => string;
     }

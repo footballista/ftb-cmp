@@ -4,6 +4,8 @@ import { User } from 'ftb-models/dist/models/user.model';
 import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
 import { Collection } from 'ftb-models/dist/models/base/collection';
+import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { filter } from 'ftb-models';
 
 /**
  * Test page that demonstrates all existing components
@@ -247,35 +249,6 @@ export class CmpTest {
     );
   }
 
-  private search() {
-    return {
-      title: 'Search',
-      elements: [
-        {
-          descr: 'Search numbers',
-          e: () => (
-            <ftb-searchable-content
-              items={range(50)}
-              renderItems={items => (
-                <div style={{ 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center' }}>
-                  {items.map(i => (
-                    <span style={{ padding: '0 5px' }}>{i}</span>
-                  ))}
-                </div>
-              )}
-              filterFn={(query, items) => Promise.resolve(items.filter(i => (i + '').includes(query)))}
-              placeholder="Search by number"
-            ></ftb-searchable-content>
-          ),
-        },
-        // {
-        //   descr: 'With category',
-        //   e: () => <ftb-searchable-content></ftb-searchable-content>,
-        // },
-      ],
-    };
-  }
-
   private tabs() {
     return {
       title: 'Tabs',
@@ -292,17 +265,97 @@ export class CmpTest {
             ></ftb-tabs>
           ),
         },
-        // {
-        //   descr: 'With search',
-        //   e: () => (
-        //     <ftb-tabs
-        //       tabs={[
-        //         { renderTitle: () => 'First', renderContent: () => <ftb-searchable-content></ftb-searchable-content> },
-        //         { renderTitle: () => 'Second', renderContent: () => <div>second tab</div> },
-        //       ]}
-        //     ></ftb-tabs>
-        //   ),
-        // },
+        {
+          descr: 'With search',
+          e: () => (
+            <ftb-tabs
+              tabs={[
+                { renderTitle: () => 'First', renderContent: () => this.search().elements[1].e() },
+                { renderTitle: () => 'Second', renderContent: () => <div>second tab</div> },
+              ]}
+            ></ftb-tabs>
+          ),
+        },
+      ],
+    };
+  }
+
+  private search() {
+    const filterFn = (items: number[], query: string, categories: CategoryInterface[]) => {
+      const oddevenVal = categories.find(c => c.key === 'oddeven').options.find(o => o.selected).key;
+      if (oddevenVal === 'odd') items = items.filter(i => i % 2);
+      if (oddevenVal === 'even') items = items.filter(i => !(i % 2));
+      return Promise.resolve(query ? items.filter(i => (i + '').includes(query)) : items);
+    };
+
+    return {
+      title: 'Search',
+      elements: [
+        {
+          descr: 'Search numbers',
+          e: () => (
+            <ftb-searchable-content
+              items={range(50)}
+              renderItems={items => (
+                <div style={{ 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center' }}>
+                  {items.map(i => (
+                    <span class="content-item">{i}</span>
+                  ))}
+                </div>
+              )}
+              filterFn={filterFn}
+              placeholder="Search by number"
+              categories={[
+                {
+                  key: 'oddeven',
+                  placeholder: 'Filter',
+                  filterFn: (query, options) => filter(options, query, ['text']),
+                  renderItem: i => i.text,
+                  options: [
+                    { key: 'all', text: 'All items' },
+                    { key: 'odd', text: 'Odd' },
+                    { key: 'even', text: 'Even' },
+                  ],
+                },
+              ]}
+            ></ftb-searchable-content>
+          ),
+        },
+        {
+          descr: 'With pagination',
+          e: () => (
+            <ftb-searchable-content
+              items={range(50)}
+              renderItems={items => {
+                return (
+                  <ftb-pagination
+                    totalItems={items.length}
+                    items={items}
+                    renderItem={(item: number) => <div class="pag-item">{item}</div>}
+                    rows={2}
+                    itemMinWidthPx={100}
+                    itemHeightPx={54}
+                  ></ftb-pagination>
+                );
+              }}
+              filterFn={filterFn}
+              placeholder="Search by number"
+              categories={[
+                {
+                  key: 'oddeven',
+                  placeholder: 'Filter',
+                  filterFn: (query, options) => filter(options, query, ['text']),
+                  renderItem: i => i.text,
+                  options: [
+                    { key: 'all', text: 'All items' },
+                    { key: 'odd', text: 'Odd' },
+                    { key: 'even', text: 'Even' },
+                  ],
+                },
+              ]}
+            ></ftb-searchable-content>
+          ),
+        },
       ],
     };
   }
