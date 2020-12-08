@@ -1,0 +1,35 @@
+ftb-game-photo-preview {
+  display: block;
+  width: inherit;
+  height: inherit;
+  .game-photo-wrapper {
+    width: inherit;
+    height: inherit;
+    .bg {
+      width: inherit;
+      height: inherit;
+      ftb-improving-img {
+        width: inherit;
+        height: inherit;
+      }
+    }
+  }
+  &:nth-child(2n) .bg {
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0) 2px,
+      rgba(255, 255, 255, 0) 3px
+    );
+  }
+  &:nth-child(2n -1) .bg {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1) 2px,
+      rgba(255, 255, 255, 0) 2px,
+      rgba(255, 255, 255, 0) 3px
+    );
+  }
+}
