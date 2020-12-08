@@ -1,7 +1,7 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core';
 import { Game, StageFormat } from 'ftb-models';
 import { Language } from 'ftb-models/dist/models/base/language';
-import { getComponentLanguage } from '@src/tools/component-language';
+import userState from '@src/tools/user-store';
 
 type TourLangBlock = {
   [Language.default]: string | string[];
@@ -54,17 +54,12 @@ export class FtbGameTour {
     },
   };
 
-  translate(key: string) {
-    return this.i18n[key][getComponentLanguage(this.element)];
-  }
-
   render() {
-    const lang = getComponentLanguage(this.element);
     return (
       <Host>
         {this.game.stage.format === StageFormat.cup
-          ? this.i18n.cup[lang][this.game.tourNumber]
-          : this.game.tourNumber + ' ' + this.i18n.round[lang]}
+          ? this.i18n.cup[userState.language][this.game.tourNumber]
+          : this.game.tourNumber + ' ' + this.i18n.round[userState.language]}
       </Host>
     );
   }

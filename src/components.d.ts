@@ -34,6 +34,8 @@ export namespace Components {
     interface FtbImprovingImg {
         "sources": string[];
     }
+    interface FtbLanguageSelect {
+    }
     interface FtbPagination {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
@@ -127,6 +129,12 @@ declare global {
         prototype: HTMLFtbImprovingImgElement;
         new (): HTMLFtbImprovingImgElement;
     };
+    interface HTMLFtbLanguageSelectElement extends Components.FtbLanguageSelect, HTMLStencilElement {
+    }
+    var HTMLFtbLanguageSelectElement: {
+        prototype: HTMLFtbLanguageSelectElement;
+        new (): HTMLFtbLanguageSelectElement;
+    };
     interface HTMLFtbPaginationElement extends Components.FtbPagination, HTMLStencilElement {
     }
     var HTMLFtbPaginationElement: {
@@ -184,6 +192,7 @@ declare global {
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
         "ftb-improving-img": HTMLFtbImprovingImgElement;
+        "ftb-language-select": HTMLFtbLanguageSelectElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
@@ -219,6 +228,8 @@ declare namespace LocalJSX {
     }
     interface FtbImprovingImg {
         "sources": string[];
+    }
+    interface FtbLanguageSelect {
     }
     interface FtbPagination {
         "itemHeightPx": number;
@@ -275,6 +286,7 @@ declare namespace LocalJSX {
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
         "ftb-improving-img": FtbImprovingImg;
+        "ftb-language-select": FtbLanguageSelect;
         "ftb-pagination": FtbPagination;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
@@ -297,6 +309,7 @@ declare module "@stencil/core" {
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
+            "ftb-language-select": LocalJSX.FtbLanguageSelect & JSXBase.HTMLAttributes<HTMLFtbLanguageSelectElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;

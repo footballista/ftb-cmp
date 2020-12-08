@@ -43,6 +43,7 @@ export class CmpTest {
       elements: Array<{ descr: string; e: any }>;
       caseStyle?: { [key: string]: string };
     }> = [
+      this.langSelect(),
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
@@ -72,6 +73,18 @@ export class CmpTest {
         ))}
       </Host>
     );
+  }
+
+  private langSelect() {
+    return {
+      title: 'Language select',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
   }
 
   private teamLogo() {

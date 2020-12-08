@@ -3,7 +3,7 @@ import { Game, LangBlock, RoleLevel } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-import { getComponentLanguage } from '@src/tools/component-language';
+import userState from '@src/tools/user-store';
 
 @Component({
   tag: 'ftb-photo-gallery',
@@ -28,8 +28,7 @@ export class FtbPhotoGallery {
   };
 
   translate(key: string) {
-    console.log(this.i18n[key][getComponentLanguage(this.element)]);
-    return this.i18n[key][getComponentLanguage(this.element)];
+    return this.i18n[key][userState.language];
   }
 
   componentDidLoad() {

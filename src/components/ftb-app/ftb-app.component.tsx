@@ -1,6 +1,7 @@
 import { Component, h, Host } from '@stencil/core';
 import userState from '@src/tools/user-store';
 import { Language } from 'ftb-models/dist/models/base/language';
+import { getFromStorage } from '@src/tools/storage';
 
 @Component({
   tag: 'ftb-app',
@@ -8,8 +9,9 @@ import { Language } from 'ftb-models/dist/models/base/language';
   shadow: true,
 })
 export class FtbApp {
-  componentWillRender() {
-    userState.user.language = Language.ru;
+  async componentWillLoad() {
+    const language = (await getFromStorage('language')) || Language.default;
+    userState.language = language;
   }
 
   render() {
