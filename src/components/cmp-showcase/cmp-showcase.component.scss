@@ -58,9 +58,15 @@
     }
   }
 
-  ftb-improving-img {
+  .case > ftb-improving-img {
     height: 90px;
     width: 120px;
+  }
+
+  ftb-game-photo-preview {
+    .game-photo-wrapper {
+      background: darkorange;
+    }
   }
 
   ftb-pagination {
@@ -89,6 +95,18 @@
       background: darkorange;
       color: rgba(255, 255, 255, 0.95);
       border-radius: 2px;
+    }
+  }
+
+  .photo-gallery {
+    width: 792px;
+    ftb-pagination {
+      max-width: 792px;
+      width: 100%;
+      .item {
+        margin: 1px;
+        cursor: pointer;
+      }
     }
   }
 }

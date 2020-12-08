@@ -26,21 +26,24 @@
   "dependencies": {
     "@stencil/core": "^2.3.0",
     "colorthief": "^2.3.2",
-    "ftb-models": "^2.1.1",
+    "file-saver": "^2.0.5",
+    "ftb-models": "^2.1.4",
     "lodash-es": "^4.17.15",
     "npm": "^6.14.9",
+    "photoswipe": "^4.1.3",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.3"
   },
   "license": "MIT",
   "devDependencies": {
     "@stencil/sass": "^1.4.1",
+    "@stencil/store": "^1.3.0",
     "@types/rx": "^4.1.2",
     "conventional-changelog-cli": "^2.1.1",
     "inquirer": "^7.3.3",
     "npm-check-updates": "^10.2.2",
     "prettier": "^2.2.1",
-    "semver": "^7.3.2",
+    "semver": "^7.3.4",
     "simple-git": "^2.24.0",
     "stencil-inline-svg": "^1.0.1"
   }

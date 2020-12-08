@@ -5,7 +5,10 @@ import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
 import { Collection } from 'ftb-models/dist/models/base/collection';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { filter } from 'ftb-models';
+import { filter, Game, GamePhoto, GamePhotoImg } from 'ftb-models';
+import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
+import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
+import { GameService } from 'ftb-models/dist/services/game.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -20,9 +23,14 @@ export class CmpTest {
 
   private data = {
     improvingCollection: new Collection({ total: 12, items: range(7) }),
+    game: new Game({ _id: 313299 }),
+    showGallery: false,
+    galleryIdx: 0,
   };
 
-  componentWillLoad() {
+  async componentWillLoad() {
+    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
+    this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id);
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -38,10 +46,12 @@ export class CmpTest {
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
+      this.photoGallery(),
       this.improvingImg(),
-      this.search(),
+      this.gamePhotoPreview(),
       this.pagination(),
       this.paginationWithCollection(),
+      this.search(),
       this.tabs(),
     ];
 
@@ -354,6 +364,98 @@ export class CmpTest {
                 },
               ]}
             ></ftb-searchable-content>
+          ),
+        },
+      ],
+    };
+  }
+
+  private gamePhotoPreview() {
+    return {
+      title: 'Game photo preview',
+      elements: [
+        {
+          descr: 'small',
+          e: () => (
+            <ftb-game-photo-preview
+              photo={this.data.game.photoset.photos[0]}
+              style={{ height: '50px', width: '100px' }}
+            ></ftb-game-photo-preview>
+          ),
+        },
+        {
+          descr: 'big',
+          e: () => (
+            <ftb-game-photo-preview
+              photo={this.data.game.photoset.photos[0]}
+              style={{ height: '100px', width: '200px' }}
+            ></ftb-game-photo-preview>
+          ),
+        },
+        {
+          descr: 'incorrect',
+          e: () => (
+            <ftb-game-photo-preview
+              photo={{
+                thumb: new GamePhotoImg(
+                  'https://sun9-10.userapi.com/impf/c851536/v851536702/15a74a/incorrect.jpg?size=1280x948&quality=96&sign=ffa05f7d2b59768d20eb91756d1a87fd&c_uniq_tag=muP6oinQviXYTcY30xJpPaTl5czvWHNwJXqCc01bJQA',
+                ),
+                middle: new GamePhotoImg(
+                  'https://sun9-10.userapi.com/impf/c851536/v851536702/15a74a/incorrect.jpg?size=1280x948&quality=96&sign=ffa05f7d2b59768d20eb91756d1a87fd&c_uniq_tag=muP6oinQviXYTcY30xJpPaTl5czvWHNwJXqCc01bJQA',
+                ),
+                full: null,
+                hd: null,
+              }}
+              style={{ height: '100px', width: '200px' }}
+            ></ftb-game-photo-preview>
+          ),
+        },
+      ],
+    };
+  }
+
+  private photoGallery() {
+    const open = (photo: GamePhoto) => {
+      const idx = this.data.game.photoset.photos.findIndex(p => p.thumb === photo.thumb);
+      this.data.galleryIdx = idx;
+      this.data.showGallery = true;
+      this.updateSignal++;
+    };
+
+    const close = () => {
+      this.data.showGallery = false;
+      this.updateSignal++;
+    };
+
+    return {
+      title: 'photo-gallery',
+      elements: [
+        {
+          descr: 'basic',
+          e: () => (
+            <div class="photo-gallery">
+              {this.data.showGallery && (
+                <ftb-photo-gallery
+                  game={this.data.game}
+                  onClosed={() => close()}
+                  start={this.data.galleryIdx}
+                ></ftb-photo-gallery>
+              )}
+              <ftb-pagination
+                totalItems={this.data.game.photoset.photos.length}
+                items={this.data.game.photoset.photos}
+                renderItem={i => (
+                  <ftb-game-photo-preview
+                    photo={i}
+                    style={{ height: '96px', width: '130px' }}
+                    onClick={() => open(i)}
+                  ></ftb-game-photo-preview>
+                )}
+                rows={2}
+                itemMinWidthPx={130}
+                itemHeightPx={96}
+              ></ftb-pagination>
+            </div>
           ),
         },
       ],

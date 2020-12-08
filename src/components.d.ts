@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Game, GamePhoto } from "ftb-models";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
@@ -14,6 +15,14 @@ export namespace Components {
     interface CmpShowcase {
     }
     interface FtbAlertsFeed {
+    }
+    interface FtbApp {
+    }
+    interface FtbGamePhotoPreview {
+        "photo": GamePhoto;
+    }
+    interface FtbGameTour {
+        "game": Game;
     }
     interface FtbIcon {
         "svg": string;
@@ -32,6 +41,10 @@ export namespace Components {
         "renderItem": (item) => string;
         "rows": number;
         "totalItems": number;
+    }
+    interface FtbPhotoGallery {
+        "game": Game;
+        "start": number;
     }
     interface FtbPlayerPhoto {
         "player": Player;
@@ -78,6 +91,24 @@ declare global {
         prototype: HTMLFtbAlertsFeedElement;
         new (): HTMLFtbAlertsFeedElement;
     };
+    interface HTMLFtbAppElement extends Components.FtbApp, HTMLStencilElement {
+    }
+    var HTMLFtbAppElement: {
+        prototype: HTMLFtbAppElement;
+        new (): HTMLFtbAppElement;
+    };
+    interface HTMLFtbGamePhotoPreviewElement extends Components.FtbGamePhotoPreview, HTMLStencilElement {
+    }
+    var HTMLFtbGamePhotoPreviewElement: {
+        prototype: HTMLFtbGamePhotoPreviewElement;
+        new (): HTMLFtbGamePhotoPreviewElement;
+    };
+    interface HTMLFtbGameTourElement extends Components.FtbGameTour, HTMLStencilElement {
+    }
+    var HTMLFtbGameTourElement: {
+        prototype: HTMLFtbGameTourElement;
+        new (): HTMLFtbGameTourElement;
+    };
     interface HTMLFtbIconElement extends Components.FtbIcon, HTMLStencilElement {
     }
     var HTMLFtbIconElement: {
@@ -101,6 +132,12 @@ declare global {
     var HTMLFtbPaginationElement: {
         prototype: HTMLFtbPaginationElement;
         new (): HTMLFtbPaginationElement;
+    };
+    interface HTMLFtbPhotoGalleryElement extends Components.FtbPhotoGallery, HTMLStencilElement {
+    }
+    var HTMLFtbPhotoGalleryElement: {
+        prototype: HTMLFtbPhotoGalleryElement;
+        new (): HTMLFtbPhotoGalleryElement;
     };
     interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {
     }
@@ -141,10 +178,14 @@ declare global {
     interface HTMLElementTagNameMap {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
+        "ftb-app": HTMLFtbAppElement;
+        "ftb-game-photo-preview": HTMLFtbGamePhotoPreviewElement;
+        "ftb-game-tour": HTMLFtbGameTourElement;
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
         "ftb-improving-img": HTMLFtbImprovingImgElement;
         "ftb-pagination": HTMLFtbPaginationElement;
+        "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
@@ -157,6 +198,14 @@ declare namespace LocalJSX {
     interface CmpShowcase {
     }
     interface FtbAlertsFeed {
+    }
+    interface FtbApp {
+    }
+    interface FtbGamePhotoPreview {
+        "photo"?: GamePhoto;
+    }
+    interface FtbGameTour {
+        "game"?: Game;
     }
     interface FtbIcon {
         "svg": string;
@@ -178,6 +227,12 @@ declare namespace LocalJSX {
         "renderItem": (item) => string;
         "rows": number;
         "totalItems"?: number;
+    }
+    interface FtbPhotoGallery {
+        "game": Game;
+        "onClosed"?: (event: CustomEvent<boolean>) => void;
+        "onPhotographerClicked"?: (event: CustomEvent<number>) => void;
+        "start": number;
     }
     interface FtbPlayerPhoto {
         "player"?: Player;
@@ -214,10 +269,14 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "cmp-showcase": CmpShowcase;
         "ftb-alerts-feed": FtbAlertsFeed;
+        "ftb-app": FtbApp;
+        "ftb-game-photo-preview": FtbGamePhotoPreview;
+        "ftb-game-tour": FtbGameTour;
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
         "ftb-improving-img": FtbImprovingImg;
         "ftb-pagination": FtbPagination;
+        "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-searchable-content": FtbSearchableContent;
         "ftb-spinner": FtbSpinner;
@@ -232,10 +291,14 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
             "ftb-alerts-feed": LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
+            "ftb-app": LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
+            "ftb-game-photo-preview": LocalJSX.FtbGamePhotoPreview & JSXBase.HTMLAttributes<HTMLFtbGamePhotoPreviewElement>;
+            "ftb-game-tour": LocalJSX.FtbGameTour & JSXBase.HTMLAttributes<HTMLFtbGameTourElement>;
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
+            "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
