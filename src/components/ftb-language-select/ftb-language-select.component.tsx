@@ -1,5 +1,5 @@
 import { Component, h, Host } from '@stencil/core';
-import userState from '@src/tools/user-store';
+import userState from '@src/tools/user.store';
 import Uk from '../../assets/flags/united kingdom.svg';
 import Ru from '../../assets/flags/russia.svg';
 import { Language } from 'ftb-models/dist/models/base/language';

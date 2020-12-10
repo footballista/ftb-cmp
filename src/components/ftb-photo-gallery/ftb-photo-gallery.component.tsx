@@ -1,9 +1,9 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State, Element } from '@stencil/core';
-import { Game, LangBlock, RoleLevel } from 'ftb-models';
+import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { Game, RoleLevel, translations } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-import userState from '@src/tools/user-store';
+import userState from '@src/tools/user.store';
 
 @Component({
   tag: 'ftb-photo-gallery',
@@ -16,20 +16,9 @@ export class FtbPhotoGallery {
   @State() update = 0;
   @Event() closed: EventEmitter<boolean>;
   @Event() photographerClicked: EventEmitter<number>;
-  @Element() element;
   private destroyed$ = new AsyncSubject<boolean>();
   private pswpEl: HTMLDivElement;
   private gallery;
-  private i18n: Record<string, LangBlock> = {
-    photo_by: {
-      en: 'Photo by',
-      ru: 'Фотограф',
-    },
-  };
-
-  translate(key: string) {
-    return this.i18n[key][userState.language];
-  }
 
   componentDidLoad() {
     const items = this.game.photoset.photos.map(p => ({
@@ -167,15 +156,9 @@ export class FtbPhotoGallery {
         <div class="tour">
           {this.game.champ.name} - {this.game.season.name}, <ftb-game-tour game={this.game}></ftb-game-tour>
         </div>
-
-        <div class="photo-by">
-          {this.translate('photo_by')}:
-          <a onClick={() => this.photographerClicked.emit(photographer?.user?._id)}>Fedor Avetisov</a>
-        </div>
-
         {photographer && (
           <div class="photo-by">
-            {this.translate('photo_by')}:
+            {translations.game.photo_by[userState.language]}:
             <a onClick={() => this.photographerClicked.emit(photographer.user._id)}>{photographer.user.name}</a>
           </div>
         )}

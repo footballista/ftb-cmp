@@ -23,7 +23,7 @@ export class CmpTest {
 
   private data = {
     improvingCollection: new Collection({ total: 12, items: range(7) }),
-    game: new Game({ _id: 313299 }),
+    game: new Game({ _id: 347476 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -43,6 +43,7 @@ export class CmpTest {
       elements: Array<{ descr: string; e: any }>;
       caseStyle?: { [key: string]: string };
     }> = [
+      this.gameScoreboard(),
       this.langSelect(),
       this.teamLogo(),
       this.userPhoto(),
@@ -58,19 +59,21 @@ export class CmpTest {
 
     return (
       <Host>
-        {components.map(c => (
-          <div class="component">
-            <h4>{c.title}</h4>
-            <div class="elements">
-              {c.elements.map(el => (
-                <div class="case" style={c.caseStyle || {}}>
-                  {el.e()}
-                  <p>{el.descr}</p>
-                </div>
-              ))}
+        <ftb-app>
+          {components.map(c => (
+            <div class="component">
+              <h4>{c.title}</h4>
+              <div class="elements">
+                {c.elements.map(el => (
+                  <div class="case" style={c.caseStyle || {}}>
+                    {el.e()}
+                    <p>{el.descr}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </ftb-app>
       </Host>
     );
   }
@@ -82,6 +85,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
+  }
+
+  private gameScoreboard() {
+    return {
+      title: 'Game scoreboard',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-game-scoreboard game={this.data.game}></ftb-game-scoreboard>,
         },
       ],
     };
