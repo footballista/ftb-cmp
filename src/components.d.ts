@@ -5,7 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Game, GamePhoto, GameSide, GameStaff } from "ftb-models";
+import { Game, GamePhoto, GameSide, GameStaff, PlayerGame } from "ftb-models";
+import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
@@ -28,8 +29,17 @@ export namespace Components {
     vapidKey: string;
   };
     }
+    interface FtbGameCard {
+        "bottomFields": FtbGameCardField[];
+        "game": Game;
+        "leftFields": FtbGameCardField[];
+        "playerStats": PlayerGame['stats'];
+        "rightFields": FtbGameCardField[];
+        "topFields": FtbGameCardField[];
+    }
     interface FtbGameDate {
         "game": Game;
+        "withtime": boolean;
     }
     interface FtbGamePerson {
         "person": GameStaff;
@@ -48,6 +58,9 @@ export namespace Components {
         "game": Game;
     }
     interface FtbGameState {
+        "game": Game;
+    }
+    interface FtbGameStatsPreview {
         "game": Game;
     }
     interface FtbGameTour {
@@ -128,6 +141,12 @@ declare global {
         prototype: HTMLFtbAppElement;
         new (): HTMLFtbAppElement;
     };
+    interface HTMLFtbGameCardElement extends Components.FtbGameCard, HTMLStencilElement {
+    }
+    var HTMLFtbGameCardElement: {
+        prototype: HTMLFtbGameCardElement;
+        new (): HTMLFtbGameCardElement;
+    };
     interface HTMLFtbGameDateElement extends Components.FtbGameDate, HTMLStencilElement {
     }
     var HTMLFtbGameDateElement: {
@@ -169,6 +188,12 @@ declare global {
     var HTMLFtbGameStateElement: {
         prototype: HTMLFtbGameStateElement;
         new (): HTMLFtbGameStateElement;
+    };
+    interface HTMLFtbGameStatsPreviewElement extends Components.FtbGameStatsPreview, HTMLStencilElement {
+    }
+    var HTMLFtbGameStatsPreviewElement: {
+        prototype: HTMLFtbGameStatsPreviewElement;
+        new (): HTMLFtbGameStatsPreviewElement;
     };
     interface HTMLFtbGameTourElement extends Components.FtbGameTour, HTMLStencilElement {
     }
@@ -252,6 +277,7 @@ declare global {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
         "ftb-app": HTMLFtbAppElement;
+        "ftb-game-card": HTMLFtbGameCardElement;
         "ftb-game-date": HTMLFtbGameDateElement;
         "ftb-game-person": HTMLFtbGamePersonElement;
         "ftb-game-photo-preview": HTMLFtbGamePhotoPreviewElement;
@@ -259,6 +285,7 @@ declare global {
         "ftb-game-side-score": HTMLFtbGameSideScoreElement;
         "ftb-game-stadium": HTMLFtbGameStadiumElement;
         "ftb-game-state": HTMLFtbGameStateElement;
+        "ftb-game-stats-preview": HTMLFtbGameStatsPreviewElement;
         "ftb-game-tour": HTMLFtbGameTourElement;
         "ftb-icon": HTMLFtbIconElement;
         "ftb-img": HTMLFtbImgElement;
@@ -291,8 +318,17 @@ declare namespace LocalJSX {
     vapidKey: string;
   };
     }
+    interface FtbGameCard {
+        "bottomFields"?: FtbGameCardField[];
+        "game": Game;
+        "leftFields"?: FtbGameCardField[];
+        "playerStats"?: PlayerGame['stats'];
+        "rightFields"?: FtbGameCardField[];
+        "topFields"?: FtbGameCardField[];
+    }
     interface FtbGameDate {
         "game": Game;
+        "withtime"?: boolean;
     }
     interface FtbGamePerson {
         "person"?: GameStaff;
@@ -311,6 +347,9 @@ declare namespace LocalJSX {
         "game": Game;
     }
     interface FtbGameState {
+        "game": Game;
+    }
+    interface FtbGameStatsPreview {
         "game": Game;
     }
     interface FtbGameTour {
@@ -381,6 +420,7 @@ declare namespace LocalJSX {
         "cmp-showcase": CmpShowcase;
         "ftb-alerts-feed": FtbAlertsFeed;
         "ftb-app": FtbApp;
+        "ftb-game-card": FtbGameCard;
         "ftb-game-date": FtbGameDate;
         "ftb-game-person": FtbGamePerson;
         "ftb-game-photo-preview": FtbGamePhotoPreview;
@@ -388,6 +428,7 @@ declare namespace LocalJSX {
         "ftb-game-side-score": FtbGameSideScore;
         "ftb-game-stadium": FtbGameStadium;
         "ftb-game-state": FtbGameState;
+        "ftb-game-stats-preview": FtbGameStatsPreview;
         "ftb-game-tour": FtbGameTour;
         "ftb-icon": FtbIcon;
         "ftb-img": FtbImg;
@@ -410,6 +451,7 @@ declare module "@stencil/core" {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
             "ftb-alerts-feed": LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
             "ftb-app": LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
+            "ftb-game-card": LocalJSX.FtbGameCard & JSXBase.HTMLAttributes<HTMLFtbGameCardElement>;
             "ftb-game-date": LocalJSX.FtbGameDate & JSXBase.HTMLAttributes<HTMLFtbGameDateElement>;
             "ftb-game-person": LocalJSX.FtbGamePerson & JSXBase.HTMLAttributes<HTMLFtbGamePersonElement>;
             "ftb-game-photo-preview": LocalJSX.FtbGamePhotoPreview & JSXBase.HTMLAttributes<HTMLFtbGamePhotoPreviewElement>;
@@ -417,6 +459,7 @@ declare module "@stencil/core" {
             "ftb-game-side-score": LocalJSX.FtbGameSideScore & JSXBase.HTMLAttributes<HTMLFtbGameSideScoreElement>;
             "ftb-game-stadium": LocalJSX.FtbGameStadium & JSXBase.HTMLAttributes<HTMLFtbGameStadiumElement>;
             "ftb-game-state": LocalJSX.FtbGameState & JSXBase.HTMLAttributes<HTMLFtbGameStateElement>;
+            "ftb-game-stats-preview": LocalJSX.FtbGameStatsPreview & JSXBase.HTMLAttributes<HTMLFtbGameStatsPreviewElement>;
             "ftb-game-tour": LocalJSX.FtbGameTour & JSXBase.HTMLAttributes<HTMLFtbGameTourElement>;
             "ftb-icon": LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;

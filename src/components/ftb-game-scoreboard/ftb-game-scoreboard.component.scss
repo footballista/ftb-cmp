@@ -1,10 +1,12 @@
 ftb-game-scoreboard {
   .ftb-game-scoreboard__wrapper {
     .ftb-game-scoreboard__background {
+      border: 1px solid rgba(0, 0, 0, 0.1);
       .ftb-game-scoreboard__header {
         .header {
           display: flex;
-          background: rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          padding: 10px 20px;
           justify-content: space-between;
           align-items: center;
           div,
@@ -20,12 +22,14 @@ ftb-game-scoreboard {
           display: flex;
           justify-content: center;
           align-items: center;
-
+          padding: 20px;
           ftb-team-logo {
             height: 100px;
             width: 100px;
           }
-
+          .side {
+            text-align: center;
+          }
           .score {
             display: flex;
             align-items: center;

@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 })
 export class FtbGameDate {
   @Prop() game!: Game;
+  @Prop() withtime = true;
 
   render() {
     if (!this.game.date) return <div class="time-not-set">{translations.game.time_not_set[userState.language]}</div>;
@@ -17,16 +18,24 @@ export class FtbGameDate {
     return (
       <Host>
         <div class="date">
-          {this.game.date.format('YYYY') == dayjs().format('YYYY')
-            ? this.game.date.format('DD ') +
-              translations.days[userState.language][this.game.date.month()] +
-              ' (' +
-              translations.days[userState.language][this.game.date.day()] +
-              ')'
-            : this.game.date.format('DD.MM.YYYY')}
+          {this.game.date.format('YYYY') == dayjs().format('YYYY') ? this.currentYearDate() : this.otherYearDate()}
         </div>
-        <div class="time">{this.game.date.format('HH:mm')}</div>
+        {this.withtime && <div class="time">{this.game.date.format('HH:mm')}</div>}
       </Host>
     );
+  }
+
+  private currentYearDate() {
+    return (
+      this.game.date.format('DD ') +
+      translations.months[userState.language][this.game.date.month()] +
+      ' (' +
+      translations.days[userState.language][this.game.date.day()] +
+      ')'
+    );
+  }
+
+  private otherYearDate() {
+    return this.game.date.format('DD.MM.YYYY');
   }
 }

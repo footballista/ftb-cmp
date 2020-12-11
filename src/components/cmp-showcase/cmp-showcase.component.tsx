@@ -9,6 +9,7 @@ import { filter, Game, GamePhoto, GamePhotoImg } from 'ftb-models';
 import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
 import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
 import { GameService } from 'ftb-models/dist/services/game.service';
+import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 
 /**
  * Test page that demonstrates all existing components
@@ -23,7 +24,8 @@ export class CmpTest {
 
   private data = {
     improvingCollection: new Collection({ total: 12, items: range(7) }),
-    game: new Game({ _id: 347476 }),
+    // game: new Game({ _id: 347476 }),
+    game: new Game({ _id: 313283 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -43,8 +45,10 @@ export class CmpTest {
       elements: Array<{ descr: string; e: any }>;
       caseStyle?: { [key: string]: string };
     }> = [
-      this.gameScoreboard(),
       this.langSelect(),
+      this.gameCard(),
+      this.gameScoreboard(),
+      this.gameStatsPreview(),
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
@@ -90,6 +94,60 @@ export class CmpTest {
     };
   }
 
+  private gameCard() {
+    return {
+      title: 'Game card',
+      elements: [
+        {
+          descr: 'Minimal',
+          e: () => <ftb-game-card game={this.data.game}></ftb-game-card>,
+        },
+        {
+          descr: 'With date',
+          e: () => (
+            <ftb-game-card
+              game={this.data.game}
+              leftFields={[FtbGameCardField.time]}
+              topFields={[FtbGameCardField.date, FtbGameCardField.round]}
+            ></ftb-game-card>
+          ),
+        },
+        {
+          descr: 'With time and pitch',
+          e: () => (
+            <ftb-game-card
+              game={this.data.game}
+              leftFields={[FtbGameCardField.time, FtbGameCardField.stadium]}
+              topFields={[FtbGameCardField.champSeason, FtbGameCardField.round]}
+            ></ftb-game-card>
+          ),
+        },
+        {
+          descr: 'With bottom line',
+          e: () => (
+            <ftb-game-card
+              game={this.data.game}
+              leftFields={[FtbGameCardField.time]}
+              topFields={[FtbGameCardField.date, FtbGameCardField.round]}
+              bottomFields={[FtbGameCardField.champ, FtbGameCardField.season]}
+            ></ftb-game-card>
+          ),
+        },
+        {
+          descr: 'With playerStats',
+          e: () => (
+            <ftb-game-card
+              game={this.data.game}
+              topFields={[FtbGameCardField.champSeason, FtbGameCardField.round]}
+              rightFields={[FtbGameCardField.playerStats]}
+              playerStats={{ teamId: 1, goals: 0, assists: 1, yellow: 2, red: 1 }}
+            ></ftb-game-card>
+          ),
+        },
+      ],
+    };
+  }
+
   private gameScoreboard() {
     return {
       title: 'Game scoreboard',
@@ -97,6 +155,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-game-scoreboard game={this.data.game}></ftb-game-scoreboard>,
+        },
+      ],
+    };
+  }
+
+  private gameStatsPreview() {
+    return {
+      title: 'Game stats preview',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-game-stats-preview game={this.data.game}></ftb-game-stats-preview>,
         },
       ],
     };
