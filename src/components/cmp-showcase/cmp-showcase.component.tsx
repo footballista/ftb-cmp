@@ -46,9 +46,12 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.gameMedia(),
       this.gameCard(),
       this.gameScoreboard(),
       this.gameStatsPreview(),
+      this.gameEvents(),
+      this.gameLineups(),
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
@@ -160,6 +163,18 @@ export class CmpTest {
     };
   }
 
+  private gameMedia() {
+    return {
+      title: 'Game media',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-game-media game={this.data.game}></ftb-game-media>,
+        },
+      ],
+    };
+  }
+
   private gameStatsPreview() {
     return {
       title: 'Game stats preview',
@@ -167,6 +182,30 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-game-stats-preview game={this.data.game}></ftb-game-stats-preview>,
+        },
+      ],
+    };
+  }
+
+  private gameLineups() {
+    return {
+      title: 'Game lineups',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-game-lineups game={this.data.game}></ftb-game-lineups>,
+        },
+      ],
+    };
+  }
+
+  private gameEvents() {
+    return {
+      title: 'Game events',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-game-events game={this.data.game}></ftb-game-events>,
         },
       ],
     };
@@ -476,7 +515,7 @@ export class CmpTest {
           descr: 'small',
           e: () => (
             <ftb-game-photo-preview
-              photo={this.data.game.photoset.photos[0]}
+              photo={this.data.game.photoset.photos.items[0]}
               style={{ height: '50px', width: '100px' }}
             ></ftb-game-photo-preview>
           ),
@@ -485,7 +524,7 @@ export class CmpTest {
           descr: 'big',
           e: () => (
             <ftb-game-photo-preview
-              photo={this.data.game.photoset.photos[0]}
+              photo={this.data.game.photoset.photos.items[0]}
               style={{ height: '100px', width: '200px' }}
             ></ftb-game-photo-preview>
           ),
@@ -514,7 +553,7 @@ export class CmpTest {
 
   private photoGallery() {
     const open = (photo: GamePhoto) => {
-      const idx = this.data.game.photoset.photos.findIndex(p => p.thumb === photo.thumb);
+      const idx = this.data.game.photoset.photos.items.findIndex(p => p.thumb === photo.thumb);
       this.data.galleryIdx = idx;
       this.data.showGallery = true;
       this.updateSignal++;
@@ -540,8 +579,8 @@ export class CmpTest {
                 ></ftb-photo-gallery>
               )}
               <ftb-pagination
-                totalItems={this.data.game.photoset.photos.length}
-                items={this.data.game.photoset.photos}
+                totalItems={this.data.game.photoset.photos.total}
+                items={this.data.game.photoset.photos.items}
                 renderItem={i => (
                   <ftb-game-photo-preview
                     photo={i}

@@ -14,7 +14,9 @@ export class FtbPagination {
   @Prop() itemMinWidthPx!: number;
   @Prop() itemHeightPx!: number;
   @Prop() renderItem!: (item) => string;
-  @State() displayItems: any[];
+  @Prop() stretchItems = true;
+  @State()
+  displayItems: any[];
   @Element() element: HTMLElement;
   private pageLoaded: boolean;
   private itemMaxWidthPx: number;
@@ -42,8 +44,7 @@ export class FtbPagination {
   private onResize() {
     this.wrapperWidthPx = this.element.offsetWidth || this.itemMinWidthPx;
     const itemsPerRow = Math.floor(this.wrapperWidthPx / this.itemMinWidthPx);
-    this.itemMaxWidthPx = this.wrapperWidthPx / itemsPerRow;
-
+    this.itemMaxWidthPx = this.stretchItems ? this.wrapperWidthPx / itemsPerRow : this.itemMinWidthPx;
     this.itemsPerPage = itemsPerRow * this.rows;
     if (!this.wrapperHeightPx) {
       const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));

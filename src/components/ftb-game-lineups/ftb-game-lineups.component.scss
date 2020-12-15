@@ -1,0 +1,137 @@
+ftb-game-lineups {
+  .ftb-game-lineups__wrapper {
+    .ftb-game-lineups__background {
+      width: 800px;
+      display: flex;
+      justify-content: space-between;
+      .ftb-game-lineups__side {
+        width: calc(50% - 30px);
+        .category {
+          margin-bottom: 3px;
+          .category-title {
+            margin: 0;
+            padding: 15px 0;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+          }
+          .player-wrapper {
+            display: flex;
+            align-items: center;
+            .player-background {
+              height: 40px;
+              display: flex;
+              align-items: center;
+              padding: 0px;
+              margin: 1.5px 0;
+              flex: 1;
+              cursor: pointer;
+              .position {
+                width: 55px;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 12px;
+                background-position: left top;
+                background-size: 800%;
+                margin: 0 1px;
+              }
+              .number {
+                width: 55px;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 13px;
+                letter-spacing: 1.5px;
+                background-position: right top;
+                background-size: 800%;
+                margin: 0 1px;
+              }
+              .name {
+                flex: 1;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                height: 40px;
+                line-height: 40px;
+                padding: 0 10px;
+                font-size: 14px;
+                margin: 0 1px;
+              }
+            }
+            .stats-wrapper {
+              display: flex;
+            }
+            .item {
+              height: 40px;
+              width: 35px;
+              padding: 0 10px;
+              align-items: center;
+              justify-content: center;
+              display: flex;
+              border: 1px solid rgba(0, 0, 0, 0.2);
+              background-position: right top;
+              background-size: 800%;
+              position: relative;
+              margin: 0 1px;
+              .goal,
+              .assist {
+                width: 18px;
+                height: 18px;
+                display: inline-block;
+                background-size: contain;
+                background-repeat: no-repeat;
+                opacity: 0.85;
+                margin-top: -2px;
+              }
+              .yellow {
+                width: 10px;
+                height: 16px;
+                background: yellow;
+                transform: rotate(7deg);
+                opacity: 0.7;
+              }
+              .red {
+                width: 10px;
+                height: 16px;
+                background: red;
+                transform: rotate(7deg);
+                opacity: 0.7;
+              }
+              .yellow + .red {
+                margin-left: -15px;
+              }
+
+              .multi {
+                display: flex;
+                align-items: center;
+                margin-left: 5px;
+                font-size: 12px;
+                position: absolute;
+                top: 2px;
+                right: 5px;
+                color: rgba(255, 255, 255, 0.85);
+                font-weight: 900;
+              }
+            }
+          }
+        }
+      }
+      .ftb-game-lineups__side:last-of-type {
+        .category-title {
+          text-align: right;
+        }
+        .player-background {
+          flex-direction: row-reverse;
+          .name {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

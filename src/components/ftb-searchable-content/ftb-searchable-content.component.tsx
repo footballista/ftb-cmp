@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Element } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
@@ -30,18 +30,24 @@ export class FtbSearchableContent {
   @State() filteredItems: any[];
   @State() searchInProgress = false;
   @Event() inputKeyDown: EventEmitter<KeyboardEvent>;
+  @Element() element: HTMLElement;
   private inputEl: HTMLInputElement;
   private queryChanges$ = new Subject<string>();
   private categoryUpdated$ = new Subject();
   private onDestroyed$ = new AsyncSubject();
   private ready$ = new AsyncSubject();
   private inputDirty = false;
+  private minHeightPx: number;
 
   async componentWillLoad() {
     this.categoryDefaultSelect();
     this.subscribeToQueryChanges();
     this.queryChanges$.next('');
     await this.ready$.toPromise();
+  }
+
+  componentDidRender() {
+    this.minHeightPx ??= this.element.offsetHeight;
   }
 
   async componentWillUpdate() {
@@ -155,7 +161,7 @@ export class FtbSearchableContent {
 
   render() {
     return (
-      <Host>
+      <Host style={{ 'min-height': this.minHeightPx + 'px' }}>
         <div class="ftb-searchable-content-search-line">
           <div class={{ 'input-wrapper': true, 'hidden': !this.open, 'dirty': this.inputDirty }}>
             <div class="inputs">

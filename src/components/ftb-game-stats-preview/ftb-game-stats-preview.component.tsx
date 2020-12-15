@@ -18,9 +18,13 @@ export class FtbGameStatsPreview {
   @State() loaded: boolean;
 
   componentWillLoad() {
+    //todo move somewhere
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     new GameService(gql).loadGamePreview(this.game._id).then(g => {
-      this.game = Object.assign(this.game, g);
+      this.game.home = Object.assign(this.game.home, g.home);
+      this.game.away = Object.assign(this.game.away, g.away);
+      this.game.stage.table = g.stage.table;
+      this.game.previousDuels = g.previousDuels;
       this.loaded = true;
     });
   }
@@ -36,20 +40,20 @@ export class FtbGameStatsPreview {
   }
 
   private renderTabs() {
-    return (
-      <ftb-tabs
-        tabs={[
-          {
-            renderTitle: () => translations.game.stats_preview[userState.language],
-            renderContent: () => this.renderStats(),
-          },
-          {
-            renderTitle: () => translations.game.duels_history[userState.language],
-            renderContent: () => this.renderHistory(),
-          },
-        ]}
-      ></ftb-tabs>
-    );
+    const tabs = [
+      {
+        renderTitle: () => translations.game.stats_preview[userState.language],
+        renderContent: () => this.renderStats(),
+      },
+    ];
+    if (this.game.previousDuels.length) {
+      tabs.push({
+        renderTitle: () => translations.game.duels_history[userState.language],
+        renderContent: () => this.renderHistory(),
+      });
+    }
+
+    return <ftb-tabs tabs={tabs}></ftb-tabs>;
   }
 
   private renderStats() {

@@ -21,12 +21,12 @@ export class FtbPhotoGallery {
   private gallery;
 
   componentDidLoad() {
-    const items = this.game.photoset.photos.map(p => ({
+    const items = this.game.photoset.photos.items.map(p => ({
       src: p.middle.url,
       currSize: 'middle',
       msrc: p.thumb.url,
-      w: p.hd.width,
-      h: p.hd.height,
+      w: p.hd?.width || p.full?.width || p.middle?.width || p.thumb?.width,
+      h: p.hd?.height || p.full?.height || p.middle?.height || p.thumb?.height,
       all: p,
       title: 'test title',
     }));
@@ -68,8 +68,8 @@ export class FtbPhotoGallery {
     const currIdx = this.gallery.getCurrentIndex();
 
     const getIdx = idx => {
-      if (idx < 0) return this.game.photoset.photos.length + idx;
-      if (idx >= this.game.photoset.photos.length) return idx - this.game.photoset.photos.length;
+      if (idx < 0) return this.game.photoset.photos.items.length + idx;
+      if (idx >= this.game.photoset.photos.items.length) return idx - this.game.photoset.photos.items.length;
       return idx;
     };
 
@@ -77,12 +77,12 @@ export class FtbPhotoGallery {
       if (this.gallery) {
         if (size === 'hd') {
           this.gallery.items[index].currSize = size;
-          this.gallery.items[index].src = this.game.photoset.photos[index].hd.url;
+          this.gallery.items[index].src = this.game.photoset.photos.items[index].hd.url;
           this.gallery.invalidateCurrItems();
           this.gallery.updateSize(true);
         } else if (size === 'full' && this.gallery.items[index].currSize !== 'hd') {
           this.gallery.items[index].currSize = size;
-          this.gallery.items[index].src = this.game.photoset.photos[index].full.url;
+          this.gallery.items[index].src = this.game.photoset.photos.items[index].full.url;
           this.gallery.invalidateCurrItems();
           this.gallery.updateSize(true);
         }
@@ -92,13 +92,14 @@ export class FtbPhotoGallery {
     return (
       <div class="help-images">
         {[getIdx(currIdx - 1), getIdx(currIdx), getIdx(currIdx + 1)].map(i => {
-          const photo = this.game.photoset.photos[i];
+          const photo = this.game.photoset.photos.items[i];
           return (
             <div>
-              {(this.pswpEl.offsetWidth > photo.full.width || this.pswpEl.offsetHeight > photo.full.height) && (
-                <img src={this.game.photoset.photos[i].hd.url} onLoad={() => onImgLoad(i, 'hd')} />
-              )}
-              <img src={this.game.photoset.photos[i].full.url} onLoad={() => onImgLoad(i, 'full')} />
+              {this.game.photoset.photos.items[i].hd &&
+                (this.pswpEl.offsetWidth > photo.full.width || this.pswpEl.offsetHeight > photo.full.height) && (
+                  <img src={this.game.photoset.photos.items[i].hd.url} onLoad={() => onImgLoad(i, 'hd')} />
+                )}
+              <img src={this.game.photoset.photos.items[i].full?.url} onLoad={() => onImgLoad(i, 'full')} />
             </div>
           );
         })}

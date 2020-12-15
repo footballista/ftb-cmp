@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Game, GamePhoto, GameSide, GameStaff, PlayerGame } from "ftb-models";
+import { Game, GamePhoto, GameSide, GameStaff, GameVideo, PlayerGame, Post } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
@@ -40,6 +40,15 @@ export namespace Components {
     interface FtbGameDate {
         "game": Game;
         "withtime": boolean;
+    }
+    interface FtbGameEvents {
+        "game": Game;
+    }
+    interface FtbGameLineups {
+        "game": Game;
+    }
+    interface FtbGameMedia {
+        "game": Game;
     }
     interface FtbGamePerson {
         "person": GameStaff;
@@ -78,12 +87,18 @@ export namespace Components {
     }
     interface FtbLanguageSelect {
     }
+    interface FtbMedia {
+        "news": Post[];
+        "photoGames": Game[];
+        "videos": GameVideo[];
+    }
     interface FtbPagination {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items": any[];
         "renderItem": (item) => string;
         "rows": number;
+        "stretchItems": boolean;
         "totalItems": number;
     }
     interface FtbPhotoGallery {
@@ -121,6 +136,9 @@ export namespace Components {
         "userId": number;
         "version": number;
     }
+    interface FtbVideo {
+        "video": GameVideo;
+    }
 }
 declare global {
     interface HTMLCmpShowcaseElement extends Components.CmpShowcase, HTMLStencilElement {
@@ -152,6 +170,24 @@ declare global {
     var HTMLFtbGameDateElement: {
         prototype: HTMLFtbGameDateElement;
         new (): HTMLFtbGameDateElement;
+    };
+    interface HTMLFtbGameEventsElement extends Components.FtbGameEvents, HTMLStencilElement {
+    }
+    var HTMLFtbGameEventsElement: {
+        prototype: HTMLFtbGameEventsElement;
+        new (): HTMLFtbGameEventsElement;
+    };
+    interface HTMLFtbGameLineupsElement extends Components.FtbGameLineups, HTMLStencilElement {
+    }
+    var HTMLFtbGameLineupsElement: {
+        prototype: HTMLFtbGameLineupsElement;
+        new (): HTMLFtbGameLineupsElement;
+    };
+    interface HTMLFtbGameMediaElement extends Components.FtbGameMedia, HTMLStencilElement {
+    }
+    var HTMLFtbGameMediaElement: {
+        prototype: HTMLFtbGameMediaElement;
+        new (): HTMLFtbGameMediaElement;
     };
     interface HTMLFtbGamePersonElement extends Components.FtbGamePerson, HTMLStencilElement {
     }
@@ -225,6 +261,12 @@ declare global {
         prototype: HTMLFtbLanguageSelectElement;
         new (): HTMLFtbLanguageSelectElement;
     };
+    interface HTMLFtbMediaElement extends Components.FtbMedia, HTMLStencilElement {
+    }
+    var HTMLFtbMediaElement: {
+        prototype: HTMLFtbMediaElement;
+        new (): HTMLFtbMediaElement;
+    };
     interface HTMLFtbPaginationElement extends Components.FtbPagination, HTMLStencilElement {
     }
     var HTMLFtbPaginationElement: {
@@ -273,12 +315,21 @@ declare global {
         prototype: HTMLFtbUserPhotoElement;
         new (): HTMLFtbUserPhotoElement;
     };
+    interface HTMLFtbVideoElement extends Components.FtbVideo, HTMLStencilElement {
+    }
+    var HTMLFtbVideoElement: {
+        prototype: HTMLFtbVideoElement;
+        new (): HTMLFtbVideoElement;
+    };
     interface HTMLElementTagNameMap {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
         "ftb-app": HTMLFtbAppElement;
         "ftb-game-card": HTMLFtbGameCardElement;
         "ftb-game-date": HTMLFtbGameDateElement;
+        "ftb-game-events": HTMLFtbGameEventsElement;
+        "ftb-game-lineups": HTMLFtbGameLineupsElement;
+        "ftb-game-media": HTMLFtbGameMediaElement;
         "ftb-game-person": HTMLFtbGamePersonElement;
         "ftb-game-photo-preview": HTMLFtbGamePhotoPreviewElement;
         "ftb-game-scoreboard": HTMLFtbGameScoreboardElement;
@@ -291,6 +342,7 @@ declare global {
         "ftb-img": HTMLFtbImgElement;
         "ftb-improving-img": HTMLFtbImprovingImgElement;
         "ftb-language-select": HTMLFtbLanguageSelectElement;
+        "ftb-media": HTMLFtbMediaElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
@@ -299,6 +351,7 @@ declare global {
         "ftb-tabs": HTMLFtbTabsElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
+        "ftb-video": HTMLFtbVideoElement;
     }
 }
 declare namespace LocalJSX {
@@ -329,6 +382,15 @@ declare namespace LocalJSX {
     interface FtbGameDate {
         "game": Game;
         "withtime"?: boolean;
+    }
+    interface FtbGameEvents {
+        "game": Game;
+    }
+    interface FtbGameLineups {
+        "game": Game;
+    }
+    interface FtbGameMedia {
+        "game": Game;
     }
     interface FtbGamePerson {
         "person"?: GameStaff;
@@ -370,12 +432,18 @@ declare namespace LocalJSX {
     }
     interface FtbLanguageSelect {
     }
+    interface FtbMedia {
+        "news"?: Post[];
+        "photoGames"?: Game[];
+        "videos"?: GameVideo[];
+    }
     interface FtbPagination {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items"?: any[];
         "renderItem": (item) => string;
         "rows": number;
+        "stretchItems"?: boolean;
         "totalItems"?: number;
     }
     interface FtbPhotoGallery {
@@ -416,12 +484,18 @@ declare namespace LocalJSX {
         "userId"?: number;
         "version"?: number;
     }
+    interface FtbVideo {
+        "video": GameVideo;
+    }
     interface IntrinsicElements {
         "cmp-showcase": CmpShowcase;
         "ftb-alerts-feed": FtbAlertsFeed;
         "ftb-app": FtbApp;
         "ftb-game-card": FtbGameCard;
         "ftb-game-date": FtbGameDate;
+        "ftb-game-events": FtbGameEvents;
+        "ftb-game-lineups": FtbGameLineups;
+        "ftb-game-media": FtbGameMedia;
         "ftb-game-person": FtbGamePerson;
         "ftb-game-photo-preview": FtbGamePhotoPreview;
         "ftb-game-scoreboard": FtbGameScoreboard;
@@ -434,6 +508,7 @@ declare namespace LocalJSX {
         "ftb-img": FtbImg;
         "ftb-improving-img": FtbImprovingImg;
         "ftb-language-select": FtbLanguageSelect;
+        "ftb-media": FtbMedia;
         "ftb-pagination": FtbPagination;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
@@ -442,6 +517,7 @@ declare namespace LocalJSX {
         "ftb-tabs": FtbTabs;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
+        "ftb-video": FtbVideo;
     }
 }
 export { LocalJSX as JSX };
@@ -453,6 +529,9 @@ declare module "@stencil/core" {
             "ftb-app": LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
             "ftb-game-card": LocalJSX.FtbGameCard & JSXBase.HTMLAttributes<HTMLFtbGameCardElement>;
             "ftb-game-date": LocalJSX.FtbGameDate & JSXBase.HTMLAttributes<HTMLFtbGameDateElement>;
+            "ftb-game-events": LocalJSX.FtbGameEvents & JSXBase.HTMLAttributes<HTMLFtbGameEventsElement>;
+            "ftb-game-lineups": LocalJSX.FtbGameLineups & JSXBase.HTMLAttributes<HTMLFtbGameLineupsElement>;
+            "ftb-game-media": LocalJSX.FtbGameMedia & JSXBase.HTMLAttributes<HTMLFtbGameMediaElement>;
             "ftb-game-person": LocalJSX.FtbGamePerson & JSXBase.HTMLAttributes<HTMLFtbGamePersonElement>;
             "ftb-game-photo-preview": LocalJSX.FtbGamePhotoPreview & JSXBase.HTMLAttributes<HTMLFtbGamePhotoPreviewElement>;
             "ftb-game-scoreboard": LocalJSX.FtbGameScoreboard & JSXBase.HTMLAttributes<HTMLFtbGameScoreboardElement>;
@@ -465,6 +544,7 @@ declare module "@stencil/core" {
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
             "ftb-language-select": LocalJSX.FtbLanguageSelect & JSXBase.HTMLAttributes<HTMLFtbLanguageSelectElement>;
+            "ftb-media": LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
@@ -473,6 +553,7 @@ declare module "@stencil/core" {
             "ftb-tabs": LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
+            "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
         }
     }
 }
