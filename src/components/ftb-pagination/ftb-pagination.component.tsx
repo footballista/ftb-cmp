@@ -1,6 +1,9 @@
 import { Component, Host, h, Prop, State, Element } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { AsyncSubject } from 'rxjs';
+import userState from '@src/tools/user.store';
+import { translations } from 'ftb-models';
+import Chevron from '../../assets/icons/chevron-down.svg';
 
 @Component({
   tag: 'ftb-pagination',
@@ -109,7 +112,7 @@ export class FtbPagination {
     return (
       <Host>
         <div
-          class="ftb-pagination-items-wrapper"
+          class="ftb-pagination__items-wrapper"
           style={{ height: this.wrapperHeightPx + 'px', width: this.wrapperWidthPx + 'px' }}
         >
           {this.pageLoaded ? (
@@ -132,17 +135,38 @@ export class FtbPagination {
           )}
         </div>
 
-        <div class={{ 'ftb-pagination-pages-wrapper': true, 'empty': this.totalPages <= 1 }}>
-          {this.totalPages > 1 &&
-            this.getDisplayedPages().map(p =>
-              p === null ? (
-                <div>...</div>
-              ) : (
-                <div class={{ page: true, selected: this.currentPage === p }} onClick={() => this.onPageSelected(p)}>
-                  {p + 1}
-                </div>
-              ),
+        <div class={{ 'ftb-pagination__pages-wrapper': true, 'empty': this.totalPages <= 1 }}>
+          <div class="button-wrapper">
+            {this.currentPage > 0 && (
+              <button class="nav-button prev" onClick={() => this.onPageSelected(this.currentPage - 1)}>
+                <ftb-icon svg={Chevron}></ftb-icon>
+                {translations.navigation.prev[userState.language]}
+              </button>
             )}
+          </div>
+          <div class="pages">
+            {this.totalPages > 1 &&
+              this.getDisplayedPages().map(p =>
+                p === null ? (
+                  <div>...</div>
+                ) : (
+                  <div
+                    class={{ page: true, selected: this.currentPage === p }}
+                    onClick={() => this.onPageSelected(this.currentPage - 1)}
+                  >
+                    {p + 1}
+                  </div>
+                ),
+              )}
+          </div>
+          <div class="button-wrapper">
+            {this.currentPage < this.totalPages - 1 && (
+              <button class="nav-button next" onClick={() => this.onPageSelected(this.currentPage + 1)}>
+                {translations.navigation.next[userState.language]}
+                <ftb-icon svg={Chevron}></ftb-icon>
+              </button>
+            )}
+          </div>
         </div>
       </Host>
     );

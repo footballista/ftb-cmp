@@ -1,5 +1,5 @@
 ftb-pagination {
-  .ftb-pagination-items-wrapper {
+  .ftb-pagination__items-wrapper {
     display: flex;
     flex-wrap: wrap;
     .item {
@@ -16,24 +16,64 @@ ftb-pagination {
       }
     }
   }
-  .ftb-pagination-pages-wrapper {
+  .ftb-pagination__pages-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 40px;
     user-select: none;
     font-size: 13px;
-    .page {
-      padding: 0 5px;
-      cursor: pointer;
-      transition: color 0.2s linear;
-      $selectedColor: cornflowerblue;
-      &:hover {
-        color: $selectedColor;
+    .button-wrapper {
+      min-width: 100px;
+      max-width: 100px;
+      height: inherit;
+      display: flex;
+      align-items: center;
+      &:first-of-type {
+        justify-content: flex-start;
       }
-      &.selected {
-        font-size: 16px;
-        color: $selectedColor;
+      &:last-of-type {
+        justify-content: flex-end;
+      }
+      button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        ftb-icon {
+          height: 10px;
+        }
+        &.prev {
+          ftb-icon {
+            transform: rotate(90deg);
+            margin-right: 7.5px;
+          }
+        }
+        &.next {
+          ftb-icon {
+            transform: rotate(-90deg);
+            margin-left: 7.5px;
+          }
+        }
+      }
+    }
+    .pages {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      height: inherit;
+      .page {
+        padding: 0 5px;
+        cursor: pointer;
+        transition: color 0.2s linear;
+        $selectedColor: cornflowerblue;
+        &:hover {
+          color: $selectedColor;
+        }
+        &.selected {
+          font-size: 16px;
+          color: $selectedColor;
+        }
       }
     }
   }
