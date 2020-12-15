@@ -23,7 +23,12 @@ export class FtbGameMedia {
       this.game.photoset = g.photoset;
       this.game.videos = g.videos;
       this.game.videos = [...g.videos, ...g.videos, ...g.videos];
-      this.update++;
+      if (window?.location.href.includes('#&gid=')) {
+        this.galleryIdx = parseInt(window.location.href.split('&pid=')[1]);
+        this.showGallery = true;
+      } else {
+        this.update++;
+      }
     });
   }
 
