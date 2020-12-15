@@ -58,6 +58,22 @@
     }
   }
 
+  ftb-stadium-photo.stadium-photo-case {
+    height: 120px;
+    width: 160px;
+    background: darkorange;
+    border: 2px solid cornflowerblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ftb-icon {
+      height: 50px;
+      width: 50px;
+      box-sizing: border-box;
+      fill: rgb(255 255 255 / 42%);
+    }
+  }
+
   .case > ftb-improving-img {
     height: 90px;
     width: 120px;

@@ -154,10 +154,7 @@ export class FtbPagination {
                 p === null ? (
                   <div>...</div>
                 ) : (
-                  <div
-                    class={{ page: true, selected: this.currentPage === p }}
-                    onClick={() => this.onPageSelected(this.currentPage - 1)}
-                  >
+                  <div class={{ page: true, selected: this.currentPage === p }} onClick={() => this.onPageSelected(p)}>
                     {p + 1}
                   </div>
                 ),

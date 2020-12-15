@@ -5,7 +5,7 @@ import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
 import { Collection } from 'ftb-models/dist/models/base/collection';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { filter, Game, GamePhoto, GamePhotoImg, League } from 'ftb-models';
+import { filter, Game, GamePhoto, GamePhotoImg, League, Stadium } from 'ftb-models';
 import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
 import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
 import { GameService } from 'ftb-models/dist/services/game.service';
@@ -49,6 +49,7 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.leagueStadiums(),
       this.leagueTeams(),
       this.gameMedia(),
       this.gameCard(),
@@ -59,6 +60,7 @@ export class CmpTest {
       this.teamLogo(),
       this.userPhoto(),
       this.playerPhoto(),
+      this.stadiumPhoto(),
       this.photoGallery(),
       this.improvingImg(),
       this.gamePhotoPreview(),
@@ -108,6 +110,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-league-teams league={this.data.league}></ftb-league-teams>,
+        },
+      ],
+    };
+  }
+
+  private leagueStadiums() {
+    return {
+      title: 'League stadiums',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-stadiums league={this.data.league}></ftb-league-stadiums>,
         },
       ],
     };
@@ -282,6 +296,31 @@ export class CmpTest {
         {
           descr: 'Incorrect photo',
           e: () => <ftb-player-photo player-id={-1} version={2}></ftb-player-photo>,
+        },
+      ],
+    };
+  }
+
+  private stadiumPhoto() {
+    return {
+      title: 'Stadium photo',
+      elements: [
+        {
+          descr: 'Argument object',
+          e: () => (
+            <ftb-stadium-photo
+              stadium={new Stadium({ _id: 1101, photoId: 1 })}
+              class="stadium-photo-case"
+            ></ftb-stadium-photo>
+          ),
+        },
+        {
+          descr: 'Separate object',
+          e: () => <ftb-stadium-photo stadium-id={1101} version={2} class="stadium-photo-case"></ftb-stadium-photo>,
+        },
+        {
+          descr: 'Incorrect photo',
+          e: () => <ftb-stadium-photo stadium-id={-1} version={2} class="stadium-photo-case"></ftb-stadium-photo>,
         },
       ],
     };

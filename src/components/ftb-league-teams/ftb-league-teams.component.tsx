@@ -19,6 +19,7 @@ export class FtbLeagueTeams {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
+    //todo move somewhere
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     new LeagueService(gql).loadLeagueTeams(this.league._id).then(l => {
       l.teams.items = orderBy(l.teams.items, ['rating'], ['desc']);
@@ -56,7 +57,7 @@ export class FtbLeagueTeams {
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.league.teams.total}
             items={items}
-            renderItem={(team: Team) => <ftb-team-card team={team}></ftb-team-card>}
+            renderItem={(team: Team) => <ftb-team-card team={team} key={'team' + team._id}></ftb-team-card>}
             rows={3}
             itemMinWidthPx={200}
             itemHeightPx={68}

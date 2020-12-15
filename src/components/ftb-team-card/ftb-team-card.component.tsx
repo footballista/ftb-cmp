@@ -8,6 +8,7 @@ import { Team } from 'ftb-models/dist/models/team.model';
 export class FtbLeagueTeamCard {
   @Prop() team!: Team;
   @State() bg = [];
+  @State() loaded = false;
 
   private onTeamColor(palette) {
     this.bg = [
@@ -24,12 +25,13 @@ export class FtbLeagueTeamCard {
 
       'rgba(' + [...palette[1], 0.25].join(', ') + ')',
     ];
+    this.loaded = true;
   }
 
   render() {
     return (
       <Host>
-        <div class="ftb-team-card__wrapper" style={{ background: this.bg[0] }}>
+        <div class={{ 'ftb-team-card__wrapper': true, 'loaded': this.loaded }} style={{ background: this.bg[0] }}>
           <div class="ftb-team-card__background" style={{ background: this.bg[1] }}>
             <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
             <div class="name-rating">

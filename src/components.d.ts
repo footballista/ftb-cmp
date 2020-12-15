@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post } from "ftb-models";
+import { Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Stadium } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
@@ -92,6 +92,7 @@ export namespace Components {
     interface FtbLeagueDocuments {
     }
     interface FtbLeagueStadiums {
+        "league": League;
     }
     interface FtbLeagueTeams {
         "league": League;
@@ -129,6 +130,14 @@ export namespace Components {
         "renderItems": (items: any[]) => string;
     }
     interface FtbSpinner {
+    }
+    interface FtbStadiumCard {
+        "stadium": Stadium;
+    }
+    interface FtbStadiumPhoto {
+        "stadium": Stadium;
+        "stadiumId": number;
+        "version": number;
     }
     interface FtbTabs {
         "hideSingleTab": boolean;
@@ -334,6 +343,18 @@ declare global {
         prototype: HTMLFtbSpinnerElement;
         new (): HTMLFtbSpinnerElement;
     };
+    interface HTMLFtbStadiumCardElement extends Components.FtbStadiumCard, HTMLStencilElement {
+    }
+    var HTMLFtbStadiumCardElement: {
+        prototype: HTMLFtbStadiumCardElement;
+        new (): HTMLFtbStadiumCardElement;
+    };
+    interface HTMLFtbStadiumPhotoElement extends Components.FtbStadiumPhoto, HTMLStencilElement {
+    }
+    var HTMLFtbStadiumPhotoElement: {
+        prototype: HTMLFtbStadiumPhotoElement;
+        new (): HTMLFtbStadiumPhotoElement;
+    };
     interface HTMLFtbTabsElement extends Components.FtbTabs, HTMLStencilElement {
     }
     var HTMLFtbTabsElement: {
@@ -395,6 +416,8 @@ declare global {
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
+        "ftb-stadium-card": HTMLFtbStadiumCardElement;
+        "ftb-stadium-photo": HTMLFtbStadiumPhotoElement;
         "ftb-tabs": HTMLFtbTabsElement;
         "ftb-team-card": HTMLFtbTeamCardElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
@@ -485,6 +508,7 @@ declare namespace LocalJSX {
     interface FtbLeagueDocuments {
     }
     interface FtbLeagueStadiums {
+        "league": League;
     }
     interface FtbLeagueTeams {
         "league": League;
@@ -525,6 +549,14 @@ declare namespace LocalJSX {
         "renderItems": (items: any[]) => string;
     }
     interface FtbSpinner {
+    }
+    interface FtbStadiumCard {
+        "stadium": Stadium;
+    }
+    interface FtbStadiumPhoto {
+        "stadium"?: Stadium;
+        "stadiumId"?: number;
+        "version"?: number;
     }
     interface FtbTabs {
         "hideSingleTab"?: boolean;
@@ -580,6 +612,8 @@ declare namespace LocalJSX {
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-searchable-content": FtbSearchableContent;
         "ftb-spinner": FtbSpinner;
+        "ftb-stadium-card": FtbStadiumCard;
+        "ftb-stadium-photo": FtbStadiumPhoto;
         "ftb-tabs": FtbTabs;
         "ftb-team-card": FtbTeamCard;
         "ftb-team-logo": FtbTeamLogo;
@@ -621,6 +655,8 @@ declare module "@stencil/core" {
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
+            "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
+            "ftb-stadium-photo": LocalJSX.FtbStadiumPhoto & JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoElement>;
             "ftb-tabs": LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
             "ftb-team-card": LocalJSX.FtbTeamCard & JSXBase.HTMLAttributes<HTMLFtbTeamCardElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
