@@ -11,7 +11,7 @@ export class FtbImg {
   @Prop() name: string;
   @Event() loaded: EventEmitter<boolean>;
   @Event() failed: EventEmitter<boolean>;
-  @Event() color: EventEmitter<[number, number, number]>;
+  @Event() color: EventEmitter<[number, number, number][]>;
   @State() isLoaded: boolean = false;
   private image: HTMLImageElement;
 

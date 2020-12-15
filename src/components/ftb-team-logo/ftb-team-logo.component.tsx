@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { FtbTeamLogoMode } from './ftb-team-logo-mode';
 import Shield from '../../assets/icons/shield.svg';
@@ -14,6 +14,7 @@ export class FtbTeamLogo {
   @Prop() logo: string;
   @Prop() name: string;
   @Prop() version: number;
+  @Event() color: EventEmitter<[number, number, number][]>;
   @State() showPlaceholder: boolean = false;
   @State() url: string;
 
@@ -29,7 +30,11 @@ export class FtbTeamLogo {
         {this.showPlaceholder ? (
           <ftb-icon svg={Shield}></ftb-icon>
         ) : (
-          <ftb-img src={this.url} onFailed={() => (this.showPlaceholder = true)}></ftb-img>
+          <ftb-img
+            src={this.url}
+            onFailed={() => (this.showPlaceholder = true)}
+            onColor={e => this.color.emit(e.detail)}
+          ></ftb-img>
         )}
       </Host>
     );

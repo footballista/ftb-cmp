@@ -18,7 +18,7 @@ export class FtbPagination {
   @Prop() itemHeightPx!: number;
   @Prop() renderItem!: (item) => string;
   @Prop() stretchItems = true;
-  @Prop() currentIdx: number;
+  @Prop() currentIdx: number = 0;
   @State()
   displayItems: any[];
   @Element() element: HTMLElement;

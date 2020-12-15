@@ -1,0 +1,19 @@
+ftb-team-card {
+  .ftb-team-card__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-team-card__background {
+      width: inherit;
+      height: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 5px 10px;
+      box-sizing: border-box;
+      .name-rating {
+        text-align: right;
+      }
+    }
+  }
+}

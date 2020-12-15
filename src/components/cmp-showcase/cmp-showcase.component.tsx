@@ -5,11 +5,12 @@ import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
 import { Collection } from 'ftb-models/dist/models/base/collection';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { filter, Game, GamePhoto, GamePhotoImg } from 'ftb-models';
+import { filter, Game, GamePhoto, GamePhotoImg, League } from 'ftb-models';
 import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
 import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
 import { GameService } from 'ftb-models/dist/services/game.service';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { LeagueService } from 'ftb-models/dist/services/league.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -26,6 +27,7 @@ export class CmpTest {
     improvingCollection: new Collection({ total: 12, items: range(7) }),
     // game: new Game({ _id: 347476 }),
     game: new Game({ _id: 313283 }),
+    league: new League({ _id: 394 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -33,6 +35,7 @@ export class CmpTest {
   async componentWillLoad() {
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id);
+    this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id);
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -46,6 +49,7 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.leagueTeams(),
       this.gameMedia(),
       this.gameCard(),
       this.gameScoreboard(),
@@ -92,6 +96,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
+  }
+
+  private leagueTeams() {
+    return {
+      title: 'League teams',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-teams league={this.data.league}></ftb-league-teams>,
         },
       ],
     };

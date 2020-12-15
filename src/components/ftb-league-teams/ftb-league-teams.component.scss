@@ -1,0 +1,22 @@
+ftb-league-teams {
+  .ftb-league-teams__wrapper {
+    .ftb-league-teams__background {
+      .ftb-league-teams__content {
+        ftb-searchable-content {
+          width: 800px;
+          .item {
+            ftb-team-card {
+              display: block;
+              width: 196px;
+              margin: 0 2px;
+              height: 66px;
+              ftb-team-logo {
+                --shadow: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
