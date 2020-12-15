@@ -18,6 +18,7 @@ export class FtbPagination {
   @Prop() itemHeightPx!: number;
   @Prop() renderItem!: (item) => string;
   @Prop() stretchItems = true;
+  @Prop() currentIdx: number;
   @State()
   displayItems: any[];
   @Element() element: HTMLElement;
@@ -63,6 +64,7 @@ export class FtbPagination {
   private onPageSelected(page: number) {
     if (this.currentPage !== page) {
       this.currentPage = page;
+      this.currentIdx = this.currentPage * this.itemsPerPage;
       this.defineDisplayedItems();
     }
   }
@@ -109,6 +111,8 @@ export class FtbPagination {
   }
 
   render() {
+    this.currentPage = Math.floor(this.currentIdx / this.itemsPerPage);
+
     return (
       <Host>
         <div

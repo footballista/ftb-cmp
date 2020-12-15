@@ -93,6 +93,7 @@ export namespace Components {
         "videos": GameVideo[];
     }
     interface FtbPagination {
+        "currentIdx": number;
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items": any[];
@@ -438,6 +439,7 @@ declare namespace LocalJSX {
         "videos"?: GameVideo[];
     }
     interface FtbPagination {
+        "currentIdx"?: number;
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items"?: any[];
@@ -449,7 +451,7 @@ declare namespace LocalJSX {
     interface FtbPhotoGallery {
         "game": Game;
         "onClosed"?: (event: CustomEvent<boolean>) => void;
-        "onPhotographerClicked"?: (event: CustomEvent<number>) => void;
+        "onSlideChanged"?: (event: CustomEvent<number>) => void;
         "start": number;
     }
     interface FtbPlayerPhoto {

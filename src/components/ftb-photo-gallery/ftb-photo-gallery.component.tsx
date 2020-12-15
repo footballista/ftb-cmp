@@ -15,7 +15,7 @@ export class FtbPhotoGallery {
   @Prop() start!: number;
   @State() update = 0;
   @Event() closed: EventEmitter<boolean>;
-  @Event() photographerClicked: EventEmitter<number>;
+  @Event() slideChanged: EventEmitter<number>;
   private destroyed$ = new AsyncSubject<boolean>();
   private pswpEl: HTMLDivElement;
   private gallery;
@@ -45,6 +45,7 @@ export class FtbPhotoGallery {
     this.gallery.init();
     this.gallery.listen('afterChange', () => {
       this.update++;
+      this.slideChanged.emit(this.gallery.getCurrentIndex());
     });
     this.update++;
   }
@@ -159,8 +160,7 @@ export class FtbPhotoGallery {
         </div>
         {photographer && (
           <div class="photo-by">
-            {translations.game.photo_by[userState.language]}:
-            <a onClick={() => this.photographerClicked.emit(photographer.user._id)}>{photographer.user.name}</a>
+            {translations.game.photo_by[userState.language]}:<a>{photographer.user.name}</a>
           </div>
         )}
       </div>

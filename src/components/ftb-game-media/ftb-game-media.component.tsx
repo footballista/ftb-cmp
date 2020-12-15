@@ -74,12 +74,14 @@ export class FtbGameMedia {
             game={this.game}
             onClosed={() => (this.showGallery = false)}
             start={this.galleryIdx}
+            onSlideChanged={e => (this.galleryIdx = e.detail)}
           ></ftb-photo-gallery>
         )}
         <ftb-pagination
           key="game-media-photo"
           totalItems={this.game.photoset.photos.total}
           items={this.game.photoset.photos.items}
+          currentIdx={this.galleryIdx}
           renderItem={i => (
             <ftb-game-photo-preview
               photo={i}
