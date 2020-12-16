@@ -1,2 +1,27 @@
-:host {
+ftb-league-documents {
+  .ftb-league-documents__wrapper {
+    .ftb-league-documents__background {
+      .ftb-league-documents__content {
+        ftb-searchable-content {
+          width: 800px;
+          .document {
+            height: 60px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0 15px;
+            ftb-icon {
+              height: 30px;
+              margin-right: 10px;
+            }
+            .title {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

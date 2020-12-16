@@ -90,6 +90,7 @@ export namespace Components {
     interface FtbLeagueChamps {
     }
     interface FtbLeagueDocuments {
+        "league": League;
     }
     interface FtbLeagueStadiums {
         "league": League;
@@ -506,6 +507,7 @@ declare namespace LocalJSX {
     interface FtbLeagueChamps {
     }
     interface FtbLeagueDocuments {
+        "league": League;
     }
     interface FtbLeagueStadiums {
         "league": League;

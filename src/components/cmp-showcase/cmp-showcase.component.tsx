@@ -49,6 +49,7 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.leagueDocuments(),
       this.leagueStadiums(),
       this.leagueTeams(),
       this.gameMedia(),
@@ -110,6 +111,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-league-teams league={this.data.league}></ftb-league-teams>,
+        },
+      ],
+    };
+  }
+
+  private leagueDocuments() {
+    return {
+      title: 'League documents',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-documents league={this.data.league}></ftb-league-documents>,
         },
       ],
     };
