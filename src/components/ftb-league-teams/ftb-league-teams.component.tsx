@@ -45,6 +45,7 @@ export class FtbLeagueTeams {
   private renderTeamsList() {
     let filtersOn = false;
     const filterFn = async (_, query: string) => {
+      if (!query) return this.league.teams.items;
       await this.ready$.toPromise();
       filtersOn = Boolean(query);
       return filter(this.league.teams.items, query, ['name']);

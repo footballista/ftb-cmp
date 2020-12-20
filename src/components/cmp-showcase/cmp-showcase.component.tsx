@@ -49,26 +49,27 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
-      this.leagueDocuments(),
-      this.leagueStadiums(),
-      this.leagueTeams(),
-      this.gameMedia(),
-      this.gameCard(),
-      this.gameScoreboard(),
-      this.gameStatsPreview(),
-      this.gameEvents(),
-      this.gameLineups(),
-      this.teamLogo(),
-      this.userPhoto(),
-      this.playerPhoto(),
-      this.stadiumPhoto(),
-      this.photoGallery(),
-      this.improvingImg(),
-      this.gamePhotoPreview(),
-      this.pagination(),
-      this.paginationWithCollection(),
-      this.search(),
-      this.tabs(),
+      this.leagueMedia(),
+      // this.leagueDocuments(),
+      // this.leagueStadiums(),
+      // this.leagueTeams(),
+      // this.gameMedia(),
+      // this.gameCard(),
+      // this.gameScoreboard(),
+      // this.gameStatsPreview(),
+      // this.gameEvents(),
+      // this.gameLineups(),
+      // this.teamLogo(),
+      // this.userPhoto(),
+      // this.playerPhoto(),
+      // this.stadiumPhoto(),
+      // this.photoGallery(),
+      // this.improvingImg(),
+      // this.gamePhotoPreview(),
+      // this.pagination(),
+      // this.paginationWithCollection(),
+      // this.search(),
+      // this.tabs(),
     ];
 
     return (
@@ -111,6 +112,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-league-teams league={this.data.league}></ftb-league-teams>,
+        },
+      ],
+    };
+  }
+
+  private leagueMedia() {
+    return {
+      title: 'League media',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-media league={this.data.league}></ftb-league-media>,
         },
       ],
     };

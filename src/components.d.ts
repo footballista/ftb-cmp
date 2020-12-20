@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Stadium } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
+import { Collection } from "ftb-models/dist/models/base/collection";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { Team } from "ftb-models/dist/models/team.model";
@@ -92,6 +93,9 @@ export namespace Components {
     interface FtbLeagueDocuments {
         "league": League;
     }
+    interface FtbLeagueMedia {
+        "league": League;
+    }
     interface FtbLeagueStadiums {
         "league": League;
     }
@@ -99,9 +103,10 @@ export namespace Components {
         "league": League;
     }
     interface FtbMedia {
-        "news": Post[];
-        "photoGames": Game[];
-        "videos": GameVideo[];
+        "dataLoaded": boolean;
+        "news": Collection<Post>;
+        "photoGames": Collection<Game>;
+        "videoGames": Collection<Game>;
     }
     interface FtbPagination {
         "currentIdx": number;
@@ -121,6 +126,9 @@ export namespace Components {
         "player": Player;
         "playerId": number;
         "version": number;
+    }
+    interface FtbPostCover {
+        "post": Post;
     }
     interface FtbSearchableContent {
         "categories": CategoryInterface[];
@@ -296,6 +304,12 @@ declare global {
         prototype: HTMLFtbLeagueDocumentsElement;
         new (): HTMLFtbLeagueDocumentsElement;
     };
+    interface HTMLFtbLeagueMediaElement extends Components.FtbLeagueMedia, HTMLStencilElement {
+    }
+    var HTMLFtbLeagueMediaElement: {
+        prototype: HTMLFtbLeagueMediaElement;
+        new (): HTMLFtbLeagueMediaElement;
+    };
     interface HTMLFtbLeagueStadiumsElement extends Components.FtbLeagueStadiums, HTMLStencilElement {
     }
     var HTMLFtbLeagueStadiumsElement: {
@@ -331,6 +345,12 @@ declare global {
     var HTMLFtbPlayerPhotoElement: {
         prototype: HTMLFtbPlayerPhotoElement;
         new (): HTMLFtbPlayerPhotoElement;
+    };
+    interface HTMLFtbPostCoverElement extends Components.FtbPostCover, HTMLStencilElement {
+    }
+    var HTMLFtbPostCoverElement: {
+        prototype: HTMLFtbPostCoverElement;
+        new (): HTMLFtbPostCoverElement;
     };
     interface HTMLFtbSearchableContentElement extends Components.FtbSearchableContent, HTMLStencilElement {
     }
@@ -409,12 +429,14 @@ declare global {
         "ftb-language-select": HTMLFtbLanguageSelectElement;
         "ftb-league-champs": HTMLFtbLeagueChampsElement;
         "ftb-league-documents": HTMLFtbLeagueDocumentsElement;
+        "ftb-league-media": HTMLFtbLeagueMediaElement;
         "ftb-league-stadiums": HTMLFtbLeagueStadiumsElement;
         "ftb-league-teams": HTMLFtbLeagueTeamsElement;
         "ftb-media": HTMLFtbMediaElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
+        "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-stadium-card": HTMLFtbStadiumCardElement;
@@ -509,6 +531,9 @@ declare namespace LocalJSX {
     interface FtbLeagueDocuments {
         "league": League;
     }
+    interface FtbLeagueMedia {
+        "league": League;
+    }
     interface FtbLeagueStadiums {
         "league": League;
     }
@@ -516,9 +541,10 @@ declare namespace LocalJSX {
         "league": League;
     }
     interface FtbMedia {
-        "news"?: Post[];
-        "photoGames"?: Game[];
-        "videos"?: GameVideo[];
+        "dataLoaded"?: boolean;
+        "news"?: Collection<Post>;
+        "photoGames"?: Collection<Game>;
+        "videoGames"?: Collection<Game>;
     }
     interface FtbPagination {
         "currentIdx"?: number;
@@ -540,6 +566,9 @@ declare namespace LocalJSX {
         "player"?: Player;
         "playerId"?: number;
         "version"?: number;
+    }
+    interface FtbPostCover {
+        "post": Post;
     }
     interface FtbSearchableContent {
         "categories"?: CategoryInterface[];
@@ -606,12 +635,14 @@ declare namespace LocalJSX {
         "ftb-language-select": FtbLanguageSelect;
         "ftb-league-champs": FtbLeagueChamps;
         "ftb-league-documents": FtbLeagueDocuments;
+        "ftb-league-media": FtbLeagueMedia;
         "ftb-league-stadiums": FtbLeagueStadiums;
         "ftb-league-teams": FtbLeagueTeams;
         "ftb-media": FtbMedia;
         "ftb-pagination": FtbPagination;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
+        "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
         "ftb-spinner": FtbSpinner;
         "ftb-stadium-card": FtbStadiumCard;
@@ -649,12 +680,14 @@ declare module "@stencil/core" {
             "ftb-language-select": LocalJSX.FtbLanguageSelect & JSXBase.HTMLAttributes<HTMLFtbLanguageSelectElement>;
             "ftb-league-champs": LocalJSX.FtbLeagueChamps & JSXBase.HTMLAttributes<HTMLFtbLeagueChampsElement>;
             "ftb-league-documents": LocalJSX.FtbLeagueDocuments & JSXBase.HTMLAttributes<HTMLFtbLeagueDocumentsElement>;
+            "ftb-league-media": LocalJSX.FtbLeagueMedia & JSXBase.HTMLAttributes<HTMLFtbLeagueMediaElement>;
             "ftb-league-stadiums": LocalJSX.FtbLeagueStadiums & JSXBase.HTMLAttributes<HTMLFtbLeagueStadiumsElement>;
             "ftb-league-teams": LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
             "ftb-media": LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
+            "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
