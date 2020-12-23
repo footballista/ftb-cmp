@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import { Component, Host, h, Prop, State, Element, Watch } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { AsyncSubject } from 'rxjs';
 import userState from '@src/tools/user.store';
@@ -19,6 +19,7 @@ export class FtbPagination {
   @Prop() renderItem!: (item) => string;
   @Prop() stretchItems = true;
   @Prop() currentIdx: number = 0;
+  @Prop() getItemsForInterval: (items: any[], offset: number, limit: number) => Promise<any[]>;
   @State()
   displayItems: any[];
   @Element() element: HTMLElement;
@@ -40,12 +41,12 @@ export class FtbPagination {
     await this.ready$.toPromise();
   }
 
-  componentWillUpdate() {
+  @Watch('items') onItemsChange() {
     this.defineTotalPages();
     this.defineDisplayedItems();
   }
 
-  private onResize() {
+  private async onResize() {
     this.wrapperWidthPx = this.element.offsetWidth || this.itemMinWidthPx;
     const itemsPerRow = Math.floor(this.wrapperWidthPx / this.itemMinWidthPx);
     this.itemMaxWidthPx = this.stretchItems ? this.wrapperWidthPx / itemsPerRow : this.itemMinWidthPx;
@@ -55,7 +56,7 @@ export class FtbPagination {
       this.wrapperHeightPx = this.itemHeightPx * maxDisplayedRows;
     }
     this.defineTotalPages();
-    this.defineDisplayedItems();
+    await this.defineDisplayedItems();
 
     this.ready$.next(true);
     this.ready$.complete();
@@ -63,9 +64,10 @@ export class FtbPagination {
 
   private onPageSelected(page: number) {
     if (this.currentPage !== page) {
+      this.pageLoaded = false;
       this.currentPage = page;
       this.currentIdx = this.currentPage * this.itemsPerPage;
-      this.defineDisplayedItems();
+      return this.defineDisplayedItems();
     }
   }
 
@@ -73,15 +75,16 @@ export class FtbPagination {
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
-  private defineDisplayedItems() {
+  private async defineDisplayedItems() {
     const offset = this.currentPage * this.itemsPerPage;
-    const limit = offset + this.itemsPerPage;
-    if (this.totalItems === this.items.length || this.items.length >= limit) {
-      this.displayItems = this.items.slice(offset, limit);
-      this.pageLoaded = true;
-    } else {
+    const items = this.getItemsForInterval
+      ? await this.getItemsForInterval(this.items, offset, this.itemsPerPage)
+      : this.items.slice(offset, offset + this.itemsPerPage);
+    if (items.length < this.itemsPerPage && offset + items.length < this.totalItems) {
       this.displayItems = [];
-      this.pageLoaded = false;
+    } else {
+      this.displayItems = items;
+      this.pageLoaded = true;
     }
   }
 

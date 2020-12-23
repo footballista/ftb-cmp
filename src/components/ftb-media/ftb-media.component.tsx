@@ -56,6 +56,7 @@ export class FtbMedia {
       filtersOn = Boolean(query);
       return filter(this.news.items, query, ['title']);
     };
+
     return (
       <ftb-searchable-content
         class="news-tab"
@@ -68,10 +69,10 @@ export class FtbMedia {
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.news.total}
             items={items}
-            renderItem={(post: Post) => <div>{post.title}</div>}
-            rows={3}
+            renderItem={(post: Post) => <ftb-post-cover key={'post_' + post._id} post={post}></ftb-post-cover>}
+            rows={1}
             itemMinWidthPx={200}
-            itemHeightPx={68}
+            itemHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>
@@ -99,13 +100,11 @@ export class FtbMedia {
             totalItems={filtersOn ? items.length : this.photoGames.total}
             items={items}
             renderItem={(game: Game) => (
-              <div>
-                {game.home.team.name} - {game.away.team.name}
-              </div>
+              <ftb-game-photo-cover game={game} key={'photo_' + game._id}></ftb-game-photo-cover>
             )}
             rows={1}
             itemMinWidthPx={200}
-            itemHeightPx={200}
+            itemHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>
@@ -120,6 +119,13 @@ export class FtbMedia {
       filtersOn = Boolean(query);
       return filter(this.videoGames.items, query, ['home.team.name', 'away.team.name']);
     };
+
+    const renderVideoTitle = (game: Game) => (
+      <div class="teams">
+        {game.home.team.name} - {game.away.team.name}
+      </div>
+    );
+
     return (
       <ftb-searchable-content
         class="video-tab"
@@ -133,17 +139,15 @@ export class FtbMedia {
             totalItems={filtersOn ? items.length : this.videoGames.total}
             items={items}
             renderItem={(game: Game) => (
-              <div>
-                {game.videos.map(v => (
-                  <div>
-                    {game.home.team.name} - {game.away.team.name} {v.name}
-                  </div>
-                ))}
-              </div>
+              <ftb-video
+                key={'video_' + game._id}
+                video={game.videos[game.videos.length - 1]}
+                renderTitle={() => renderVideoTitle(game)}
+              ></ftb-video>
             )}
             rows={1}
             itemMinWidthPx={200}
-            itemHeightPx={200}
+            itemHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

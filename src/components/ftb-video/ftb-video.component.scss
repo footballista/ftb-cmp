@@ -1,9 +1,17 @@
 ftb-video {
+  display: block;
   .ftb-video__wrapper {
     text-decoration: none;
+    height: inherit;
+    width: inherit;
     color: rgba(0, 0, 0, 0.8);
     .ftb-video__background {
+      height: inherit;
+      width: inherit;
+      position: relative;
       .ftb-video__image {
+        height: inherit;
+        width: inherit;
       }
       .ftb-video__title {
       }

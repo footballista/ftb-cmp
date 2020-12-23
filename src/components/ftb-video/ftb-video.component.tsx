@@ -7,6 +7,7 @@ import { GameVideo } from 'ftb-models';
 })
 export class FtbVideo {
   @Prop() video!: GameVideo;
+  @Prop() renderTitle: () => string;
 
   render() {
     return (
@@ -18,7 +19,7 @@ export class FtbVideo {
                 sources={[this.video.covers.lq, this.video.covers.mq, this.video.covers.hq]}
               ></ftb-improving-img>
             </div>
-            <div class="ftb-video__title">{this.video.name}</div>
+            <div class="ftb-video__title">{this.renderTitle ? this.renderTitle() : this.video.name}</div>
           </div>
         </a>
       </Host>

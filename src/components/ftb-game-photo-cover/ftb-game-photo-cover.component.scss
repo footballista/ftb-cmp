@@ -1,22 +1,25 @@
-ftb-post-cover {
+ftb-game-photo-cover {
   display: block;
-  .ftb-post-cover__wrapper {
+  .ftb-game-photo-cover__wrapper {
     background: rgba(0, 0, 0, 0.1);
     height: inherit;
     width: inherit;
-    .ftb-post-cover__background {
+    .ftb-game-photo-cover__background {
       display: block;
       text-align: center;
       position: relative;
       height: inherit;
       width: inherit;
-      .ftb-post-cover__image {
+      .ftb-game-photo-cover__image {
         height: inherit;
         width: inherit;
         background-size: cover;
         background-position: center center;
       }
-      .ftb-post-cover__title {
+      .ftb-game-photo-cover__logos {
+        display: none;
+      }
+      .ftb-game-photo-cover__title {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -32,16 +35,20 @@ ftb-post-cover {
         color: white;
       }
     }
-    .ftb-post-cover__background:not(.loaded) {
-      .ftb-post-cover__image {
+    .ftb-game-photo-cover__background:not(.loaded) {
+      .ftb-game-photo-cover__image {
         opacity: 0;
       }
-      .ftb-post-cover__title {
+      .ftb-game-photo-cover__title {
+        color: black;
+        background: transparent;
+      }
+      .ftb-game-photo-cover__logos {
         opacity: 0;
       }
     }
   }
-  .ftb-post-cover__helper-img {
+  .ftb-game-photo-cover__helper-img {
     height: 0;
     width: 0;
     overflow: hidden;
