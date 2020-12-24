@@ -1,12 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Game, League, Post, translations } from 'ftb-models';
-// import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-// import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-// import { User } from 'ftb-models/dist/models/user.model';
-// import { LeagueService } from 'ftb-models/dist/services/league.service';
+import { League, Post, translations } from 'ftb-models';
 import userState from '@src/tools/user.store';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
-import { diStore } from '@src/tools/di.store';
 
 @Component({
   tag: 'ftb-league-media',
@@ -15,7 +9,6 @@ import { diStore } from '@src/tools/di.store';
 })
 export class FtbLeagueMedia {
   @Prop() league!: League;
-  private leagueService = new LeagueService(diStore.gql);
 
   componentWillLoad() {
     for (let i = 0; i < this.league.news.total; i++) {
@@ -40,7 +33,7 @@ export class FtbLeagueMedia {
     if (this.league.gamesWithVideos?.total) {
       tabs.push({
         renderTitle: () => translations.media.videos[userState.language],
-        renderContent: () => this.renderVideoTab(),
+        renderContent: () => <ftb-league-media-video-tab league={this.league}></ftb-league-media-video-tab>,
       });
     }
 
@@ -55,48 +48,6 @@ export class FtbLeagueMedia {
           </div>
         </div>
       </Host>
-    );
-  }
-
-  private renderVideoTab() {
-    let filtersOn = false;
-    const filterFn = async (_, query) => {
-      const league = await this.leagueService.searchLeagueVideoGames(this.league._id, query);
-      filtersOn = Boolean(query);
-      return league.gamesWithVideos.items;
-    };
-
-    const renderVideoTitle = (game: Game) => (
-      <div class="teams">
-        {game.home.team.name} - {game.away.team.name}
-      </div>
-    );
-
-    return (
-      <ftb-searchable-content
-        class="video-tab"
-        key="league-video-pagination"
-        items={this.league.gamesWithVideos.items}
-        filterFn={filterFn}
-        placeholder={translations.game.search_by_game_teams[userState.language]}
-        categories={[]}
-        renderItems={items => (
-          <ftb-pagination
-            totalItems={filtersOn ? items.length : this.league.gamesWithVideos.total}
-            items={items}
-            renderItem={(game: Game) => (
-              <ftb-video
-                key={'video_' + game._id}
-                video={game.videos[game.videos.length - 1]}
-                renderTitle={() => renderVideoTitle(game)}
-              ></ftb-video>
-            )}
-            rows={1}
-            itemMinWidthPx={200}
-            itemHeightPx={150}
-          ></ftb-pagination>
-        )}
-      ></ftb-searchable-content>
     );
   }
 }

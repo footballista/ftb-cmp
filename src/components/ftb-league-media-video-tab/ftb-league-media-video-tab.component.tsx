@@ -6,7 +6,7 @@ import userState from '@src/tools/user.store';
 @Component({
   tag: 'ftb-league-media-video-tab',
   styleUrl: 'ftb-league-media-video-tab.component.scss',
-  shadow: true,
+  shadow: false,
 })
 export class FtbLeagueMediaVideoTab {
   @Prop() league!: League;
@@ -86,7 +86,7 @@ export class FtbLeagueMediaVideoTab {
             )}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
             rows={1}
-            itemMinWidthPx={200}
+            itemMinWidthPx={266}
             itemHeightPx={150}
           ></ftb-pagination>
         )}

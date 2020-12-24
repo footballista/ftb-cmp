@@ -1,5 +1,7 @@
 ftb-video {
   display: block;
+  height: 90px;
+  width: 160px; // 16:9 is recommended thumbnail ratio
   .ftb-video__wrapper {
     text-decoration: none;
     height: inherit;
@@ -12,9 +14,16 @@ ftb-video {
       .ftb-video__image {
         height: inherit;
         width: inherit;
+        background-size: cover;
+        background-position: center;
       }
       .ftb-video__title {
       }
     }
+  }
+  .ftb-video__service-img {
+    height: 0;
+    width: 0;
+    overflow: hidden;
   }
 }
