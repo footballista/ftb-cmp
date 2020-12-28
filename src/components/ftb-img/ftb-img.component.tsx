@@ -14,8 +14,10 @@ export class FtbImg {
   @Event() color: EventEmitter<[number, number, number][]>;
   @State() isLoaded: boolean = false;
   private image: HTMLImageElement;
+  private isDestroyed: boolean;
 
   private onLoad() {
+    if (this.isDestroyed) return;
     this.isLoaded = true;
     this.loaded.emit(true);
     const colorThief = new ColorThief();
@@ -25,6 +27,10 @@ export class FtbImg {
       this.color.emit(colorThief.getPalette(image));
     };
     image.src = this.image.src;
+  }
+
+  disconnectedCallback() {
+    this.isDestroyed = true;
   }
 
   render() {

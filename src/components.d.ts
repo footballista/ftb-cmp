@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Stadium } from "ftb-models";
+import { BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Stadium } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Collection } from "ftb-models/dist/models/base/collection";
 import { Player } from "ftb-models/dist/models/player.model";
@@ -29,6 +29,12 @@ export namespace Components {
     appId: string;
     vapidKey: string;
   };
+    }
+    interface FtbChampCard {
+        "champ": Champ;
+    }
+    interface FtbFlag {
+        "flag": string;
     }
     interface FtbGameCard {
         "bottomFields": FtbGameCardField[];
@@ -91,7 +97,11 @@ export namespace Components {
     }
     interface FtbLanguageSelect {
     }
+    interface FtbLeagueBirthdays {
+        "league": League;
+    }
     interface FtbLeagueChamps {
+        "league": League;
     }
     interface FtbLeagueDocuments {
         "league": League;
@@ -131,6 +141,10 @@ export namespace Components {
         "stretchItems": boolean;
         "totalItems": number;
     }
+    interface FtbPartnerBanner {
+        "leagueId": number;
+        "slotCode": BannerSlotCode;
+    }
     interface FtbPhotoGallery {
         "game": Game;
         "start": number;
@@ -150,6 +164,8 @@ export namespace Components {
         "items": any[];
         "placeholder": string;
         "renderItems": (items: any[]) => string;
+    }
+    interface FtbSeasonStandings {
     }
     interface FtbSpinner {
     }
@@ -203,6 +219,18 @@ declare global {
     var HTMLFtbAppElement: {
         prototype: HTMLFtbAppElement;
         new (): HTMLFtbAppElement;
+    };
+    interface HTMLFtbChampCardElement extends Components.FtbChampCard, HTMLStencilElement {
+    }
+    var HTMLFtbChampCardElement: {
+        prototype: HTMLFtbChampCardElement;
+        new (): HTMLFtbChampCardElement;
+    };
+    interface HTMLFtbFlagElement extends Components.FtbFlag, HTMLStencilElement {
+    }
+    var HTMLFtbFlagElement: {
+        prototype: HTMLFtbFlagElement;
+        new (): HTMLFtbFlagElement;
     };
     interface HTMLFtbGameCardElement extends Components.FtbGameCard, HTMLStencilElement {
     }
@@ -312,6 +340,12 @@ declare global {
         prototype: HTMLFtbLanguageSelectElement;
         new (): HTMLFtbLanguageSelectElement;
     };
+    interface HTMLFtbLeagueBirthdaysElement extends Components.FtbLeagueBirthdays, HTMLStencilElement {
+    }
+    var HTMLFtbLeagueBirthdaysElement: {
+        prototype: HTMLFtbLeagueBirthdaysElement;
+        new (): HTMLFtbLeagueBirthdaysElement;
+    };
     interface HTMLFtbLeagueChampsElement extends Components.FtbLeagueChamps, HTMLStencilElement {
     }
     var HTMLFtbLeagueChampsElement: {
@@ -372,6 +406,12 @@ declare global {
         prototype: HTMLFtbPaginationElement;
         new (): HTMLFtbPaginationElement;
     };
+    interface HTMLFtbPartnerBannerElement extends Components.FtbPartnerBanner, HTMLStencilElement {
+    }
+    var HTMLFtbPartnerBannerElement: {
+        prototype: HTMLFtbPartnerBannerElement;
+        new (): HTMLFtbPartnerBannerElement;
+    };
     interface HTMLFtbPhotoGalleryElement extends Components.FtbPhotoGallery, HTMLStencilElement {
     }
     var HTMLFtbPhotoGalleryElement: {
@@ -395,6 +435,12 @@ declare global {
     var HTMLFtbSearchableContentElement: {
         prototype: HTMLFtbSearchableContentElement;
         new (): HTMLFtbSearchableContentElement;
+    };
+    interface HTMLFtbSeasonStandingsElement extends Components.FtbSeasonStandings, HTMLStencilElement {
+    }
+    var HTMLFtbSeasonStandingsElement: {
+        prototype: HTMLFtbSeasonStandingsElement;
+        new (): HTMLFtbSeasonStandingsElement;
     };
     interface HTMLFtbSpinnerElement extends Components.FtbSpinner, HTMLStencilElement {
     }
@@ -448,6 +494,8 @@ declare global {
         "cmp-showcase": HTMLCmpShowcaseElement;
         "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
         "ftb-app": HTMLFtbAppElement;
+        "ftb-champ-card": HTMLFtbChampCardElement;
+        "ftb-flag": HTMLFtbFlagElement;
         "ftb-game-card": HTMLFtbGameCardElement;
         "ftb-game-date": HTMLFtbGameDateElement;
         "ftb-game-events": HTMLFtbGameEventsElement;
@@ -466,6 +514,7 @@ declare global {
         "ftb-img": HTMLFtbImgElement;
         "ftb-improving-img": HTMLFtbImprovingImgElement;
         "ftb-language-select": HTMLFtbLanguageSelectElement;
+        "ftb-league-birthdays": HTMLFtbLeagueBirthdaysElement;
         "ftb-league-champs": HTMLFtbLeagueChampsElement;
         "ftb-league-documents": HTMLFtbLeagueDocumentsElement;
         "ftb-league-media": HTMLFtbLeagueMediaElement;
@@ -476,10 +525,12 @@ declare global {
         "ftb-league-teams": HTMLFtbLeagueTeamsElement;
         "ftb-media": HTMLFtbMediaElement;
         "ftb-pagination": HTMLFtbPaginationElement;
+        "ftb-partner-banner": HTMLFtbPartnerBannerElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
+        "ftb-season-standings": HTMLFtbSeasonStandingsElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-stadium-card": HTMLFtbStadiumCardElement;
         "ftb-stadium-photo": HTMLFtbStadiumPhotoElement;
@@ -506,6 +557,13 @@ declare namespace LocalJSX {
     appId: string;
     vapidKey: string;
   };
+    }
+    interface FtbChampCard {
+        "champ": Champ;
+    }
+    interface FtbFlag {
+        "flag"?: string;
+        "onColor"?: (event: CustomEvent<[number, number, number][]>) => void;
     }
     interface FtbGameCard {
         "bottomFields"?: FtbGameCardField[];
@@ -571,7 +629,11 @@ declare namespace LocalJSX {
     }
     interface FtbLanguageSelect {
     }
+    interface FtbLeagueBirthdays {
+        "league": League;
+    }
     interface FtbLeagueChamps {
+        "league": League;
     }
     interface FtbLeagueDocuments {
         "league": League;
@@ -611,6 +673,10 @@ declare namespace LocalJSX {
         "stretchItems"?: boolean;
         "totalItems"?: number;
     }
+    interface FtbPartnerBanner {
+        "leagueId"?: number;
+        "slotCode": BannerSlotCode;
+    }
     interface FtbPhotoGallery {
         "game": Game;
         "onClosed"?: (event: CustomEvent<boolean>) => void;
@@ -633,6 +699,8 @@ declare namespace LocalJSX {
         "onInputKeyDown"?: (event: CustomEvent<KeyboardEvent>) => void;
         "placeholder": string;
         "renderItems": (items: any[]) => string;
+    }
+    interface FtbSeasonStandings {
     }
     interface FtbSpinner {
     }
@@ -672,6 +740,8 @@ declare namespace LocalJSX {
         "cmp-showcase": CmpShowcase;
         "ftb-alerts-feed": FtbAlertsFeed;
         "ftb-app": FtbApp;
+        "ftb-champ-card": FtbChampCard;
+        "ftb-flag": FtbFlag;
         "ftb-game-card": FtbGameCard;
         "ftb-game-date": FtbGameDate;
         "ftb-game-events": FtbGameEvents;
@@ -690,6 +760,7 @@ declare namespace LocalJSX {
         "ftb-img": FtbImg;
         "ftb-improving-img": FtbImprovingImg;
         "ftb-language-select": FtbLanguageSelect;
+        "ftb-league-birthdays": FtbLeagueBirthdays;
         "ftb-league-champs": FtbLeagueChamps;
         "ftb-league-documents": FtbLeagueDocuments;
         "ftb-league-media": FtbLeagueMedia;
@@ -700,10 +771,12 @@ declare namespace LocalJSX {
         "ftb-league-teams": FtbLeagueTeams;
         "ftb-media": FtbMedia;
         "ftb-pagination": FtbPagination;
+        "ftb-partner-banner": FtbPartnerBanner;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
+        "ftb-season-standings": FtbSeasonStandings;
         "ftb-spinner": FtbSpinner;
         "ftb-stadium-card": FtbStadiumCard;
         "ftb-stadium-photo": FtbStadiumPhoto;
@@ -721,6 +794,8 @@ declare module "@stencil/core" {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
             "ftb-alerts-feed": LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
             "ftb-app": LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
+            "ftb-champ-card": LocalJSX.FtbChampCard & JSXBase.HTMLAttributes<HTMLFtbChampCardElement>;
+            "ftb-flag": LocalJSX.FtbFlag & JSXBase.HTMLAttributes<HTMLFtbFlagElement>;
             "ftb-game-card": LocalJSX.FtbGameCard & JSXBase.HTMLAttributes<HTMLFtbGameCardElement>;
             "ftb-game-date": LocalJSX.FtbGameDate & JSXBase.HTMLAttributes<HTMLFtbGameDateElement>;
             "ftb-game-events": LocalJSX.FtbGameEvents & JSXBase.HTMLAttributes<HTMLFtbGameEventsElement>;
@@ -739,6 +814,7 @@ declare module "@stencil/core" {
             "ftb-img": LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
             "ftb-improving-img": LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
             "ftb-language-select": LocalJSX.FtbLanguageSelect & JSXBase.HTMLAttributes<HTMLFtbLanguageSelectElement>;
+            "ftb-league-birthdays": LocalJSX.FtbLeagueBirthdays & JSXBase.HTMLAttributes<HTMLFtbLeagueBirthdaysElement>;
             "ftb-league-champs": LocalJSX.FtbLeagueChamps & JSXBase.HTMLAttributes<HTMLFtbLeagueChampsElement>;
             "ftb-league-documents": LocalJSX.FtbLeagueDocuments & JSXBase.HTMLAttributes<HTMLFtbLeagueDocumentsElement>;
             "ftb-league-media": LocalJSX.FtbLeagueMedia & JSXBase.HTMLAttributes<HTMLFtbLeagueMediaElement>;
@@ -749,10 +825,12 @@ declare module "@stencil/core" {
             "ftb-league-teams": LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
             "ftb-media": LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
+            "ftb-partner-banner": LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
+            "ftb-season-standings": LocalJSX.FtbSeasonStandings & JSXBase.HTMLAttributes<HTMLFtbSeasonStandingsElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
             "ftb-stadium-photo": LocalJSX.FtbStadiumPhoto & JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoElement>;

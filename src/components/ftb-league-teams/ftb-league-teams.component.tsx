@@ -3,11 +3,9 @@ import { filter, League, translations } from 'ftb-models';
 import userState from '@src/tools/user.store';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { AsyncSubject } from 'rxjs';
-import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { User } from 'ftb-models/dist/models/user.model';
 import { LeagueService } from 'ftb-models/dist/services/league.service';
 import orderBy from 'lodash-es/orderBy';
+import { diStore } from '@src/tools/di.store';
 
 @Component({
   tag: 'ftb-league-teams',
@@ -19,9 +17,7 @@ export class FtbLeagueTeams {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
-    //todo move somewhere
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
-    new LeagueService(gql).loadLeagueTeams(this.league._id).then(l => {
+    new LeagueService(diStore.gql).loadLeagueTeams(this.league._id).then(l => {
       l.teams.items = orderBy(l.teams.items, ['rating'], ['desc']);
       this.league.teams = l.teams;
       this.ready$.next(true);

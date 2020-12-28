@@ -27,6 +27,7 @@ export class FtbLeagueStadiums {
   }
 
   render() {
+    if (!this.league.stadiums.total) return null;
     return (
       <Host>
         <div class="ftb-league-stadiums__wrapper">

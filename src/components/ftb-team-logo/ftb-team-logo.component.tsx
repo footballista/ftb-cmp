@@ -17,23 +17,41 @@ export class FtbTeamLogo {
   @Event() color: EventEmitter<[number, number, number][]>;
   @State() showPlaceholder: boolean = false;
   @State() url: string;
+  private isDestroyed: boolean;
 
   componentWillLoad() {
-    this.url = `https://footballista.ru/api/img/logos/${this.team?.logo || this.logo}-${this.mode}.png?logoId=${
-      this.team?.logoId || this.version
-    }`;
+    if (!this.team) {
+      this.team = new Team({ logo: this.logo, name: this.name, logoId: this.version });
+    }
+
+    this.url = `https://footballista.ru/api/img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+  }
+
+  onImgFail() {
+    if (this.isDestroyed) return;
+    this.showPlaceholder = true;
+    this.color.emit([
+      [0, 0, 0],
+      [255, 255, 255],
+      [0, 0, 100],
+    ]);
+  }
+
+  disconnectedCallback() {
+    this.isDestroyed = true;
   }
 
   render() {
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Shield}></ftb-icon>
+          <ftb-icon svg={Shield} title={this.team.name}></ftb-icon>
         ) : (
           <ftb-img
             src={this.url}
-            onFailed={() => (this.showPlaceholder = true)}
-            onColor={e => this.color.emit(e.detail)}
+            onFailed={() => this.onImgFail()}
+            onColor={e => !this.isDestroyed && this.color.emit(e.detail)}
+            title={this.team.name}
           ></ftb-img>
         )}
       </Host>

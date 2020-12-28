@@ -37,6 +37,8 @@ export class FtbLeagueMedia {
       });
     }
 
+    if (!tabs.length) return null;
+
     return (
       <Host>
         <div class="ftb-league-media__wrapper">

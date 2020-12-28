@@ -5,7 +5,7 @@ import { Player } from 'ftb-models/dist/models/player.model';
 import range from 'lodash-es/range';
 import { Collection } from 'ftb-models/dist/models/base/collection';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { filter, Game, GamePhoto, GamePhotoImg, League, Stadium } from 'ftb-models';
+import { BannerSlotCode, Champ, filter, Game, GamePhoto, GamePhotoImg, League, Season, Stadium } from 'ftb-models';
 import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
 import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
 import { GameService } from 'ftb-models/dist/services/game.service';
@@ -28,6 +28,8 @@ export class CmpTest {
     // game: new Game({ _id: 347476 }),
     game: new Game({ _id: 313283 }),
     league: new League({ _id: 394 }),
+    champ: new Champ({ _id: 2117 }),
+    season: new Season({ _id: 4205 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -49,27 +51,30 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.banner(),
+      this.leagueBirthdays(),
+      this.leagueChamps(),
       this.leagueMedia(),
-      // this.leagueDocuments(),
-      // this.leagueStadiums(),
-      // this.leagueTeams(),
-      // this.gameMedia(),
-      // this.gameCard(),
-      // this.gameScoreboard(),
-      // this.gameStatsPreview(),
-      // this.gameEvents(),
-      // this.gameLineups(),
-      // this.teamLogo(),
-      // this.userPhoto(),
-      // this.playerPhoto(),
-      // this.stadiumPhoto(),
-      // this.photoGallery(),
-      // this.improvingImg(),
-      // this.gamePhotoPreview(),
-      // this.pagination(),
-      // this.paginationWithCollection(),
-      // this.search(),
-      // this.tabs(),
+      this.leagueDocuments(),
+      this.leagueStadiums(),
+      this.leagueTeams(),
+      this.gameMedia(),
+      this.gameCard(),
+      this.gameScoreboard(),
+      this.gameStatsPreview(),
+      this.gameEvents(),
+      this.gameLineups(),
+      this.teamLogo(),
+      this.userPhoto(),
+      this.playerPhoto(),
+      this.stadiumPhoto(),
+      this.photoGallery(),
+      this.improvingImg(),
+      this.gamePhotoPreview(),
+      this.pagination(),
+      this.paginationWithCollection(),
+      this.search(),
+      this.tabs(),
     ];
 
     return (
@@ -100,6 +105,47 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
+  }
+
+  private banner() {
+    return {
+      title: 'Partner banner',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => (
+            <ftb-partner-banner
+              slotCode={BannerSlotCode.site_footer}
+              leagueId={this.data.league._id}
+            ></ftb-partner-banner>
+          ),
+        },
+      ],
+    };
+  }
+
+  private leagueBirthdays() {
+    return {
+      title: 'League birthdays',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-birthdays league={this.data.league}></ftb-league-birthdays>,
+        },
+      ],
+    };
+  }
+
+  private leagueChamps() {
+    return {
+      title: 'League champs',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-league-champs league={this.data.league}></ftb-league-champs>,
         },
       ],
     };

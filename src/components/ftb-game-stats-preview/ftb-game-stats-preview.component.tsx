@@ -21,8 +21,15 @@ export class FtbGameStatsPreview {
     //todo move somewhere
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     new GameService(gql).loadGamePreview(this.game._id).then(g => {
-      this.game.home = Object.assign(this.game.home, g.home);
-      this.game.away = Object.assign(this.game.away, g.away);
+      this.game.home ??= g.home;
+      for (const key in g.home) {
+        this.game.home[key] = g.home[key];
+      }
+      this.game.away ??= g.away;
+      for (const key in g.away) {
+        this.game.away[key] = g.away[key];
+      }
+
       this.game.stage.table = g.stage.table;
       this.game.previousDuels = g.previousDuels;
       this.loaded = true;

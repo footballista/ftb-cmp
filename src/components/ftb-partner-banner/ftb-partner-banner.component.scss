@@ -1,0 +1,22 @@
+ftb-partner-banner {
+  .ftb-partner-banner__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-partner-banner__background {
+      display: flex;
+      padding: 0;
+      width: inherit;
+      height: inherit;
+      a {
+        display: block;
+        padding: 0;
+        width: inherit;
+        height: inherit;
+        img {
+          width: inherit;
+          height: inherit;
+        }
+      }
+    }
+  }
+}

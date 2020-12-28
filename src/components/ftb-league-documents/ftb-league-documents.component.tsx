@@ -30,6 +30,8 @@ export class FtbLeagueDocuments {
   }
 
   render() {
+    if (!this.league.documents.total) return null;
+
     return (
       <Host>
         <div class="ftb-league-documents__wrapper">

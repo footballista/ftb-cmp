@@ -13,17 +13,17 @@ export class FtbLeagueTeamCard {
   private onTeamColor(palette) {
     this.bg = [
       'linear-gradient(to right, rgba(' +
-        [...palette[0], 0.3].join(', ') +
+        [...palette[0], 1].join(', ') +
         '), rgba(' +
-        [...palette[0], 0.15].join(', ') +
+        [...palette[0], 0].join(', ') +
         ')',
       'linear-gradient(to right, rgba(' +
-        [...palette[2], 0.15].join(', ') +
+        [...palette[2], 0].join(', ') +
         '), rgba(' +
-        [...palette[2], 0.3].join(', ') +
+        [...palette[2], 1].join(', ') +
         ')',
 
-      'rgba(' + [...palette[1], 0.25].join(', ') + ')',
+      'rgba(' + [...palette[1], 1].join(', ') + ')',
     ];
     this.loaded = true;
   }
@@ -31,12 +31,19 @@ export class FtbLeagueTeamCard {
   render() {
     return (
       <Host>
-        <div class={{ 'ftb-team-card__wrapper': true, 'loaded': this.loaded }} style={{ background: this.bg[0] }}>
-          <div class="ftb-team-card__background" style={{ background: this.bg[1] }}>
-            <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
-            <div class="name-rating">
-              <div class="name">{this.team.name}</div>
-              <div class="rating">{this.team.rating}</div>
+        <div class={{ 'ftb-team-card__wrapper': true, 'loaded': this.loaded }}>
+          <div class="ftb-team-card__background">
+            <div class="ftb-team-card__color">
+              <div class="ftb-team-card__color-layer" style={{ background: this.bg[0] }}></div>
+              <div class="ftb-team-card__color-layer" style={{ background: this.bg[1] }}></div>
+              <div class="ftb-team-card__color-layer" style={{ background: this.bg[2] }}></div>
+            </div>
+            <div class="ftb-team-card__content">
+              <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
+              <div class="ftb-team-card__name-rating">
+                <div class="ftb-team-card__name">{this.team.name}</div>
+                <div class="ftb-team-card__rating">{this.team.rating}</div>
+              </div>
             </div>
           </div>
         </div>
