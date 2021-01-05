@@ -1,0 +1,94 @@
+ftb-stage-cup-net {
+  .ftb-stage-cup-net__wrapper {
+    height: inherit;
+    width: inherit;
+    .ftb-stage-cup-net__background {
+      height: inherit;
+      width: inherit;
+      .ftb-stage-cup-net__net {
+        display: flex;
+        .ftb-stage-cup-net__column {
+          .ftb-stage-cup-net__head {
+            text-align: center;
+          }
+          .ftb-stage-cup-net__body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            .game {
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              margin: 20px 10px;
+              position: relative;
+              &:after {
+                height: 50%;
+                width: calc(100% + 20px);
+                display: block;
+                content: ' ';
+                position: absolute;
+                top: -0.5px;
+                left: -10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              }
+              .row {
+                display: flex;
+                align-items: center;
+                height: 40px;
+                .name {
+                  display: flex;
+                  flex: 1;
+                  align-items: center;
+                  padding-right: 10px;
+                  ftb-team-logo {
+                    --shadow: none;
+                    padding: 0 10px;
+                    height: 25px;
+                    width: 25px;
+                  }
+                }
+                .score {
+                  padding: 0 5px;
+                  &:not(:last-of-type) {
+                    border-right: 1px solid rgba(0, 0, 0, 0.1);
+                  }
+                  .pen {
+                    padding: 0 2px;
+                  }
+                }
+              }
+              .row:first-of-type {
+                //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              }
+              .row.loser {
+                opacity: 0.6;
+              }
+            }
+          }
+        }
+        .ftb-stage-cup-net__column:not(:first-of-type) {
+          .game:before {
+            height: calc(100% + 43px);
+            width: 100%;
+            position: absolute;
+            top: -21px;
+            left: -11px;
+            content: ' ';
+            display: block;
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+          }
+        }
+        .ftb-stage-cup-net__column:last-of-type {
+          .game:after {
+            width: calc(100% + 10px);
+          }
+        }
+        .ftb-stage-cup-net__column:first-of-type {
+          .game:after {
+            width: calc(100% + 10px);
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
 import { GameService } from 'ftb-models/dist/services/game.service';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 import { LeagueService } from 'ftb-models/dist/services/league.service';
+import { SeasonService } from 'ftb-models/dist/services/season.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -29,7 +30,8 @@ export class CmpTest {
     game: new Game({ _id: 313283 }),
     league: new League({ _id: 394 }),
     champ: new Champ({ _id: 2117 }),
-    season: new Season({ _id: 4205 }),
+    // season: new Season({ _id: 4205 }),
+    season: new Season({ _id: 4270 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -38,6 +40,7 @@ export class CmpTest {
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id);
     this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id);
+    this.data.season = await new SeasonService(gql).loadStandings(this.data.season._id);
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -52,6 +55,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.seasonStandings(),
       this.leagueBirthdays(),
       this.leagueChamps(),
       this.leagueMedia(),
@@ -134,6 +138,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-league-birthdays league={this.data.league}></ftb-league-birthdays>,
+        },
+      ],
+    };
+  }
+
+  private seasonStandings() {
+    return {
+      title: 'Season Standings',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-standings season={this.data.season}></ftb-season-standings>,
         },
       ],
     };

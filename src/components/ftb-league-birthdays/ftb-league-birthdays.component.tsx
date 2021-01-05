@@ -50,7 +50,8 @@ export class FtbLeagueBirthdays {
               {p.firstName[0]}. {p.lastName}
             </div>
             <div class="age">
-              {p.getAge()} {translations.player.y_o[userState.language].getForm(p.getAge())}
+              {p.birthday.format('DD.MM.YYYY')} -{p.getAge()}{' '}
+              {translations.player.y_o[userState.language].getForm(p.getAge())}
             </div>
           </div>
           <div class="ftb-league-birthdays__player-teams">

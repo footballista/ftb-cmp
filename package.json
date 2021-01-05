@@ -30,7 +30,7 @@
     "colorthief": "^2.3.2",
     "file-saver": "^2.0.5",
     "firebase": "^8.2.1",
-    "ftb-models": "^2.3.8",
+    "ftb-models": "^2.3.16",
     "lodash-es": "^4.17.20",
     "npm": "^7.3.0",
     "photoswipe": "^4.1.3",
