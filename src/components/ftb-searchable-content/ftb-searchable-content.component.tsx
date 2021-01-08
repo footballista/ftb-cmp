@@ -25,6 +25,8 @@ export class FtbSearchableContent {
   @Prop() filterFn!: (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
   @Prop() placeholder!: string;
   @Prop() categories: CategoryInterface[];
+  /** alternative to "categories" property. used when categories list should be updated on category change */
+  @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;
   @State() open = true;
   @State() filteredItems: any[];
@@ -40,6 +42,7 @@ export class FtbSearchableContent {
   private minHeightPx: number;
 
   async componentWillLoad() {
+    if (this.getCategories) this.categories = this.getCategories();
     this.categoryDefaultSelect();
     this.subscribeToQueryChanges();
     this.queryChanges$.next('');
@@ -142,6 +145,7 @@ export class FtbSearchableContent {
       this.categories = [...this.categories];
       this.inputEl.focus();
     } else {
+      this.categories.forEach(ct => (ct.open = false));
       c.open = true;
       this.categories = [...this.categories];
       c.inputEl.focus();
@@ -154,6 +158,7 @@ export class FtbSearchableContent {
       c.options.forEach(opt => (opt.selected = opt.focused = false));
       o.selected = true;
       c.open = false;
+      if (this.getCategories) this.categories = this.getCategories(this.categories);
       this.categoryUpdated$.next();
     }
     this.inputEl.focus();

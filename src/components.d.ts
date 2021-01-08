@@ -161,9 +161,22 @@ export namespace Components {
         "categories": CategoryInterface[];
         "debounce": number;
         "filterFn": (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
+        /**
+          * alternative to "categories" property. used when categories list should be updated on category change
+         */
+        "getCategories": (currentCategories?: CategoryInterface[]) => CategoryInterface[];
         "items": any[];
         "placeholder": string;
         "renderItems": (items: any[]) => string;
+    }
+    interface FtbSeasonBestPlayers {
+        "season": Season;
+    }
+    interface FtbSeasonBirthdays {
+        "season": Season;
+    }
+    interface FtbSeasonGames {
+        "season": Season;
     }
     interface FtbSeasonStandings {
         "season": Season;
@@ -443,6 +456,24 @@ declare global {
         prototype: HTMLFtbSearchableContentElement;
         new (): HTMLFtbSearchableContentElement;
     };
+    interface HTMLFtbSeasonBestPlayersElement extends Components.FtbSeasonBestPlayers, HTMLStencilElement {
+    }
+    var HTMLFtbSeasonBestPlayersElement: {
+        prototype: HTMLFtbSeasonBestPlayersElement;
+        new (): HTMLFtbSeasonBestPlayersElement;
+    };
+    interface HTMLFtbSeasonBirthdaysElement extends Components.FtbSeasonBirthdays, HTMLStencilElement {
+    }
+    var HTMLFtbSeasonBirthdaysElement: {
+        prototype: HTMLFtbSeasonBirthdaysElement;
+        new (): HTMLFtbSeasonBirthdaysElement;
+    };
+    interface HTMLFtbSeasonGamesElement extends Components.FtbSeasonGames, HTMLStencilElement {
+    }
+    var HTMLFtbSeasonGamesElement: {
+        prototype: HTMLFtbSeasonGamesElement;
+        new (): HTMLFtbSeasonGamesElement;
+    };
     interface HTMLFtbSeasonStandingsElement extends Components.FtbSeasonStandings, HTMLStencilElement {
     }
     var HTMLFtbSeasonStandingsElement: {
@@ -549,6 +580,9 @@ declare global {
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
+        "ftb-season-best-players": HTMLFtbSeasonBestPlayersElement;
+        "ftb-season-birthdays": HTMLFtbSeasonBirthdaysElement;
+        "ftb-season-games": HTMLFtbSeasonGamesElement;
         "ftb-season-standings": HTMLFtbSeasonStandingsElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-stadium-card": HTMLFtbStadiumCardElement;
@@ -716,10 +750,23 @@ declare namespace LocalJSX {
         "categories"?: CategoryInterface[];
         "debounce"?: number;
         "filterFn": (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
+        /**
+          * alternative to "categories" property. used when categories list should be updated on category change
+         */
+        "getCategories"?: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
         "items": any[];
         "onInputKeyDown"?: (event: CustomEvent<KeyboardEvent>) => void;
         "placeholder": string;
         "renderItems": (items: any[]) => string;
+    }
+    interface FtbSeasonBestPlayers {
+        "season": Season;
+    }
+    interface FtbSeasonBirthdays {
+        "season": Season;
+    }
+    interface FtbSeasonGames {
+        "season": Season;
     }
     interface FtbSeasonStandings {
         "season": Season;
@@ -804,6 +851,9 @@ declare namespace LocalJSX {
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
+        "ftb-season-best-players": FtbSeasonBestPlayers;
+        "ftb-season-birthdays": FtbSeasonBirthdays;
+        "ftb-season-games": FtbSeasonGames;
         "ftb-season-standings": FtbSeasonStandings;
         "ftb-spinner": FtbSpinner;
         "ftb-stadium-card": FtbStadiumCard;
@@ -860,6 +910,9 @@ declare module "@stencil/core" {
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
+            "ftb-season-best-players": LocalJSX.FtbSeasonBestPlayers & JSXBase.HTMLAttributes<HTMLFtbSeasonBestPlayersElement>;
+            "ftb-season-birthdays": LocalJSX.FtbSeasonBirthdays & JSXBase.HTMLAttributes<HTMLFtbSeasonBirthdaysElement>;
+            "ftb-season-games": LocalJSX.FtbSeasonGames & JSXBase.HTMLAttributes<HTMLFtbSeasonGamesElement>;
             "ftb-season-standings": LocalJSX.FtbSeasonStandings & JSXBase.HTMLAttributes<HTMLFtbSeasonStandingsElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;

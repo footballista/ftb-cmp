@@ -1,0 +1,23 @@
+ftb-season-games {
+  .ftb-season-games__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-season-games__background {
+      width: inherit;
+      height: inherit;
+      ftb-searchable-content {
+        width: 800px;
+        height: 300px;
+        .team-option {
+          display: flex;
+          align-items: center;
+          ftb-team-logo {
+            height: 20px;
+            width: 20px;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
-ftb-league-birthdays {
-  .ftb-league-birthdays__wrapper {
+ftb-season-birthdays {
+  .ftb-season-birthdays__wrapper {
     width: inherit;
     height: inherit;
-    .ftb-league-birthdays__background {
+    .ftb-season-birthdays__background {
       width: inherit;
       height: inherit;
-      .ftb-league-birthdays__player-wrapper {
+      .ftb-season-birthdays__player-wrapper {
         .ftb-league-birthdays__player-background {
           width: inherit;
           height: inherit;
@@ -25,7 +25,7 @@ ftb-league-birthdays {
             }
           }
 
-          .ftb-league-birthdays__player-data {
+          .ftb-season-birthdays__player-data {
             flex: 1;
             .name {
               font-size: 14px;
@@ -35,10 +35,9 @@ ftb-league-birthdays {
             }
           }
 
-          .ftb-league-birthdays__player-teams {
+          .ftb-season-birthdays__player-teams {
             display: flex;
             padding: 0 10px;
-
             ftb-team-logo {
               height: 25px;
               width: 25px;

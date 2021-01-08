@@ -40,7 +40,7 @@ export class CmpTest {
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id);
     this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id);
-    this.data.season = await new SeasonService(gql).loadStandings(this.data.season._id);
+    this.data.season = await new SeasonService(gql).loadSeasonStandings(this.data.season._id);
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -55,7 +55,10 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.seasonGames(),
       this.seasonStandings(),
+      this.seasonBestPlayers(),
+      this.seasonBirthdays(),
       this.leagueBirthdays(),
       this.leagueChamps(),
       this.leagueMedia(),
@@ -131,6 +134,30 @@ export class CmpTest {
     };
   }
 
+  private seasonGames() {
+    return {
+      title: 'Season games',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-games season={this.data.season}></ftb-season-games>,
+        },
+      ],
+    };
+  }
+
+  private seasonBirthdays() {
+    return {
+      title: 'Season birthdays',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-birthdays season={this.data.season}></ftb-season-birthdays>,
+        },
+      ],
+    };
+  }
+
   private leagueBirthdays() {
     return {
       title: 'League birthdays',
@@ -150,6 +177,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-season-standings season={this.data.season}></ftb-season-standings>,
+        },
+      ],
+    };
+  }
+
+  private seasonBestPlayers() {
+    return {
+      title: 'Season Best Players',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-best-players season={this.data.season}></ftb-season-best-players>,
         },
       ],
     };
