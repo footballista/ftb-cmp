@@ -1,2 +1,38 @@
-:host {
+ftb-season-best-players {
+  .ftb-season-best-players__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-season-best-players__background {
+      width: inherit;
+      height: inherit;
+      ftb-searchable-content {
+        width: 800px;
+        .team-option {
+          display: flex;
+          align-items: center;
+          ftb-team-logo {
+            height: 20px;
+            width: 20px;
+            margin-right: 5px;
+          }
+        }
+        .ftb-season-best-players__player-card {
+          .ftb-season-best-players__player-card-background {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            ftb-player-photo {
+              height: 40px;
+              width: 40px;
+            }
+            .info {
+              flex: 1;
+              padding: 0 10px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

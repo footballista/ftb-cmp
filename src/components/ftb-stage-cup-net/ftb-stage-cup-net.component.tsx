@@ -63,7 +63,6 @@ export class FtbStageCupNet {
     return (
       <div class="ftb-stage-cup-net__net">
         {rounds.map(r => {
-          console.log(games[r]);
           return (
             <div class="ftb-stage-cup-net__column">
               <div class="ftb-stage-cup-net__head">

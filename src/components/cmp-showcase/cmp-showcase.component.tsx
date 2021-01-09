@@ -55,9 +55,9 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.seasonBestPlayers(),
       this.seasonGames(),
       this.seasonStandings(),
-      this.seasonBestPlayers(),
       this.seasonBirthdays(),
       this.leagueBirthdays(),
       this.leagueChamps(),

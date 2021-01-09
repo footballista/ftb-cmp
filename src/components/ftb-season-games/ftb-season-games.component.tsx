@@ -139,7 +139,7 @@ export class FtbSeasonGames {
         items = items.filter(g => g.home.team._id === teamId || g.away.team._id === teamId);
       }
       filtersOn = Boolean(query) || stageId || teamId;
-      if (!query) return items;
+      if (!filtersOn) return items;
       await this.ready$.toPromise();
       return filter(items, query, ['home.team.name', 'home.team.shortName', 'away.team.name', 'away.team.shortName']);
     };
