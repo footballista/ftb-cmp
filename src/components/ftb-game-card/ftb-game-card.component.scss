@@ -13,6 +13,15 @@ ftb-game-card {
       }
       .ftb-game-card__top {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        .champ-season {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .round {
+          white-space: nowrap;
+        }
       }
       .ftb-game-card__bottom {
         border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -45,6 +54,9 @@ ftb-game-card {
             text-align: center;
           }
           .date {
+            font-size: 12px;
+          }
+          .round {
             font-size: 12px;
           }
           .player-stats {

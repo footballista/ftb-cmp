@@ -1,0 +1,14 @@
+ftb-team-games {
+  .ftb-team-games__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-team-games__background {
+      width: inherit;
+      height: inherit;
+      ftb-searchable-content {
+        width: 800px;
+        height: 300px;
+      }
+    }
+  }
+}

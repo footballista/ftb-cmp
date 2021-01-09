@@ -12,6 +12,7 @@ import { GameService } from 'ftb-models/dist/services/game.service';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 import { LeagueService } from 'ftb-models/dist/services/league.service';
 import { SeasonService } from 'ftb-models/dist/services/season.service';
+import { TeamService } from 'ftb-models/dist/services/team.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -32,6 +33,7 @@ export class CmpTest {
     champ: new Champ({ _id: 2117 }),
     // season: new Season({ _id: 4205 }),
     season: new Season({ _id: 4270 }),
+    team: new Team({ _id: 18804 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -41,6 +43,7 @@ export class CmpTest {
     this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id);
     this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id);
     this.data.season = await new SeasonService(gql).loadSeasonStandings(this.data.season._id);
+    this.data.team = await new TeamService(gql).loadTeamInfo(this.data.team._id);
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -55,6 +58,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.teamGames(),
       this.seasonBestPlayers(),
       this.seasonGames(),
       this.seasonStandings(),
@@ -129,6 +133,18 @@ export class CmpTest {
               leagueId={this.data.league._id}
             ></ftb-partner-banner>
           ),
+        },
+      ],
+    };
+  }
+
+  private teamGames() {
+    return {
+      title: 'Team games',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-team-games team={this.data.team}></ftb-team-games>,
         },
       ],
     };

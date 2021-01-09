@@ -204,6 +204,9 @@ export namespace Components {
     interface FtbTeamCard {
         "team": Team;
     }
+    interface FtbTeamGames {
+        "team": Team;
+    }
     interface FtbTeamLogo {
         "logo": string;
         "mode": FtbTeamLogoMode;
@@ -522,6 +525,12 @@ declare global {
         prototype: HTMLFtbTeamCardElement;
         new (): HTMLFtbTeamCardElement;
     };
+    interface HTMLFtbTeamGamesElement extends Components.FtbTeamGames, HTMLStencilElement {
+    }
+    var HTMLFtbTeamGamesElement: {
+        prototype: HTMLFtbTeamGamesElement;
+        new (): HTMLFtbTeamGamesElement;
+    };
     interface HTMLFtbTeamLogoElement extends Components.FtbTeamLogo, HTMLStencilElement {
     }
     var HTMLFtbTeamLogoElement: {
@@ -591,6 +600,7 @@ declare global {
         "ftb-stage-table": HTMLFtbStageTableElement;
         "ftb-tabs": HTMLFtbTabsElement;
         "ftb-team-card": HTMLFtbTeamCardElement;
+        "ftb-team-games": HTMLFtbTeamGamesElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
         "ftb-video": HTMLFtbVideoElement;
@@ -794,6 +804,9 @@ declare namespace LocalJSX {
     interface FtbTeamCard {
         "team": Team;
     }
+    interface FtbTeamGames {
+        "team": Team;
+    }
     interface FtbTeamLogo {
         "logo"?: string;
         "mode"?: FtbTeamLogoMode;
@@ -862,6 +875,7 @@ declare namespace LocalJSX {
         "ftb-stage-table": FtbStageTable;
         "ftb-tabs": FtbTabs;
         "ftb-team-card": FtbTeamCard;
+        "ftb-team-games": FtbTeamGames;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-user-photo": FtbUserPhoto;
         "ftb-video": FtbVideo;
@@ -921,6 +935,7 @@ declare module "@stencil/core" {
             "ftb-stage-table": LocalJSX.FtbStageTable & JSXBase.HTMLAttributes<HTMLFtbStageTableElement>;
             "ftb-tabs": LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
             "ftb-team-card": LocalJSX.FtbTeamCard & JSXBase.HTMLAttributes<HTMLFtbTeamCardElement>;
+            "ftb-team-games": LocalJSX.FtbTeamGames & JSXBase.HTMLAttributes<HTMLFtbTeamGamesElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
             "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;

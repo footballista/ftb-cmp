@@ -1,12 +1,10 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
 import { Game, GameSide, GameState, translations } from 'ftb-models';
-import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { User } from 'ftb-models/dist/models/user.model';
 import { GameService } from 'ftb-models/dist/services/game.service';
 import userState from '@src/tools/user.store';
 import { Team } from 'ftb-models/dist/models/team.model';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { diStore } from '@src/tools/di.store';
 
 @Component({
   tag: 'ftb-game-stats-preview',
@@ -18,9 +16,7 @@ export class FtbGameStatsPreview {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    //todo move somewhere
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
-    new GameService(gql).loadGamePreview(this.game._id).then(g => {
+    new GameService(diStore.gql).loadGamePreview(this.game._id).then(g => {
       this.game.home ??= g.home;
       for (const key in g.home) {
         this.game.home[key] = g.home[key];
@@ -145,7 +141,7 @@ export class FtbGameStatsPreview {
   private renderLastGames(team: Team) {
     return (
       <div class="side">
-        {team.games
+        {team.games.items
           .filter(g => g.state == GameState.CLOSED)
           .slice(0, 5)
           .reverse()
