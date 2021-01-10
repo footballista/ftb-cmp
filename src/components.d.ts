@@ -136,7 +136,7 @@ export namespace Components {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items": any[];
-        "renderItem": (item) => string;
+        "renderItem": (item) => string | string[];
         "rows": number;
         "stretchItems": boolean;
         "totalItems": number;
@@ -167,7 +167,7 @@ export namespace Components {
         "getCategories": (currentCategories?: CategoryInterface[]) => CategoryInterface[];
         "items": any[];
         "placeholder": string;
-        "renderItems": (items: any[]) => string;
+        "renderItems": (items: any[]) => string | string[];
     }
     interface FtbSeasonBestPlayers {
         "season": Season;
@@ -211,6 +211,7 @@ export namespace Components {
         "team": Team;
     }
     interface FtbTeamLogo {
+        "caption": string;
         "logo": string;
         "mode": FtbTeamLogoMode;
         "name": string;
@@ -218,6 +219,9 @@ export namespace Components {
         "version": number;
     }
     interface FtbTeamMedia {
+        "team": Team;
+    }
+    interface FtbTeamRoster {
         "team": Team;
     }
     interface FtbUserPhoto {
@@ -555,6 +559,12 @@ declare global {
         prototype: HTMLFtbTeamMediaElement;
         new (): HTMLFtbTeamMediaElement;
     };
+    interface HTMLFtbTeamRosterElement extends Components.FtbTeamRoster, HTMLStencilElement {
+    }
+    var HTMLFtbTeamRosterElement: {
+        prototype: HTMLFtbTeamRosterElement;
+        new (): HTMLFtbTeamRosterElement;
+    };
     interface HTMLFtbUserPhotoElement extends Components.FtbUserPhoto, HTMLStencilElement {
     }
     var HTMLFtbUserPhotoElement: {
@@ -622,6 +632,7 @@ declare global {
         "ftb-team-games": HTMLFtbTeamGamesElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-team-media": HTMLFtbTeamMediaElement;
+        "ftb-team-roster": HTMLFtbTeamRosterElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
         "ftb-video": HTMLFtbVideoElement;
     }
@@ -753,7 +764,7 @@ declare namespace LocalJSX {
         "itemHeightPx": number;
         "itemMinWidthPx": number;
         "items"?: any[];
-        "renderItem": (item) => string;
+        "renderItem": (item) => string | string[];
         "rows": number;
         "stretchItems"?: boolean;
         "totalItems"?: number;
@@ -787,7 +798,7 @@ declare namespace LocalJSX {
         "items": any[];
         "onInputKeyDown"?: (event: CustomEvent<KeyboardEvent>) => void;
         "placeholder": string;
-        "renderItems": (items: any[]) => string;
+        "renderItems": (items: any[]) => string | string[];
     }
     interface FtbSeasonBestPlayers {
         "season": Season;
@@ -831,6 +842,7 @@ declare namespace LocalJSX {
         "team": Team;
     }
     interface FtbTeamLogo {
+        "caption"?: string;
         "logo"?: string;
         "mode"?: FtbTeamLogoMode;
         "name"?: string;
@@ -839,6 +851,9 @@ declare namespace LocalJSX {
         "version"?: number;
     }
     interface FtbTeamMedia {
+        "team": Team;
+    }
+    interface FtbTeamRoster {
         "team": Team;
     }
     interface FtbUserPhoto {
@@ -905,6 +920,7 @@ declare namespace LocalJSX {
         "ftb-team-games": FtbTeamGames;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-team-media": FtbTeamMedia;
+        "ftb-team-roster": FtbTeamRoster;
         "ftb-user-photo": FtbUserPhoto;
         "ftb-video": FtbVideo;
     }
@@ -967,6 +983,7 @@ declare module "@stencil/core" {
             "ftb-team-games": LocalJSX.FtbTeamGames & JSXBase.HTMLAttributes<HTMLFtbTeamGamesElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-team-media": LocalJSX.FtbTeamMedia & JSXBase.HTMLAttributes<HTMLFtbTeamMediaElement>;
+            "ftb-team-roster": LocalJSX.FtbTeamRoster & JSXBase.HTMLAttributes<HTMLFtbTeamRosterElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
             "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
         }

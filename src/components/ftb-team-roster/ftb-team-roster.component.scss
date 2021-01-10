@@ -1,0 +1,80 @@
+ftb-team-roster {
+  .ftb-team-roster__wrapper {
+    height: inherit;
+    width: inherit;
+    .ftb-team-roster__background {
+      height: inherit;
+      width: inherit;
+      ftb-searchable-content {
+        width: 800px;
+        .ftb-team-roster__player {
+          .ftb-team-roster__player-background {
+            display: flex;
+            align-items: center;
+            .photo {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 50px;
+              width: 50px;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              margin: 1px;
+              margin-left: 0;
+              ftb-player-photo {
+                height: 48px;
+                width: 48px;
+                border-radius: 0;
+                border: none;
+              }
+            }
+
+            .info {
+              flex: 1;
+              height: 50px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: flex-start;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              padding: 0 10px;
+              .name {
+                font-size: 14px;
+              }
+              .age {
+                font-size: 13px;
+              }
+            }
+
+            .team {
+              height: 50px;
+              width: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              margin: 1px;
+            }
+            .position {
+              height: 50px;
+              width: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              margin: 1px;
+            }
+            .number {
+              height: 50px;
+              width: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              margin: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

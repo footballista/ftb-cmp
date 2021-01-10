@@ -58,6 +58,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.teamRoster(),
       this.teamGames(),
       this.teamMedia(),
       this.seasonMedia(),
@@ -135,6 +136,18 @@ export class CmpTest {
               leagueId={this.data.league._id}
             ></ftb-partner-banner>
           ),
+        },
+      ],
+    };
+  }
+
+  private teamRoster() {
+    return {
+      title: 'Team roster',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-team-roster team={this.data.team}></ftb-team-roster>,
         },
       ],
     };

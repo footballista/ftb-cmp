@@ -21,7 +21,7 @@ export interface CategoryInterface {
 })
 export class FtbSearchableContent {
   @Prop() items!: any[];
-  @Prop() renderItems!: (items: any[]) => string;
+  @Prop() renderItems!: (items: any[]) => string | string[];
   @Prop() filterFn!: (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
   @Prop() placeholder!: string;
   @Prop() categories: CategoryInterface[];

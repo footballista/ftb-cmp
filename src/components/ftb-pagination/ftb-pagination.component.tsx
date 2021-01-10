@@ -16,7 +16,7 @@ export class FtbPagination {
   @Prop() rows!: number;
   @Prop() itemMinWidthPx!: number;
   @Prop() itemHeightPx!: number;
-  @Prop() renderItem!: (item) => string;
+  @Prop() renderItem!: (item) => string | string[];
   @Prop() stretchItems = true;
   @Prop() currentIdx: number = 0;
   @Prop() getItemsForInterval: (items: any[], offset: number, limit: number) => Promise<any[]>;

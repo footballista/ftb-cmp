@@ -14,6 +14,7 @@ export class FtbTeamLogo {
   @Prop() logo: string;
   @Prop() name: string;
   @Prop() version: number;
+  @Prop() caption: string;
   @Event() color: EventEmitter<[number, number, number][]>;
   @State() showPlaceholder: boolean = false;
   @State() url: string;
@@ -51,7 +52,7 @@ export class FtbTeamLogo {
             src={this.url}
             onFailed={() => this.onImgFail()}
             onColor={e => !this.isDestroyed && this.color.emit(e.detail)}
-            title={this.team.name}
+            title={this.caption || this.team.name}
           ></ftb-img>
         )}
       </Host>
