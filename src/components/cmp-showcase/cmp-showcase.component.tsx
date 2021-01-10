@@ -59,6 +59,8 @@ export class CmpTest {
       this.langSelect(),
       this.banner(),
       this.teamGames(),
+      this.teamMedia(),
+      this.seasonMedia(),
       this.seasonBestPlayers(),
       this.seasonGames(),
       this.seasonStandings(),
@@ -145,6 +147,30 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-team-games team={this.data.team}></ftb-team-games>,
+        },
+      ],
+    };
+  }
+
+  private teamMedia() {
+    return {
+      title: 'Team media',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-team-media team={this.data.team}></ftb-team-media>,
+        },
+      ],
+    };
+  }
+
+  private seasonMedia() {
+    return {
+      title: 'Season media',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-media season={this.data.season}></ftb-season-media>,
         },
       ],
     };

@@ -1,0 +1,13 @@
+ftb-season-media {
+  .ftb-season-media__wrapper {
+    width: inherit;
+    height: inherit;
+    .ftb-season-media__background {
+      width: inherit;
+      height: inherit;
+      ftb-searchable-content {
+        width: 800px;
+      }
+    }
+  }
+}

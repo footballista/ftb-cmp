@@ -18,7 +18,6 @@ export class FtbTeamGames {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    console.log(this.team.games.items[0]);
     new TeamService(diStore.gql).loadTeamGames(this.team._id).then(t => {
       this.team.games = t.games;
       this.loaded = true;

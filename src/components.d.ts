@@ -178,6 +178,9 @@ export namespace Components {
     interface FtbSeasonGames {
         "season": Season;
     }
+    interface FtbSeasonMedia {
+        "season": Season;
+    }
     interface FtbSeasonStandings {
         "season": Season;
     }
@@ -213,6 +216,9 @@ export namespace Components {
         "name": string;
         "team": Team;
         "version": number;
+    }
+    interface FtbTeamMedia {
+        "team": Team;
     }
     interface FtbUserPhoto {
         "user": User;
@@ -477,6 +483,12 @@ declare global {
         prototype: HTMLFtbSeasonGamesElement;
         new (): HTMLFtbSeasonGamesElement;
     };
+    interface HTMLFtbSeasonMediaElement extends Components.FtbSeasonMedia, HTMLStencilElement {
+    }
+    var HTMLFtbSeasonMediaElement: {
+        prototype: HTMLFtbSeasonMediaElement;
+        new (): HTMLFtbSeasonMediaElement;
+    };
     interface HTMLFtbSeasonStandingsElement extends Components.FtbSeasonStandings, HTMLStencilElement {
     }
     var HTMLFtbSeasonStandingsElement: {
@@ -537,6 +549,12 @@ declare global {
         prototype: HTMLFtbTeamLogoElement;
         new (): HTMLFtbTeamLogoElement;
     };
+    interface HTMLFtbTeamMediaElement extends Components.FtbTeamMedia, HTMLStencilElement {
+    }
+    var HTMLFtbTeamMediaElement: {
+        prototype: HTMLFtbTeamMediaElement;
+        new (): HTMLFtbTeamMediaElement;
+    };
     interface HTMLFtbUserPhotoElement extends Components.FtbUserPhoto, HTMLStencilElement {
     }
     var HTMLFtbUserPhotoElement: {
@@ -592,6 +610,7 @@ declare global {
         "ftb-season-best-players": HTMLFtbSeasonBestPlayersElement;
         "ftb-season-birthdays": HTMLFtbSeasonBirthdaysElement;
         "ftb-season-games": HTMLFtbSeasonGamesElement;
+        "ftb-season-media": HTMLFtbSeasonMediaElement;
         "ftb-season-standings": HTMLFtbSeasonStandingsElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-stadium-card": HTMLFtbStadiumCardElement;
@@ -602,6 +621,7 @@ declare global {
         "ftb-team-card": HTMLFtbTeamCardElement;
         "ftb-team-games": HTMLFtbTeamGamesElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
+        "ftb-team-media": HTMLFtbTeamMediaElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
         "ftb-video": HTMLFtbVideoElement;
     }
@@ -778,6 +798,9 @@ declare namespace LocalJSX {
     interface FtbSeasonGames {
         "season": Season;
     }
+    interface FtbSeasonMedia {
+        "season": Season;
+    }
     interface FtbSeasonStandings {
         "season": Season;
     }
@@ -814,6 +837,9 @@ declare namespace LocalJSX {
         "onColor"?: (event: CustomEvent<[number, number, number][]>) => void;
         "team"?: Team;
         "version"?: number;
+    }
+    interface FtbTeamMedia {
+        "team": Team;
     }
     interface FtbUserPhoto {
         "user"?: User;
@@ -867,6 +893,7 @@ declare namespace LocalJSX {
         "ftb-season-best-players": FtbSeasonBestPlayers;
         "ftb-season-birthdays": FtbSeasonBirthdays;
         "ftb-season-games": FtbSeasonGames;
+        "ftb-season-media": FtbSeasonMedia;
         "ftb-season-standings": FtbSeasonStandings;
         "ftb-spinner": FtbSpinner;
         "ftb-stadium-card": FtbStadiumCard;
@@ -877,6 +904,7 @@ declare namespace LocalJSX {
         "ftb-team-card": FtbTeamCard;
         "ftb-team-games": FtbTeamGames;
         "ftb-team-logo": FtbTeamLogo;
+        "ftb-team-media": FtbTeamMedia;
         "ftb-user-photo": FtbUserPhoto;
         "ftb-video": FtbVideo;
     }
@@ -927,6 +955,7 @@ declare module "@stencil/core" {
             "ftb-season-best-players": LocalJSX.FtbSeasonBestPlayers & JSXBase.HTMLAttributes<HTMLFtbSeasonBestPlayersElement>;
             "ftb-season-birthdays": LocalJSX.FtbSeasonBirthdays & JSXBase.HTMLAttributes<HTMLFtbSeasonBirthdaysElement>;
             "ftb-season-games": LocalJSX.FtbSeasonGames & JSXBase.HTMLAttributes<HTMLFtbSeasonGamesElement>;
+            "ftb-season-media": LocalJSX.FtbSeasonMedia & JSXBase.HTMLAttributes<HTMLFtbSeasonMediaElement>;
             "ftb-season-standings": LocalJSX.FtbSeasonStandings & JSXBase.HTMLAttributes<HTMLFtbSeasonStandingsElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
@@ -937,6 +966,7 @@ declare module "@stencil/core" {
             "ftb-team-card": LocalJSX.FtbTeamCard & JSXBase.HTMLAttributes<HTMLFtbTeamCardElement>;
             "ftb-team-games": LocalJSX.FtbTeamGames & JSXBase.HTMLAttributes<HTMLFtbTeamGamesElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
+            "ftb-team-media": LocalJSX.FtbTeamMedia & JSXBase.HTMLAttributes<HTMLFtbTeamMediaElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
             "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
         }

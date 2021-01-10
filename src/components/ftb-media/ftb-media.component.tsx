@@ -60,11 +60,11 @@ export class FtbMedia {
     return (
       <ftb-searchable-content
         class="news-tab"
-        key="league-news-pagination"
         items={this.news.items}
         filterFn={filterFn}
         placeholder={translations.media.search_by_post_title[userState.language]}
         categories={[]}
+        key={'league-news-searchable' + (this.dataLoaded ? '1' : '0')}
         renderItems={items => (
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.news.total}
@@ -94,9 +94,9 @@ export class FtbMedia {
         filterFn={filterFn}
         placeholder={translations.game.search_by_game_teams[userState.language]}
         categories={[]}
+        key={'league-photo-searchable' + (this.dataLoaded ? '1' : '0')}
         renderItems={items => (
           <ftb-pagination
-            key="league-photo-pagination"
             totalItems={filtersOn ? items.length : this.photoGames.total}
             items={items}
             renderItem={(game: Game) => (
@@ -129,11 +129,11 @@ export class FtbMedia {
     return (
       <ftb-searchable-content
         class="video-tab"
-        key="league-video-pagination"
         items={this.videoGames.items}
         filterFn={filterFn}
         placeholder={translations.game.search_by_game_teams[userState.language]}
         categories={[]}
+        key={'league-video-searchable' + (this.dataLoaded ? '1' : '0')}
         renderItems={items => (
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.videoGames.total}
@@ -146,7 +146,7 @@ export class FtbMedia {
               ></ftb-video>
             )}
             rows={1}
-            itemMinWidthPx={200}
+            itemMinWidthPx={266}
             itemHeightPx={150}
           ></ftb-pagination>
         )}
