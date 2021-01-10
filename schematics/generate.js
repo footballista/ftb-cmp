@@ -22,18 +22,31 @@ import { Component, Host, h } from '@stencil/core';
 @Component({
   tag: '${fileName}',
   styleUrl: '${fileName}.component.scss',
-  shadow: true,
+  shadow: false,
 })
 export class ${modelName} {
 
   render() {
-    return <Host></Host>
+    return <Host>
+    <div class="${fileName}__wrapper">
+      <div class="${fileName}__background">
+      </div>
+    </div>
+</Host>
   }
 }
 `;
 
 const lcFirst = (s) => s[0].toLowerCase() + s.slice(1);
-const styleTmp = `:host {
+const styleTmp = `${fileName} {
+  .${fileName}__wrapper {
+    height: inherit;
+    width: inherit;
+    .${fileName}__background {
+      height: inherit;
+      width: inherit;
+    }
+  }
 }`;
 
 (async () => {
