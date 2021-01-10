@@ -224,6 +224,9 @@ export namespace Components {
     interface FtbTeamRoster {
         "team": Team;
     }
+    interface FtbTeamTransfers {
+        "team": Team;
+    }
     interface FtbUserPhoto {
         "user": User;
         "userId": number;
@@ -565,6 +568,12 @@ declare global {
         prototype: HTMLFtbTeamRosterElement;
         new (): HTMLFtbTeamRosterElement;
     };
+    interface HTMLFtbTeamTransfersElement extends Components.FtbTeamTransfers, HTMLStencilElement {
+    }
+    var HTMLFtbTeamTransfersElement: {
+        prototype: HTMLFtbTeamTransfersElement;
+        new (): HTMLFtbTeamTransfersElement;
+    };
     interface HTMLFtbUserPhotoElement extends Components.FtbUserPhoto, HTMLStencilElement {
     }
     var HTMLFtbUserPhotoElement: {
@@ -633,6 +642,7 @@ declare global {
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-team-media": HTMLFtbTeamMediaElement;
         "ftb-team-roster": HTMLFtbTeamRosterElement;
+        "ftb-team-transfers": HTMLFtbTeamTransfersElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
         "ftb-video": HTMLFtbVideoElement;
     }
@@ -856,6 +866,9 @@ declare namespace LocalJSX {
     interface FtbTeamRoster {
         "team": Team;
     }
+    interface FtbTeamTransfers {
+        "team": Team;
+    }
     interface FtbUserPhoto {
         "user"?: User;
         "userId"?: number;
@@ -921,6 +934,7 @@ declare namespace LocalJSX {
         "ftb-team-logo": FtbTeamLogo;
         "ftb-team-media": FtbTeamMedia;
         "ftb-team-roster": FtbTeamRoster;
+        "ftb-team-transfers": FtbTeamTransfers;
         "ftb-user-photo": FtbUserPhoto;
         "ftb-video": FtbVideo;
     }
@@ -984,6 +998,7 @@ declare module "@stencil/core" {
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-team-media": LocalJSX.FtbTeamMedia & JSXBase.HTMLAttributes<HTMLFtbTeamMediaElement>;
             "ftb-team-roster": LocalJSX.FtbTeamRoster & JSXBase.HTMLAttributes<HTMLFtbTeamRosterElement>;
+            "ftb-team-transfers": LocalJSX.FtbTeamTransfers & JSXBase.HTMLAttributes<HTMLFtbTeamTransfersElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
             "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
         }

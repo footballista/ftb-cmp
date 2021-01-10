@@ -58,6 +58,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.teamTransfers(),
       this.teamRoster(),
       this.teamGames(),
       this.teamMedia(),
@@ -136,6 +137,18 @@ export class CmpTest {
               leagueId={this.data.league._id}
             ></ftb-partner-banner>
           ),
+        },
+      ],
+    };
+  }
+
+  private teamTransfers() {
+    return {
+      title: 'Team transfers',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-team-transfers team={this.data.team}></ftb-team-transfers>,
         },
       ],
     };

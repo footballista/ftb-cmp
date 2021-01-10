@@ -43,7 +43,6 @@ export class FtbTeamGames {
       filtersOn = Boolean(query);
       if (!filtersOn) return items;
       await this.ready$.toPromise();
-      await this.ready$.toPromise();
       return filter(items, query, ['home.team.name', 'home.team.shortName', 'away.team.name', 'away.team.shortName']);
     };
     const cardFn = (g: Game) => (
