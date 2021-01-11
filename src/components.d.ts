@@ -163,6 +163,9 @@ export namespace Components {
         "playerId": number;
         "version": number;
     }
+    interface FtbPlayerTransfers {
+        "player": Player;
+    }
     interface FtbPostCover {
         "post": Post;
     }
@@ -493,6 +496,12 @@ declare global {
         prototype: HTMLFtbPlayerPhotoElement;
         new (): HTMLFtbPlayerPhotoElement;
     };
+    interface HTMLFtbPlayerTransfersElement extends Components.FtbPlayerTransfers, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerTransfersElement: {
+        prototype: HTMLFtbPlayerTransfersElement;
+        new (): HTMLFtbPlayerTransfersElement;
+    };
     interface HTMLFtbPostCoverElement extends Components.FtbPostCover, HTMLStencilElement {
     }
     var HTMLFtbPostCoverElement: {
@@ -672,6 +681,7 @@ declare global {
         "ftb-player-games": HTMLFtbPlayerGamesElement;
         "ftb-player-media": HTMLFtbPlayerMediaElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
+        "ftb-player-transfers": HTMLFtbPlayerTransfersElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
         "ftb-season-best-players": HTMLFtbSeasonBestPlayersElement;
@@ -743,7 +753,7 @@ declare namespace LocalJSX {
         "game": Game;
     }
     interface FtbGamePerson {
-        "person"?: GameStaff;
+        "person": GameStaff;
     }
     interface FtbGamePhotoCover {
         "game": Game;
@@ -852,6 +862,9 @@ declare namespace LocalJSX {
         "player"?: Player;
         "playerId"?: number;
         "version"?: number;
+    }
+    interface FtbPlayerTransfers {
+        "player": Player;
     }
     interface FtbPostCover {
         "post": Post;
@@ -984,6 +997,7 @@ declare namespace LocalJSX {
         "ftb-player-games": FtbPlayerGames;
         "ftb-player-media": FtbPlayerMedia;
         "ftb-player-photo": FtbPlayerPhoto;
+        "ftb-player-transfers": FtbPlayerTransfers;
         "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
         "ftb-season-best-players": FtbSeasonBestPlayers;
@@ -1053,6 +1067,7 @@ declare module "@stencil/core" {
             "ftb-player-games": LocalJSX.FtbPlayerGames & JSXBase.HTMLAttributes<HTMLFtbPlayerGamesElement>;
             "ftb-player-media": LocalJSX.FtbPlayerMedia & JSXBase.HTMLAttributes<HTMLFtbPlayerMediaElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
+            "ftb-player-transfers": LocalJSX.FtbPlayerTransfers & JSXBase.HTMLAttributes<HTMLFtbPlayerTransfersElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
             "ftb-season-best-players": LocalJSX.FtbSeasonBestPlayers & JSXBase.HTMLAttributes<HTMLFtbSeasonBestPlayersElement>;

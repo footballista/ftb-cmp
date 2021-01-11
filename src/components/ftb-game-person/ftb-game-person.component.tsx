@@ -8,7 +8,7 @@ import userState from '@src/tools/user.store.ts';
   shadow: false,
 })
 export class FtbGamePerson {
-  @Prop() person: GameStaff;
+  @Prop() person!: GameStaff;
 
   render() {
     return (

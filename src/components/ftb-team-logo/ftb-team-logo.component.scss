@@ -1,9 +1,8 @@
 ftb-team-logo {
   display: inline-flex;
-  img {
+  ftb-img {
     height: inherit;
     width: inherit;
-    filter: drop-shadow(var(--shadow));
   }
   svg {
     height: inherit;
