@@ -69,6 +69,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.playerMedia(),
       this.playerGames(),
       this.personGames(),
       this.stadiumGames(),
@@ -168,6 +169,19 @@ export class CmpTest {
       ],
     };
   }
+
+  private playerMedia() {
+    return {
+      title: 'Player media',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-player-media player={this.data.player}></ftb-player-media>,
+        },
+      ],
+    };
+  }
+
   private personGames() {
     return {
       title: 'Person games',

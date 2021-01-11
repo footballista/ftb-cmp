@@ -155,6 +155,9 @@ export namespace Components {
     interface FtbPlayerGames {
         "player": Player;
     }
+    interface FtbPlayerMedia {
+        "player": Player;
+    }
     interface FtbPlayerPhoto {
         "player": Player;
         "playerId": number;
@@ -478,6 +481,12 @@ declare global {
         prototype: HTMLFtbPlayerGamesElement;
         new (): HTMLFtbPlayerGamesElement;
     };
+    interface HTMLFtbPlayerMediaElement extends Components.FtbPlayerMedia, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerMediaElement: {
+        prototype: HTMLFtbPlayerMediaElement;
+        new (): HTMLFtbPlayerMediaElement;
+    };
     interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {
     }
     var HTMLFtbPlayerPhotoElement: {
@@ -661,6 +670,7 @@ declare global {
         "ftb-person-games": HTMLFtbPersonGamesElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-games": HTMLFtbPlayerGamesElement;
+        "ftb-player-media": HTMLFtbPlayerMediaElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
@@ -835,6 +845,9 @@ declare namespace LocalJSX {
     interface FtbPlayerGames {
         "player": Player;
     }
+    interface FtbPlayerMedia {
+        "player": Player;
+    }
     interface FtbPlayerPhoto {
         "player"?: Player;
         "playerId"?: number;
@@ -969,6 +982,7 @@ declare namespace LocalJSX {
         "ftb-person-games": FtbPersonGames;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-games": FtbPlayerGames;
+        "ftb-player-media": FtbPlayerMedia;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
@@ -1037,6 +1051,7 @@ declare module "@stencil/core" {
             "ftb-person-games": LocalJSX.FtbPersonGames & JSXBase.HTMLAttributes<HTMLFtbPersonGamesElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-games": LocalJSX.FtbPlayerGames & JSXBase.HTMLAttributes<HTMLFtbPlayerGamesElement>;
+            "ftb-player-media": LocalJSX.FtbPlayerMedia & JSXBase.HTMLAttributes<HTMLFtbPlayerMediaElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
