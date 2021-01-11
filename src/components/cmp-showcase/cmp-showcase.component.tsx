@@ -13,6 +13,7 @@ import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fi
 import { LeagueService } from 'ftb-models/dist/services/league.service';
 import { SeasonService } from 'ftb-models/dist/services/season.service';
 import { TeamService } from 'ftb-models/dist/services/team.service';
+import { StadiumService } from 'ftb-models/dist/services/stadium.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -34,6 +35,8 @@ export class CmpTest {
     // season: new Season({ _id: 4205 }),
     season: new Season({ _id: 4270 }),
     team: new Team({ _id: 18804 }),
+    user: new User({ _id: 750 }),
+    stadium: new Stadium({ _id: 1086 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -44,6 +47,9 @@ export class CmpTest {
     this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id);
     this.data.season = await new SeasonService(gql).loadSeasonStandings(this.data.season._id);
     this.data.team = await new TeamService(gql).loadTeamInfo(this.data.team._id);
+    this.data.stadium = await new StadiumService(gql).loadStadiumGames(this.data.stadium._id);
+    // user
+    // stadium
     setTimeout(() => {
       this.data.improvingCollection.items = range(12);
       this.updateSignal++;
@@ -58,6 +64,8 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.stadiumGames(),
+      this.teamSeasons(),
       this.teamTransfers(),
       this.teamRoster(),
       this.teamGames(),
@@ -137,6 +145,30 @@ export class CmpTest {
               leagueId={this.data.league._id}
             ></ftb-partner-banner>
           ),
+        },
+      ],
+    };
+  }
+
+  private stadiumGames() {
+    return {
+      title: 'Stadium games',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-stadium-games stadium={this.data.stadium}></ftb-stadium-games>,
+        },
+      ],
+    };
+  }
+
+  private teamSeasons() {
+    return {
+      title: 'Team seasons',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-team-seasons team={this.data.team}></ftb-team-seasons>,
         },
       ],
     };

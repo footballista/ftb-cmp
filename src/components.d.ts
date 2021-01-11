@@ -189,6 +189,9 @@ export namespace Components {
     interface FtbStadiumCard {
         "stadium": Stadium;
     }
+    interface FtbStadiumGames {
+        "stadium": Stadium;
+    }
     interface FtbStadiumPhoto {
         "stadium": Stadium;
         "stadiumId": number;
@@ -222,6 +225,9 @@ export namespace Components {
         "team": Team;
     }
     interface FtbTeamRoster {
+        "team": Team;
+    }
+    interface FtbTeamSeasons {
         "team": Team;
     }
     interface FtbTeamTransfers {
@@ -514,6 +520,12 @@ declare global {
         prototype: HTMLFtbStadiumCardElement;
         new (): HTMLFtbStadiumCardElement;
     };
+    interface HTMLFtbStadiumGamesElement extends Components.FtbStadiumGames, HTMLStencilElement {
+    }
+    var HTMLFtbStadiumGamesElement: {
+        prototype: HTMLFtbStadiumGamesElement;
+        new (): HTMLFtbStadiumGamesElement;
+    };
     interface HTMLFtbStadiumPhotoElement extends Components.FtbStadiumPhoto, HTMLStencilElement {
     }
     var HTMLFtbStadiumPhotoElement: {
@@ -567,6 +579,12 @@ declare global {
     var HTMLFtbTeamRosterElement: {
         prototype: HTMLFtbTeamRosterElement;
         new (): HTMLFtbTeamRosterElement;
+    };
+    interface HTMLFtbTeamSeasonsElement extends Components.FtbTeamSeasons, HTMLStencilElement {
+    }
+    var HTMLFtbTeamSeasonsElement: {
+        prototype: HTMLFtbTeamSeasonsElement;
+        new (): HTMLFtbTeamSeasonsElement;
     };
     interface HTMLFtbTeamTransfersElement extends Components.FtbTeamTransfers, HTMLStencilElement {
     }
@@ -633,6 +651,7 @@ declare global {
         "ftb-season-standings": HTMLFtbSeasonStandingsElement;
         "ftb-spinner": HTMLFtbSpinnerElement;
         "ftb-stadium-card": HTMLFtbStadiumCardElement;
+        "ftb-stadium-games": HTMLFtbStadiumGamesElement;
         "ftb-stadium-photo": HTMLFtbStadiumPhotoElement;
         "ftb-stage-cup-net": HTMLFtbStageCupNetElement;
         "ftb-stage-table": HTMLFtbStageTableElement;
@@ -642,6 +661,7 @@ declare global {
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-team-media": HTMLFtbTeamMediaElement;
         "ftb-team-roster": HTMLFtbTeamRosterElement;
+        "ftb-team-seasons": HTMLFtbTeamSeasonsElement;
         "ftb-team-transfers": HTMLFtbTeamTransfersElement;
         "ftb-user-photo": HTMLFtbUserPhotoElement;
         "ftb-video": HTMLFtbVideoElement;
@@ -830,6 +850,9 @@ declare namespace LocalJSX {
     interface FtbStadiumCard {
         "stadium": Stadium;
     }
+    interface FtbStadiumGames {
+        "stadium": Stadium;
+    }
     interface FtbStadiumPhoto {
         "stadium"?: Stadium;
         "stadiumId"?: number;
@@ -864,6 +887,9 @@ declare namespace LocalJSX {
         "team": Team;
     }
     interface FtbTeamRoster {
+        "team": Team;
+    }
+    interface FtbTeamSeasons {
         "team": Team;
     }
     interface FtbTeamTransfers {
@@ -925,6 +951,7 @@ declare namespace LocalJSX {
         "ftb-season-standings": FtbSeasonStandings;
         "ftb-spinner": FtbSpinner;
         "ftb-stadium-card": FtbStadiumCard;
+        "ftb-stadium-games": FtbStadiumGames;
         "ftb-stadium-photo": FtbStadiumPhoto;
         "ftb-stage-cup-net": FtbStageCupNet;
         "ftb-stage-table": FtbStageTable;
@@ -934,6 +961,7 @@ declare namespace LocalJSX {
         "ftb-team-logo": FtbTeamLogo;
         "ftb-team-media": FtbTeamMedia;
         "ftb-team-roster": FtbTeamRoster;
+        "ftb-team-seasons": FtbTeamSeasons;
         "ftb-team-transfers": FtbTeamTransfers;
         "ftb-user-photo": FtbUserPhoto;
         "ftb-video": FtbVideo;
@@ -989,6 +1017,7 @@ declare module "@stencil/core" {
             "ftb-season-standings": LocalJSX.FtbSeasonStandings & JSXBase.HTMLAttributes<HTMLFtbSeasonStandingsElement>;
             "ftb-spinner": LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
             "ftb-stadium-card": LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
+            "ftb-stadium-games": LocalJSX.FtbStadiumGames & JSXBase.HTMLAttributes<HTMLFtbStadiumGamesElement>;
             "ftb-stadium-photo": LocalJSX.FtbStadiumPhoto & JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoElement>;
             "ftb-stage-cup-net": LocalJSX.FtbStageCupNet & JSXBase.HTMLAttributes<HTMLFtbStageCupNetElement>;
             "ftb-stage-table": LocalJSX.FtbStageTable & JSXBase.HTMLAttributes<HTMLFtbStageTableElement>;
@@ -998,6 +1027,7 @@ declare module "@stencil/core" {
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-team-media": LocalJSX.FtbTeamMedia & JSXBase.HTMLAttributes<HTMLFtbTeamMediaElement>;
             "ftb-team-roster": LocalJSX.FtbTeamRoster & JSXBase.HTMLAttributes<HTMLFtbTeamRosterElement>;
+            "ftb-team-seasons": LocalJSX.FtbTeamSeasons & JSXBase.HTMLAttributes<HTMLFtbTeamSeasonsElement>;
             "ftb-team-transfers": LocalJSX.FtbTeamTransfers & JSXBase.HTMLAttributes<HTMLFtbTeamTransfersElement>;
             "ftb-user-photo": LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
             "ftb-video": LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
