@@ -15,6 +15,7 @@ import { SeasonService } from 'ftb-models/dist/services/season.service';
 import { TeamService } from 'ftb-models/dist/services/team.service';
 import { StadiumService } from 'ftb-models/dist/services/stadium.service';
 import { PersonService } from 'ftb-models/dist/services/person.service';
+import { PlayerService } from 'ftb-models/dist/services/player.service';
 
 /**
  * Test page that demonstrates all existing components
@@ -38,6 +39,7 @@ export class CmpTest {
     team: new Team({ _id: 18804 }),
     person: new User({ _id: 750 }),
     stadium: new Stadium({ _id: 1086 }),
+    player: new Player({ _id: 453593 }),
     showGallery: false,
     galleryIdx: 0,
   };
@@ -50,6 +52,7 @@ export class CmpTest {
     this.data.team = await new TeamService(gql).loadTeamInfo(this.data.team._id);
     this.data.stadium = await new StadiumService(gql).loadStadiumGames(this.data.stadium._id);
     this.data.person = await new PersonService(gql).loadPersonInfo(this.data.person._id);
+    this.data.player = await new PlayerService(gql).loadPlayerInfo(this.data.player._id);
     // user
     // stadium
     setTimeout(() => {
@@ -66,6 +69,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.banner(),
+      this.playerGames(),
       this.personGames(),
       this.stadiumGames(),
       this.teamSeasons(),
@@ -153,6 +157,17 @@ export class CmpTest {
     };
   }
 
+  private playerGames() {
+    return {
+      title: 'Player games',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-player-games player={this.data.player}></ftb-player-games>,
+        },
+      ],
+    };
+  }
   private personGames() {
     return {
       title: 'Person games',

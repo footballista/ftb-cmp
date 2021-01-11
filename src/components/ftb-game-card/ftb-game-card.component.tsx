@@ -96,8 +96,8 @@ export class FtbGameCard {
   private renderCenterRow(side: GameSide) {
     return (
       <div class="center-row">
-        <ftb-team-logo team={side.team}></ftb-team-logo>
-        <div class="name">{side.team.shortName}</div>
+        <ftb-team-logo team={side.team} key={side.team._id}></ftb-team-logo>
+        <div class="name">{side.team.shortName.toUpperCase()}</div>
         <ftb-game-side-score game={this.game} side={side}></ftb-game-side-score>
       </div>
     );
