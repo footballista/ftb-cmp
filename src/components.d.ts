@@ -5,14 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Season, Stadium, Stage } from "ftb-models";
+import { BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Season, Stadium, Stage, User } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Collection } from "ftb-models/dist/models/base/collection";
 import { Player } from "ftb-models/dist/models/player.model";
 import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { Team } from "ftb-models/dist/models/team.model";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
-import { User } from "ftb-models/dist/models/user.model";
+import { User as User1 } from "ftb-models/dist/models/user.model";
 export namespace Components {
     interface CmpShowcase {
     }
@@ -144,6 +144,9 @@ export namespace Components {
     interface FtbPartnerBanner {
         "leagueId": number;
         "slotCode": BannerSlotCode;
+    }
+    interface FtbPersonGames {
+        "person": User;
     }
     interface FtbPhotoGallery {
         "game": Game;
@@ -454,6 +457,12 @@ declare global {
         prototype: HTMLFtbPartnerBannerElement;
         new (): HTMLFtbPartnerBannerElement;
     };
+    interface HTMLFtbPersonGamesElement extends Components.FtbPersonGames, HTMLStencilElement {
+    }
+    var HTMLFtbPersonGamesElement: {
+        prototype: HTMLFtbPersonGamesElement;
+        new (): HTMLFtbPersonGamesElement;
+    };
     interface HTMLFtbPhotoGalleryElement extends Components.FtbPhotoGallery, HTMLStencilElement {
     }
     var HTMLFtbPhotoGalleryElement: {
@@ -640,6 +649,7 @@ declare global {
         "ftb-media": HTMLFtbMediaElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-partner-banner": HTMLFtbPartnerBannerElement;
+        "ftb-person-games": HTMLFtbPersonGamesElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
@@ -803,6 +813,9 @@ declare namespace LocalJSX {
         "leagueId"?: number;
         "slotCode": BannerSlotCode;
     }
+    interface FtbPersonGames {
+        "person": User;
+    }
     interface FtbPhotoGallery {
         "game": Game;
         "onClosed"?: (event: CustomEvent<boolean>) => void;
@@ -940,6 +953,7 @@ declare namespace LocalJSX {
         "ftb-media": FtbMedia;
         "ftb-pagination": FtbPagination;
         "ftb-partner-banner": FtbPartnerBanner;
+        "ftb-person-games": FtbPersonGames;
         "ftb-photo-gallery": FtbPhotoGallery;
         "ftb-player-photo": FtbPlayerPhoto;
         "ftb-post-cover": FtbPostCover;
@@ -1006,6 +1020,7 @@ declare module "@stencil/core" {
             "ftb-media": LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-partner-banner": LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
+            "ftb-person-games": LocalJSX.FtbPersonGames & JSXBase.HTMLAttributes<HTMLFtbPersonGamesElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
