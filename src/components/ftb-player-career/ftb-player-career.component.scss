@@ -1,0 +1,32 @@
+ftb-player-career {
+  .ftb-player-career__wrapper {
+    height: inherit;
+    width: inherit;
+    .ftb-player-career__background {
+      height: inherit;
+      width: inherit;
+      .ftb-player-career__spinner-wrapper {
+        width: 800px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ftb-spinner {
+          --size: 10px;
+        }
+      }
+      ftb-searchable-content {
+        width: 800px;
+        height: 150px;
+        ftb-player-team-card {
+          height: 60px;
+          width: 263px;
+        }
+        ftb-player-season-card {
+          height: 60px;
+          width: 263px;
+        }
+      }
+    }
+  }
+}

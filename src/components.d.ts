@@ -9,8 +9,8 @@ import { BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo,
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Collection } from "ftb-models/dist/models/base/collection";
 import { Player } from "ftb-models/dist/models/player.model";
-import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { Team } from "ftb-models/dist/models/team.model";
+import { CategoryInterface } from "./components/ftb-searchable-content/ftb-searchable-content.component";
 import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
 import { User as User1 } from "ftb-models/dist/models/user.model";
 export namespace Components {
@@ -152,6 +152,9 @@ export namespace Components {
         "game": Game;
         "start": number;
     }
+    interface FtbPlayerCareer {
+        "player": Player;
+    }
     interface FtbPlayerGames {
         "player": Player;
     }
@@ -162,6 +165,17 @@ export namespace Components {
         "player": Player;
         "playerId": number;
         "version": number;
+    }
+    interface FtbPlayerSeasonCard {
+        "data": { season: Season; stats: { [key: string]: number } };
+    }
+    interface FtbPlayerTeamCard {
+        "data": {
+    from: any; //dayjs
+    till: any; // dayjs
+    team: Team;
+    stats: { [key: string]: number };
+  };
     }
     interface FtbPlayerTransfers {
         "player": Player;
@@ -478,6 +492,12 @@ declare global {
         prototype: HTMLFtbPhotoGalleryElement;
         new (): HTMLFtbPhotoGalleryElement;
     };
+    interface HTMLFtbPlayerCareerElement extends Components.FtbPlayerCareer, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerCareerElement: {
+        prototype: HTMLFtbPlayerCareerElement;
+        new (): HTMLFtbPlayerCareerElement;
+    };
     interface HTMLFtbPlayerGamesElement extends Components.FtbPlayerGames, HTMLStencilElement {
     }
     var HTMLFtbPlayerGamesElement: {
@@ -495,6 +515,18 @@ declare global {
     var HTMLFtbPlayerPhotoElement: {
         prototype: HTMLFtbPlayerPhotoElement;
         new (): HTMLFtbPlayerPhotoElement;
+    };
+    interface HTMLFtbPlayerSeasonCardElement extends Components.FtbPlayerSeasonCard, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerSeasonCardElement: {
+        prototype: HTMLFtbPlayerSeasonCardElement;
+        new (): HTMLFtbPlayerSeasonCardElement;
+    };
+    interface HTMLFtbPlayerTeamCardElement extends Components.FtbPlayerTeamCard, HTMLStencilElement {
+    }
+    var HTMLFtbPlayerTeamCardElement: {
+        prototype: HTMLFtbPlayerTeamCardElement;
+        new (): HTMLFtbPlayerTeamCardElement;
     };
     interface HTMLFtbPlayerTransfersElement extends Components.FtbPlayerTransfers, HTMLStencilElement {
     }
@@ -678,9 +710,12 @@ declare global {
         "ftb-partner-banner": HTMLFtbPartnerBannerElement;
         "ftb-person-games": HTMLFtbPersonGamesElement;
         "ftb-photo-gallery": HTMLFtbPhotoGalleryElement;
+        "ftb-player-career": HTMLFtbPlayerCareerElement;
         "ftb-player-games": HTMLFtbPlayerGamesElement;
         "ftb-player-media": HTMLFtbPlayerMediaElement;
         "ftb-player-photo": HTMLFtbPlayerPhotoElement;
+        "ftb-player-season-card": HTMLFtbPlayerSeasonCardElement;
+        "ftb-player-team-card": HTMLFtbPlayerTeamCardElement;
         "ftb-player-transfers": HTMLFtbPlayerTransfersElement;
         "ftb-post-cover": HTMLFtbPostCoverElement;
         "ftb-searchable-content": HTMLFtbSearchableContentElement;
@@ -852,6 +887,9 @@ declare namespace LocalJSX {
         "onSlideChanged"?: (event: CustomEvent<number>) => void;
         "start": number;
     }
+    interface FtbPlayerCareer {
+        "player": Player;
+    }
     interface FtbPlayerGames {
         "player": Player;
     }
@@ -862,6 +900,17 @@ declare namespace LocalJSX {
         "player"?: Player;
         "playerId"?: number;
         "version"?: number;
+    }
+    interface FtbPlayerSeasonCard {
+        "data": { season: Season; stats: { [key: string]: number } };
+    }
+    interface FtbPlayerTeamCard {
+        "data": {
+    from: any; //dayjs
+    till: any; // dayjs
+    team: Team;
+    stats: { [key: string]: number };
+  };
     }
     interface FtbPlayerTransfers {
         "player": Player;
@@ -994,9 +1043,12 @@ declare namespace LocalJSX {
         "ftb-partner-banner": FtbPartnerBanner;
         "ftb-person-games": FtbPersonGames;
         "ftb-photo-gallery": FtbPhotoGallery;
+        "ftb-player-career": FtbPlayerCareer;
         "ftb-player-games": FtbPlayerGames;
         "ftb-player-media": FtbPlayerMedia;
         "ftb-player-photo": FtbPlayerPhoto;
+        "ftb-player-season-card": FtbPlayerSeasonCard;
+        "ftb-player-team-card": FtbPlayerTeamCard;
         "ftb-player-transfers": FtbPlayerTransfers;
         "ftb-post-cover": FtbPostCover;
         "ftb-searchable-content": FtbSearchableContent;
@@ -1064,9 +1116,12 @@ declare module "@stencil/core" {
             "ftb-partner-banner": LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
             "ftb-person-games": LocalJSX.FtbPersonGames & JSXBase.HTMLAttributes<HTMLFtbPersonGamesElement>;
             "ftb-photo-gallery": LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
+            "ftb-player-career": LocalJSX.FtbPlayerCareer & JSXBase.HTMLAttributes<HTMLFtbPlayerCareerElement>;
             "ftb-player-games": LocalJSX.FtbPlayerGames & JSXBase.HTMLAttributes<HTMLFtbPlayerGamesElement>;
             "ftb-player-media": LocalJSX.FtbPlayerMedia & JSXBase.HTMLAttributes<HTMLFtbPlayerMediaElement>;
             "ftb-player-photo": LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
+            "ftb-player-season-card": LocalJSX.FtbPlayerSeasonCard & JSXBase.HTMLAttributes<HTMLFtbPlayerSeasonCardElement>;
+            "ftb-player-team-card": LocalJSX.FtbPlayerTeamCard & JSXBase.HTMLAttributes<HTMLFtbPlayerTeamCardElement>;
             "ftb-player-transfers": LocalJSX.FtbPlayerTransfers & JSXBase.HTMLAttributes<HTMLFtbPlayerTransfersElement>;
             "ftb-post-cover": LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
             "ftb-searchable-content": LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;

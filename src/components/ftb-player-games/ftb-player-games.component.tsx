@@ -30,19 +30,32 @@ export class FtbPlayerGames {
   }
 
   render() {
+    const filterSeason = (games, seasonId) => (seasonId ? games.filter(g => g.game.season._id === seasonId) : games);
+    const filterTeam = (games, teamId) => (teamId ? games.filter(g => g.stats.teamId === teamId) : games);
+    const filterStats = (games, statsKey) => {
+      if (statsKey == 'all_games') {
+        return games;
+      } else if (statsKey == 'with_goals_or_assists') {
+        return games.filter(g => g.stats.goals || g.stats.assists);
+      } else if (statsKey == 'with_cards') {
+        return games.filter(g => g.stats.yellow || g.stats.red);
+      } else {
+        return games;
+      }
+    };
+
     let filtersOn = false;
     const filterFn = async (_, query: string, categories: CategoryInterface[]) => {
-      let items = this.player.games.items;
-      const teamId = categories.find(c => c.key === 'team')?.options.find(o => o.selected)?._id;
-      if (teamId) {
-        items = items.filter(g => g.stats.teamId === teamId);
-      }
-      const seasonId = categories.find(c => c.key === 'season')?.options.find(o => o.selected)?._id;
-      if (seasonId) {
-        items = items.filter(g => g.game.season._id === seasonId);
-      }
+      const teamId = categories?.find(c => c.key === 'team')?.options.find(o => o.selected)?._id;
+      const seasonId = categories?.find(c => c.key === 'season')?.options.find(o => o.selected)?._id;
+      const statsKey = categories?.find(c => c.key === 'stats')?.options.find(o => o.selected)?.key;
 
-      filtersOn = Boolean(query) || teamId || seasonId;
+      let items = this.player.games.items;
+      items = filterTeam(items, teamId);
+      items = filterSeason(items, seasonId);
+      items = filterStats(items, statsKey);
+
+      filtersOn = Boolean(query) || teamId || seasonId || statsKey;
       if (!filtersOn) return items;
       await this.ready$.toPromise();
       return filter(items, query, [
@@ -56,23 +69,17 @@ export class FtbPlayerGames {
     const getCategories = (currentCategories?: CategoryInterface[]) => {
       const teamId = currentCategories?.find(c => c.key === 'team')?.options.find(o => o.selected)?._id;
       const seasonId = currentCategories?.find(c => c.key === 'season')?.options.find(o => o.selected)?._id;
-
-      let games = this.player.games.items;
-      if (seasonId) games = games.filter(g => g.game.season._id === seasonId);
-      if (teamId) games = games.filter(g => g.stats.teamId === teamId);
+      const statsKey = currentCategories?.find(c => c.key === 'stats')?.options.find(o => o.selected)?.key;
 
       const smap = {};
-      (teamId ? this.player.games.items.filter(g => g.stats.teamId === teamId) : this.player.games.items).forEach(g => {
+      filterStats(filterTeam(this.player.games.items, teamId), statsKey).forEach(g => {
         smap[g.game.season._id] ??= { lastDate: g.game.date, season: g.game.season };
         if (g.game.date > smap[g.game.season._id].lastDate) smap[g.game.season._id].lastDate = g.game.date;
       });
       const seasons = orderBy(Object.values(smap), ['lastDate'], ['desc']).map(row => row.season);
 
       const tmap = {};
-      (seasonId
-        ? this.player.games.items.filter(g => g.game.season._id === seasonId)
-        : this.player.games.items
-      ).forEach(g => {
+      filterStats(filterSeason(this.player.games.items, seasonId), statsKey).forEach(g => {
         tmap[g.stats.teamId] ??= {
           lastDate: g.game.date,
           team: g.game.home.team._id == g.stats.teamId ? g.game.home.team : g.game.away.team,
@@ -81,36 +88,69 @@ export class FtbPlayerGames {
       });
       const teams = orderBy(Object.values(tmap), ['lastDate'], ['desc']).map(row => row.team);
 
-      const teamsCategory = {
-        key: 'team',
-        placeholder: translations.team.search_by_team_name[userState.language],
-        filterFn: (query, options) => filter(options, query, ['name']),
-        renderItem: (t: Team) => (
-          <div class="team-option">
-            {t._id && <ftb-team-logo team={t} key={t._id}></ftb-team-logo>}
-            {t.name}
-          </div>
-        ),
-        options: [
-          { name: translations.team.all_teams[userState.language] },
-          ...teams.map((o: Team) => Object.assign(o, { selected: o._id === teamId })),
-        ],
-      };
+      const stats = ['all_games'];
+      filterTeam(filterSeason(this.player.games.items, seasonId), teamId).forEach(g => {
+        if ((g.stats.goals || g.stats.assists) && !stats.includes('with_goals_or_assists')) {
+          stats.push('with_goals_or_assists');
+        }
+        if ((g.stats.yellow || g.stats.red) && !stats.includes('with_cards')) {
+          stats.push('with_cards');
+        }
+      });
 
-      const seasonsCategory = {
-        key: 'season',
-        placeholder: translations.champ.search_by_champ_name[userState.language],
-        filterFn: (query, options) => filter(options, query, ['text']),
-        renderItem: s => <div class="season-option">{s.text}</div>,
-        options: [
-          { text: translations.champ.champs[userState.language] },
-          ...seasons.map((o: Season) =>
-            Object.assign(o, { text: o.champ.name + ' - ' + o.name, selected: o._id === seasonId }),
+      const categories = [];
+      if (Object.values(smap).length > 1) {
+        const seasonsCategory = {
+          key: 'season',
+          placeholder: translations.champ.search_by_champ_name[userState.language],
+          filterFn: (query, options) => filter(options, query, ['text']),
+          renderItem: s => <div class="season-option">{s.text}</div>,
+          options: [
+            { text: translations.champ.all_champs[userState.language] },
+            ...seasons.map((o: Season) =>
+              Object.assign(o, { text: o.champ.name + ' - ' + o.name, selected: o._id === seasonId }),
+            ),
+          ],
+        };
+        categories.push(seasonsCategory);
+      }
+
+      if (Object.values(tmap).length > 1) {
+        const teamsCategory = {
+          key: 'team',
+          placeholder: translations.team.search_by_team_name[userState.language],
+          filterFn: (query, options) => filter(options, query, ['name']),
+          renderItem: (t: Team) => (
+            <div class="team-option">
+              {t._id && <ftb-team-logo team={t} key={t._id}></ftb-team-logo>}
+              {t.name}
+            </div>
           ),
-        ],
-      };
+          options: [
+            { name: translations.team.all_teams[userState.language] },
+            ...teams.map((o: Team) => Object.assign(o, { selected: o._id === teamId })),
+          ],
+        };
+        categories.push(teamsCategory);
+      }
 
-      return [seasonsCategory, teamsCategory];
+      if (stats.length > 1) {
+        const statsCategory = {
+          key: 'stats',
+          placeholder: translations.search.search[userState.language],
+          filterFn: (query, options) => filter(options, query, ['text']),
+          renderItem: s => <div class="stats-option">{s.text}</div>,
+          options: [
+            ...stats.map(key => ({
+              key,
+              text: translations.game[key][userState.language],
+              selected: key === statsKey,
+            })),
+          ],
+        };
+        categories.push(statsCategory);
+      }
+      return categories;
     };
 
     return (
@@ -127,8 +167,10 @@ export class FtbPlayerGames {
                     <ftb-game-card
                       key={gs.game._id}
                       game={gs.game}
+                      playerStats={gs.stats}
                       leftFields={[FtbGameCardField.date, FtbGameCardField.time, FtbGameCardField.stadium]}
                       topFields={[FtbGameCardField.champSeason, FtbGameCardField.round]}
+                      rightFields={[FtbGameCardField.playerStats]}
                     ></ftb-game-card>
                   )}
                   rows={2}
