@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter, Element } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
@@ -28,10 +28,12 @@ export class FtbSearchableContent {
   /** alternative to "categories" property. used when categories list should be updated on category change */
   @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;
+  @Prop() clear: number;
   @State() open = true;
   @State() filteredItems: any[];
   @State() searchInProgress = false;
   @Event() inputKeyDown: EventEmitter<KeyboardEvent>;
+  @Event() inputFocusChange: EventEmitter<boolean>;
   @Element() element: HTMLElement;
   private inputEl: HTMLInputElement;
   private queryChanges$ = new Subject<string>();
@@ -47,6 +49,11 @@ export class FtbSearchableContent {
     this.subscribeToQueryChanges();
     this.queryChanges$.next('');
     await this.ready$.toPromise();
+  }
+
+  @Watch('clear') onClearSignal() {
+    this.inputEl.value = '';
+    this.queryChanges$.next('');
   }
 
   componentDidRender() {
@@ -110,7 +117,10 @@ export class FtbSearchableContent {
   }
 
   private onKeyUp(e: KeyboardEvent) {
-    this.queryChanges$.next(e.target['value']);
+    const inp = String.fromCharCode(e.keyCode);
+    if (/[a-zA-Z0-9-_ ]/.test(inp)) {
+      this.queryChanges$.next(e.target['value']);
+    }
   }
 
   private onCategoryInputKeyDown(c: CategoryInterface, e: KeyboardEvent) {
@@ -176,6 +186,8 @@ export class FtbSearchableContent {
                 ref={el => (this.inputEl = el)}
                 onKeyUp={e => this.onKeyUp(e)}
                 onKeyDown={e => this.onKeyDown(e)}
+                onFocus={() => this.inputFocusChange.emit(true)}
+                onBlur={() => this.inputFocusChange.emit(false)}
               />
               {this.categories.map(c => (
                 <input

@@ -1,0 +1,112 @@
+ftb-global-search {
+  .ftb-global-search__wrapper {
+    height: inherit;
+    width: inherit;
+    .ftb-global-search__background {
+      height: inherit;
+      width: inherit;
+      ftb-searchable-content {
+        width: 800px;
+
+        .ftb-searchable-content-search-line {
+          .city-option {
+            display: flex;
+            align-items: center;
+            ftb-flag {
+              height: 20px;
+              width: 20px;
+              margin-right: 10px;
+            }
+          }
+          .league-option {
+            display: flex;
+            align-items: center;
+            ftb-league-logo {
+              height: 20px;
+              width: 20px;
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .ftb-searchable-content-content {
+          position: relative;
+          width: inherit;
+          .ftb-global-search__results-wrapper {
+            width: inherit;
+            position: absolute;
+            z-index: 1000;
+            top: -3px;
+            left: -1px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            .ftb-global-search__item-wrapper {
+              &:hover {
+                background: rgba(0, 0, 0, 0.05);
+              }
+              &.focused {
+                background: rgba(0, 0, 0, 0.05);
+              }
+
+              .ftb-global-search__item {
+                height: 35px;
+                padding: 5px 10px;
+                font-size: 13px;
+                &:not(:first-of-type) {
+                  border-top: 1px solid rgba(0, 0, 0, 0.1);
+                }
+                display: flex;
+                align-items: center;
+                user-select: none;
+                cursor: pointer;
+
+                .info {
+                  margin-left: 10px;
+                  .league {
+                    font-size: 11px;
+                    color: rgba(0, 0, 0, 0.7);
+                  }
+                }
+
+                &.team {
+                  ftb-team-logo {
+                    height: 30px;
+                    width: 30px;
+                  }
+                }
+                &.stadium {
+                  ftb-stadium-photo {
+                    height: 30px;
+                    width: 30px;
+                  }
+                }
+                &.league {
+                  ftb-league-logo {
+                    height: 20px;
+                    width: 20px;
+                  }
+                }
+                &.player {
+                  ftb-player-photo {
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 2px;
+                    border-width: 1px;
+                  }
+                }
+                &.champ {
+                  ftb-flag {
+                    height: 25px;
+                    width: 25px;
+                    margin-left: 2.5px;
+                    margin-right: 2.5px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

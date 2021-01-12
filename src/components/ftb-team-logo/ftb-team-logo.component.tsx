@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/c
 import { Team } from 'ftb-models/dist/models/team.model';
 import { FtbTeamLogoMode } from './ftb-team-logo-mode';
 import Shield from '../../assets/icons/shield.svg';
+import { envStore } from '@src/tools/env.store';
 
 @Component({
   tag: 'ftb-team-logo',
@@ -25,7 +26,7 @@ export class FtbTeamLogo {
       this.team = new Team({ logo: this.logo, name: this.name, logoId: this.version });
     }
 
-    this.url = `https://footballista.ru/api/img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+    this.url = envStore.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
   }
 
   onImgFail() {
@@ -46,7 +47,7 @@ export class FtbTeamLogo {
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Shield} title={this.team.name}></ftb-icon>
+          <ftb-icon svg={Shield} title={this.caption || this.team.name}></ftb-icon>
         ) : (
           <ftb-img
             src={this.url}

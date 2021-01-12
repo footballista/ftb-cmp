@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { Post } from 'ftb-models';
+import { envStore } from '@src/tools/env.store';
 @Component({
   tag: 'ftb-post-cover',
   styleUrl: 'ftb-post-cover.component.scss',
@@ -11,7 +12,7 @@ export class FtbPostCover {
   private coverUrl: string;
 
   componentWillLoad() {
-    this.coverUrl = `https://footballista.ru/api/img/news/${this.post._id}.jpg?version=${this.post.photoId}`;
+    this.coverUrl = envStore.imgHost + `/img/news/${this.post._id}.jpg?version=${this.post.photoId}`;
   }
 
   render() {

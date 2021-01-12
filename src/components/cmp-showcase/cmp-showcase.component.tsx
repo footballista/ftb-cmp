@@ -70,6 +70,7 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.globalSearch(),
       this.banner(),
       this.playerCareer(),
       this.playerTransfers(),
@@ -157,6 +158,18 @@ export class CmpTest {
               leagueId={this.data.league._id}
             ></ftb-partner-banner>
           ),
+        },
+      ],
+    };
+  }
+
+  private globalSearch() {
+    return {
+      title: 'Global search',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-global-search></ftb-global-search>,
         },
       ],
     };

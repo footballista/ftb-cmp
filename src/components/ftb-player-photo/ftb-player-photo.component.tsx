@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Avatar from '../../assets/icons/avatar.svg';
 import { Player } from 'ftb-models/dist/models/player.model';
+import { envStore } from '@src/tools/env.store';
 @Component({
   tag: 'ftb-player-photo',
   styleUrl: 'ftb-player-photo.component.scss',
@@ -14,9 +15,9 @@ export class FtbPlayerPhoto {
   @State() url: string;
 
   componentWillLoad() {
-    this.url = `https://footballista.ru/api/img/players/${this.player?._id || this.playerId}.jpg?version=${
-      this.player?.photoId || this.version
-    }`;
+    this.url =
+      envStore.imgHost +
+      `img/players/${this.player?._id || this.playerId}.jpg?version=${this.player?.photoId || this.version}`;
   }
 
   render() {
