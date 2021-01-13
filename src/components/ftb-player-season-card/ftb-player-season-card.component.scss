@@ -8,17 +8,18 @@ ftb-player-season-card {
       position: relative;
       display: flex;
       align-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       .ftb-player-season-card__color {
         position: absolute;
         top: 0;
         right: 0;
-        height: 100%;
-        width: 100%;
+        width: inherit;
+        height: inherit;
         z-index: 1;
         .ftb-player-season-card__color-layer {
           position: absolute;
-          height: 100%;
-          width: 100%;
+          width: inherit;
+          height: inherit;
           top: 0;
           left: 0;
           &:nth-child(1) {

@@ -25,17 +25,22 @@ export class FtbGameCard {
   render() {
     return (
       <Host>
-        <div class="ftb-game-card__wrapper">
-          <div class="ftb-game-card__background">
-            {this.renderTop()}
-            <div class="ftb-game-card__content">
-              {this.renderLeft()}
-              {this.renderCenter()}
-              {this.renderRight()}
+        <ftb-link
+          route="game"
+          params={{ gameId: this.game._id, gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name }}
+        >
+          <div class="ftb-game-card__wrapper">
+            <div class="ftb-game-card__background">
+              {this.renderTop()}
+              <div class="ftb-game-card__content">
+                {this.renderLeft()}
+                {this.renderCenter()}
+                {this.renderRight()}
+              </div>
+              {this.renderBottom()}
             </div>
-            {this.renderBottom()}
           </div>
-        </div>
+        </ftb-link>
       </Host>
     );
   }

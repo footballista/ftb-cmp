@@ -50,17 +50,22 @@ export class FtbFlag {
     this.url = `assets/flags/${this.flagAlias}.svg`;
   }
 
+  onImgFail() {
+    this.showPlaceholder = true;
+    this.color.emit([
+      [0, 0, 0],
+      [255, 255, 255],
+      [0, 0, 100],
+    ]);
+  }
+
   render() {
     return (
       <Host>
         {this.showPlaceholder ? (
           <ftb-icon svg={Flag}></ftb-icon>
         ) : (
-          <ftb-img
-            src={this.url}
-            onFailed={() => (this.showPlaceholder = true)}
-            onColor={e => this.color.emit(e.detail)}
-          ></ftb-img>
+          <ftb-img src={this.url} onFailed={() => this.onImgFail()} onColor={e => this.color.emit(e.detail)}></ftb-img>
         )}
       </Host>
     );

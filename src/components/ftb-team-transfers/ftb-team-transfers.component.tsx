@@ -88,37 +88,42 @@ export class FtbTeamTransfers {
 
   private renderTransfer(t: TransferRequest) {
     return (
-      <div class="ftb-team-transfers__transfer">
-        <div class="ftb-team-transfers__transfer-background">
-          <div class="photo">
-            <ftb-player-photo player={t.player} key={t.player._id}></ftb-player-photo>
-          </div>
-          <div class="info">
-            <div class="name">
-              {t.player.firstName} {t.player.lastName}
+      <ftb-link
+        route="player"
+        params={{ playerId: t.player._id, playerName: t.player.firstName + ' ' + t.player.lastName }}
+      >
+        <div class="ftb-team-transfers__transfer">
+          <div class="ftb-team-transfers__transfer-background">
+            <div class="photo">
+              <ftb-player-photo player={t.player} key={t.player._id}></ftb-player-photo>
             </div>
-            <div class="type">
-              {translations.transfers.types[t.type][userState.language]}
-              {t.fromTeam?._id && t.fromTeam._id != this.team._id && (
-                <span>
-                  {translations.transfers.direction.from[userState.language]}
-                  <ftb-team-logo team={t.fromTeam}></ftb-team-logo>
-                </span>
-              )}
-              {t.toTeam?._id && t.toTeam._id != this.team._id && (
-                <span>
-                  {translations.transfers.direction.to[userState.language]}
-                  <ftb-team-logo team={t.toTeam}></ftb-team-logo>
-                </span>
-              )}
+            <div class="info">
+              <div class="name">
+                {t.player.firstName} {t.player.lastName}
+              </div>
+              <div class="type">
+                {translations.transfers.types[t.type][userState.language]}
+                {t.fromTeam?._id && t.fromTeam._id != this.team._id && (
+                  <span>
+                    {translations.transfers.direction.from[userState.language]}
+                    <ftb-team-logo team={t.fromTeam}></ftb-team-logo>
+                  </span>
+                )}
+                {t.toTeam?._id && t.toTeam._id != this.team._id && (
+                  <span>
+                    {translations.transfers.direction.to[userState.language]}
+                    <ftb-team-logo team={t.toTeam}></ftb-team-logo>
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
-          <div class="date-time">
-            <div class="date">{t.adminConfirmedDate.format('DD.MM.YYYY')}</div>
-            <div class="time">{t.adminConfirmedDate.format('HH:mm')}</div>
+            <div class="date-time">
+              <div class="date">{t.adminConfirmedDate.format('DD.MM.YYYY')}</div>
+              <div class="time">{t.adminConfirmedDate.format('HH:mm')}</div>
+            </div>
           </div>
         </div>
-      </div>
+      </ftb-link>
     );
   }
 }

@@ -17,15 +17,16 @@ ftb-stage-table {
           height: 35px;
           display: flex;
           align-items: center;
-          &:not(:last-child) {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          }
+        }
+        ftb-link:not(:last-child) .ftb-stage-table__row {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
       }
 
       .ftb-stage-table__head,
       .ftb-stage-table__body {
-        & > div {
+        & > div,
+        .ftb-stage-table__row > div {
           text-align: center;
           font-size: 12px;
         }
@@ -37,6 +38,7 @@ ftb-stage-table {
         .position {
           max-width: 40px;
           min-width: 40px;
+          text-align: center;
         }
 
         .points {

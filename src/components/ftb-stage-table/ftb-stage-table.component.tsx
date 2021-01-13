@@ -137,53 +137,55 @@ export class FtbStageTable {
     return (
       <div class="ftb-stage-table__body">
         {this.stage.table.map((row: TableRow) => (
-          <div class="ftb-stage-table__row">
-            {this.structure.label && (
-              <div class="label">
-                {row.label == 'chevron-up' && (
-                  <div class="svg-container" innerHTML={Chevron} style={{ transform: 'rotate(180deg)' }}></div>
-                )}
-                {row.label == 'chevron-down' && <div class="svg-container" innerHTML={Chevron}></div>}
-                {row.label == 'champions-league' && <div class="svg-container" innerHTML={ChampionsLeague}></div>}
-                {row.label == 'europa-league' && <div class="svg-container" innerHTML={EuropaLeague}></div>}
-              </div>
-            )}
-            {this.structure.position && <div class="position">{row.position}</div>}
-            {(this.structure.shortName || this.structure.name) && (
-              <div class="name">
-                <ftb-team-logo team={row.team}></ftb-team-logo>
-                {this.structure.name ? row.team.name : row.team.shortName}
-              </div>
-            )}
-            {this.structure.games && <div class="games">{row.games}</div>}
-            {this.structure.wdl && (
-              <div class="wdl">
-                {row.w}-{row.d}-{row.l}
-              </div>
-            )}
-            {this.structure.wl && (
-              <div class="wl">
-                {row.w}-{row.l}
-              </div>
-            )}
-            {this.structure.gd && (
-              <div class="gd">
-                {row.scored}-{row.conceded}
-                <span class="diff">
-                  {row.scored > row.conceded && '+'}
-                  {row.scored - row.conceded}
-                </span>
-              </div>
-            )}
-            {this.structure.points && <div class="points">{row.points}</div>}
-            {this.structure.form && (
-              <div class="form">
-                {[5, 4, 3, 2, 1].map(idx => (
-                  <i class={this.getFormClass(row, idx)}></i>
-                ))}
-              </div>
-            )}
-          </div>
+          <ftb-link route="team" params={{ teamId: row.team._id, teamName: row.team.name }}>
+            <div class="ftb-stage-table__row">
+              {this.structure.label && (
+                <div class="label">
+                  {row.label == 'chevron-up' && (
+                    <div class="svg-container" innerHTML={Chevron} style={{ transform: 'rotate(180deg)' }}></div>
+                  )}
+                  {row.label == 'chevron-down' && <div class="svg-container" innerHTML={Chevron}></div>}
+                  {row.label == 'champions-league' && <div class="svg-container" innerHTML={ChampionsLeague}></div>}
+                  {row.label == 'europa-league' && <div class="svg-container" innerHTML={EuropaLeague}></div>}
+                </div>
+              )}
+              {this.structure.position && <div class="position">{row.position}</div>}
+              {(this.structure.shortName || this.structure.name) && (
+                <div class="name">
+                  <ftb-team-logo team={row.team}></ftb-team-logo>
+                  {this.structure.name ? row.team.name : row.team.shortName}
+                </div>
+              )}
+              {this.structure.games && <div class="games">{row.games}</div>}
+              {this.structure.wdl && (
+                <div class="wdl">
+                  {row.w}-{row.d}-{row.l}
+                </div>
+              )}
+              {this.structure.wl && (
+                <div class="wl">
+                  {row.w}-{row.l}
+                </div>
+              )}
+              {this.structure.gd && (
+                <div class="gd">
+                  {row.scored}-{row.conceded}
+                  <span class="diff">
+                    {row.scored > row.conceded && '+'}
+                    {row.scored - row.conceded}
+                  </span>
+                </div>
+              )}
+              {this.structure.points && <div class="points">{row.points}</div>}
+              {this.structure.form && (
+                <div class="form">
+                  {[5, 4, 3, 2, 1].map(idx => (
+                    <i class={this.getFormClass(row, idx)}></i>
+                  ))}
+                </div>
+              )}
+            </div>
+          </ftb-link>
         ))}
       </div>
     );

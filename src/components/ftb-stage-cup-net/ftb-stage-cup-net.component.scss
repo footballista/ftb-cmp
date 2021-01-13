@@ -30,6 +30,9 @@ ftb-stage-cup-net {
                 left: -10px;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.1);
               }
+              ftb-link a {
+                display: block;
+              }
               .row {
                 display: flex;
                 align-items: center;

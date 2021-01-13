@@ -36,35 +36,43 @@ export class FtbPlayerSeasonCard {
 
     return (
       <Host>
-        <div class="ftb-player-season-card__wrapper">
-          <div class="ftb-player-season-card__background">
-            <div class="ftb-player-season-card__color">
-              <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[0] }}></div>
-              <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[1] }}></div>
-              <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[2] }}></div>
-            </div>
-            <div class="ftb-player-season-card__content">
-              <ftb-flag
-                flag={this.data.season.champ.country.flag}
-                onColor={e => this.onFlagColor(e.detail)}
-                key={this.data.season.country.flag}
-              ></ftb-flag>
-              <div class="ftb-player-season-card__data">
-                <div class="ftb-player-season-card__champ-name">
-                  {this.data.season.champ.name} - {this.data.season.name}
-                </div>
-                <div class="ftb-player-season-card__stats">
+        <ftb-link
+          route="season"
+          params={{
+            seasonId: this.data.season._id,
+            tournamentName: this.data.season.champ.name + ' ' + this.data.season.name,
+          }}
+        >
+          <div class="ftb-player-season-card__wrapper">
+            <div class="ftb-player-season-card__background">
+              <div class="ftb-player-season-card__color">
+                <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[0] }}></div>
+                <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[1] }}></div>
+                <div class="ftb-player-season-card__color-layer" style={{ background: this.bg[2] }}></div>
+              </div>
+              <div class="ftb-player-season-card__content">
+                <ftb-flag
+                  flag={this.data.season.champ.country.flag}
+                  onColor={e => this.onFlagColor(e.detail)}
+                  key={this.data.season.country.flag}
+                ></ftb-flag>
+                <div class="ftb-player-season-card__data">
+                  <div class="ftb-player-season-card__champ-name">
+                    {this.data.season.champ.name} - {this.data.season.name}
+                  </div>
                   <div class="ftb-player-season-card__stats">
-                    {sortBy(Object.keys(this.data.stats), [k => statsPriority.findIndex(f => f == k)]).map(key => [
-                      <div class="title">{translations.team.stats[key][userState.language]}: </div>,
-                      <div class="val">{this.data.stats[key]}</div>,
-                    ])}
+                    <div class="ftb-player-season-card__stats">
+                      {sortBy(Object.keys(this.data.stats), [k => statsPriority.findIndex(f => f == k)]).map(key => [
+                        <div class="title">{translations.team.stats[key][userState.language]}: </div>,
+                        <div class="val">{this.data.stats[key]}</div>,
+                      ])}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </ftb-link>
       </Host>
     );
   }

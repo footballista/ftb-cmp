@@ -190,18 +190,32 @@ export class FtbGameEvents {
           <span class="first-player-name name">{translations.game.events.unknown[userState.language]}</span>
         )}
         {e.firstPlayer && (
-          <a class="first-player-name name">
-            {e.firstPlayer._id > 0 && e.firstPlayer.firstName[0] + '.' + e.firstPlayer.lastName}
-            {e.firstPlayer._id == -GameEventExtra.OWN_GOAL && translations.game.events.own_goal[userState.language]}
-          </a>
+          <ftb-link
+            route="player"
+            params={{ playerId: e.firstPlayer._id, playerName: e.firstPlayer.firstName + ' ' + e.firstPlayer.lastName }}
+          >
+            <a class="first-player-name name">
+              {e.firstPlayer._id > 0 && e.firstPlayer.firstName[0] + '.' + e.firstPlayer.lastName}
+              {e.firstPlayer._id == -GameEventExtra.OWN_GOAL && translations.game.events.own_goal[userState.language]}
+            </a>
+          </ftb-link>
         )}
         {e.secondPlayer && (
-          <a class="second-player-name name">
-            {e.secondPlayer._id > 0 && e.secondPlayer.firstName[0] + '.' + e.secondPlayer.lastName}
-            {e.secondPlayer._id == -GameEventExtra.FREE_KICK &&
-              translations.game.events.from_free_kick[userState.language]}
-            {e.secondPlayer._id == -GameEventExtra.PENALTY && translations.game.events.from_penalty[userState.language]}
-          </a>
+          <ftb-link
+            route="player"
+            params={{
+              playerId: e.secondPlayer._id,
+              playerName: e.secondPlayer.firstName + ' ' + e.secondPlayer.lastName,
+            }}
+          >
+            <a class="second-player-name name">
+              {e.secondPlayer._id > 0 && e.secondPlayer.firstName[0] + '.' + e.secondPlayer.lastName}
+              {e.secondPlayer._id == -GameEventExtra.FREE_KICK &&
+                translations.game.events.from_free_kick[userState.language]}
+              {e.secondPlayer._id == -GameEventExtra.PENALTY &&
+                translations.game.events.from_penalty[userState.language]}
+            </a>
+          </ftb-link>
         )}
       </div>
     );

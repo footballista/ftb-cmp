@@ -12,26 +12,31 @@ export class FtbGamePhotoCover {
   render() {
     return (
       <Host>
-        <div class="ftb-game-photo-cover__wrapper">
-          <div class={{ 'ftb-game-photo-cover__background': true, 'loaded': this.loaded }}>
-            <div
-              class="ftb-game-photo-cover__image"
-              style={{ 'background-image': this.loaded ? `url('${this.game.photoset.cover}')` : 'unset' }}
-            ></div>
-            <div class="ftb-game-photo-cover__logos">
-              <ftb-team-logo team={this.game.home.team}></ftb-team-logo>
-              <ftb-team-logo team={this.game.away.team}></ftb-team-logo>
-            </div>
-            <div class="ftb-game-photo-cover__title">
-              {this.game.home.team.name} - {this.game.away.team.name}
+        <ftb-link
+          route="game"
+          params={{ gameId: this.game._id, gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name }}
+        >
+          <div class="ftb-game-photo-cover__wrapper">
+            <div class={{ 'ftb-game-photo-cover__background': true, 'loaded': this.loaded }}>
+              <div
+                class="ftb-game-photo-cover__image"
+                style={{ 'background-image': this.loaded ? `url('${this.game.photoset.cover}')` : 'unset' }}
+              ></div>
+              <div class="ftb-game-photo-cover__logos">
+                <ftb-team-logo team={this.game.home.team}></ftb-team-logo>
+                <ftb-team-logo team={this.game.away.team}></ftb-team-logo>
+              </div>
+              <div class="ftb-game-photo-cover__title">
+                {this.game.home.team.name} - {this.game.away.team.name}
+              </div>
             </div>
           </div>
-        </div>
-        <img
-          src={this.game.photoset.cover}
-          onLoad={() => (this.loaded = true)}
-          class="ftb-game-photo-cover__helper-img"
-        />
+          <img
+            src={this.game.photoset.cover}
+            onLoad={() => (this.loaded = true)}
+            class="ftb-game-photo-cover__helper-img"
+          />
+        </ftb-link>
       </Host>
     );
   }

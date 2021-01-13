@@ -126,24 +126,26 @@ export class FtbStageCupNet {
     }
 
     return (
-      <div
-        class={{
-          row: true,
-          short: this.shortForm,
-          winner: isWinner,
-          loser: isLoser,
-        }}
-      >
-        <div class="name">
-          <ftb-team-logo team={games[0][side].team}></ftb-team-logo>
-          {this.shortForm ? games[0][side].team.shortName : games[0][side].team.name}
-        </div>
-        {games.map(g => (
-          <div class="score">
-            <ftb-game-side-score game={g} side={g[side]}></ftb-game-side-score>
+      <ftb-link route="team" params={{ teamId: games[0][side].team._id, teamName: games[0][side].team.name }}>
+        <div
+          class={{
+            row: true,
+            short: this.shortForm,
+            winner: isWinner,
+            loser: isLoser,
+          }}
+        >
+          <div class="name">
+            <ftb-team-logo team={games[0][side].team}></ftb-team-logo>
+            {this.shortForm ? games[0][side].team.shortName : games[0][side].team.name}
           </div>
-        ))}
-      </div>
+          {games.map(g => (
+            <div class="score">
+              <ftb-game-side-score game={g} side={g[side]}></ftb-game-side-score>
+            </div>
+          ))}
+        </div>
+      </ftb-link>
     );
   }
 }

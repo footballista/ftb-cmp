@@ -34,25 +34,27 @@ export class FtbSeasonBirthdays {
 
   private renderPlayer(p: Player) {
     return (
-      <div class="ftb-season-birthdays__player-wrapper">
-        <div class="ftb-season-birthdays__player-background">
-          <ftb-player-photo player={p} key={'player_' + p._id}></ftb-player-photo>
-          <div class="ftb-season-birthdays__player-data">
-            <div class="name">
-              {p.firstName[0]}. {p.lastName}
+      <ftb-link route="player" params={{ playerId: p._id, playerName: p.firstName + ' ' + p.lastName }}>
+        <div class="ftb-season-birthdays__player-wrapper">
+          <div class="ftb-season-birthdays__player-background">
+            <ftb-player-photo player={p} key={'player_' + p._id}></ftb-player-photo>
+            <div class="ftb-season-birthdays__player-data">
+              <div class="name">
+                {p.firstName[0]}. {p.lastName}
+              </div>
+              <div class="age">
+                {p.birthday.format('DD.MM.YYYY')} -{p.getAge()}{' '}
+                {translations.player.y_o[userState.language].getForm(p.getAge())}
+              </div>
             </div>
-            <div class="age">
-              {p.birthday.format('DD.MM.YYYY')} -{p.getAge()}{' '}
-              {translations.player.y_o[userState.language].getForm(p.getAge())}
+            <div class="ftb-season-birthdays__player-teams">
+              {p.teams.map(t => (
+                <ftb-team-logo team={t} key={'team_' + t._id}></ftb-team-logo>
+              ))}
             </div>
-          </div>
-          <div class="ftb-season-birthdays__player-teams">
-            {p.teams.map(t => (
-              <ftb-team-logo team={t} key={'team_' + t._id}></ftb-team-logo>
-            ))}
           </div>
         </div>
-      </div>
+      </ftb-link>
     );
   }
 }

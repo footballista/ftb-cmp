@@ -158,17 +158,19 @@ export class FtbGameStatsPreview {
       g.home.team._id === team._id ? [g.home.score.pen, g.away.score.pen] : [g.away.score.pen, g.home.score.pen];
     const hasPen = scorePen[0] > 0 || scorePen[1] > 0;
     return (
-      <div class="mini-score">
-        <ftb-team-logo team={opponent}></ftb-team-logo>
-        <div class="score">
-          {scoreFt[0]}-{scoreFt[1]}
-          {hasPen && (
-            <small>
-              {scorePen[0]}-{scorePen[1]}
-            </small>
-          )}
+      <ftb-link route="game" params={{ game: g._id, gameTitle: g.home.team.name + ' - ' + g.away.team.name }}>
+        <div class="mini-score">
+          <ftb-team-logo team={opponent}></ftb-team-logo>
+          <div class="score">
+            {scoreFt[0]}-{scoreFt[1]}
+            {hasPen && (
+              <small>
+                {scorePen[0]}-{scorePen[1]}
+              </small>
+            )}
+          </div>
         </div>
-      </div>
+      </ftb-link>
     );
   }
 

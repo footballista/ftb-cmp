@@ -18,16 +18,18 @@ export class FtbPostCover {
   render() {
     return (
       <Host>
-        <div class="ftb-post-cover__wrapper">
-          <div class={{ 'ftb-post-cover__background': true, 'loaded': this.loaded }}>
-            <div
-              class="ftb-post-cover__image"
-              style={{ 'background-image': this.loaded ? `url('${this.coverUrl}')` : 'unset' }}
-            ></div>
-            <div class="ftb-post-cover__title">{this.post.title}</div>
+        <ftb-link route="post" params={{ postId: this.post._id, postTitle: this.post.title }}>
+          <div class="ftb-post-cover__wrapper">
+            <div class={{ 'ftb-post-cover__background': true, 'loaded': this.loaded }}>
+              <div
+                class="ftb-post-cover__image"
+                style={{ 'background-image': this.loaded ? `url('${this.coverUrl}')` : 'unset' }}
+              ></div>
+              <div class="ftb-post-cover__title">{this.post.title}</div>
+            </div>
           </div>
-        </div>
-        <img src={this.coverUrl} onLoad={() => (this.loaded = true)} class="ftb-post-cover__helper-img" />
+          <img src={this.coverUrl} onLoad={() => (this.loaded = true)} class="ftb-post-cover__helper-img" />
+        </ftb-link>
       </Host>
     );
   }

@@ -85,27 +85,32 @@ export class FtbSeasonBestPlayers {
 
     const cardFn = (row: SeasonPlayerStats) => {
       return (
-        <div class="ftb-season-best-players__player-card">
-          <div class="ftb-season-best-players__player-card-background">
-            <ftb-player-photo player={row.player}></ftb-player-photo>
-            <div class="info">
-              <div class="name">
-                {row.player.firstName} {row.player.lastName}
-              </div>
-              <div class="parameters">
-                <div class="parameter">
-                  <span class="value">{row[key]}</span>
-                  <span class="label">{translations.player.stats[key][userState.language].getForm(row[key])}</span>
+        <ftb-link
+          route="player"
+          params={{ playerId: row.player._id, playerName: row.player.firstName + ' ' + row.player.lastName }}
+        >
+          <div class="ftb-season-best-players__player-card">
+            <div class="ftb-season-best-players__player-card-background">
+              <ftb-player-photo player={row.player}></ftb-player-photo>
+              <div class="info">
+                <div class="name">
+                  {row.player.firstName} {row.player.lastName}
+                </div>
+                <div class="parameters">
+                  <div class="parameter">
+                    <span class="value">{row[key]}</span>
+                    <span class="label">{translations.player.stats[key][userState.language].getForm(row[key])}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="teams">
-              {row.player.teams.map(t => (
-                <ftb-team-logo team={t} key={t._id}></ftb-team-logo>
-              ))}
+              <div class="teams">
+                {row.player.teams.map(t => (
+                  <ftb-team-logo team={t} key={t._id}></ftb-team-logo>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </ftb-link>
       );
     };
     const filterFn = async (_, query: string, categories: CategoryInterface[]) => {

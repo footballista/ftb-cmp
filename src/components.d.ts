@@ -148,6 +148,10 @@ export namespace Components {
     interface FtbLeagueTeams {
         "league": League;
     }
+    interface FtbLink {
+        "params": { [key: string]: string | number };
+        "route": string;
+    }
     interface FtbMedia {
         "dataLoaded": boolean;
         "news": Collection<Post>;
@@ -535,6 +539,12 @@ declare global {
         prototype: HTMLFtbLeagueTeamsElement;
         new (): HTMLFtbLeagueTeamsElement;
     };
+    interface HTMLFtbLinkElement extends Components.FtbLink, HTMLStencilElement {
+    }
+    var HTMLFtbLinkElement: {
+        prototype: HTMLFtbLinkElement;
+        new (): HTMLFtbLinkElement;
+    };
     interface HTMLFtbMediaElement extends Components.FtbMedia, HTMLStencilElement {
     }
     var HTMLFtbMediaElement: {
@@ -786,6 +796,7 @@ declare global {
         "ftb-league-media-video-tab": HTMLFtbLeagueMediaVideoTabElement;
         "ftb-league-stadiums": HTMLFtbLeagueStadiumsElement;
         "ftb-league-teams": HTMLFtbLeagueTeamsElement;
+        "ftb-link": HTMLFtbLinkElement;
         "ftb-media": HTMLFtbMediaElement;
         "ftb-pagination": HTMLFtbPaginationElement;
         "ftb-partner-banner": HTMLFtbPartnerBannerElement;
@@ -961,6 +972,10 @@ declare namespace LocalJSX {
     }
     interface FtbLeagueTeams {
         "league": League;
+    }
+    interface FtbLink {
+        "params"?: { [key: string]: string | number };
+        "route": string;
     }
     interface FtbMedia {
         "dataLoaded"?: boolean;
@@ -1153,6 +1168,7 @@ declare namespace LocalJSX {
         "ftb-league-media-video-tab": FtbLeagueMediaVideoTab;
         "ftb-league-stadiums": FtbLeagueStadiums;
         "ftb-league-teams": FtbLeagueTeams;
+        "ftb-link": FtbLink;
         "ftb-media": FtbMedia;
         "ftb-pagination": FtbPagination;
         "ftb-partner-banner": FtbPartnerBanner;
@@ -1234,6 +1250,7 @@ declare module "@stencil/core" {
             "ftb-league-media-video-tab": LocalJSX.FtbLeagueMediaVideoTab & JSXBase.HTMLAttributes<HTMLFtbLeagueMediaVideoTabElement>;
             "ftb-league-stadiums": LocalJSX.FtbLeagueStadiums & JSXBase.HTMLAttributes<HTMLFtbLeagueStadiumsElement>;
             "ftb-league-teams": LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
+            "ftb-link": LocalJSX.FtbLink & JSXBase.HTMLAttributes<HTMLFtbLinkElement>;
             "ftb-media": LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
             "ftb-pagination": LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
             "ftb-partner-banner": LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;

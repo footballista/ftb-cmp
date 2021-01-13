@@ -45,16 +45,18 @@ export class FtbGameLineups {
                 </div>
                 {players[category].map(p => (
                   <div class="player">
-                    <div class="player-wrapper">
-                      <div class="player-background">
-                        <div class="position">{p.position}</div>
-                        <div class="name">
-                          {p.firstName[0]}. {p.lastName}
+                    <ftb-link route="player" params={{ playerId: p._id, playerName: p.firstName + ' ' + p.lastName }}>
+                      <div class="player-wrapper">
+                        <div class="player-background">
+                          <div class="position">{p.position}</div>
+                          <div class="name">
+                            {p.firstName[0]}. {p.lastName}
+                          </div>
+                          {this.renderStats(p)}
+                          <div class="number">#{p.number}</div>
                         </div>
-                        {this.renderStats(p)}
-                        <div class="number">#{p.number}</div>
                       </div>
-                    </div>
+                    </ftb-link>
                   </div>
                 ))}
               </div>
