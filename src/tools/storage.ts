@@ -1,11 +1,11 @@
-import { Plugins } from "@capacitor/core";
+import { Plugins } from '@capacitor/core';
 
 const { Storage } = Plugins;
 
 export async function setToStorage(key: string, value: any): Promise<void> {
   await Storage.set({
     key: key,
-    value: JSON.stringify(value)
+    value: JSON.stringify(value),
   });
 }
 
@@ -16,6 +16,6 @@ export async function getFromStorage(key: string): Promise<any> {
 
 export async function removeFromStorage(key: string): Promise<void> {
   await Storage.remove({
-    key: key
+    key: key,
   });
 }
