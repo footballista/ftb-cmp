@@ -34,6 +34,8 @@ export class FtbApp {
     }
 
     userState.language = language;
+    userState.token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsImlhdCI6MTYwODg4MDkwNn0.yGTFmJkkynbkm2MKBzZtg8sGcf_LC6okS67Tbz893KY';
   }
 
   render() {

@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Season, Stadium, Stage, User } from "ftb-models";
+import { Alert, BannerSlotCode, Champ, Game, GamePhoto, GameSide, GameStaff, GameVideo, League, PlayerGame, Post, Season, Stadium, Stage, User } from "ftb-models";
 import { FtbGameCardField } from "@src/components/ftb-game-card/ftb-game-card-fields";
 import { Collection } from "ftb-models/dist/models/base/collection";
 import { Player } from "ftb-models/dist/models/player.model";
@@ -15,6 +15,24 @@ import { FtbTeamLogoMode } from "./components/ftb-team-logo/ftb-team-logo-mode";
 import { User as User1 } from "ftb-models/dist/models/user.model";
 export namespace Components {
     interface CmpShowcase {
+    }
+    interface FtbAlertArticle {
+        "alert": Alert;
+    }
+    interface FtbAlertDate {
+        "alert": Alert;
+    }
+    interface FtbAlertPhoto {
+        "alert": Alert;
+    }
+    interface FtbAlertResult {
+        "alert": Alert;
+    }
+    interface FtbAlertVideo {
+        "alert": Alert;
+    }
+    interface FtbAlertWish {
+        "alert": Alert;
     }
     interface FtbAlertsFeed {
     }
@@ -282,6 +300,42 @@ declare global {
     var HTMLCmpShowcaseElement: {
         prototype: HTMLCmpShowcaseElement;
         new (): HTMLCmpShowcaseElement;
+    };
+    interface HTMLFtbAlertArticleElement extends Components.FtbAlertArticle, HTMLStencilElement {
+    }
+    var HTMLFtbAlertArticleElement: {
+        prototype: HTMLFtbAlertArticleElement;
+        new (): HTMLFtbAlertArticleElement;
+    };
+    interface HTMLFtbAlertDateElement extends Components.FtbAlertDate, HTMLStencilElement {
+    }
+    var HTMLFtbAlertDateElement: {
+        prototype: HTMLFtbAlertDateElement;
+        new (): HTMLFtbAlertDateElement;
+    };
+    interface HTMLFtbAlertPhotoElement extends Components.FtbAlertPhoto, HTMLStencilElement {
+    }
+    var HTMLFtbAlertPhotoElement: {
+        prototype: HTMLFtbAlertPhotoElement;
+        new (): HTMLFtbAlertPhotoElement;
+    };
+    interface HTMLFtbAlertResultElement extends Components.FtbAlertResult, HTMLStencilElement {
+    }
+    var HTMLFtbAlertResultElement: {
+        prototype: HTMLFtbAlertResultElement;
+        new (): HTMLFtbAlertResultElement;
+    };
+    interface HTMLFtbAlertVideoElement extends Components.FtbAlertVideo, HTMLStencilElement {
+    }
+    var HTMLFtbAlertVideoElement: {
+        prototype: HTMLFtbAlertVideoElement;
+        new (): HTMLFtbAlertVideoElement;
+    };
+    interface HTMLFtbAlertWishElement extends Components.FtbAlertWish, HTMLStencilElement {
+    }
+    var HTMLFtbAlertWishElement: {
+        prototype: HTMLFtbAlertWishElement;
+        new (): HTMLFtbAlertWishElement;
     };
     interface HTMLFtbAlertsFeedElement extends Components.FtbAlertsFeed, HTMLStencilElement {
     }
@@ -693,6 +747,12 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "cmp-showcase": HTMLCmpShowcaseElement;
+        "ftb-alert-article": HTMLFtbAlertArticleElement;
+        "ftb-alert-date": HTMLFtbAlertDateElement;
+        "ftb-alert-photo": HTMLFtbAlertPhotoElement;
+        "ftb-alert-result": HTMLFtbAlertResultElement;
+        "ftb-alert-video": HTMLFtbAlertVideoElement;
+        "ftb-alert-wish": HTMLFtbAlertWishElement;
         "ftb-alerts-feed": HTMLFtbAlertsFeedElement;
         "ftb-app": HTMLFtbAppElement;
         "ftb-champ-card": HTMLFtbChampCardElement;
@@ -765,6 +825,24 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CmpShowcase {
+    }
+    interface FtbAlertArticle {
+        "alert": Alert;
+    }
+    interface FtbAlertDate {
+        "alert": Alert;
+    }
+    interface FtbAlertPhoto {
+        "alert": Alert;
+    }
+    interface FtbAlertResult {
+        "alert": Alert;
+    }
+    interface FtbAlertVideo {
+        "alert": Alert;
+    }
+    interface FtbAlertWish {
+        "alert": Alert;
     }
     interface FtbAlertsFeed {
     }
@@ -1036,6 +1114,12 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "cmp-showcase": CmpShowcase;
+        "ftb-alert-article": FtbAlertArticle;
+        "ftb-alert-date": FtbAlertDate;
+        "ftb-alert-photo": FtbAlertPhoto;
+        "ftb-alert-result": FtbAlertResult;
+        "ftb-alert-video": FtbAlertVideo;
+        "ftb-alert-wish": FtbAlertWish;
         "ftb-alerts-feed": FtbAlertsFeed;
         "ftb-app": FtbApp;
         "ftb-champ-card": FtbChampCard;
@@ -1111,6 +1195,12 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cmp-showcase": LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
+            "ftb-alert-article": LocalJSX.FtbAlertArticle & JSXBase.HTMLAttributes<HTMLFtbAlertArticleElement>;
+            "ftb-alert-date": LocalJSX.FtbAlertDate & JSXBase.HTMLAttributes<HTMLFtbAlertDateElement>;
+            "ftb-alert-photo": LocalJSX.FtbAlertPhoto & JSXBase.HTMLAttributes<HTMLFtbAlertPhotoElement>;
+            "ftb-alert-result": LocalJSX.FtbAlertResult & JSXBase.HTMLAttributes<HTMLFtbAlertResultElement>;
+            "ftb-alert-video": LocalJSX.FtbAlertVideo & JSXBase.HTMLAttributes<HTMLFtbAlertVideoElement>;
+            "ftb-alert-wish": LocalJSX.FtbAlertWish & JSXBase.HTMLAttributes<HTMLFtbAlertWishElement>;
             "ftb-alerts-feed": LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
             "ftb-app": LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
             "ftb-champ-card": LocalJSX.FtbChampCard & JSXBase.HTMLAttributes<HTMLFtbChampCardElement>;

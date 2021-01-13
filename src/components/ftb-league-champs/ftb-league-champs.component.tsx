@@ -52,6 +52,7 @@ export class FtbLeagueChamps {
         categories={[
           {
             key: 'countryId',
+            lsKey: 'ftb::league-champs::leagueId',
             placeholder: translations.search.search[userState.language],
             filterFn: (query, options) => filter(options, query, ['text']),
             options: [

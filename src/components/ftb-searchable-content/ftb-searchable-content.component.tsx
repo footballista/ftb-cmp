@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch } 
 import Chevron from '../../assets/icons/chevron-down.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
+import { getFromStorage, setToStorage } from '@src/tools/storage';
 
 export interface CategoryInterface {
   key: string;
@@ -12,6 +13,7 @@ export interface CategoryInterface {
   filteredOptions?: any;
   open?: boolean;
   inputEl?: HTMLInputElement;
+  lsKey?: string;
 }
 
 @Component({
@@ -45,7 +47,7 @@ export class FtbSearchableContent {
 
   async componentWillLoad() {
     if (this.getCategories) this.categories = this.getCategories();
-    this.categoryDefaultSelect();
+    await this.categoryDefaultSelect();
     this.subscribeToQueryChanges();
     this.queryChanges$.next('');
     await this.ready$.toPromise();
@@ -61,14 +63,33 @@ export class FtbSearchableContent {
   }
 
   async componentWillUpdate() {
-    this.categoryDefaultSelect();
+    await this.categoryDefaultSelect();
   }
 
-  private categoryDefaultSelect() {
-    this.categories?.forEach(c => {
-      if (!c.options.some(o => o.selected)) c.options[0].selected = true;
+  private async categoryDefaultSelect() {
+    for (const c of this.categories) {
+      if (!c.options.some(o => o.selected)) {
+        if (c.lsKey) {
+          const savedOpt = await getFromStorage(c.lsKey);
+          const compareOptions = (o1, o2) => {
+            for (const key in o1) {
+              if (key !== 'selected' && key !== 'focused') {
+                if (JSON.stringify(o1[key]) != JSON.stringify(o2[key])) return false;
+              }
+            }
+            return true;
+          };
+          if (savedOpt && c.options.some(o => compareOptions(o, savedOpt))) {
+            c.options.find(o => compareOptions(o, savedOpt)).selected = true;
+          } else {
+            c.options[0].selected = true;
+          }
+        } else {
+          c.options[0].selected = true;
+        }
+      }
       c.filteredOptions ??= [...c.options];
-    });
+    }
   }
 
   private subscribeToQueryChanges() {
@@ -169,6 +190,7 @@ export class FtbSearchableContent {
       o.selected = true;
       c.open = false;
       if (this.getCategories) this.categories = this.getCategories(this.categories);
+      if (c.lsKey) setToStorage(c.lsKey, o);
       this.categoryUpdated$.next();
     }
     this.inputEl.focus();

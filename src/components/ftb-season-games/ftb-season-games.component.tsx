@@ -164,6 +164,7 @@ export class FtbSeasonGames {
       const categories: CategoryInterface[] = [
         {
           key: 'team',
+          lsKey: 'ftb::season-games::team',
           placeholder: translations.team.search_by_team_name[userState.language],
           filterFn: (query, options) => filter(options, query, ['name']),
           renderItem: (t: Team) => (
@@ -185,6 +186,7 @@ export class FtbSeasonGames {
           : extractStages(gamesCollection.items.filter(g => g.home.team._id === teamId || g.away.team._id === teamId));
         categories.push({
           key: 'stage',
+          lsKey: 'ftb::season-games::stage',
           placeholder: translations.champ.search_by_stage_name[userState.language],
           filterFn: (query, options) => filter(options, query, ['name']),
           renderItem: (s: Stage) => <div class="stage-option">{s.name}</div>,

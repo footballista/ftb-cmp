@@ -57,6 +57,7 @@ export class FtbGlobalSearch {
 
       categories.push({
         key: 'league',
+        lsKey: 'ftb::global-search::league',
         placeholder: translations.search.search[userState.language],
         filterFn: (query, options) => filter(options, query, ['name']),
         renderItem: l => (
@@ -78,6 +79,7 @@ export class FtbGlobalSearch {
 
       categories.push({
         key: 'city',
+        lsKey: 'ftb::global-search::city',
         placeholder: translations.search.search[userState.language],
         filterFn: (query, options) => filter(options, query, ['name']),
         renderItem: c => (

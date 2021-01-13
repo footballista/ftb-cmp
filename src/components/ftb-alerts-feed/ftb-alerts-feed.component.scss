@@ -1,2 +1,39 @@
-:host {
+ftb-alerts-feed {
+  .ftb-alerts-feed__wrapper {
+    .ftb-alerts-feed__background {
+      div[class^='ftb-alert-'][class$='__wrapper'] {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 1px;
+        ftb-video {
+          height: 112px;
+          width: 198px;
+          margin: 0 1px;
+          .ftb-video__title {
+            display: none;
+          }
+        }
+        ftb-game-photo-cover {
+          height: 150px;
+          width: 198px;
+          margin: 0 1px;
+        }
+
+        .ftb-alert-result__background {
+          .content {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+          }
+        }
+
+        .ftb-alert-date__background {
+          .content {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+  }
 }

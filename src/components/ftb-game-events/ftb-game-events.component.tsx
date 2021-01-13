@@ -131,7 +131,9 @@ export class FtbGameEvents {
           {e.team && (
             <div class="event-team">
               <div class="event-team-background">
-                <ftb-team-logo team={e.team}></ftb-team-logo>
+                <ftb-team-logo
+                  team={(this.game.home.team._id == e.team._id ? this.game.home : this.game.away).team}
+                ></ftb-team-logo>
               </div>
             </div>
           )}

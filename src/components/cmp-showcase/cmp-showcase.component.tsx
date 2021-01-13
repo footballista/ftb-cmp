@@ -72,6 +72,7 @@ export class CmpTest {
       this.langSelect(),
       this.globalSearch(),
       this.banner(),
+      this.profileAlerts(),
       this.playerCareer(),
       this.playerTransfers(),
       this.playerMedia(),
@@ -170,6 +171,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-global-search></ftb-global-search>,
+        },
+      ],
+    };
+  }
+
+  private profileAlerts() {
+    return {
+      title: 'Profile Alerts',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-alerts-feed></ftb-alerts-feed>,
         },
       ],
     };

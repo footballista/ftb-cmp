@@ -127,6 +127,7 @@ export class FtbSeasonBestPlayers {
     const categories = [
       {
         key: 'team',
+        lsKey: 'ftb::season-best-players::team',
         placeholder: translations.team.search_by_team_name[userState.language],
         filterFn: (query, options) => filter(options, query, ['name']),
         renderItem: (t: Team) => (
