@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { Game, GameSide, PlayerGame, translations } from 'ftb-models';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { FtbGameCardField } from './ftb-game-card-fields';
 import userState from '@src/tools/user.store';
 
 @Component({

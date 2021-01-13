@@ -22,7 +22,7 @@ import {
   Stage,
   User,
 } from 'ftb-models';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { FtbGameCardField } from './components/ftb-game-card/ftb-game-card-fields';
 import { Collection } from 'ftb-models/dist/models/base/collection';
 import { Player } from 'ftb-models/dist/models/player.model';
 import { Team } from 'ftb-models/dist/models/team.model';
