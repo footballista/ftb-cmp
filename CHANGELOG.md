@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/footballista/ftb-cmp/compare/1.0.0...1.0.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* FtbGameCardField import ([373bb9e](https://github.com/footballista/ftb-cmp/commit/373bb9e0c27080f3accf4b45ea882bfddea221d7))
+
+
+
 # [1.0.0](https://github.com/footballista/ftb-cmp/compare/0.0.5...1.0.0) (2021-01-13)
 
 
