@@ -1,3 +1,56 @@
+# [1.0.0](https://github.com/footballista/ftb-cmp/compare/0.0.5...1.0.0) (2021-01-13)
+
+
+### Bug Fixes
+
+* defining pagination min width if none set ([4abdade](https://github.com/footballista/ftb-cmp/commit/4abdade392bd80e108afce2d139e34ed06e386c5))
+* league media components split by tabs ([1904f28](https://github.com/footballista/ftb-cmp/commit/1904f28072b1685840608cbebbd842cf29ad49d2))
+* media tabs style fixes ([4044b7f](https://github.com/footballista/ftb-cmp/commit/4044b7f7b68ca347b0d3c2cd0c05169e6fb80b0c))
+* pagination content now works with items collection ([010cb44](https://github.com/footballista/ftb-cmp/commit/010cb4492831f41ce04ff1758216f2c1404478a6))
+* updated schematics templates ([64e2cf6](https://github.com/footballista/ftb-cmp/commit/64e2cf6d7ce47e86cbd3334e68b92b5907613245))
+
+
+### Features
+
+* aced game stats preview ([342faf3](https://github.com/footballista/ftb-cmp/commit/342faf379a6e5c7f8d6db65d7ee2ae5c3bbd52f5))
+* added ftb-season-games component ([b5e74d9](https://github.com/footballista/ftb-cmp/commit/b5e74d9c13741cce486a35fdcb1e2d07468c807d))
+* added language selector ([220aa94](https://github.com/footballista/ftb-cmp/commit/220aa949b210e297ad29174d5b1d3a3a1759ef12))
+* added league birthdays component ([73158c0](https://github.com/footballista/ftb-cmp/commit/73158c07fcc6f81ef2e8863b522462cbb117d284))
+* added navigation buttons to ftb-pagination ([e1a5011](https://github.com/footballista/ftb-cmp/commit/e1a5011cce4b56dbdd4528be1cf0bdb930a7cb10))
+* component-language function ([82cbdd6](https://github.com/footballista/ftb-cmp/commit/82cbdd635cad3869c6e8b090200cea5b4258e2a3))
+* created alert feed components ([ad1a1d6](https://github.com/footballista/ftb-cmp/commit/ad1a1d624b45c674016f18e0d22876790e36d5f7))
+* created ftb-game-photo-preview component ([d879166](https://github.com/footballista/ftb-cmp/commit/d8791664a942c4ed6727d6ed4c4245b4865a2cf8))
+* created ftb-game-tour component ([30b29e6](https://github.com/footballista/ftb-cmp/commit/30b29e6ca15f8afda802ec05dab13c13057900b1))
+* created ftb-global-search component ([3df4790](https://github.com/footballista/ftb-cmp/commit/3df47902565e9f906edcd48ad9db2b30d0e09e49))
+* created ftb-league media component ([efc64b2](https://github.com/footballista/ftb-cmp/commit/efc64b261a835ed238320a57eac94d791576fcac))
+* created ftb-league-documents component ([47b546b](https://github.com/footballista/ftb-cmp/commit/47b546bf929782ce4237585d6b8f3bf405b976b9))
+* created ftb-league-stadiums component ([08d7cbc](https://github.com/footballista/ftb-cmp/commit/08d7cbcc9e5449f8cfcf2144c7528a94aebe6c1d))
+* created ftb-league-teams component ([0bc991d](https://github.com/footballista/ftb-cmp/commit/0bc991ddca51c2b8d5e51005db42e8115b1c78f4))
+* created ftb-photo-gallery component ([d2d6d89](https://github.com/footballista/ftb-cmp/commit/d2d6d8946049f96fc32848d4207b4c0f008b18e7))
+* created ftb-searchable-content component ([22eb3bb](https://github.com/footballista/ftb-cmp/commit/22eb3bbbb728d4fc26aa3fe3deb98b768f4998f5))
+* created ftb-searchable-content component ([2da67b1](https://github.com/footballista/ftb-cmp/commit/2da67b1498f9963550e93e2c59c1f789c9174c68))
+* created ftb-team-games component ([8d09832](https://github.com/footballista/ftb-cmp/commit/8d098323914abdbc778ebf068278005ac8ad4b71))
+* created ftb-team-roster component ([d71d4b1](https://github.com/footballista/ftb-cmp/commit/d71d4b1fadc724b0b955f895d8d3ccf55400f1f4))
+* created ftb-team-transfers component ([40f7888](https://github.com/footballista/ftb-cmp/commit/40f788871d3467f5291e4919bbcb250a4e12f62a))
+* created game media component ([af40735](https://github.com/footballista/ftb-cmp/commit/af40735d517fc3b6a263e19ce7b5e7c23c3f46c6))
+* created game-scoreboard component ([d596476](https://github.com/footballista/ftb-cmp/commit/d59647663a83353258409472f1cfceae7fe2ec69))
+* created pagination component ([0fc27f4](https://github.com/footballista/ftb-cmp/commit/0fc27f46bd5f7729e4975c11c82c4be4c7a0c5b4))
+* created person-games component ([4ae514e](https://github.com/footballista/ftb-cmp/commit/4ae514e91e0e32c8d1e5482a51629f03f042516d))
+* created player games and career components ([dea7061](https://github.com/footballista/ftb-cmp/commit/dea7061bd6a4d768da4c4270a100509b4aa99ea4))
+* created player-games component ([5dc067c](https://github.com/footballista/ftb-cmp/commit/5dc067c5de27e69005d9646e22e8469f7f852b86))
+* created player-media component ([6b4c581](https://github.com/footballista/ftb-cmp/commit/6b4c58189ec5f552bf9f5e2fba180315980d76fb))
+* created player-transfers component ([2dc2934](https://github.com/footballista/ftb-cmp/commit/2dc293467bc294d9cdb8907144eaf2477bf13c36))
+* created router component; added routing to all components ([6cec9a4](https://github.com/footballista/ftb-cmp/commit/6cec9a41816b0bee64029d15bdda78fd811f2946))
+* created season and team media components ([4c4bebd](https://github.com/footballista/ftb-cmp/commit/4c4bebd8752b110dd9d88ba3a96c9737fe4239a4))
+* created season best players component ([523cf85](https://github.com/footballista/ftb-cmp/commit/523cf852ad142790bfb69040521459909bdde7f2))
+* created season standings components ([7e37700](https://github.com/footballista/ftb-cmp/commit/7e37700107b4fc4e26e9ebb89df66a5b0849f262))
+* created stadium-games component ([09b266c](https://github.com/footballista/ftb-cmp/commit/09b266cb1b45f4bc11eb9c9ccdf90983c5e7ec62))
+* created tabs component ([ac16900](https://github.com/footballista/ftb-cmp/commit/ac16900dbc0cd41669c4a24bab9b59eda291695a))
+* listing pagination on gallery slide changes ([f028a37](https://github.com/footballista/ftb-cmp/commit/f028a3784995c83d960d43424070f17e54e70f09))
+* opening photo-gallery if location has link ([70b6183](https://github.com/footballista/ftb-cmp/commit/70b61833e1e1477aacf92d53d0adc02badf92bd6))
+
+
+
 ## [0.0.5](https://github.com/footballista/ftb-cmp/compare/0.0.4...0.0.5) (2020-11-17)
 
 
