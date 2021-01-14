@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Stadium } from 'ftb-models';
+import { Stadium, envState } from 'ftb-models';
 import Location from '../../assets/icons/location.svg';
-import { envStore } from '@src/tools/env.store';
 
 @Component({
   tag: 'ftb-stadium-photo',
@@ -17,7 +16,7 @@ export class FtbStadiumPhoto {
 
   componentWillLoad() {
     this.url =
-      envStore.imgHost +
+      envState.imgHost +
       `/img/stadiums-photos/${this.stadium?._id || this.stadiumId}.png?version=${
         this.stadium?.photoId || this.version
       }`;

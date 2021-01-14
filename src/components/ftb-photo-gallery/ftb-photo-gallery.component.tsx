@@ -1,9 +1,8 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
-import { Game, RoleLevel, translations } from 'ftb-models';
+import { Game, RoleLevel, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
-import userState from '@src/tools/user.store';
 
 @Component({
   tag: 'ftb-photo-gallery',

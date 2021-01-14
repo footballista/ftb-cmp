@@ -1,10 +1,9 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
-import { Game, GameState, Stage, translations } from 'ftb-models';
+import { Game, GameState, Stage, translations, userState } from 'ftb-models';
 import last from 'lodash-es/last';
 import range from 'lodash-es/range';
 import rangeRight from 'lodash-es/rangeRight';
 import sortBy from 'lodash-es/sortBy';
-import userState from '@src/tools/user.store';
 
 @Component({
   tag: 'ftb-stage-cup-net',

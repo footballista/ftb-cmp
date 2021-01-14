@@ -1,10 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Player } from 'ftb-models/dist/models/player.model';
 import { AsyncSubject } from 'rxjs';
-import { PlayerService } from 'ftb-models/dist/services/player.service';
-import { diStore } from '@src/tools/di.store';
-import { filter, TransferRequest, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { filter, TransferRequest, translations, Player, PlayerService, userState, diState } from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
 
 @Component({
@@ -17,7 +13,7 @@ export class FtbPlayerTransfers {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new PlayerService(diStore.gql).loadPlayerTransfers(this.player._id).then(p => {
+    new PlayerService(diState.gql).loadPlayerTransfers(this.player._id).then(p => {
       this.player.transfers = p.transfers;
       this.ready$.next(true);
       this.ready$.complete();

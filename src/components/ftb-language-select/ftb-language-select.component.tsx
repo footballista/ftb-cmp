@@ -1,8 +1,7 @@
 import { Component, h, Host } from '@stencil/core';
-import userState from '@src/tools/user.store';
+import { userState, Language } from 'ftb-models';
 import Uk from '../../assets/flags/united kingdom.svg';
 import Ru from '../../assets/flags/russia.svg';
-import { Language } from 'ftb-models/dist/models/base/language';
 
 @Component({
   tag: 'ftb-language-select',

@@ -1,10 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
-import { filter, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
-import { Player } from 'ftb-models/dist/models/player.model';
+import { filter, translations, Team, userState, Player, getPlayerPosition, positions } from 'ftb-models';
 import sortBy from 'lodash-es/sortBy';
-import { getPlayerPosition, positions } from 'ftb-models/dist/tools/players-positions';
 
 @Component({
   tag: 'ftb-team-roster',

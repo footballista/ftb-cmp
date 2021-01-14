@@ -1,10 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
-import { filter, Game, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { filter, Game, translations, Team, userState, TeamService, diState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { TeamService } from 'ftb-models/dist/services/team.service';
-import { diStore } from '@src/tools/di.store';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 
 @Component({
@@ -18,7 +14,7 @@ export class FtbTeamGames {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new TeamService(diStore.gql).loadTeamGames(this.team._id).then(t => {
+    new TeamService(diState.gql).loadTeamGames(this.team._id).then(t => {
       this.team.games = t.games;
       this.loaded = true;
       this.ready$.next(true);

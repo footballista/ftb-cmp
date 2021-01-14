@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { GameVideo } from 'ftb-models';
+
 @Component({
   tag: 'ftb-video',
   styleUrl: 'ftb-video.component.scss',

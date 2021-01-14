@@ -1,10 +1,6 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
 import { AsyncSubject } from 'rxjs';
-import { filter, TransferRequest, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
-import { TeamService } from 'ftb-models/dist/services/team.service';
-import { diStore } from '@src/tools/di.store';
+import { filter, TransferRequest, translations, Team, userState, TeamService, diState } from 'ftb-models';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
@@ -17,7 +13,7 @@ export class FtbTeamTransfers {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new TeamService(diStore.gql).loadTeamTransfers(this.team._id).then(t => {
+    new TeamService(diState.gql).loadTeamTransfers(this.team._id).then(t => {
       this.team.transfers = t.transfers;
       this.ready$.next(true);
       this.ready$.complete();

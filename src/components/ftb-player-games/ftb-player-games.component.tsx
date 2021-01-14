@@ -1,12 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Player } from 'ftb-models/dist/models/player.model';
 import { AsyncSubject } from 'rxjs';
-import { PlayerService } from 'ftb-models/dist/services/player.service';
-import { diStore } from '@src/tools/di.store';
-import { filter, Season, translations } from 'ftb-models';
+import { filter, Season, translations, Player, PlayerService, Team, userState, diState } from 'ftb-models';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { Team } from 'ftb-models/dist/models/team.model';
-import userState from '@src/tools/user.store';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 import orderBy from 'lodash-es/orderBy';
 
@@ -21,7 +16,7 @@ export class FtbPlayerGames {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new PlayerService(diStore.gql).loadPlayerGames(this.player._id).then(p => {
+    new PlayerService(diState.gql).loadPlayerGames(this.player._id).then(p => {
       this.player.games = p.games;
       this.loaded = true;
       this.ready$.next(true);

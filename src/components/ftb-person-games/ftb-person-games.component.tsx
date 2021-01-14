@@ -1,9 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { filter, translations, User } from 'ftb-models';
-import { PersonService } from 'ftb-models/dist/services/person.service';
-import { diStore } from '@src/tools/di.store';
+import { filter, translations, User, PersonService, diState, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import userState from '@src/tools/user.store';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 @Component({
   tag: 'ftb-person-games',
@@ -16,7 +13,7 @@ export class FtbPersonGames {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new PersonService(diStore.gql).loadPersonGames(this.person._id).then(p => {
+    new PersonService(diState.gql).loadPersonGames(this.person._id).then(p => {
       this.person.games = p.games;
       this.loaded = true;
       this.ready$.next(true);

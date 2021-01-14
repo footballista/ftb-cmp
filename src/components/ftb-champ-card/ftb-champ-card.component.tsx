@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Champ, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { Champ, translations, userState } from 'ftb-models';
+
 @Component({
   tag: 'ftb-champ-card',
   styleUrl: 'ftb-champ-card.component.scss',

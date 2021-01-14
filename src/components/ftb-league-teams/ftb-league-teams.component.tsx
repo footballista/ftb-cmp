@@ -1,11 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { filter, League, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
-import { Team } from 'ftb-models/dist/models/team.model';
+import { filter, League, translations, userState, Team, LeagueService, diState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
 import orderBy from 'lodash-es/orderBy';
-import { diStore } from '@src/tools/di.store';
 
 @Component({
   tag: 'ftb-league-teams',
@@ -17,7 +13,7 @@ export class FtbLeagueTeams {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
-    new LeagueService(diStore.gql).loadLeagueTeams(this.league._id).then(l => {
+    new LeagueService(diState.gql).loadLeagueTeams(this.league._id).then(l => {
       l.teams.items = orderBy(l.teams.items, ['rating'], ['desc']);
       this.league.teams = l.teams;
       this.ready$.next(true);

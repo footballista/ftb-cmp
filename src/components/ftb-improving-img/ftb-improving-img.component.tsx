@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
+
 @Component({
   tag: 'ftb-improving-img',
   styleUrl: 'ftb-improving-img.component.scss',

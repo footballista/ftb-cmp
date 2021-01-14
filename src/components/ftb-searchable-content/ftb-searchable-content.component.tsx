@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch } 
 import Chevron from '../../assets/icons/chevron-down.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
-import { getFromStorage, setToStorage } from '@src/tools/storage';
+import { getFromStorage, setToStorage } from 'ftb-models';
 
 export interface CategoryInterface {
   key: string;

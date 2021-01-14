@@ -1,13 +1,9 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Season, translations, filter } from 'ftb-models';
+import { Season, translations, filter, SeasonService, diState, userState, Team } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { SeasonService } from 'ftb-models/dist/services/season.service';
-import { diStore } from '@src/tools/di.store';
 import orderBy from 'lodash-es/orderBy';
-import userState from '@src/tools/user.store';
 import { SeasonPlayerStats } from 'ftb-models/dist/models/season-player-stats.model';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { Team } from 'ftb-models/dist/models/team.model';
 
 @Component({
   tag: 'ftb-season-best-players',
@@ -22,7 +18,7 @@ export class FtbSeasonBestPlayers {
 
   componentWillLoad() {
     this.divideCategories();
-    new SeasonService(diStore.gql).loadSeasonPlayersStats(this.season._id).then(s => {
+    new SeasonService(diState.gql).loadSeasonPlayersStats(this.season._id).then(s => {
       this.season.playersStats = s.playersStats;
       this.divideCategories();
       this.loaded = true;

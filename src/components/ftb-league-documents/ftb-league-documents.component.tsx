@@ -1,11 +1,16 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Document, filter, League, translations } from 'ftb-models';
-import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { User } from 'ftb-models/dist/models/user.model';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
+import {
+  Document,
+  filter,
+  League,
+  translations,
+  GraphqlClient,
+  HttpClient,
+  User,
+  LeagueService,
+  userState,
+} from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import userState from '@src/tools/user.store';
 import Doc from '../../assets/icons/doc.svg';
 import Pdf from '../../assets/icons/pdf.svg';
 import Xls from '../../assets/icons/xls.svg';

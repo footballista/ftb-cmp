@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
+import { Team } from 'ftb-models';
+
 @Component({
   tag: 'ftb-team-seasons',
   styleUrl: 'ftb-team-seasons.component.scss',

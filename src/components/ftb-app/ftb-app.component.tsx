@@ -1,8 +1,6 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import userState from '@src/tools/user.store';
-import fireServicesState from '@src/tools/firebase-services.store';
+import { firebaseState, getFromStorage, userState } from 'ftb-models';
 import { Language } from 'ftb-models/dist/models/base/language';
-import { getFromStorage } from '@src/tools/storage';
 
 @Component({
   tag: 'ftb-app',
@@ -27,8 +25,8 @@ export class FtbApp {
       const firebase = (await import('firebase/app')).default;
       await import('firebase/messaging');
       const fireApp = await firebase.initializeApp(this.firebaseConfig);
-      fireServicesState.messaging = fireApp.messaging();
-      userState.token = await fireServicesState.messaging.getToken({
+      firebaseState.messaging = fireApp.messaging();
+      userState.token = await firebaseState.messaging.getToken({
         vapidKey: this.firebaseConfig.vapidKey,
       });
     }

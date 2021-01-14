@@ -1,10 +1,7 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
-import { filter, Game, Pitch, Stadium, translations } from 'ftb-models';
+import { filter, Game, Pitch, Stadium, translations, diState, StadiumService, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { diStore } from '@src/tools/di.store';
-import { StadiumService } from 'ftb-models/dist/services/stadium.service';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
-import userState from '@src/tools/user.store';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
@@ -18,7 +15,7 @@ export class FtbStadiumGames {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new StadiumService(diStore.gql).loadStadiumGames(this.stadium._id).then(s => {
+    new StadiumService(diState.gql).loadStadiumGames(this.stadium._id).then(s => {
       this.stadium.upcomingGames = s.upcomingGames;
       this.stadium.playedGames = s.playedGames;
       this.loaded = true;

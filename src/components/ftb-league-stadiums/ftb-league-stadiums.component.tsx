@@ -1,11 +1,16 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { filter, League, Stadium, translations } from 'ftb-models';
+import {
+  filter,
+  League,
+  Stadium,
+  translations,
+  GraphqlClient,
+  HttpClient,
+  User,
+  LeagueService,
+  userState,
+} from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { User } from 'ftb-models/dist/models/user.model';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
-import userState from '@src/tools/user.store';
 
 @Component({
   tag: 'ftb-league-stadiums',

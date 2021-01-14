@@ -1,8 +1,7 @@
 import { Component, Host, h, Prop, State, Element, Watch } from '@stencil/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { AsyncSubject } from 'rxjs';
-import userState from '@src/tools/user.store';
-import { translations } from 'ftb-models';
+import { translations, userState } from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
 
 @Component({

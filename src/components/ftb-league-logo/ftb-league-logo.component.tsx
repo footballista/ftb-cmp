@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { League } from 'ftb-models';
+import { League, envState } from 'ftb-models';
 import Trophy from '../../assets/icons/trophy.svg';
-import { envStore } from '@src/tools/env.store';
 @Component({
   tag: 'ftb-league-logo',
   styleUrl: 'ftb-league-logo.component.scss',
@@ -14,7 +13,7 @@ export class FtbLeagueLogo {
   @State() showPlaceholder: boolean = false;
 
   componentWillLoad() {
-    this.url = envStore.imgHost + `/img/leagues/${this.league._id}.png?version=${this.league.logoId}`;
+    this.url = envState.imgHost + `/img/leagues/${this.league._id}.png?version=${this.league.logoId}`;
   }
 
   onImgFail() {

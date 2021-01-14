@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Game, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { Game, translations, userState } from 'ftb-models';
 import dayjs from 'dayjs';
 
 @Component({

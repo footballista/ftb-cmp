@@ -1,8 +1,7 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { Game, RoleLevel, translations } from 'ftb-models';
+import { Game, RoleLevel, translations, userState } from 'ftb-models';
 import { FtbTeamLogoMode } from '@src/components/ftb-team-logo/ftb-team-logo-mode';
 import groupBy from 'lodash-es/groupBy';
-import userState from '@src/tools/user.store';
 import WhistleIcon from '../../assets/icons/whistle.svg';
 import PhotoIcon from '../../assets/icons/photo.svg';
 import CameraIcon from '../../assets/icons/camera.svg';

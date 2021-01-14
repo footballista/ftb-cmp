@@ -1,12 +1,19 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
-import { filter, Game, GameState, Season, Stage, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import {
+  filter,
+  Game,
+  GameState,
+  Season,
+  Stage,
+  translations,
+  userState,
+  diState,
+  SeasonService,
+  Team,
+} from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { SeasonService } from 'ftb-models/dist/services/season.service';
-import { diStore } from '@src/tools/di.store';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
 import orderBy from 'lodash-es/orderBy';
-import { Team } from 'ftb-models/dist/models/team.model';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
@@ -21,7 +28,7 @@ export class FtbSeasonGames {
 
   componentWillLoad() {
     this.sortGames();
-    new SeasonService(diStore.gql).loadSeasonCalendar(this.season._id).then(s => {
+    new SeasonService(diState.gql).loadSeasonCalendar(this.season._id).then(s => {
       this.season.calendar = s.calendar;
       this.season.upcomingGames.items = s.calendar.items.filter(g => g.state < GameState.CLOSED && g.date && g.stadium);
       this.season.playedGames.items = s.calendar.items.filter(g => g.state === GameState.CLOSED && g.date);

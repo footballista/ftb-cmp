@@ -1,6 +1,5 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core';
-import { Game, StageFormat, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { Game, StageFormat, translations, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-game-tour',

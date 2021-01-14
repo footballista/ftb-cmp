@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { League, Post, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { League, Post, translations, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-league-media',

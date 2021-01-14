@@ -1,7 +1,5 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
-import { Banner, BannerSlotCode, User } from 'ftb-models';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { environmentStore } from '@src/tools/environment.store';
+import { Banner, BannerSlotCode, User, HttpClient, envState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-partner-banner',
@@ -17,10 +15,10 @@ export class FtbPartnerBanner {
   private src: string;
 
   async componentWillLoad() {
-    this.httpClient = new HttpClient(environmentStore.appKey, new User());
+    this.httpClient = new HttpClient(envState.appKey, new User());
     this.banner = await this.loadBanner();
     if (this.banner?._id) {
-      this.src = environmentStore.photoHost + '/img/banners/' + this.banner._id + '.gif?version=' + this.banner.photoId;
+      this.src = envState.imgHost + '/img/banners/' + this.banner._id + '.gif?version=' + this.banner.photoId;
     }
   }
 
@@ -30,14 +28,14 @@ export class FtbPartnerBanner {
 
     return new Banner(
       await this.httpClient.load({
-        host: environmentStore.apiHost,
+        host: envState.apiHost,
         url: `/banners/build_banner`,
         method: 'POST',
         headers: headers,
         body: {
           slotCode: this.slotCode,
-          appKey: environmentStore.appKey,
-          origin: environmentStore.localHost,
+          appKey: envState.appKey,
+          origin: envState.localHost,
           leagueId: this.leagueId,
         },
       }),
@@ -49,12 +47,12 @@ export class FtbPartnerBanner {
     headers.append('Content-Type', 'application/json');
 
     return this.httpClient.load({
-      host: environmentStore.apiHost,
+      host: envState.apiHost,
       url: `/banners/${this.banner._id}/register_click`,
       method: 'POST',
       headers: headers,
       body: {
-        origin: environmentStore.localHost,
+        origin: envState.localHost,
       },
     });
   }

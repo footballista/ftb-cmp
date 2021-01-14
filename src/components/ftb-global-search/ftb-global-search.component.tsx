@@ -1,10 +1,7 @@
 import { Component, h, Host, State } from '@stencil/core';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { City, filter, League, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
-import { diStore } from '@src/tools/di.store';
-import { envStore } from '@src/tools/env.store';
+import { City, filter, League, translations, userState, diState, envState, LeagueService } from 'ftb-models';
+
 import {
   GlobalSearchResult,
   isGlobalSearchResultChamp,
@@ -17,7 +14,7 @@ import {
 import uniqBy from 'lodash-es/uniqBy';
 
 import { GlobalSearchService } from 'ftb-models/dist/services/global-search.service';
-import { getFromStorage, setToStorage } from '@src/tools/storage';
+import { getFromStorage, setToStorage } from '../../../../ftb-models/src/tools/storage';
 const LS_RESULTS_KEY = 'ftb::searchResults';
 
 @Component({
@@ -40,7 +37,7 @@ export class FtbGlobalSearch {
 
   async componentWillLoad() {
     this.savedResults = (await getFromStorage(LS_RESULTS_KEY)) || [];
-    this.leagues = await new LeagueService(diStore.gql).loadLeagues();
+    this.leagues = await new LeagueService(diState.gql).loadLeagues();
   }
 
   render() {
@@ -143,7 +140,7 @@ export class FtbGlobalSearch {
     if (!this.filtersOn) return (this.results = []);
     this.searchInProgress = true;
     this.abortHttpController = new AbortController();
-    this.results = await new GlobalSearchService(diStore.http, envStore.apiHost).search(
+    this.results = await new GlobalSearchService(diState.http, envState.apiHost).search(
       query,
       leagueId,
       cityId,

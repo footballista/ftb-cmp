@@ -1,9 +1,6 @@
 import { Component, h, Host, State } from '@stencil/core';
-import fireServicesState from '@src/tools/firebase-services.store';
 import { ProfileService } from 'ftb-models/dist/services/profile.service';
-import { diStore } from '@src/tools/di.store';
-import userState from '@src/tools/user.store';
-import { Alert, AlertType, User } from 'ftb-models';
+import { Alert, AlertType, diState, User, userState, firebaseState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-alerts-feed',
@@ -15,9 +12,9 @@ export class FtbAlertsFeed {
   @State() loadingMore = false;
 
   async componentWillLoad() {
-    this.user.alerts = (await new ProfileService(diStore.gql).loadProfileAlerts()).alerts;
-    if (fireServicesState.messaging) {
-      fireServicesState.messaging.onMessage(p => {
+    this.user.alerts = (await new ProfileService(diState.gql).loadProfileAlerts()).alerts;
+    if (firebaseState.messaging) {
+      firebaseState.messaging.onMessage(p => {
         console.log('todo: register on message update', p);
       });
     }
@@ -25,7 +22,7 @@ export class FtbAlertsFeed {
 
   private async loadMoreAlerts() {
     this.loadingMore = true;
-    this.user.alerts = (await new ProfileService(diStore.gql).loadMoreProfileAlerts(this.user)).alerts;
+    this.user.alerts = (await new ProfileService(diState.gql).loadMoreProfileAlerts(this.user)).alerts;
     this.loadingMore = false;
   }
 

@@ -1,7 +1,5 @@
 import { Component, Host, h, Prop, Watch } from '@stencil/core';
-import { Game, Post, translations, filter } from 'ftb-models';
-import { Collection } from 'ftb-models/dist/models/base/collection';
-import userState from '@src/tools/user.store';
+import { Game, Post, translations, filter, Collection, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 
 @Component({

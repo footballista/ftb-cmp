@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Season, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
-import { Player } from 'ftb-models/dist/models/player.model';
+import { Season, translations, userState, Player } from 'ftb-models';
+
 @Component({
   tag: 'ftb-season-birthdays',
   styleUrl: 'ftb-season-birthdays.component.scss',

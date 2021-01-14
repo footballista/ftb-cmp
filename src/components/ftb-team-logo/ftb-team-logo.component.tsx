@@ -1,8 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
+import { Team, envState } from 'ftb-models';
 import { FtbTeamLogoMode } from './ftb-team-logo-mode';
 import Shield from '../../assets/icons/shield.svg';
-import { envStore } from '@src/tools/env.store';
 
 @Component({
   tag: 'ftb-team-logo',
@@ -26,7 +25,7 @@ export class FtbTeamLogo {
       this.team = new Team({ logo: this.logo, name: this.name, logoId: this.version });
     }
 
-    this.url = envStore.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+    this.url = envState.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
   }
 
   onImgFail() {

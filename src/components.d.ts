@@ -9,26 +9,25 @@ import {
   Alert,
   BannerSlotCode,
   Champ,
+  Collection,
   Game,
   GamePhoto,
   GameSide,
   GameStaff,
   GameVideo,
   League,
+  Player,
   PlayerGame,
   Post,
   Season,
   Stadium,
   Stage,
+  Team,
   User,
 } from 'ftb-models';
 import { FtbGameCardField } from './components/ftb-game-card/ftb-game-card-fields';
-import { Collection } from 'ftb-models/dist/models/base/collection';
-import { Player } from 'ftb-models/dist/models/player.model';
-import { Team } from 'ftb-models/dist/models/team.model';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 import { FtbTeamLogoMode } from './components/ftb-team-logo/ftb-team-logo-mode';
-import { User as User1 } from 'ftb-models/dist/models/user.model';
 export namespace Components {
   interface CmpShowcase {}
   interface FtbAlertArticle {

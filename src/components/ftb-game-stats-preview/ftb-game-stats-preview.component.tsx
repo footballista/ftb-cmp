@@ -1,10 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
-import { Game, GameSide, GameState, translations } from 'ftb-models';
-import { GameService } from 'ftb-models/dist/services/game.service';
-import userState from '@src/tools/user.store';
-import { Team } from 'ftb-models/dist/models/team.model';
+import { Game, GameSide, GameState, translations, GameService, userState, Team, diState } from 'ftb-models';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
-import { diStore } from '@src/tools/di.store';
 
 @Component({
   tag: 'ftb-game-stats-preview',
@@ -16,7 +12,7 @@ export class FtbGameStatsPreview {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new GameService(diStore.gql).loadGamePreview(this.game._id).then(g => {
+    new GameService(diState.gql).loadGamePreview(this.game._id).then(g => {
       this.game.home ??= g.home;
       for (const key in g.home) {
         this.game.home[key] = g.home[key];

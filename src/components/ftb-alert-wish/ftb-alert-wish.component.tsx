@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Alert, relativeDate } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { Alert, relativeDate, userState } from 'ftb-models';
+
 @Component({
   tag: 'ftb-alert-wish',
   styleUrl: 'ftb-alert-wish.component.scss',

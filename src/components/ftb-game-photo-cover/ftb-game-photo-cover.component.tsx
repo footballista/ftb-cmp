@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { Game } from 'ftb-models';
+
 @Component({
   tag: 'ftb-game-photo-cover',
   styleUrl: 'ftb-game-photo-cover.component.scss',

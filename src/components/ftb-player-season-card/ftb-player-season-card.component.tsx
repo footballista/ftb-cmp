@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Season, translations } from 'ftb-models';
-import userState from '@src/tools/user.store';
+import { Season, translations, userState } from 'ftb-models';
 import sortBy from 'lodash-es/sortBy';
 
 @Component({

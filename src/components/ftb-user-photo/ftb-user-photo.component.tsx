@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { User } from 'ftb-models/dist/models/user.model';
 import Avatar from '../../assets/icons/avatar.svg';
-import { envStore } from '@src/tools/env.store';
+import { User, envState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-user-photo',
@@ -17,7 +16,7 @@ export class FtbUserPhoto {
 
   componentWillLoad() {
     this.url =
-      envStore.imgHost +
+      envState.imgHost +
       `/img/users/${this.user?._id || this.userId}.jpg?version=${this.user?.photoId || this.version}`;
   }
 

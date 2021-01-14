@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Player } from 'ftb-models/dist/models/player.model';
-import { diStore } from '@src/tools/di.store';
-import { PlayerService } from 'ftb-models/dist/services/player.service';
+import { Player, PlayerService, diState } from 'ftb-models';
+
 @Component({
   tag: 'ftb-player-media',
   styleUrl: 'ftb-player-media.component.scss',
@@ -12,7 +11,7 @@ export class FtbPlayerMedia {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new PlayerService(diStore.gql).loadPlayerMedia(this.player._id).then(s => {
+    new PlayerService(diState.gql).loadPlayerMedia(this.player._id).then(s => {
       this.player.news = s.news;
       this.player.gamesWithPhotos = s.gamesWithPhotos;
       this.player.gamesWithVideos = s.gamesWithVideos;
