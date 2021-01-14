@@ -1,21 +1,31 @@
 import { Component, Host, h, State } from '@stencil/core';
-import { Team } from 'ftb-models/dist/models/team.model';
-import { User } from 'ftb-models/dist/models/user.model';
-import { Player } from 'ftb-models/dist/models/player.model';
+import {
+  Team,
+  User,
+  Player,
+  GraphqlClient,
+  Collection,
+  HttpClient,
+  GameService,
+  LeagueService,
+  SeasonService,
+  TeamService,
+  StadiumService,
+  PersonService,
+  PlayerService,
+  BannerSlotCode,
+  Champ,
+  filter,
+  Game,
+  GamePhoto,
+  GamePhotoImg,
+  League,
+  Season,
+  Stadium,
+} from 'ftb-models';
 import range from 'lodash-es/range';
-import { Collection } from 'ftb-models/dist/models/base/collection';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { BannerSlotCode, Champ, filter, Game, GamePhoto, GamePhotoImg, League, Season, Stadium } from 'ftb-models';
-import { GraphqlClient } from 'ftb-models/dist/tools/clients/graphql.client';
-import { HttpClient } from 'ftb-models/dist/tools/clients/http.client';
-import { GameService } from 'ftb-models/dist/services/game.service';
 import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
-import { LeagueService } from 'ftb-models/dist/services/league.service';
-import { SeasonService } from 'ftb-models/dist/services/season.service';
-import { TeamService } from 'ftb-models/dist/services/team.service';
-import { StadiumService } from 'ftb-models/dist/services/stadium.service';
-import { PersonService } from 'ftb-models/dist/services/person.service';
-import { PlayerService } from 'ftb-models/dist/services/player.service';
 
 /**
  * Test page that demonstrates all existing components

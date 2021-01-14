@@ -1,6 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { firebaseState, getFromStorage, userState } from 'ftb-models';
-import { Language } from 'ftb-models/dist/models/base/language';
+import { firebaseState, getFromStorage, userState, Language } from 'ftb-models';
 
 @Component({
   tag: 'ftb-app',

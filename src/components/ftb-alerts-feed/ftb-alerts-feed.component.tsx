@@ -1,6 +1,5 @@
 import { Component, h, Host, State } from '@stencil/core';
-import { ProfileService } from 'ftb-models/dist/services/profile.service';
-import { Alert, AlertType, diState, User, userState, firebaseState } from 'ftb-models';
+import { Alert, AlertType, diState, User, userState, firebaseState, ProfileService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-alerts-feed',

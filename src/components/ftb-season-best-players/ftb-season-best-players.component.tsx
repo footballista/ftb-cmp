@@ -1,8 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Season, translations, filter, SeasonService, diState, userState, Team } from 'ftb-models';
+import { Season, translations, filter, SeasonService, diState, userState, Team, SeasonPlayerStats } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import orderBy from 'lodash-es/orderBy';
-import { SeasonPlayerStats } from 'ftb-models/dist/models/season-player-stats.model';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({

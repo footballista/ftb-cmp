@@ -1,8 +1,14 @@
 import { Component, h, Host, State } from '@stencil/core';
 import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { City, filter, League, translations, userState, diState, envState, LeagueService } from 'ftb-models';
-
 import {
+  City,
+  filter,
+  League,
+  translations,
+  userState,
+  diState,
+  envState,
+  LeagueService,
   GlobalSearchResult,
   isGlobalSearchResultChamp,
   isGlobalSearchResultLeague,
@@ -10,11 +16,12 @@ import {
   isGlobalSearchResultPlayer,
   isGlobalSearchResultStadium,
   isGlobalSearchResultTeam,
-} from 'ftb-models/dist/models/global-search-result.model';
+  getFromStorage,
+  setToStorage,
+  GlobalSearchService,
+} from 'ftb-models';
 import uniqBy from 'lodash-es/uniqBy';
 
-import { GlobalSearchService } from 'ftb-models/dist/services/global-search.service';
-import { getFromStorage, setToStorage } from '../../../../ftb-models/src/tools/storage';
 const LS_RESULTS_KEY = 'ftb::searchResults';
 
 @Component({

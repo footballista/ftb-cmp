@@ -1,10 +1,9 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import Goal from '../../assets/icons/goal.svg';
 import Assist from '../../assets/icons/assist.svg';
-import { Game, GameEventType, GameSide, translations, userState, Player } from 'ftb-models';
+import { Game, GameEventType, GameSide, translations, userState, Player, positionCategories } from 'ftb-models';
 import groupBy from 'lodash-es/groupBy';
 import findKey from 'lodash-es/findKey';
-import { positionCategories } from 'ftb-models/dist/tools/players-positions';
 
 @Component({
   tag: 'ftb-game-lineups',
