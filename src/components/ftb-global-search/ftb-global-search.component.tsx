@@ -163,7 +163,6 @@ export class FtbGlobalSearch {
     let savedResults = (await getFromStorage(LS_RESULTS_KEY)) || [];
     savedResults = savedResults.filter(row => row.type != r.type || row.item._id != r.item._id).slice(0, 4);
     savedResults.unshift(r);
-    console.log(savedResults);
     await setToStorage(LS_RESULTS_KEY, savedResults);
     this.savedResults = savedResults;
     this.focusedIdx = -1;
@@ -176,11 +175,11 @@ export class FtbGlobalSearch {
     if (!this.inputFocused) return null;
 
     if (!this.filtersOn) {
-      const cityId = this.categories?.find(c => c.key === 'city')?.options.find(o => o.selected)?._id;
-      const leagueId = this.categories?.find(c => c.key === 'league')?.options.find(o => o.selected)?._id;
-      this.results = this.savedResults
-        .filter(r => (cityId ? r.item.league.city._id == cityId : true))
-        .filter(r => (leagueId ? r.item.league._id == leagueId : true));
+      // const cityId = this.categories?.find(c => c.key === 'city')?.options.find(o => o.selected)?._id;
+      // const leagueId = this.categories?.find(c => c.key === 'league')?.options.find(o => o.selected)?._id;
+      // this.results = this.savedResults
+      //   .filter(r => (cityId ? r.item.league.city._id == cityId : true))
+      //   .filter(r => (leagueId ? r.item.league._id == leagueId : true));
       results = this.results;
       if (!results.length) return null;
     }

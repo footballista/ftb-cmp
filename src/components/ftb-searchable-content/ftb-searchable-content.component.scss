@@ -1,14 +1,9 @@
 ftb-searchable-content {
-  .ftb-searchable-content-search-line {
+  .ftb-searchable-content__search-line {
     display: flex;
-    font-size: 14px;
     justify-content: flex-end;
     align-items: center;
-    height: 35px;
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    margin-bottom: 5px;
     .input-wrapper {
       flex: 1;
       display: flex;
@@ -17,13 +12,7 @@ ftb-searchable-content {
         display: flex;
         position: relative;
         input {
-          height: 35px;
-          border: none;
-          box-shadow: none;
-          outline: none;
-          padding: 0 10px;
           flex: 1;
-          font-size: 12px;
           &.hidden {
             height: 0;
             width: 0;
@@ -34,11 +23,7 @@ ftb-searchable-content {
           }
         }
         ftb-spinner {
-          --color: black;
-          --size: 5px;
           position: absolute;
-          top: 8px;
-          right: 16px;
           &.hidden {
             opacity: 0;
           }
@@ -52,19 +37,23 @@ ftb-searchable-content {
         padding: 0;
         overflow: hidden;
       }
-      .category {
+      .category-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
-        user-select: none;
-        font-size: 10px;
-        padding: 0 15px;
-        margin: 7.5px 0;
-        height: 20px;
-        border-left: 1px solid rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        transition: color 0.2s ease-in-out;
-        text-transform: uppercase;
+        .category-background {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          user-select: none;
+          cursor: pointer;
+          text-transform: uppercase;
+          & > div {
+            display: flex;
+            align-items: center;
+          }
+        }
         ftb-icon {
           height: 7px;
           width: 7px;
@@ -76,38 +65,17 @@ ftb-searchable-content {
             transform: rotate(180deg);
           }
         }
-        &:hover {
-          color: cornflowerblue;
-          ftb-icon {
-            --fill: cornflowerblue;
-          }
-        }
       }
     }
-    .options-wrapper {
+    .options {
       position: absolute;
-      top: 37px;
-      left: -1px;
-      width: 100%;
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      .option {
-        height: 35px;
-        padding: 5px 10px;
-        font-size: 12px;
-        &:not(:first-of-type) {
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        display: flex;
-        align-items: center;
-        user-select: none;
-        cursor: pointer;
-        &:hover {
-          background: rgba(0, 0, 0, 0.05);
-        }
-        &.focused {
-          background: rgba(0, 0, 0, 0.05);
+      .option-wrapper {
+        .option {
+          display: flex;
+          align-items: center;
+          user-select: none;
+          cursor: pointer;
         }
       }
     }

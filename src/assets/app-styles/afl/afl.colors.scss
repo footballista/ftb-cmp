@@ -1,0 +1,22 @@
+@import '../default/default.colors';
+
+.ftb-searchable-content__search-line {
+  .category-wrapper {
+    background: #c54319;
+    .category-background {
+      color: white !important;
+      ftb-icon {
+        --fill: white;
+      }
+    }
+    &:hover {
+      background: #b63810;
+    }
+  }
+  .inputs + .category-wrapper {
+    padding-left: 2.5px;
+    .category-background {
+      border-left: none;
+    }
+  }
+}

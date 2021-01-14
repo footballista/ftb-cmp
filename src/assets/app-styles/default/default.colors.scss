@@ -1,0 +1,78 @@
+$inputBg: white;
+$color: rgba(0, 0, 0, 0.8);
+$colorLight: rgba(0, 0, 0, 0.6);
+$borderColor: rgba(0, 0, 0, 0.1);
+$linkHoverColor: #335e84;
+$backgroundColor: rgba(7, 10, 20, 0.87);
+$backgroundLight: rgba(139, 69, 18, 0.05);
+$fontSize: 14px;
+
+.ftb-searchable-content__search-line {
+  background: $inputBg;
+  border: 1px solid $borderColor;
+  input {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    color: $color;
+  }
+  ftb-spinner .bounce {
+    background-color: $backgroundColor;
+  }
+
+  .category-background {
+    border-left: 1px solid $borderColor;
+    color: $color;
+  }
+
+  .category-wrapper {
+    &:hover {
+      .category-background {
+        color: $linkHoverColor;
+        ftb-icon {
+          --fill: #5892c4;
+        }
+      }
+    }
+  }
+
+  .options {
+    border: 1px solid $borderColor;
+    background: $inputBg;
+    .option-wrapper {
+      &:not(:first-of-type) .option {
+        border-top: 1px solid $borderColor;
+      }
+      &:hover {
+        background: linear-gradient(to right, transparent, $backgroundLight 3%, $backgroundLight 97%, transparent);
+      }
+      &.focused {
+        background: linear-gradient(to right, transparent, $backgroundLight 3%, $backgroundLight 97%, transparent);
+      }
+    }
+  }
+}
+
+ftb-global-search {
+  .ftb-global-search__results-wrapper {
+    background: $inputBg;
+    border: 1px solid $borderColor;
+    .ftb-global-search__item-wrapper {
+      &:hover {
+        background: linear-gradient(to right, transparent, $backgroundLight 3%, $backgroundLight 97%, transparent);
+      }
+      &.focused {
+        background: linear-gradient(to right, transparent, $backgroundLight 3%, $backgroundLight 97%, transparent);
+      }
+
+      &:not(:first-of-type) {
+        .ftb-global-search__item {
+          border-top: 1px solid $borderColor;
+          .league {
+            color: $colorLight;
+          }
+        }
+      }
+    }
+  }
+}

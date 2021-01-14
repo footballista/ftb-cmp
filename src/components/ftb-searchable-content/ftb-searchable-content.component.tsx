@@ -199,7 +199,7 @@ export class FtbSearchableContent {
   render() {
     return (
       <Host style={{ 'min-height': this.minHeightPx + 'px' }}>
-        <div class="ftb-searchable-content-search-line">
+        <div class="ftb-searchable-content__search-line">
           <div class={{ 'input-wrapper': true, 'hidden': !this.open, 'dirty': this.inputDirty }}>
             <div class="inputs">
               <input
@@ -223,25 +223,29 @@ export class FtbSearchableContent {
               <ftb-spinner class={{ hidden: !this.searchInProgress }}></ftb-spinner>
             </div>
             {this.categories?.map(c => (
-              <div class="category" onClick={() => this.toggleCategory(c)}>
-                {c.renderItem(c.options.find(o => o.selected))}
-                <ftb-icon svg={Chevron} class={{ open: c.open }}></ftb-icon>
+              <div class="category-wrapper" onClick={() => this.toggleCategory(c)}>
+                <div class="category-background">
+                  {c.renderItem(c.options.find(o => o.selected))}
+                  <ftb-icon svg={Chevron} class={{ open: c.open }}></ftb-icon>
+                </div>
               </div>
             ))}
           </div>
           {this.categories?.some(c => c.open) && (
-            <div class="options-wrapper">
+            <div class="options">
               {this.categories
                 .find(c => c.open)
                 .filteredOptions.map(o => (
-                  <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
-                    {this.categories.find(c => c.open).renderItem(o)}
+                  <div class="option-wrapper">
+                    <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
+                      {this.categories.find(c => c.open).renderItem(o)}
+                    </div>
                   </div>
                 ))}
             </div>
           )}
         </div>
-        <div class="ftb-searchable-content-content">{this.renderItems(this.filteredItems)}</div>
+        <div class="ftb-searchable-content__content">{this.renderItems(this.filteredItems)}</div>
       </Host>
     );
   }
