@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { AsyncSubject } from 'rxjs';
 import { filter, TransferRequest, translations, Team, userState, TeamService, diState } from 'ftb-models';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
   tag: 'ftb-team-transfers',

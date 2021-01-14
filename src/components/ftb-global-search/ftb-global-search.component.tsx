@@ -1,5 +1,5 @@
 import { Component, h, Host, State } from '@stencil/core';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 import {
   City,
   filter,

@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
 import { Game, GameSide, GameState, translations, GameService, userState, Team, diState } from 'ftb-models';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 
 @Component({
   tag: 'ftb-game-stats-preview',

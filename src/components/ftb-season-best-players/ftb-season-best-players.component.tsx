@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State } from '@stencil/core';
 import { Season, translations, filter, SeasonService, diState, userState, Team, SeasonPlayerStats } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import orderBy from 'lodash-es/orderBy';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
   tag: 'ftb-season-best-players',

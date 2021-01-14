@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
 import { filter, Game, translations, Team, userState, TeamService, diState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 
 @Component({
   tag: 'ftb-team-games',

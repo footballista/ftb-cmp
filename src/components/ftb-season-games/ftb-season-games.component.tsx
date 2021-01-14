@@ -12,9 +12,9 @@ import {
   Team,
 } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 import orderBy from 'lodash-es/orderBy';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
   tag: 'ftb-season-games',

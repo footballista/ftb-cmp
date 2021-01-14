@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { filter, Game, GameEvent, GameEventExtra, GameEventType, translations, userState } from 'ftb-models';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 import Goal from '../../assets/icons/goal.svg';
 
 @Component({

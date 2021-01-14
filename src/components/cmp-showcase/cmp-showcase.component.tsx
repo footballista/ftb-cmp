@@ -24,8 +24,8 @@ import {
   Stadium,
 } from 'ftb-models';
 import range from 'lodash-es/range';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
+import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 
 /**
  * Test page that demonstrates all existing components

@@ -1,8 +1,8 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
 import { filter, Game, Pitch, Stadium, translations, diState, StadiumService, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
-import { FtbGameCardField } from '@src/components/ftb-game-card/ftb-game-card-fields';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
   tag: 'ftb-stadium-games',

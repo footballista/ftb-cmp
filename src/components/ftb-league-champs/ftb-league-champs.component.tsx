@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { Champ, League, translations, filter, userState } from 'ftb-models';
 import sortBy from 'lodash-es/sortBy';
-import { CategoryInterface } from '@src/components/ftb-searchable-content/ftb-searchable-content.component';
+import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
   tag: 'ftb-league-champs',
