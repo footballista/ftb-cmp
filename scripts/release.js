@@ -50,7 +50,6 @@ const prettify = () => {
 const checkWorkingTreeIsClean = async () => {
   const files = (await git.status()).files;
   if (files && files.length > 0) {
-    console.log(files);
     console.error('Unclean working tree. Commit or stash changes first');
     process.exit(1);
   }
