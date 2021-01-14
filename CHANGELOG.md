@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/footballista/ftb-cmp/compare/1.0.3...1.0.4) (2021-01-14)
+
+
+### Bug Fixes
+
+* extracted styles from search component ([ec13109](https://github.com/footballista/ftb-cmp/commit/ec13109ec602b701ef33f78fd4e6b4867419924e))
+
+
+
 ## [1.0.3](https://github.com/footballista/ftb-cmp/compare/1.0.2...1.0.3) (2021-01-14)
 
 
