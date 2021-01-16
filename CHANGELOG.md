@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/footballista/ftb-cmp/compare/1.0.4...1.0.5) (2021-01-16)
+
+
+### Bug Fixes
+
+* added league teams configurations ([c2a24b6](https://github.com/footballista/ftb-cmp/commit/c2a24b67c41cf8bf5c7d57d41ff0cc6293730e82))
+
+
+
 ## [1.0.4](https://github.com/footballista/ftb-cmp/compare/1.0.3...1.0.4) (2021-01-14)
 
 
