@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/footballista/ftb-cmp/compare/1.0.5...1.0.6) (2021-01-16)
+
+
+### Bug Fixes
+
+* removed excessive styles from team card ([fe3ba1a](https://github.com/footballista/ftb-cmp/commit/fe3ba1a88c13cada8bbf23a32f090a77f0d52ea2))
+
+
+
 ## [1.0.5](https://github.com/footballista/ftb-cmp/compare/1.0.4...1.0.5) (2021-01-16)
 
 

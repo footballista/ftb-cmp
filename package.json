@@ -1,6 +1,6 @@
 {
   "name": "ftb-cmp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Footballista Web Components",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
