@@ -19,6 +19,9 @@ import { AsyncSubject } from 'rxjs';
 })
 export class FtbLeagueStadiums {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 200;
+  @Prop() itemHeightPx = 168;
+  @Prop() rows = 1;
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
@@ -61,9 +64,9 @@ export class FtbLeagueStadiums {
             totalItems={filtersOn ? items.length : this.league.stadiums.total}
             items={items}
             renderItem={(s: Stadium) => <ftb-stadium-card stadium={s} key={'stadium' + s._id}></ftb-stadium-card>}
-            rows={1}
-            itemMinWidthPx={200}
-            itemHeightPx={160}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

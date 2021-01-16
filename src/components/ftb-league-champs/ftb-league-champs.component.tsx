@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Champ, League, translations, filter, userState } from 'ftb-models';
+import { Champ, League, translations, filter, userState, Team } from 'ftb-models';
 import sortBy from 'lodash-es/sortBy';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
@@ -10,6 +10,9 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbLeagueChamps {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 200;
+  @Prop() itemHeightPx = 68;
+  @Prop() rows = 3;
 
   componentWillLoad() {
     this.league.champs = sortBy(this.league.champs, ['country.sortIdx']);
@@ -29,8 +32,11 @@ export class FtbLeagueChamps {
   }
 
   private renderChampsList() {
+    let filtersOn = false;
     const filterFn = async (_, query: string, categories: CategoryInterface[]) => {
       const countryId = categories.find(c => c.key === 'countryId').options.find(o => o.selected).key;
+      filtersOn = query || countryId;
+      if (!filtersOn) return countryId;
       const champs =
         countryId === 'all' ? this.league.champs : this.league.champs.filter(c => c.country._id == countryId);
       return filter(champs, query, ['name']);
@@ -39,12 +45,15 @@ export class FtbLeagueChamps {
     return (
       <ftb-searchable-content
         items={this.league.champs}
-        renderItems={(champs: Champ[]) => (
-          <div class="items">
-            {champs.map(c => (
-              <ftb-champ-card champ={c}></ftb-champ-card>
-            ))}
-          </div>
+        renderItems={(items: Champ[]) => (
+          <ftb-pagination
+            totalItems={filtersOn ? items.length : this.league.champs.length}
+            items={items}
+            renderItem={(c: Champ) => <ftb-champ-card champ={c}></ftb-champ-card>}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
+          ></ftb-pagination>
         )}
         filterFn={filterFn}
         placeholder={translations.team.search_by_team_name[userState.language]}

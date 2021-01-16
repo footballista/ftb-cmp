@@ -46,8 +46,6 @@ export class FtbLeagueTeams {
       return filter(this.league.teams.items, query, ['name']);
     };
 
-    console.log(this.league.teams);
-
     return (
       <ftb-searchable-content
         items={this.league.teams.items}

@@ -132,10 +132,16 @@ export namespace Components {
     league: League;
   }
   interface FtbLeagueChamps {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueDocuments {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueLogo {
     caption: string;
@@ -145,16 +151,28 @@ export namespace Components {
     league: League;
   }
   interface FtbLeagueMediaNewsTab {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueMediaPhotoTab {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueMediaVideoTab {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueStadiums {
+    itemHeightPx: number;
+    itemMinWidthPx: number;
     league: League;
+    rows: number;
   }
   interface FtbLeagueTeams {
     itemHeightPx: number;
@@ -879,10 +897,16 @@ declare namespace LocalJSX {
     league: League;
   }
   interface FtbLeagueChamps {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueDocuments {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueLogo {
     caption?: string;
@@ -892,16 +916,28 @@ declare namespace LocalJSX {
     league: League;
   }
   interface FtbLeagueMediaNewsTab {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueMediaPhotoTab {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueMediaVideoTab {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueStadiums {
+    itemHeightPx?: number;
+    itemMinWidthPx?: number;
     league: League;
+    rows?: number;
   }
   interface FtbLeagueTeams {
     itemHeightPx?: number;

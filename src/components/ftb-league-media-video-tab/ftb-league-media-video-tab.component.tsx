@@ -8,6 +8,9 @@ import { Game, League, Post, translations, LeagueService, diState, userState } f
 })
 export class FtbLeagueMediaVideoTab {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 266;
+  @Prop() itemHeightPx = 150;
+  @Prop() rows = 1;
   private filtersOn = false;
   private leagueService = new LeagueService(diState.gql);
   private abortHttpController: AbortController;
@@ -83,9 +86,9 @@ export class FtbLeagueMediaVideoTab {
               ></ftb-video>
             )}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
-            rows={1}
-            itemMinWidthPx={266}
-            itemHeightPx={150}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

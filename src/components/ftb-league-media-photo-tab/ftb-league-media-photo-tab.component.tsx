@@ -8,6 +8,9 @@ import { Game, League, Post, translations, diState, userState, LeagueService } f
 })
 export class FtbLeagueMediaPhotoTab {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 200;
+  @Prop() itemHeightPx = 68;
+  @Prop() rows = 3;
   private filtersOn = false;
   private leagueService = new LeagueService(diState.gql);
   private abortHttpController: AbortController;
@@ -71,9 +74,9 @@ export class FtbLeagueMediaPhotoTab {
               <ftb-game-photo-cover game={game} key={'photo_' + game._id}></ftb-game-photo-cover>
             )}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
-            rows={1}
-            itemMinWidthPx={200}
-            itemHeightPx={150}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

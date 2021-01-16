@@ -1,14 +1,9 @@
 ftb-team-card {
   .ftb-team-card__wrapper {
-    width: inherit;
-    height: inherit;
     &:not(.loaded) {
       opacity: 0;
     }
     .ftb-team-card__background {
-      width: inherit;
-      height: inherit;
-      position: relative;
     }
   }
 }

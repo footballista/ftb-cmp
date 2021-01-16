@@ -22,6 +22,9 @@ import Xls from '../../assets/icons/xls.svg';
 })
 export class FtbLeagueDocuments {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 200;
+  @Prop() itemHeightPx = 60;
+  @Prop() rows = 1;
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
@@ -65,9 +68,9 @@ export class FtbLeagueDocuments {
             totalItems={filtersOn ? items.length : this.league.documents.total}
             items={items}
             renderItem={(d: Document) => this.renderDocument(d)}
-            rows={1}
-            itemMinWidthPx={200}
-            itemHeightPx={60}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}
