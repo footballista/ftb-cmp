@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/footballista/ftb-cmp/compare/1.0.6...1.0.7) (2021-01-16)
+
+
+### Bug Fixes
+
+* removed excessive styles from leagues components ([55f6fb7](https://github.com/footballista/ftb-cmp/commit/55f6fb7aa7f1cd74dcb1e244b82b89c94073d02f))
+
+
+
 ## [1.0.6](https://github.com/footballista/ftb-cmp/compare/1.0.5...1.0.6) (2021-01-16)
 
 
