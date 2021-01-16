@@ -41,7 +41,9 @@ export class FtbLeagueTeamCard {
                 <div class="ftb-team-card__color-layer" style={{ background: this.bg[2] }}></div>
               </div>
               <div class="ftb-team-card__content">
-                <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
+                <div class="logo-wrapper">
+                  <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
+                </div>
                 <div class="ftb-team-card__name-rating">
                   <div class="ftb-team-card__name">{this.team.name}</div>
                   <div class="ftb-team-card__rating">{this.team.rating}</div>

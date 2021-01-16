@@ -3,14 +3,6 @@ ftb-league-teams {
     .ftb-league-teams__background {
       .ftb-league-teams__content {
         ftb-searchable-content {
-          width: 800px;
-          .item {
-            ftb-team-card {
-              ftb-team-logo {
-                --shadow: none;
-              }
-            }
-          }
         }
       }
     }
