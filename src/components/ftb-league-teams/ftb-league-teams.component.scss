@@ -6,10 +6,6 @@ ftb-league-teams {
           width: 800px;
           .item {
             ftb-team-card {
-              display: block;
-              width: 196px;
-              margin: 0 2px;
-              height: 66px;
               ftb-team-logo {
                 --shadow: none;
               }

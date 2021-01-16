@@ -37,6 +37,7 @@ export class FtbPagination {
       this.onResize();
     });
     this.resizeObserver.observe(this.element);
+    this.onResize();
     await this.ready$.toPromise();
   }
 

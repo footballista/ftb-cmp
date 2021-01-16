@@ -10,6 +10,9 @@ import orderBy from 'lodash-es/orderBy';
 })
 export class FtbLeagueTeams {
   @Prop() league!: League;
+  @Prop() itemMinWidthPx = 200;
+  @Prop() itemHeightPx = 68;
+  @Prop() rows = 3;
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
@@ -43,6 +46,8 @@ export class FtbLeagueTeams {
       return filter(this.league.teams.items, query, ['name']);
     };
 
+    console.log(this.league.teams);
+
     return (
       <ftb-searchable-content
         items={this.league.teams.items}
@@ -51,9 +56,9 @@ export class FtbLeagueTeams {
             totalItems={filtersOn ? items.length : this.league.teams.total}
             items={items}
             renderItem={(team: Team) => <ftb-team-card team={team} key={'team' + team._id}></ftb-team-card>}
-            rows={3}
-            itemMinWidthPx={200}
-            itemHeightPx={68}
+            rows={this.rows}
+            itemMinWidthPx={this.itemMinWidthPx}
+            itemHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

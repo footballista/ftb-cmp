@@ -29,6 +29,9 @@ ftb-language-select {
     --size: 5px;
     top: 8px;
     right: 16px;
+    .bounce {
+      background-color: red;
+    }
   }
   .category-wrapper {
     font-size: 10px;
@@ -134,6 +137,74 @@ ftb-global-search {
             margin-right: 2.5px;
           }
         }
+      }
+    }
+  }
+}
+
+ftb-league-teams {
+  width: 800px;
+  ftb-searchable-content {
+    width: 800px;
+    ftb-pagina .item {
+      ftb-team-card {
+        display: block;
+        width: 196px;
+        margin: 0 2px;
+        height: 66px;
+      }
+    }
+  }
+}
+
+ftb-pagination {
+  ftb-spinner {
+    --color: darkorange;
+    --size: 12px;
+  }
+
+  .ftb-pagination__pages-wrapper {
+    $selectedColor: cornflowerblue;
+    height: 40px;
+    font-size: 13px;
+    .button-wrapper {
+      width: 120px;
+      button {
+        background: none;
+        box-shadow: none;
+        outline: none;
+        border: none;
+        transition: color 0.2s linear;
+        ftb-icon {
+          height: 10px;
+          width: 10px;
+          svg {
+            transition: fill 0.2s linear;
+          }
+        }
+        &.prev ftb-icon {
+          margin-right: 7.5px;
+        }
+        &.next ftb-icon {
+          margin-left: 7.5px;
+        }
+        &:hover {
+          color: $selectedColor;
+          ftb-icon {
+            --fill: #{$selectedColor};
+          }
+        }
+      }
+    }
+    .page {
+      padding: 0 5px;
+      transition: color 0.2s linear;
+      &:hover {
+        color: $selectedColor;
+      }
+      &.selected {
+        font-size: 16px;
+        color: $selectedColor;
       }
     }
   }

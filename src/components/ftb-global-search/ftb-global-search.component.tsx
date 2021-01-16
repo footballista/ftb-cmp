@@ -201,8 +201,10 @@ export class FtbGlobalSearch {
               </div>
             ))
           ) : (
-            <div class="ftb-global-search__item no-results">
-              {translations.search.nothing_found[userState.language]}
+            <div class="ftb-global-search__item-wrapper no-results">
+              <div class="ftb-global-search__item no-results">
+                {translations.search.nothing_found[userState.language]}
+              </div>
             </div>
           )}
         </div>
