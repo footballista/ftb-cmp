@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/footballista/ftb-cmp/compare/1.1.1...1.1.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* fixed pagination config in league components ([8957001](https://github.com/footballista/ftb-cmp/commit/89570017f0c6f6bd8e811ea18e49c67c5a161269))
+
+
+
 ## [1.1.1](https://github.com/footballista/ftb-cmp/compare/1.1.0...1.1.1) (2021-01-17)
 
 
