@@ -10,9 +10,15 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbLeagueChamps {
   @Prop() league!: League;
-  @Prop() itemMinWidthPx = 200;
-  @Prop() itemHeightPx = 68;
-  @Prop() rows = 3;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
 
   componentWillLoad() {
     this.league.champs = sortBy(this.league.champs, ['country.sortIdx']);
@@ -50,9 +56,12 @@ export class FtbLeagueChamps {
             totalItems={filtersOn ? items.length : this.league.champs.length}
             items={items}
             renderItem={(c: Champ) => <ftb-champ-card champ={c}></ftb-champ-card>}
-            rows={this.rows}
-            itemMinWidthPx={this.itemMinWidthPx}
-            itemMinHeightPx={this.itemHeightPx}
+            rows={this.paginationConfig.rows}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

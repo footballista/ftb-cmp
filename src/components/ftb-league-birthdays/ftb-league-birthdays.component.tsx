@@ -8,6 +8,15 @@ import { League, translations, userState, diState, LeagueService, Player } from 
 })
 export class FtbLeagueBirthdays {
   @Prop() league!: League;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
 
   async componentWillLoad() {
     const league = await new LeagueService(diState.gql).loadLeagueBirthdays(this.league._id);
@@ -26,9 +35,12 @@ export class FtbLeagueBirthdays {
               totalItems={this.league.birthdays.length}
               items={this.league.birthdays}
               renderItem={(p: Player) => this.renderPlayer(p)}
-              rows={2}
-              itemMinWidthPx={266}
-              itemMinHeightPx={75}
+              rows={this.paginationConfig.rows}
+              itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+              itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+              stretchX={this.paginationConfig.stretchX}
+              stretchY={this.paginationConfig.stretchY}
+              XtoY={this.paginationConfig.XtoY}
             ></ftb-pagination>
           </div>
         </div>

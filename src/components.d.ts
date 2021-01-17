@@ -130,18 +130,39 @@ export namespace Components {
   interface FtbLanguageSelect {}
   interface FtbLeagueBirthdays {
     league: League;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueChamps {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueDocuments {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueLogo {
     caption: string;
@@ -151,34 +172,64 @@ export namespace Components {
     league: League;
   }
   interface FtbLeagueMediaNewsTab {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueMediaPhotoTab {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueMediaVideoTab {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueStadiums {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueTeams {
-    itemHeightPx: number;
-    itemMinWidthPx: number;
     league: League;
-    rows: number;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLink {
     params: { [key: string]: string | number };
@@ -934,18 +985,39 @@ declare namespace LocalJSX {
   interface FtbLanguageSelect {}
   interface FtbLeagueBirthdays {
     league: League;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueChamps {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueDocuments {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueLogo {
     caption?: string;
@@ -955,34 +1027,64 @@ declare namespace LocalJSX {
     league: League;
   }
   interface FtbLeagueMediaNewsTab {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueMediaPhotoTab {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueMediaVideoTab {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueStadiums {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLeagueTeams {
-    itemHeightPx?: number;
-    itemMinWidthPx?: number;
     league: League;
-    rows?: number;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbLink {
     params?: { [key: string]: string | number };

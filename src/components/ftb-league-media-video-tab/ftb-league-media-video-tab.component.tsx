@@ -8,9 +8,15 @@ import { Game, League, Post, translations, LeagueService, diState, userState } f
 })
 export class FtbLeagueMediaVideoTab {
   @Prop() league!: League;
-  @Prop() itemMinWidthPx = 266;
-  @Prop() itemHeightPx = 150;
-  @Prop() rows = 1;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   private filtersOn = false;
   private leagueService = new LeagueService(diState.gql);
   private abortHttpController: AbortController;
@@ -86,9 +92,12 @@ export class FtbLeagueMediaVideoTab {
               ></ftb-video>
             )}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
-            rows={this.rows}
-            itemMinWidthPx={this.itemMinWidthPx}
-            itemMinHeightPx={this.itemHeightPx}
+            rows={this.paginationConfig.rows}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

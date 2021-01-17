@@ -8,9 +8,16 @@ import { League, Post, translations, LeagueService, diState, userState } from 'f
 })
 export class FtbLeagueMediaNewsTab {
   @Prop() league!: League;
-  @Prop() itemMinWidthPx = 200;
-  @Prop() itemHeightPx = 150;
-  @Prop() rows = 1;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
+
   private filtersOn = false;
   private leagueService = new LeagueService(diState.gql);
   private abortHttpController: AbortController;
@@ -67,9 +74,12 @@ export class FtbLeagueMediaNewsTab {
             items={items}
             renderItem={(post: Post) => <ftb-post-cover key={'post_' + post._id} post={post}></ftb-post-cover>}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
-            rows={this.rows}
-            itemMinWidthPx={this.itemMinWidthPx}
-            itemMinHeightPx={this.itemHeightPx}
+            rows={this.paginationConfig.rows}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>
