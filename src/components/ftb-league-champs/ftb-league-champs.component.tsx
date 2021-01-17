@@ -57,6 +57,7 @@ export class FtbLeagueChamps {
             items={items}
             renderItem={(c: Champ) => <ftb-champ-card champ={c}></ftb-champ-card>}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}
@@ -65,7 +66,7 @@ export class FtbLeagueChamps {
           ></ftb-pagination>
         )}
         filterFn={filterFn}
-        placeholder={translations.team.search_by_team_name[userState.language]}
+        placeholder={translations.champ.search_by_champ_name[userState.language]}
         categories={[
           {
             key: 'countryId',

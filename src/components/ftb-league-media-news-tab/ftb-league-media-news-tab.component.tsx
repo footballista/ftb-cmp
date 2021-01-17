@@ -75,6 +75,7 @@ export class FtbLeagueMediaNewsTab {
             renderItem={(post: Post) => <ftb-post-cover key={'post_' + post._id} post={post}></ftb-post-cover>}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}

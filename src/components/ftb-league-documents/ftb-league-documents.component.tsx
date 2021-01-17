@@ -77,6 +77,7 @@ export class FtbLeagueDocuments {
             items={items}
             renderItem={(d: Document) => this.renderDocument(d)}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}

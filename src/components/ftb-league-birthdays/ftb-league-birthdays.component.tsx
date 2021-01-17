@@ -36,6 +36,7 @@ export class FtbLeagueBirthdays {
               items={this.league.birthdays}
               renderItem={(p: Player) => this.renderPlayer(p)}
               rows={this.paginationConfig.rows}
+              fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
               itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
               itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
               stretchX={this.paginationConfig.stretchX}

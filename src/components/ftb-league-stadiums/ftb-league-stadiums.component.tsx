@@ -72,6 +72,7 @@ export class FtbLeagueStadiums {
             items={items}
             renderItem={(s: Stadium) => <ftb-stadium-card stadium={s} key={'stadium' + s._id}></ftb-stadium-card>}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}

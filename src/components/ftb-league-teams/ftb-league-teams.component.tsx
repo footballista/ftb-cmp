@@ -61,6 +61,7 @@ export class FtbLeagueTeams {
             items={items}
             renderItem={(team: Team) => <ftb-team-card team={team} key={'team' + team._id}></ftb-team-card>}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}

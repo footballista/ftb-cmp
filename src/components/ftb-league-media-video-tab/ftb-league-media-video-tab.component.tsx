@@ -93,6 +93,7 @@ export class FtbLeagueMediaVideoTab {
             )}
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
             rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
             itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
             stretchX={this.paginationConfig.stretchX}
