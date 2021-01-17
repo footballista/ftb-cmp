@@ -1,5 +1,6 @@
 import { Component, Host, h, State, Prop, EventEmitter, Event } from '@stencil/core';
 import Flag from '../../assets/icons/flag.svg';
+import { envState } from 'ftb-models';
 
 const aliases = {
   ru: 'russia',
@@ -47,7 +48,7 @@ export class FtbFlag {
       this.flagAlias = aliases[this.flag];
     }
 
-    this.url = `assets/flags/${this.flagAlias}.svg`;
+    this.url = envState.localHost + `/assets/flags/${this.flagAlias}.svg`;
   }
 
   onImgFail() {

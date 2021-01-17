@@ -53,6 +53,7 @@ export class FtbChampCard {
                   key={this.champ.country.flag}
                 ></ftb-flag>
                 <div class="ftb-champ-card__data">
+                  <div class="ftb-champ-card__country-name">{this.champ.country.name}</div>
                   <div class="ftb-champ-card__champ-name">{this.champ.name}</div>
                   <div class="ftb-champ-card__seasons">
                     <div class="ftb-champ-card__seasons-title">{translations.champ.seasons[userState.language]}:</div>
