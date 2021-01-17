@@ -53,16 +53,16 @@ ftb-searchable-content {
             display: flex;
             align-items: center;
           }
-        }
-        ftb-icon {
-          height: 7px;
-          width: 7px;
-          margin-left: 7.5px;
-          svg {
-            transition: all 0.2s ease-in-out;
-          }
-          &.open svg {
-            transform: rotate(180deg);
+          ftb-icon:last-of-type {
+            height: 7px;
+            width: 7px;
+            margin-left: 7.5px;
+            svg {
+              transition: all 0.2s ease-in-out;
+            }
+            &.open svg {
+              transform: rotate(180deg);
+            }
           }
         }
       }

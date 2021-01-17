@@ -1,35 +1,12 @@
 ftb-post-cover {
   display: block;
   .ftb-post-cover__wrapper {
-    background: rgba(0, 0, 0, 0.1);
-    height: inherit;
-    width: inherit;
     .ftb-post-cover__background {
-      display: block;
-      text-align: center;
-      position: relative;
-      height: inherit;
-      width: inherit;
       .ftb-post-cover__image {
-        height: inherit;
-        width: inherit;
         background-size: cover;
         background-position: center center;
       }
       .ftb-post-cover__title {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        font-size: 14px;
-        width: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 10px 20px;
-        padding-top: 50px;
-        box-sizing: border-box;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.01));
-        color: white;
       }
     }
     .ftb-post-cover__background:not(.loaded) {

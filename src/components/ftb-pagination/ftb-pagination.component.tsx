@@ -46,6 +46,10 @@ export class FtbPagination {
     this.defineDisplayedItems();
   }
 
+  disconnectedCallback() {
+    this.resizeObserver.disconnect();
+  }
+
   private async onResize() {
     this.wrapperWidthPx = this.element.offsetWidth || this.itemMinWidthPx;
     const itemsPerRow = Math.floor(this.wrapperWidthPx / this.itemMinWidthPx);

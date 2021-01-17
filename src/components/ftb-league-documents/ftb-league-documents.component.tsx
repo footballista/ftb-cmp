@@ -9,6 +9,7 @@ import {
   User,
   LeagueService,
   userState,
+  envState,
 } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import Doc from '../../assets/icons/doc.svg';
@@ -86,7 +87,7 @@ export class FtbLeagueDocuments {
     return (
       <a
         class="document"
-        href={`http://localhost:3001/api/files/${doc.title}_${doc._id}.${doc.extension}`}
+        href={`${envState.apiHost}/files/${doc.title}_${doc._id}.${doc.extension}`}
         download={doc.title}
         target="_blank"
       >
