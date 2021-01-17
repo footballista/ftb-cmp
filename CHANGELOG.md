@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/footballista/ftb-cmp/compare/1.0.8...1.1.0) (2021-01-17)
+
+
+### Features
+
+* added "fixed height" mode to pagination component ([930ffb1](https://github.com/footballista/ftb-cmp/commit/930ffb1e845fc269a42121877837d8da8779ed0a))
+
+
+
 ## [1.0.8](https://github.com/footballista/ftb-cmp/compare/1.0.7...1.0.8) (2021-01-17)
 
 
