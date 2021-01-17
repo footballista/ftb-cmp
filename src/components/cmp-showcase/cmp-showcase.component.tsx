@@ -120,6 +120,8 @@ export class CmpTest {
       this.gamePhotoPreview(),
       this.pagination(),
       this.paginationWithCollection(),
+      this.paginationWithFixedHeight(),
+      this.paginationWithFixedHeight2(),
       this.search(),
       this.tabs(),
     ];
@@ -700,7 +702,7 @@ export class CmpTest {
               renderItem={renderItem}
               rows={rows}
               itemMinWidthPx={itemMinWidthPx}
-              itemHeightPx={itemHeightPx}
+              itemMinHeightPx={itemHeightPx}
             ></ftb-pagination>
           ),
         },
@@ -713,7 +715,7 @@ export class CmpTest {
               renderItem={renderItem}
               rows={rows}
               itemMinWidthPx={itemMinWidthPx}
-              itemHeightPx={itemHeightPx}
+              itemMinHeightPx={itemHeightPx}
               style={{ 'max-width': '300px' }}
             ></ftb-pagination>
           ),
@@ -727,7 +729,7 @@ export class CmpTest {
               renderItem={renderItem}
               rows={rows}
               itemMinWidthPx={itemMinWidthPx}
-              itemHeightPx={itemHeightPx}
+              itemMinHeightPx={itemHeightPx}
               style={{ 'max-width': '300px' }}
             ></ftb-pagination>
           ),
@@ -754,7 +756,7 @@ export class CmpTest {
               renderItem={renderItem}
               rows={rows}
               itemMinWidthPx={itemMinWidthPx}
-              itemHeightPx={itemHeightPx}
+              itemMinHeightPx={itemHeightPx}
               style={{ 'max-width': '300px' }}
             ></ftb-pagination>
           ),
@@ -762,6 +764,77 @@ export class CmpTest {
         {
           descr: '7/12, rest loaded in 10 sec.',
           e: () => this.createImprovedPagination(),
+        },
+      ],
+    };
+  }
+
+  private paginationWithFixedHeight2() {
+    const renderItem = (item: number) => <div class="pag-item">{item}</div>;
+    const height = 200;
+    const itemMinWidthPx = 100;
+    const itemHeightPx = 54;
+
+    return {
+      title: 'Pagination with fixed height',
+      elements: [
+        {
+          descr: 'fixed height 200px; item ratio 1/1',
+          e: () => (
+            <ftb-pagination
+              class="pagination-with-fixed-height"
+              totalItems={100}
+              items={range(100)}
+              renderItem={renderItem}
+              fixedContainerHeightPx={height}
+              itemMinWidthPx={itemMinWidthPx}
+              XtoY={16 / 9}
+              itemMinHeightPx={itemHeightPx}
+            ></ftb-pagination>
+          ),
+        },
+      ],
+    };
+  }
+
+  private paginationWithFixedHeight() {
+    const renderItem = (item: number) => <div class="pag-item">{item}</div>;
+    const containerHeight = 200;
+    const itemMinWidthPx = 100;
+    const itemHeightPx = 54;
+
+    return {
+      title: 'Pagination with fixed height',
+      elements: [
+        {
+          descr: 'fixed height 200px; fixed item height',
+          e: () => (
+            <ftb-pagination
+              class="pagination-with-fixed-height"
+              totalItems={50}
+              items={range(50)}
+              renderItem={renderItem}
+              fixedContainerHeightPx={containerHeight}
+              itemMinWidthPx={itemMinWidthPx}
+              stretchY={false}
+              itemMinHeightPx={itemHeightPx}
+            ></ftb-pagination>
+          ),
+        },
+        {
+          descr: 'fixed height 200px; stretching item height',
+          e: () => (
+            <ftb-pagination
+              class="pagination-with-fixed-height"
+              totalItems={50}
+              items={range(50)}
+              renderItem={renderItem}
+              fixedContainerHeightPx={containerHeight}
+              itemMinWidthPx={itemMinWidthPx}
+              stretchY={true}
+              itemMinHeightPx={itemHeightPx}
+            ></ftb-pagination>
+          ),
         },
       ],
     };
@@ -780,7 +853,7 @@ export class CmpTest {
         renderItem={renderItem}
         rows={rows}
         itemMinWidthPx={itemMinWidthPx}
-        itemHeightPx={itemHeightPx}
+        itemMinHeightPx={itemHeightPx}
         style={{ 'max-width': '300px', 'min-width': '300px' }}
       ></ftb-pagination>
     );
@@ -871,7 +944,7 @@ export class CmpTest {
                     renderItem={(item: number) => <div class="pag-item">{item}</div>}
                     rows={2}
                     itemMinWidthPx={100}
-                    itemHeightPx={54}
+                    itemMinHeightPx={54}
                   ></ftb-pagination>
                 );
               }}
@@ -980,7 +1053,7 @@ export class CmpTest {
                 )}
                 rows={2}
                 itemMinWidthPx={130}
-                itemHeightPx={96}
+                itemMinHeightPx={96}
               ></ftb-pagination>
             </div>
           ),

@@ -2,6 +2,7 @@ ftb-spinner {
   .spinner .bounce {
     width: var(--size, 18px);
     height: var(--size, 18px);
+    background-color: var(--color);
     border-radius: 100%;
     display: inline-block;
     -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;

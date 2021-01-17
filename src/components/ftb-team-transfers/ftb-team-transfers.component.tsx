@@ -72,7 +72,7 @@ export class FtbTeamTransfers {
             renderItem={t => this.renderTransfer(t)}
             rows={2}
             itemMinWidthPx={266}
-            itemHeightPx={60}
+            itemMinHeightPx={60}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

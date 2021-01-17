@@ -43,7 +43,7 @@ export class FtbPlayerTransfers {
                   renderItem={t => this.renderTransfer(t)}
                   rows={1}
                   itemMinWidthPx={266}
-                  itemHeightPx={60}
+                  itemMinHeightPx={60}
                 ></ftb-pagination>
               )}
               filterFn={filterFn}

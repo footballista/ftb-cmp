@@ -151,7 +151,7 @@ export class FtbSeasonBestPlayers {
             renderItem={cardFn}
             rows={3}
             itemMinWidthPx={266}
-            itemHeightPx={66}
+            itemMinHeightPx={66}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

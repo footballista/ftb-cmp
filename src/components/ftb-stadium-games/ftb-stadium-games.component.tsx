@@ -114,7 +114,7 @@ export class FtbStadiumGames {
             renderItem={cardFn}
             rows={2}
             itemMinWidthPx={200}
-            itemHeightPx={110}
+            itemMinHeightPx={110}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

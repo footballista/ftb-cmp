@@ -76,7 +76,7 @@ export class FtbLeagueMediaPhotoTab {
             getItemsForInterval={(i, o, l) => this.getItemsForInterval(i, o, l)}
             rows={this.rows}
             itemMinWidthPx={this.itemMinWidthPx}
-            itemHeightPx={this.itemHeightPx}
+            itemMinHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

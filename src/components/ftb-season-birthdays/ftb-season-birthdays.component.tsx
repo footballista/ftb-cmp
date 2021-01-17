@@ -23,7 +23,7 @@ export class FtbSeasonBirthdays {
               renderItem={(p: Player) => this.renderPlayer(p)}
               rows={2}
               itemMinWidthPx={266}
-              itemHeightPx={75}
+              itemMinHeightPx={75}
             ></ftb-pagination>
           </div>
         </div>

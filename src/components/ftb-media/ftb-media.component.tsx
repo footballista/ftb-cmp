@@ -70,7 +70,7 @@ export class FtbMedia {
             renderItem={(post: Post) => <ftb-post-cover key={'post_' + post._id} post={post}></ftb-post-cover>}
             rows={1}
             itemMinWidthPx={200}
-            itemHeightPx={150}
+            itemMinHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>
@@ -102,7 +102,7 @@ export class FtbMedia {
             )}
             rows={1}
             itemMinWidthPx={200}
-            itemHeightPx={150}
+            itemMinHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>
@@ -145,7 +145,7 @@ export class FtbMedia {
             )}
             rows={1}
             itemMinWidthPx={266}
-            itemHeightPx={150}
+            itemMinHeightPx={150}
           ></ftb-pagination>
         )}
       ></ftb-searchable-content>

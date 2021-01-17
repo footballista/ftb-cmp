@@ -191,14 +191,53 @@ export namespace Components {
     videoGames: Collection<Game>;
   }
   interface FtbPagination {
+    /**
+     * calculate item Width based on Height. [Width = Height * XtoY]
+     */
+    XtoY: number;
+    /**
+     * changing pages from outside
+     */
     currentIdx: number;
+    /**
+     * Use this if container height is predefined. Otherwise provide "rows" property
+     */
+    fixedContainerHeightPx: number;
+    /**
+     * optional render function for interval. Might be useful when each page is loaded separately from server
+     */
     getItemsForInterval: (items: any[], offset: number, limit: number) => Promise<any[]>;
-    itemHeightPx: number;
+    /**
+     * minimal possible height of item container
+     */
+    itemMinHeightPx: number;
+    /**
+     * minimal possible width of item container
+     */
     itemMinWidthPx: number;
+    /**
+     * items to render
+     */
     items: any[];
+    /**
+     * jsx render item func
+     */
     renderItem: (item) => string | string[];
+    /**
+     * Number of rows to display. Either this, or "fixedContainerHeightPx" should be provided
+     */
     rows: number;
-    stretchItems: boolean;
+    /**
+     * whether elements could be stretched horizontally
+     */
+    stretchX: boolean;
+    /**
+     * whether elements could be stretched vertically
+     */
+    stretchY: boolean;
+    /**
+     * total number of items (this.items.length might be less if not fully loaded)
+     */
     totalItems: number;
   }
   interface FtbPartnerBanner {
@@ -956,15 +995,54 @@ declare namespace LocalJSX {
     videoGames?: Collection<Game>;
   }
   interface FtbPagination {
+    /**
+     * calculate item Width based on Height. [Width = Height * XtoY]
+     */
+    XtoY?: number;
+    /**
+     * changing pages from outside
+     */
     currentIdx?: number;
+    /**
+     * Use this if container height is predefined. Otherwise provide "rows" property
+     */
+    fixedContainerHeightPx?: number;
+    /**
+     * optional render function for interval. Might be useful when each page is loaded separately from server
+     */
     getItemsForInterval?: (items: any[], offset: number, limit: number) => Promise<any[]>;
-    itemHeightPx: number;
+    /**
+     * minimal possible height of item container
+     */
+    itemMinHeightPx: number;
+    /**
+     * minimal possible width of item container
+     */
     itemMinWidthPx: number;
-    items?: any[];
+    /**
+     * items to render
+     */
+    items: any[];
+    /**
+     * jsx render item func
+     */
     renderItem: (item) => string | string[];
-    rows: number;
-    stretchItems?: boolean;
-    totalItems?: number;
+    /**
+     * Number of rows to display. Either this, or "fixedContainerHeightPx" should be provided
+     */
+    rows?: number;
+    /**
+     * whether elements could be stretched horizontally
+     */
+    stretchX?: boolean;
+    /**
+     * whether elements could be stretched vertically
+     */
+    stretchY?: boolean;
+    /**
+     * total number of items (this.items.length might be less if not fully loaded)
+     */
+    totalItems: number;
   }
   interface FtbPartnerBanner {
     leagueId?: number;

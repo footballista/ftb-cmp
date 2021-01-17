@@ -1,17 +1,11 @@
 ftb-pagination {
   display: block;
-  .ftb-pagination__items-wrapper {
+  .ftb-pagination__items-background {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     .item {
-      flex: 1;
-    }
-    .spinner-container {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      box-sizing: border-box;
     }
   }
   .ftb-pagination__pages-wrapper {

@@ -60,7 +60,7 @@ export class FtbTeamGames {
             renderItem={cardFn}
             rows={2}
             itemMinWidthPx={266}
-            itemHeightPx={110}
+            itemMinHeightPx={110}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

@@ -86,7 +86,7 @@ export class FtbGameMedia {
           )}
           rows={3}
           itemMinWidthPx={130}
-          itemHeightPx={98}
+          itemMinHeightPx={98}
         ></ftb-pagination>
       </div>
     );
@@ -102,8 +102,8 @@ export class FtbGameMedia {
           renderItem={v => <ftb-video video={v}></ftb-video>}
           rows={1}
           itemMinWidthPx={364}
-          itemHeightPx={294}
-          stretchItems={false}
+          itemMinHeightPx={294}
+          stretchX={false}
         ></ftb-pagination>
       </div>
     );

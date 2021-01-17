@@ -1,182 +1,257 @@
-import { Component, Host, h, Prop, State, Element, Watch } from '@stencil/core';
-import ResizeObserver from 'resize-observer-polyfill';
-import { AsyncSubject } from 'rxjs';
-import { translations, userState } from 'ftb-models';
+import { Component, Host, h, Prop, State, Watch, Element } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
-
+import { translations, userState } from 'ftb-models';
 @Component({
   tag: 'ftb-pagination',
   styleUrl: 'ftb-pagination.component.scss',
   shadow: false,
 })
-export class FtbPagination {
-  @Prop() totalItems: number;
-  @Prop() items: any[];
-  @Prop() rows!: number;
+export class FtbPagination2 {
+  /** items to render */
+  @Prop() items!: any[];
+  /** total number of items (this.items.length might be less if not fully loaded) */
+  @Prop() totalItems!: number;
+  /** minimal possible width of item container */
   @Prop() itemMinWidthPx!: number;
-  @Prop() itemHeightPx!: number;
+  /** minimal possible height of item container */
+  @Prop() itemMinHeightPx!: number;
+  /** Number of rows to display. Either this, or "fixedContainerHeightPx" should be provided */
+  @Prop() rows: number;
+  /** Use this if container height is predefined. Otherwise provide "rows" property */
+  @Prop() fixedContainerHeightPx: number;
+  /** whether elements could be stretched horizontally */
+  @Prop() stretchX: boolean;
+  /** whether elements could be stretched vertically */
+  @Prop() stretchY: boolean;
+  /** calculate item Width based on Height. [Width = Height * XtoY] */
+  @Prop() XtoY: number;
+  /** jsx render item func */
   @Prop() renderItem!: (item) => string | string[];
-  @Prop() stretchItems = true;
+  /** changing pages from outside */
   @Prop() currentIdx: number = 0;
+  /** optional render function for interval. Might be useful when each page is loaded separately from server */
   @Prop() getItemsForInterval: (items: any[], offset: number, limit: number) => Promise<any[]>;
-  @State()
-  displayItems: any[];
-  @Element() element: HTMLElement;
-  private pageLoaded: boolean;
-  private itemMaxWidthPx: number;
-  private itemsPerPage: number;
-  private wrapperHeightPx: number;
-  private wrapperWidthPx: number;
-  private totalPages: number;
-  private currentPage: number = 0;
-  private resizeObserver: ResizeObserver;
-  private ready$ = new AsyncSubject();
+
+  @State() dimensions: {
+    rows: number;
+    pages: number;
+    containerHeightPx: number;
+    containerWidthPx: number;
+    itemHeightPx: number;
+    itemWidthPx: number;
+    itemsPerRow: number;
+    itemsPerPage: number;
+  } = {
+    rows: 0,
+    pages: 0,
+    containerHeightPx: 0,
+    containerWidthPx: 0,
+    itemWidthPx: 0,
+    itemsPerRow: 0,
+    itemsPerPage: 0,
+    itemHeightPx: 0,
+  };
+
+  @State() state: {
+    currentPage: number;
+    currentItem: number;
+    pageLoaded: boolean;
+    displayedItems: any[];
+  } = {
+    currentPage: 0,
+    currentItem: 0,
+    pageLoaded: false,
+    displayedItems: [],
+  };
+
+  @Element() element: HTMLDivElement;
 
   async componentWillLoad() {
-    this.resizeObserver = new ResizeObserver(() => {
-      this.onResize();
-    });
-    this.resizeObserver.observe(this.element);
-    this.onResize();
-    await this.ready$.toPromise();
+    this.defineDimensions();
+    await this.onCurrentIdxChange();
+  }
+
+  @Watch('currentIdx') async onCurrentIdxChange() {
+    this.state.currentItem = this.currentIdx;
+    this.state.currentPage = Math.floor(this.state.currentItem / this.dimensions.itemsPerPage);
+    return this.defineDisplayedItems();
   }
 
   @Watch('items') onItemsChange() {
     this.defineTotalPages();
-    this.defineDisplayedItems();
   }
 
-  disconnectedCallback() {
-    this.resizeObserver.disconnect();
-  }
-
-  private async onResize() {
-    this.wrapperWidthPx = this.element.offsetWidth || this.itemMinWidthPx;
-    const itemsPerRow = Math.floor(this.wrapperWidthPx / this.itemMinWidthPx);
-    this.itemMaxWidthPx = this.stretchItems ? this.wrapperWidthPx / itemsPerRow : this.itemMinWidthPx;
-    this.itemsPerPage = itemsPerRow * this.rows;
-    if (!this.wrapperHeightPx) {
-      const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / itemsPerRow));
-      this.wrapperHeightPx = this.itemHeightPx * maxDisplayedRows;
+  /**
+   * calculating height and width of container and each item
+   */
+  defineDimensions() {
+    this.dimensions.containerWidthPx = this.element.clientWidth || this.itemMinWidthPx;
+    this.dimensions.itemsPerRow = Math.floor(this.dimensions.containerWidthPx / this.itemMinWidthPx);
+    if (this.fixedContainerHeightPx) {
+      this.dimensions.containerHeightPx = this.fixedContainerHeightPx;
+      this.dimensions.rows = Math.floor(this.dimensions.containerHeightPx / this.itemMinHeightPx);
+    } else if (!this.dimensions.containerHeightPx) {
+      // do not recalculate height if already set. otherwise height will differ on items property changes (when running filters)
+      const maxDisplayedRows = Math.min(this.rows, Math.ceil(this.totalItems / this.dimensions.itemsPerRow));
+      this.dimensions.containerHeightPx = this.itemMinHeightPx * maxDisplayedRows;
+      this.dimensions.rows = this.rows;
     }
-    this.defineTotalPages();
-    await this.defineDisplayedItems();
 
-    this.ready$.next(true);
-    this.ready$.complete();
+    this.dimensions.itemsPerPage = this.dimensions.itemsPerRow * this.dimensions.rows;
+
+    if (this.stretchX) {
+      this.dimensions.itemWidthPx = this.dimensions.containerWidthPx / this.dimensions.itemsPerRow;
+    } else {
+      this.dimensions.itemWidthPx = this.itemMinWidthPx;
+    }
+
+    if (this.XtoY) {
+      // todo we can calculate sizes here more carefully
+      const maxHeight = this.dimensions.containerHeightPx / this.dimensions.rows;
+      this.dimensions.itemHeightPx = Math.min(this.dimensions.itemWidthPx / this.XtoY, maxHeight);
+    } else if (this.stretchY) {
+      this.dimensions.itemHeightPx = this.dimensions.containerHeightPx / this.dimensions.rows;
+    } else {
+      this.dimensions.itemHeightPx = this.itemMinHeightPx;
+    }
+
+    this.defineTotalPages();
   }
 
-  private onPageSelected(page: number) {
-    if (this.currentPage !== page) {
-      this.pageLoaded = false;
-      this.currentPage = page;
-      this.currentIdx = this.currentPage * this.itemsPerPage;
+  /** count total pages. Moved out from defineDimensions 'cause it is re-calculated on items property update */
+  defineTotalPages() {
+    this.dimensions.pages = Math.ceil(this.totalItems / this.dimensions.itemsPerPage);
+    this.dimensions = { ...this.dimensions };
+  }
+
+  /** define array of items on current page */
+  async defineDisplayedItems() {
+    const offset = this.state.currentPage * this.dimensions.itemsPerPage;
+    const items = this.getItemsForInterval
+      ? await this.getItemsForInterval(this.items, offset, this.dimensions.itemsPerPage)
+      : this.items.slice(offset, offset + this.dimensions.itemsPerPage);
+
+    if (items.length < this.dimensions.itemsPerPage && offset + items.length < this.totalItems) {
+      this.state.displayedItems = [];
+      this.state.pageLoaded = false;
+    } else {
+      this.state.displayedItems = items;
+      this.state.pageLoaded = true;
+    }
+
+    this.state = { ...this.state };
+  }
+
+  /** move to page */
+  selectPage(page: number) {
+    if (this.state.currentPage !== page) {
+      this.state.pageLoaded = false;
+      this.state.currentPage = page;
+      this.state.currentItem = this.state.currentPage * this.dimensions.itemsPerPage;
+      this.state = { ...this.state };
       return this.defineDisplayedItems();
     }
   }
 
-  private defineTotalPages() {
-    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-  }
-
-  private async defineDisplayedItems() {
-    const offset = this.currentPage * this.itemsPerPage;
-    const items = this.getItemsForInterval
-      ? await this.getItemsForInterval(this.items, offset, this.itemsPerPage)
-      : this.items.slice(offset, offset + this.itemsPerPage);
-    if (items.length < this.itemsPerPage && offset + items.length < this.totalItems) {
-      this.displayItems = [];
-    } else {
-      this.displayItems = items;
-      this.pageLoaded = true;
-    }
-  }
-
-  private getDisplayedPages(): Array<number | null> {
-    const displayedPages = [0];
-    if (this.currentPage === 0) {
-      if (this.totalPages > 2) displayedPages.push(1);
-      if (this.totalPages > 3) displayedPages.push(2);
-    } else if (this.currentPage === this.totalPages - 1) {
-      if (this.totalPages > 3) displayedPages.push(this.totalPages - 3);
-      if (this.totalPages > 2) displayedPages.push(this.totalPages - 2);
-    } else {
-      [this.currentPage - 1, this.currentPage, this.currentPage + 1].forEach(p => {
-        if (p > 0 && p < this.totalPages - 1) displayedPages.push(p);
-      });
-    }
-    displayedPages.push(this.totalPages - 1);
-
-    const displayedEntities = [];
-    for (let i = 0; i < displayedPages.length; i++) {
-      displayedEntities.push(displayedPages[i]);
-      if (displayedPages[i + 1] - displayedPages[i] > 1) {
-        displayedEntities.push(null);
-      }
-    }
-    return displayedEntities;
-  }
-
   render() {
-    this.currentPage = Math.floor(this.currentIdx / this.itemsPerPage);
-
     return (
       <Host>
-        <div
-          class="ftb-pagination__items-wrapper"
-          style={{ height: this.wrapperHeightPx + 'px', width: this.wrapperWidthPx + 'px' }}
-        >
-          {this.pageLoaded ? (
-            this.displayItems.map(i => (
-              <div
-                class="item"
-                style={{
-                  'min-width': this.itemMinWidthPx + 'px',
-                  'max-width': this.itemMaxWidthPx + 'px',
-                  'height': this.itemHeightPx + 'px',
-                }}
-              >
-                {this.renderItem(i)}
-              </div>
-            ))
-          ) : (
-            <div class="spinner-container">
-              <ftb-spinner></ftb-spinner>
-            </div>
-          )}
+        <div class="ftb-pagination__items-wrapper">
+          <div
+            class="ftb-pagination__items-background"
+            style={{
+              height: this.dimensions.containerHeightPx + 'px',
+              width: this.dimensions.containerWidthPx + 'px',
+            }}
+          >
+            {this.state.pageLoaded ? this.renderCurrentPage() : this.renderSpinner()}
+          </div>
         </div>
-
-        <div class={{ 'ftb-pagination__pages-wrapper': true, 'empty': this.totalPages <= 1 }}>
+        <div class={{ 'ftb-pagination__pages-wrapper': true, 'empty': this.dimensions.pages <= 1 }}>
+          <div class="button-wrapper">{this.state.currentPage > 0 && this.renderPrevButton()}</div>
+          <div class="pages">{this.renderPages()}</div>
           <div class="button-wrapper">
-            {this.currentPage > 0 && (
-              <button class="nav-button prev" onClick={() => this.onPageSelected(this.currentPage - 1)}>
-                <ftb-icon svg={Chevron}></ftb-icon>
-                {translations.navigation.prev[userState.language]}
-              </button>
-            )}
-          </div>
-          <div class="pages">
-            {this.totalPages > 1 &&
-              this.getDisplayedPages().map(p =>
-                p === null ? (
-                  <div>...</div>
-                ) : (
-                  <div class={{ page: true, selected: this.currentPage === p }} onClick={() => this.onPageSelected(p)}>
-                    {p + 1}
-                  </div>
-                ),
-              )}
-          </div>
-          <div class="button-wrapper">
-            {this.currentPage < this.totalPages - 1 && (
-              <button class="nav-button next" onClick={() => this.onPageSelected(this.currentPage + 1)}>
-                {translations.navigation.next[userState.language]}
-                <ftb-icon svg={Chevron}></ftb-icon>
-              </button>
-            )}
+            {this.state.currentPage < this.dimensions.pages - 1 && this.renderNextButton()}
           </div>
         </div>
       </Host>
+    );
+  }
+
+  private renderCurrentPage() {
+    return this.state.displayedItems.map(i => (
+      <div
+        class="item"
+        style={{
+          width: this.dimensions.itemWidthPx + 'px',
+          height: this.dimensions.itemHeightPx + 'px',
+        }}
+      >
+        {this.renderItem(i)}
+      </div>
+    ));
+  }
+
+  private renderSpinner() {
+    return (
+      <div class="spinner-container">
+        <ftb-spinner></ftb-spinner>
+      </div>
+    );
+  }
+
+  private renderPages() {
+    const getDisplayedPages = (): Array<number | null> => {
+      const displayedPages = [0];
+      if (this.state.currentPage === 0) {
+        if (this.dimensions.pages > 2) displayedPages.push(1);
+        if (this.dimensions.pages > 3) displayedPages.push(2);
+      } else if (this.state.currentPage === this.dimensions.pages - 1) {
+        if (this.dimensions.pages > 3) displayedPages.push(this.dimensions.pages - 3);
+        if (this.dimensions.pages > 2) displayedPages.push(this.dimensions.pages - 2);
+      } else {
+        [this.state.currentPage - 1, this.state.currentPage, this.state.currentPage + 1].forEach(p => {
+          if (p > 0 && p < this.dimensions.pages - 1) displayedPages.push(p);
+        });
+      }
+      displayedPages.push(this.dimensions.pages - 1);
+
+      const displayedEntities = [];
+      for (let i = 0; i < displayedPages.length; i++) {
+        displayedEntities.push(displayedPages[i]);
+        if (displayedPages[i + 1] - displayedPages[i] > 1) {
+          displayedEntities.push(null);
+        }
+      }
+      return displayedEntities;
+    };
+
+    return getDisplayedPages().map(p =>
+      p === null ? (
+        <div>...</div>
+      ) : (
+        <button class={{ page: true, selected: this.state.currentPage === p }} onClick={() => this.selectPage(p)}>
+          {p + 1}
+        </button>
+      ),
+    );
+  }
+
+  private renderPrevButton() {
+    return (
+      <button class="nav-button prev" onClick={() => this.selectPage(this.state.currentPage - 1)}>
+        <ftb-icon svg={Chevron} class="chevron-icon prev"></ftb-icon>
+        {translations.navigation.prev[userState.language]}
+      </button>
+    );
+  }
+
+  private renderNextButton() {
+    return (
+      <button class="nav-button next" onClick={() => this.selectPage(this.state.currentPage + 1)}>
+        {translations.navigation.next[userState.language]}
+        <ftb-icon svg={Chevron} class="chevron-icon next"></ftb-icon>
+      </button>
     );
   }
 }

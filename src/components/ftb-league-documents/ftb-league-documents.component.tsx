@@ -71,7 +71,7 @@ export class FtbLeagueDocuments {
             renderItem={(d: Document) => this.renderDocument(d)}
             rows={this.rows}
             itemMinWidthPx={this.itemMinWidthPx}
-            itemHeightPx={this.itemHeightPx}
+            itemMinHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

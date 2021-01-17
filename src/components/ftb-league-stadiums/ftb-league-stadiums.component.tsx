@@ -66,7 +66,7 @@ export class FtbLeagueStadiums {
             renderItem={(s: Stadium) => <ftb-stadium-card stadium={s} key={'stadium' + s._id}></ftb-stadium-card>}
             rows={this.rows}
             itemMinWidthPx={this.itemMinWidthPx}
-            itemHeightPx={this.itemHeightPx}
+            itemMinHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

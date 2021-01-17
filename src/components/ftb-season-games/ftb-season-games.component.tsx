@@ -215,7 +215,7 @@ export class FtbSeasonGames {
             renderItem={cardFn}
             rows={2}
             itemMinWidthPx={200}
-            itemHeightPx={110}
+            itemMinHeightPx={110}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

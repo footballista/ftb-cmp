@@ -222,7 +222,7 @@ export class FtbGameStatsPreview {
         )}
         rows={2}
         itemMinWidthPx={190}
-        itemHeightPx={112}
+        itemMinHeightPx={112}
       ></ftb-pagination>
     );
   }

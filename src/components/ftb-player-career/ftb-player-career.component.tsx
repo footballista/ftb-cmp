@@ -68,7 +68,7 @@ export class FtbPlayerCareer {
             renderItem={d => <ftb-player-team-card data={d} key={d.team._id}></ftb-player-team-card>}
             rows={1}
             itemMinWidthPx={265.5}
-            itemHeightPx={60}
+            itemMinHeightPx={60}
           ></ftb-pagination>
         )}
         filterFn={filterFn}
@@ -98,7 +98,7 @@ export class FtbPlayerCareer {
             renderItem={d => <ftb-player-season-card data={d} key={d.season._id}></ftb-player-season-card>}
             rows={1}
             itemMinWidthPx={265.5}
-            itemHeightPx={60}
+            itemMinHeightPx={60}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

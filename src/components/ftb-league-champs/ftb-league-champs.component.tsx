@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Champ, League, translations, filter, userState, Team } from 'ftb-models';
+import { Champ, League, translations, filter, userState } from 'ftb-models';
 import sortBy from 'lodash-es/sortBy';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
@@ -52,7 +52,7 @@ export class FtbLeagueChamps {
             renderItem={(c: Champ) => <ftb-champ-card champ={c}></ftb-champ-card>}
             rows={this.rows}
             itemMinWidthPx={this.itemMinWidthPx}
-            itemHeightPx={this.itemHeightPx}
+            itemMinHeightPx={this.itemHeightPx}
           ></ftb-pagination>
         )}
         filterFn={filterFn}
