@@ -1,3 +1,13 @@
+## [1.1.3](https://github.com/footballista/ftb-cmp/compare/1.1.1...1.1.3) (2021-01-17)
+
+
+### Bug Fixes
+
+* fixed flag assets path ([106bdfe](https://github.com/footballista/ftb-cmp/commit/106bdfe3c4cd724d9738ee2cf33db39527371125))
+* fixed pagination config in league components ([8957001](https://github.com/footballista/ftb-cmp/commit/89570017f0c6f6bd8e811ea18e49c67c5a161269))
+
+
+
 ## [1.1.2](https://github.com/footballista/ftb-cmp/compare/1.1.1...1.1.2) (2021-01-17)
 
 
