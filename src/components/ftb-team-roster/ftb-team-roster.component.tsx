@@ -9,6 +9,15 @@ import sortBy from 'lodash-es/sortBy';
 })
 export class FtbTeamRoster {
   @Prop() team!: Team;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
 
   componentWillLoad() {
     this.team.players = sortBy(this.team.players, [
@@ -18,12 +27,14 @@ export class FtbTeamRoster {
   }
 
   render() {
+    let filtersOn = false;
     const filterFn = async (_, query, categories) => {
       let items = this.team.players;
       const position = categories.find(c => c.key === 'position')?.options.find(o => o.selected)?.key;
       if (position !== 'all') {
         items = items.filter(p => getPlayerPosition(p.position) == position);
       }
+      filtersOn = Boolean(query) || position !== 'all';
       return filter(items, query, ['firstName', 'middleName', 'lastName', 'number']);
     };
 
@@ -64,7 +75,20 @@ export class FtbTeamRoster {
               filterFn={filterFn}
               placeholder={translations.player.search_by_player_name[userState.language]}
               categories={categories}
-              renderItems={players => players.map(p => this.renderPlayer(p))}
+              renderItems={items => (
+                <ftb-pagination
+                  totalItems={filtersOn ? items.length : this.team.players.length}
+                  items={items}
+                  renderItem={(p: Player) => this.renderPlayer(p)}
+                  rows={this.paginationConfig.rows}
+                  fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+                  itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+                  itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+                  stretchX={this.paginationConfig.stretchX}
+                  stretchY={this.paginationConfig.stretchY}
+                  XtoY={this.paginationConfig.XtoY}
+                ></ftb-pagination>
+              )}
             ></ftb-searchable-content>
           </div>
         </div>

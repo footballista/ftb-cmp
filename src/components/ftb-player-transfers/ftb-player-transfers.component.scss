@@ -1,41 +1,10 @@
 ftb-player-transfers {
   .ftb-player-transfers__wrapper {
-    height: inherit;
-    width: inherit;
     .ftb-player-transfers__background {
-      height: inherit;
-      width: inherit;
       ftb-searchable-content {
-        width: 800px;
-
         .ftb-player-transfers__transfer-background {
-          display: flex;
-          align-items: center;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          height: 60px;
-          .teams {
-            padding: 0 10px;
-            display: flex;
-            align-items: center;
-            ftb-team-logo {
-              height: 30px;
-              width: 30px;
-            }
-            ftb-icon.chevron-icon {
-              height: 10px;
-              width: 10px;
-              transform: rotate(-90deg);
-              margin: 0 5px;
-            }
-          }
-          .type {
-            font-size: 12px;
-            flex: 1;
-          }
-          .date-time {
-            padding: 0 10px;
-            font-size: 12px;
-            text-align: center;
+          ftb-icon.chevron-icon {
+            transform: rotate(-90deg);
           }
         }
       }

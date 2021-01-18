@@ -8,6 +8,15 @@ import { Season, translations, userState, Player } from 'ftb-models';
 })
 export class FtbSeasonBirthdays {
   @Prop() season!: Season;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
 
   render() {
     if (!this.season.birthdays.length) return null;
@@ -21,9 +30,13 @@ export class FtbSeasonBirthdays {
               totalItems={this.season.birthdays.length}
               items={this.season.birthdays}
               renderItem={(p: Player) => this.renderPlayer(p)}
-              rows={2}
-              itemMinWidthPx={266}
-              itemMinHeightPx={75}
+              rows={this.paginationConfig.rows}
+              fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+              itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+              itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+              stretchX={this.paginationConfig.stretchX}
+              stretchY={this.paginationConfig.stretchY}
+              XtoY={this.paginationConfig.XtoY}
             ></ftb-pagination>
           </div>
         </div>

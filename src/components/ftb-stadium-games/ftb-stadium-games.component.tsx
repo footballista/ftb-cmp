@@ -11,6 +11,15 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbStadiumGames {
   @Prop() stadium!: Stadium;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   @State() loaded = false;
   private ready$ = new AsyncSubject();
 
@@ -112,9 +121,13 @@ export class FtbStadiumGames {
             totalItems={filtersOn ? items.length : gamesCollection.total}
             items={items}
             renderItem={cardFn}
-            rows={2}
-            itemMinWidthPx={200}
-            itemMinHeightPx={110}
+            rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

@@ -1,20 +1,10 @@
 ftb-player-games {
   .ftb-player-games__wrapper {
-    height: inherit;
-    width: inherit;
     .ftb-player-games__background {
-      height: inherit;
-      width: inherit;
       ftb-searchable-content {
-        width: 800px;
         .team-option {
           display: flex;
           align-items: center;
-          ftb-team-logo {
-            height: 20px;
-            width: 20px;
-            margin-right: 10px;
-          }
         }
       }
     }

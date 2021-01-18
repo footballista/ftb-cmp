@@ -1,14 +1,5 @@
 ftb-game-stats-preview {
   .ftb-game-stats-preview__wrapper {
-    height: 304px;
-    width: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ftb-tabs {
-      height: inherit;
-      width: inherit;
-    }
     .stats {
       .row {
         display: flex;

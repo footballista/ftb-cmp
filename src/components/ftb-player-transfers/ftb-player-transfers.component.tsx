@@ -10,6 +10,15 @@ import Chevron from '../../assets/icons/chevron-down.svg';
 })
 export class FtbPlayerTransfers {
   @Prop() player!: Player;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
@@ -41,9 +50,13 @@ export class FtbPlayerTransfers {
                   totalItems={filtersOn ? items.length : this.player.transfers.total}
                   items={items}
                   renderItem={t => this.renderTransfer(t)}
-                  rows={1}
-                  itemMinWidthPx={266}
-                  itemMinHeightPx={60}
+                  rows={this.paginationConfig.rows}
+                  fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+                  itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+                  itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+                  stretchX={this.paginationConfig.stretchX}
+                  stretchY={this.paginationConfig.stretchY}
+                  XtoY={this.paginationConfig.XtoY}
                 ></ftb-pagination>
               )}
               filterFn={filterFn}

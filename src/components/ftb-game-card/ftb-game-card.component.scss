@@ -1,19 +1,13 @@
 ftb-game-card {
   .ftb-game-card__wrapper {
     .ftb-game-card__background {
-      border: 1px solid rgba(0, 0, 0, 0.2);
       .ftb-game-card__top,
       .ftb-game-card__bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 12px;
-        padding: 5px 10px;
-        background: rgba(0, 0, 0, 0.05);
       }
       .ftb-game-card__top {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
         .champ-season {
           white-space: nowrap;
           overflow: hidden;
@@ -24,69 +18,51 @@ ftb-game-card {
         }
       }
       .ftb-game-card__bottom {
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
       }
       .ftb-game-card__content {
         display: flex;
-        padding: 5px 10px;
         .left,
         .right {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 0 5px;
           .time {
-            font-size: 18px;
           }
           .stadium {
-            font-size: 12px;
             text-align: center;
           }
           .pitch {
-            font-size: 12px;
             text-align: center;
           }
           .champ {
-            font-size: 12px;
-            line-height: 11px;
             text-align: center;
-            padding: 2.5px;
           }
           .season {
-            font-size: 12px;
             text-align: center;
           }
           .date {
-            font-size: 12px;
           }
           .round {
-            font-size: 12px;
           }
           .player-stats {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
             flex-wrap: nowrap;
             .item {
               display: flex;
               align-items: center;
               text-align: center;
               white-space: nowrap;
-              padding: 0 4px;
-              font-size: 12px;
               flex-wrap: nowrap;
               .title {
-                font-weight: 600;
               }
             }
             .card {
               width: 8px;
               height: 15px;
               display: block;
-              margin: 0 auto;
-              box-shadow: var(--card-content-box-shadow);
               &.yellow {
                 background: gold;
                 transform: rotate(7deg);
@@ -109,20 +85,12 @@ ftb-game-card {
           .center-row {
             display: flex;
             align-items: center;
-            height: 35px;
             ftb-team-logo {
-              height: 25px;
-              width: 25px;
-              padding: 0 10px;
             }
             .name {
-              padding: 0 5px;
-              font-size: 14px;
               flex: 1;
             }
             .score {
-              font-weight: 600;
-              padding: 0 10px;
             }
           }
         }

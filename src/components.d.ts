@@ -81,6 +81,15 @@ export namespace Components {
   }
   interface FtbGameEvents {
     game: Game;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbGameLineups {
     game: Game;
@@ -112,6 +121,16 @@ export namespace Components {
   }
   interface FtbGameStatsPreview {
     game: Game;
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
+    splitToTabs: boolean;
   }
   interface FtbGameTour {
     game: Game;
@@ -306,6 +325,15 @@ export namespace Components {
     player: Player;
   }
   interface FtbPlayerGames {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     player: Player;
   }
   interface FtbPlayerMedia {
@@ -328,6 +356,15 @@ export namespace Components {
     };
   }
   interface FtbPlayerTransfers {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     player: Player;
   }
   interface FtbPostCover {
@@ -350,6 +387,15 @@ export namespace Components {
     season: Season;
   }
   interface FtbSeasonBirthdays {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonGames {
@@ -360,12 +406,22 @@ export namespace Components {
   }
   interface FtbSeasonStandings {
     season: Season;
+    splitToTabs: boolean;
   }
   interface FtbSpinner {}
   interface FtbStadiumCard {
     stadium: Stadium;
   }
   interface FtbStadiumGames {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     stadium: Stadium;
   }
   interface FtbStadiumPhoto {
@@ -387,6 +443,15 @@ export namespace Components {
     team: Team;
   }
   interface FtbTeamGames {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamLogo {
@@ -401,6 +466,15 @@ export namespace Components {
     team: Team;
   }
   interface FtbTeamRoster {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamSeasons {
@@ -933,6 +1007,15 @@ declare namespace LocalJSX {
   }
   interface FtbGameEvents {
     game: Game;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
   }
   interface FtbGameLineups {
     game: Game;
@@ -964,6 +1047,16 @@ declare namespace LocalJSX {
   }
   interface FtbGameStatsPreview {
     game: Game;
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
+    splitToTabs?: boolean;
   }
   interface FtbGameTour {
     game?: Game;
@@ -1163,6 +1256,15 @@ declare namespace LocalJSX {
     player: Player;
   }
   interface FtbPlayerGames {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     player: Player;
   }
   interface FtbPlayerMedia {
@@ -1185,6 +1287,15 @@ declare namespace LocalJSX {
     };
   }
   interface FtbPlayerTransfers {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     player: Player;
   }
   interface FtbPostCover {
@@ -1209,6 +1320,15 @@ declare namespace LocalJSX {
     season: Season;
   }
   interface FtbSeasonBirthdays {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonGames {
@@ -1219,12 +1339,22 @@ declare namespace LocalJSX {
   }
   interface FtbSeasonStandings {
     season: Season;
+    splitToTabs?: boolean;
   }
   interface FtbSpinner {}
   interface FtbStadiumCard {
     stadium: Stadium;
   }
   interface FtbStadiumGames {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     stadium: Stadium;
   }
   interface FtbStadiumPhoto {
@@ -1246,6 +1376,15 @@ declare namespace LocalJSX {
     team: Team;
   }
   interface FtbTeamGames {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamLogo {
@@ -1261,6 +1400,15 @@ declare namespace LocalJSX {
     team: Team;
   }
   interface FtbTeamRoster {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamSeasons {

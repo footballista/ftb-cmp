@@ -9,6 +9,16 @@ import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 })
 export class FtbGameStatsPreview {
   @Prop() game!: Game;
+  @Prop() splitToTabs: boolean;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   @State() loaded: boolean;
 
   componentWillLoad() {
@@ -32,10 +42,25 @@ export class FtbGameStatsPreview {
     return (
       <Host>
         <div class="ftb-game-stats-preview__wrapper">
-          {this.loaded ? this.renderTabs() : <ftb-spinner class="loader"></ftb-spinner>}
+          {this.loaded ? this.renderContent() : <ftb-spinner class="loader"></ftb-spinner>}
         </div>
       </Host>
     );
+  }
+
+  private renderContent() {
+    return this.splitToTabs
+      ? this.renderTabs()
+      : [
+          <div>
+            <h4 class="section-title">{translations.game.stats_preview[userState.language]}</h4>
+            {this.renderStats()}
+          </div>,
+          <div>
+            <h4 class="section-title">{translations.game.duels_history[userState.language]}</h4>
+            {this.renderHistory()}
+          </div>,
+        ];
   }
 
   private renderTabs() {
@@ -220,9 +245,13 @@ export class FtbGameStatsPreview {
             leftFields={[FtbGameCardField.date, FtbGameCardField.time, FtbGameCardField.stadium]}
           ></ftb-game-card>
         )}
-        rows={2}
-        itemMinWidthPx={190}
-        itemMinHeightPx={112}
+        rows={this.paginationConfig.rows}
+        fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+        itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+        itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+        stretchX={this.paginationConfig.stretchX}
+        stretchY={this.paginationConfig.stretchY}
+        XtoY={this.paginationConfig.XtoY}
       ></ftb-pagination>
     );
   }

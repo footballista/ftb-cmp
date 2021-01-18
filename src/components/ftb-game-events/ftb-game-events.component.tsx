@@ -10,6 +10,15 @@ import Goal from '../../assets/icons/goal.svg';
 })
 export class FtbGameEvents {
   @Prop() game!: Game;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
 
   componentWillLoad() {
     this.sortEvents();
@@ -32,12 +41,16 @@ export class FtbGameEvents {
   render() {
     if (!this.game.events.length) return;
 
+    let filtersOn = false;
+    let hasEventsWithMinute = false;
     const filterFn = async (events: GameEvent[], query: string, categories: CategoryInterface[]) => {
-      const importanceCat = categories.find(c => c.key === 'importance');
-      if (importanceCat?.options.find(o => o.selected).key === 'important') {
+      const importanceCat = categories.find(c => c.key === 'importance')?.options.find(o => o.selected)?.key;
+      const importanceCatOn = importanceCat === 'important';
+      if (importanceCatOn) {
         events = events.filter(this.isMainEvent);
       }
-      return filter(events, query, [
+      filtersOn = Boolean(query) || importanceCat === 'important';
+      events = filter(events, query, [
         'firstPlayer.firstName',
         'firstPlayer.middleName',
         'firstPlayer.lastName',
@@ -45,15 +58,8 @@ export class FtbGameEvents {
         'secondPlayer.middleName',
         'secondPlayer.lastName',
       ]);
-    };
-
-    const renderContentFn = (events: GameEvent[]) => {
-      const hasEventsWithMinute = events.some(e => e.minute);
-      return (
-        <div class="ftb-game-events__wrapper">
-          <div class="ftb-game-events__background">{events.map(e => this.renderEvent(e, hasEventsWithMinute))}</div>
-        </div>
-      );
+      hasEventsWithMinute = events.some(e => e.minute);
+      return events;
     };
 
     const categories = [];
@@ -85,7 +91,20 @@ export class FtbGameEvents {
       <Host>
         <ftb-searchable-content
           items={this.game.events}
-          renderItems={i => renderContentFn(i)}
+          renderItems={items => (
+            <ftb-pagination
+              totalItems={filtersOn ? items.length : this.game.events.length}
+              items={items}
+              renderItem={(e: GameEvent) => this.renderEvent(e, hasEventsWithMinute)}
+              rows={this.paginationConfig.rows}
+              fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+              itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+              itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+              stretchX={this.paginationConfig.stretchX}
+              stretchY={this.paginationConfig.stretchY}
+              XtoY={this.paginationConfig.XtoY}
+            ></ftb-pagination>
+          )}
           filterFn={filterFn}
           placeholder={translations.player.search_by_player_name[userState.language]}
           categories={categories}

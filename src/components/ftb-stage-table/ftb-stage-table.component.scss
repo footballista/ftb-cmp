@@ -1,25 +1,14 @@
 ftb-stage-table {
   .ftb-stage-table__wrapper {
-    height: inherit;
-    width: inherit;
     .ftb-stage-table__background {
-      height: inherit;
-      width: inherit;
-      border: 1px solid rgba(0, 0, 0, 0.1);
       .ftb-stage-table__head {
-        height: 35px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       }
       .ftb-stage-table__body {
         .ftb-stage-table__row {
-          height: 35px;
           display: flex;
           align-items: center;
-        }
-        ftb-link:not(:last-child) .ftb-stage-table__row {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
       }
 
@@ -28,7 +17,6 @@ ftb-stage-table {
         & > div,
         .ftb-stage-table__row > div {
           text-align: center;
-          font-size: 12px;
         }
         .label {
           max-width: 10px;
@@ -61,54 +49,24 @@ ftb-stage-table {
           min-width: 65px;
           display: flex;
           align-items: center;
-          ftb-team-logo {
-            --shadow: none;
-            height: 20px;
-            width: 20px;
-            margin-right: 5px;
-          }
         }
 
         .wdl,
         .wl {
           max-width: 55px;
           min-width: 45px;
-          font-size: 10px;
         }
 
         .gd {
-          max-width: 85px;
-          min-width: 75px;
-          font-size: 10px;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          .diff {
-            margin-top: -8px;
-            margin-left: 2px;
-          }
         }
 
         .form {
           max-width: 85px;
           min-width: 75px;
-          i {
-            height: 7px;
-            width: 7px;
-            margin: 2px;
-            box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.5);
-            display: inline-block;
-            &.w {
-              background: #0dc190;
-            }
-            &.d {
-              background: #e2bf00;
-            }
-            &.l {
-              background: #ed4c4c;
-            }
-          }
         }
       }
     }

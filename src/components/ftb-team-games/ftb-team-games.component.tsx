@@ -10,6 +10,15 @@ import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 })
 export class FtbTeamGames {
   @Prop() team!: Team;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   @State() loaded = false;
   private ready$ = new AsyncSubject();
 
@@ -58,9 +67,13 @@ export class FtbTeamGames {
             totalItems={filtersOn ? items.length : this.team.games.total}
             items={items}
             renderItem={cardFn}
-            rows={2}
-            itemMinWidthPx={266}
-            itemMinHeightPx={110}
+            rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
         filterFn={filterFn}

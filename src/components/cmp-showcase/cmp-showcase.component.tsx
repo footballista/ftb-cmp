@@ -101,6 +101,7 @@ export class CmpTest {
       this.seasonBestPlayers(),
       this.seasonGames(),
       this.seasonStandings(),
+      this.seasonStandingsTabs(),
       this.seasonBirthdays(),
       this.leagueBirthdays(),
       this.leagueChamps(),
@@ -395,6 +396,18 @@ export class CmpTest {
     };
   }
 
+  private seasonStandingsTabs() {
+    return {
+      title: 'Season Standings Tabs',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-season-standings season={this.data.season} splitToTabs={true}></ftb-season-standings>,
+        },
+      ],
+    };
+  }
+
   private seasonBestPlayers() {
     return {
       title: 'Season Best Players',
@@ -575,7 +588,16 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-game-events game={this.data.game}></ftb-game-events>,
+          e: () => (
+            <ftb-game-events
+              game={this.data.game}
+              paginationConfig={{
+                fixedContainerHeightPx: 300,
+                itemMinHeightPx: 50,
+                itemMinWidthPx: 300,
+              }}
+            ></ftb-game-events>
+          ),
         },
       ],
     };
