@@ -1,5 +1,15 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Game, GamePhoto, translations, userState, GraphqlClient, HttpClient, User, GameService } from 'ftb-models';
+import {
+  Game,
+  GamePhoto,
+  translations,
+  userState,
+  GraphqlClient,
+  HttpClient,
+  User,
+  GameService,
+  diState,
+} from 'ftb-models';
 
 @Component({
   tag: 'ftb-game-media',
@@ -13,11 +23,9 @@ export class FtbGameMedia {
   @State() update = 0;
 
   componentWillLoad() {
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
-    new GameService(gql).loadGameMedia(this.game._id).then(g => {
+    new GameService(diState.gql).loadGameMedia(this.game._id).then(g => {
       this.game.photoset = g.photoset;
       this.game.videos = g.videos;
-      this.game.videos = [...g.videos, ...g.videos, ...g.videos];
       if (window?.location.href.includes('#&gid=')) {
         this.galleryIdx = parseInt(window.location.href.split('&pid=')[1]);
         this.showGallery = true;
