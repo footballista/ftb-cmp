@@ -1,3 +1,13 @@
+## [1.1.5](https://github.com/footballista/ftb-cmp/compare/1.1.4...1.1.5) (2021-01-18)
+
+
+### Bug Fixes
+
+* added routes to global search ([fef8a6e](https://github.com/footballista/ftb-cmp/commit/fef8a6e4305aebb6b81df15837b270df5ac6620a))
+* added routes to global search ([9db2b73](https://github.com/footballista/ftb-cmp/commit/9db2b73c9a1289b41e4d065ee0f0d3d0f48f0d19))
+
+
+
 ## [1.1.4](https://github.com/footballista/ftb-cmp/compare/1.1.3...1.1.4) (2021-01-17)
 
 
