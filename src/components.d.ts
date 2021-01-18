@@ -478,9 +478,27 @@ export namespace Components {
     team: Team;
   }
   interface FtbTeamSeasons {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamTransfers {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbUserPhoto {
@@ -1412,9 +1430,27 @@ declare namespace LocalJSX {
     team: Team;
   }
   interface FtbTeamSeasons {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbTeamTransfers {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     team: Team;
   }
   interface FtbUserPhoto {

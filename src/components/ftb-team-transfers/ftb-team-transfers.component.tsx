@@ -10,6 +10,15 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbTeamTransfers {
   @Prop() team!: Team;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
@@ -70,9 +79,13 @@ export class FtbTeamTransfers {
             totalItems={filtersOn ? items.length : this.team.transfers.total}
             items={items}
             renderItem={t => this.renderTransfer(t)}
-            rows={2}
-            itemMinWidthPx={266}
-            itemMinHeightPx={60}
+            rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
         filterFn={filterFn}
