@@ -1,3 +1,12 @@
+## [1.1.9](https://github.com/footballista/ftb-cmp/compare/1.1.8...1.1.9) (2021-01-18)
+
+
+### Bug Fixes
+
+* added separated media components for entities ([276abbc](https://github.com/footballista/ftb-cmp/commit/276abbcc99c8ddbe0e99b87d5262578763255638))
+
+
+
 ## [1.1.8](https://github.com/footballista/ftb-cmp/compare/1.1.7...1.1.8) (2021-01-18)
 
 
