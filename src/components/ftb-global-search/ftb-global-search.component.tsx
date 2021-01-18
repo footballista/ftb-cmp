@@ -216,67 +216,82 @@ export class FtbGlobalSearch {
     if (isGlobalSearchResultTeam(row)) {
       return (
         <div class="ftb-global-search__item team">
-          <ftb-team-logo team={row.item} key={row.item._id}></ftb-team-logo>
-          <div class="info">
-            <div class="name">{row.item.name}</div>
-            <div class="league">{row.item.league.name}</div>
-          </div>
+          <ftb-link route="team" params={{ teamId: row.item._id, teamName: row.item.name }}>
+            <ftb-team-logo team={row.item} key={row.item._id}></ftb-team-logo>
+            <div class="info">
+              <div class="name">{row.item.name}</div>
+              <div class="league">{row.item.league.name}</div>
+            </div>
+          </ftb-link>
         </div>
       );
     } else if (isGlobalSearchResultPlayer(row)) {
       return (
         <div class="ftb-global-search__item player">
-          <ftb-player-photo player={row.item} key={row.item._id}></ftb-player-photo>
-          <div class="info">
-            <div class="name">
-              {row.item.firstName} {row.item.middleName} {row.item.lastName}
+          <ftb-link
+            route="player"
+            params={{ playerId: row.item._id, playerName: row.item.firstName + ' ' + row.item.lastName }}
+          >
+            <ftb-player-photo player={row.item} key={row.item._id}></ftb-player-photo>
+            <div class="info">
+              <div class="name">
+                {row.item.firstName} {row.item.middleName} {row.item.lastName}
+              </div>
+              <div class="league">{row.item.league.name}</div>
             </div>
-            <div class="league">{row.item.league.name}</div>
-          </div>
+          </ftb-link>
         </div>
       );
     } else if (isGlobalSearchResultChamp(row)) {
       return (
         <div class="ftb-global-search__item champ">
-          <ftb-flag flag={row.item.country.flag} key={row.item._id}></ftb-flag>
-          <div class="info">
-            <div class="name">{row.item.name}</div>
-            <div class="league">{row.item.league.name}</div>
-          </div>
+          <ftb-link route="season" params={{ seasonId: row.item.seasons[0]._id, tournamentName: row.item.name }}>
+            <ftb-flag flag={row.item.country.flag} key={row.item._id}></ftb-flag>
+            <div class="info">
+              <div class="name">{row.item.name}</div>
+              <div class="league">{row.item.league.name}</div>
+            </div>
+          </ftb-link>
         </div>
       );
     } else if (isGlobalSearchResultLeague(row)) {
       return (
         <div class="ftb-global-search__item league">
-          <ftb-league-logo league={row.item} key={row.item._id}></ftb-league-logo>
-          <div class="info">
-            <div class="name">{row.item.name}</div>
-          </div>
+          <ftb-link route="league" params={{ leagueId: row.item._id, leagueName: row.item.name }}>
+            <ftb-league-logo league={row.item} key={row.item._id}></ftb-league-logo>
+            <div class="info">
+              <div class="name">{row.item.name}</div>
+            </div>
+          </ftb-link>
         </div>
       );
     } else if (isGlobalSearchResultPerson(row)) {
       return (
         <div class="ftb-global-search__item person">
-          <ftb-user-photo user={row.item} key={row.item._id}></ftb-user-photo>
-          <div class="info">
-            <div class="name">{row.item.name}</div>
-            <div class="league">
-              {uniqBy(row.item.roles, 'level')
-                .map(r => translations.role[r.level][userState.language])
-                .join(', ')}
-              , {row.item.league.name}
+          <ftb-link route="person" params={{ personId: row.item._id, personNmae: row.item.name }}>
+            <ftb-user-photo user={row.item} key={row.item._id}></ftb-user-photo>
+            <div class="info">
+              <div class="name">{row.item.name}</div>
+              <div class="league">
+                {uniqBy(row.item.roles, 'level')
+                  .map(r => translations.role[r.level][userState.language])
+                  .join(', ')}
+                , {row.item.league.name}
+              </div>
             </div>
-          </div>
+          </ftb-link>
         </div>
       );
     } else if (isGlobalSearchResultStadium(row)) {
       return (
         <div class="ftb-global-search__item stadium">
-          <ftb-stadium-photo stadium={row.item} key={row.item._id}></ftb-stadium-photo>
-          <div class="info">
-            <div class="name">{row.item.name}</div>
-            <div class="league">{row.item.league.name}</div>
-          </div>
+          <ftb-link route="stadium" params={{ stadiumId: row.item._id, stadiumName: row.item.name }}>
+            <ftb-stadium-photo stadium={row.item} key={row.item._id}></ftb-stadium-photo>
+            <div class="info">
+              <div class="name">{row.item.name}</div>
+              <div class="league">{row.item.league.name}</div>
+            </div>
+          </ftb-link>
         </div>
       );
     }

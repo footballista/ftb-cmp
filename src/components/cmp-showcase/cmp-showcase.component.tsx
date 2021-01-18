@@ -22,6 +22,7 @@ import {
   League,
   Season,
   Stadium,
+  envState,
 } from 'ftb-models';
 import range from 'lodash-es/range';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
@@ -55,6 +56,8 @@ export class CmpTest {
   };
 
   async componentWillLoad() {
+    envState.localHost = location.href.split('/')[0];
+
     const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
     await Promise.all([
       (async () => (this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id)))(),

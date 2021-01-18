@@ -15,7 +15,7 @@ ftb-global-search {
             position: absolute;
             z-index: 1000;
             .ftb-global-search__item-wrapper {
-              .ftb-global-search__item {
+              .ftb-global-search__item a {
                 display: flex;
                 align-items: center;
                 user-select: none;
