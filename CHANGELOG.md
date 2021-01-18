@@ -1,3 +1,12 @@
+## [1.1.8](https://github.com/footballista/ftb-cmp/compare/1.1.7...1.1.8) (2021-01-18)
+
+
+### Bug Fixes
+
+* added pagination config to team components ([8f307e3](https://github.com/footballista/ftb-cmp/commit/8f307e32a34043eaa8231d83280b3222502ef2d5))
+
+
+
 ## [1.1.7](https://github.com/footballista/ftb-cmp/compare/1.1.6...1.1.7) (2021-01-18)
 
 
