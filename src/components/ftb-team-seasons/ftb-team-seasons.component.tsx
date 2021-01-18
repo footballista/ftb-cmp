@@ -59,7 +59,7 @@ export class FtbTeamSeasons {
                 ></ftb-pagination>
               )}
               filterFn={filterFn}
-              placeholder={translations.team.search_by_team_name[userState.language]}
+              placeholder={translations.champ.search_by_champ_name[userState.language]}
               categories={[]}
             ></ftb-searchable-content>
           </div>
@@ -69,6 +69,10 @@ export class FtbTeamSeasons {
   }
 
   private renderSeason(s: Season) {
-    return s.name;
+    return (
+      <ftb-link route="season" params={{ seasonId: s._id, tournamentName: s.champ.name + ' - ' + s.name }}>
+        {s.name}
+      </ftb-link>
+    );
   }
 }

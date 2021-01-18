@@ -384,6 +384,15 @@ export namespace Components {
     renderItems: (items: any[]) => string | string[];
   }
   interface FtbSeasonBestPlayers {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonBirthdays {
@@ -1335,6 +1344,15 @@ declare namespace LocalJSX {
     renderItems: (items: any[]) => string | string[];
   }
   interface FtbSeasonBestPlayers {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonBirthdays {

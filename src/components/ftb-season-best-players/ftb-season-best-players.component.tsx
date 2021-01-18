@@ -11,6 +11,15 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbSeasonBestPlayers {
   @Prop() season!: Season;
+  @Prop() paginationConfig: {
+    itemMinWidthPx: number;
+    itemMinHeightPx: number;
+    rows?: number;
+    fixedContainerHeightPx?: number;
+    stretchX?: boolean;
+    stretchY?: boolean;
+    XtoY?: number;
+  };
   @State() tabs = [];
   @State() loaded = false;
   ready$ = new AsyncSubject<boolean>();
@@ -149,9 +158,13 @@ export class FtbSeasonBestPlayers {
             totalItems={filtersOn ? items.length : rows.length}
             items={items}
             renderItem={cardFn}
-            rows={3}
-            itemMinWidthPx={266}
-            itemMinHeightPx={66}
+            rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
           ></ftb-pagination>
         )}
         filterFn={filterFn}
