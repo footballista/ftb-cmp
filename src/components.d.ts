@@ -510,6 +510,15 @@ export namespace Components {
     season: Season;
   }
   interface FtbSeasonGames {
+    paginationConfig: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonMedia {
@@ -1734,6 +1743,15 @@ declare namespace LocalJSX {
     season: Season;
   }
   interface FtbSeasonGames {
+    paginationConfig?: {
+      itemMinWidthPx: number;
+      itemMinHeightPx: number;
+      rows?: number;
+      fixedContainerHeightPx?: number;
+      stretchX?: boolean;
+      stretchY?: boolean;
+      XtoY?: number;
+    };
     season: Season;
   }
   interface FtbSeasonMedia {

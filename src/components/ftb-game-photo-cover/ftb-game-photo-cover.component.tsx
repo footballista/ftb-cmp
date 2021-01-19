@@ -15,7 +15,11 @@ export class FtbGamePhotoCover {
       <Host>
         <ftb-link
           route="game"
-          params={{ gameId: this.game._id, gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name }}
+          params={{
+            gameId: this.game._id,
+            gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name,
+            section: 'photos',
+          }}
         >
           <div class="ftb-game-photo-cover__wrapper">
             <div class={{ 'ftb-game-photo-cover__background': true, 'loaded': this.loaded }}>
