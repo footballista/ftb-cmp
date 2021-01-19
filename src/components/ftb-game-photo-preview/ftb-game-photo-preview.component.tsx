@@ -17,8 +17,8 @@ export class FtbGamePhotoPreview {
 
     return (
       <Host>
-        <div class="game-photo-wrapper">
-          <div class="bg">
+        <div class="ftb-game-photo-preview__wrapper">
+          <div class="ftb-game-photo-preview__background">
             <ftb-improving-img sources={sources.map(s => s.url)}></ftb-improving-img>
           </div>
         </div>
