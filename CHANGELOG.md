@@ -1,3 +1,12 @@
+## [1.1.10](https://github.com/footballista/ftb-cmp/compare/1.1.9...1.1.10) (2021-01-19)
+
+
+### Bug Fixes
+
+* added pagination config to season games ([4db321c](https://github.com/footballista/ftb-cmp/commit/4db321c92f5fd09761da45aef05840f740635270))
+
+
+
 ## [1.1.9](https://github.com/footballista/ftb-cmp/compare/1.1.8...1.1.9) (2021-01-18)
 
 
