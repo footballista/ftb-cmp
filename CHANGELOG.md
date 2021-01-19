@@ -1,3 +1,12 @@
+## [1.1.11](https://github.com/footballista/ftb-cmp/compare/1.1.10...1.1.11) (2021-01-19)
+
+
+### Bug Fixes
+
+* removed excessive styles from ftb-game-photo-preview ([fbb5636](https://github.com/footballista/ftb-cmp/commit/fbb5636176c8aa41b58b21802de5875386019e6f))
+
+
+
 ## [1.1.10](https://github.com/footballista/ftb-cmp/compare/1.1.9...1.1.10) (2021-01-19)
 
 
