@@ -1,3 +1,12 @@
+## [1.1.13](https://github.com/footballista/ftb-cmp/compare/1.1.12...1.1.13) (2021-01-20)
+
+
+### Bug Fixes
+
+* imports fix ([6790167](https://github.com/footballista/ftb-cmp/commit/6790167bb81457b60b116e5daf9adf440d437924))
+
+
+
 ## [1.1.12](https://github.com/footballista/ftb-cmp/compare/1.1.11...1.1.12) (2021-01-20)
 
 
