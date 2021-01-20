@@ -1,3 +1,13 @@
+## [1.1.12](https://github.com/footballista/ftb-cmp/compare/1.1.11...1.1.12) (2021-01-20)
+
+
+### Bug Fixes
+
+* added customizable link to game photos component ([646acb3](https://github.com/footballista/ftb-cmp/commit/646acb3bc3b4d03bd31440b49f0b9c5aefb02a64))
+* global search navigation on click ([66daa32](https://github.com/footballista/ftb-cmp/commit/66daa32d20cc42470613f5bf03d6d56a668b1cf1))
+
+
+
 ## [1.1.11](https://github.com/footballista/ftb-cmp/compare/1.1.10...1.1.11) (2021-01-19)
 
 
