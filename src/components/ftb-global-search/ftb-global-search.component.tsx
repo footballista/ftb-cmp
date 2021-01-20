@@ -158,16 +158,19 @@ export class FtbGlobalSearch {
   }
 
   private async onItemClick(idx) {
-    this.filtersOn = false;
-    const r = this.results[idx];
-    let savedResults = (await getFromStorage(LS_RESULTS_KEY)) || [];
-    savedResults = savedResults.filter(row => row.type != r.type || row.item._id != r.item._id).slice(0, 4);
-    savedResults.unshift(r);
-    await setToStorage(LS_RESULTS_KEY, savedResults);
-    this.savedResults = savedResults;
-    this.focusedIdx = -1;
-    this.inputFocused = false;
-    this.clearSignal++;
+    this.resultsElements[idx].querySelector('ftb-link a')?.click();
+    setTimeout(async () => {
+      this.filtersOn = false;
+      const r = this.results[idx];
+      let savedResults = (await getFromStorage(LS_RESULTS_KEY)) || [];
+      savedResults = savedResults.filter(row => row.type != r.type || row.item._id != r.item._id).slice(0, 4);
+      savedResults.unshift(r);
+      await setToStorage(LS_RESULTS_KEY, savedResults);
+      this.savedResults = savedResults;
+      this.focusedIdx = -1;
+      this.inputFocused = false;
+      this.clearSignal++;
+    }, 150);
   }
 
   private renderResults(results: any[]) {
