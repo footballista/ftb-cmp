@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { Game } from 'ftb-models';
+import { FtbCustomLinkProp } from '@src/components/ftb-link/ftb-custom-link-prop';
 
 @Component({
   tag: 'ftb-game-photo-cover',
@@ -8,18 +9,21 @@ import { Game } from 'ftb-models';
 })
 export class FtbGamePhotoCover {
   @Prop() game!: Game;
-  @State() loaded: boolean;
+  @Prop() customRoute: FtbCustomLinkProp;
+  @State()
+  loaded: boolean;
 
   render() {
     return (
       <Host>
         <ftb-link
-          route="game"
-          params={{
-            gameId: this.game._id,
-            gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name,
-            section: 'photos',
-          }}
+          route={this.customRoute?.route || 'game'}
+          params={
+            this.customRoute?.params || {
+              gameId: this.game._id,
+              gameTitle: this.game.home.team.name + ' ' + this.game.away.team.name,
+            }
+          }
         >
           <div class="ftb-game-photo-cover__wrapper">
             <div class={{ 'ftb-game-photo-cover__background': true, 'loaded': this.loaded }}>

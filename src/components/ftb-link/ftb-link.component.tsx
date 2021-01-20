@@ -16,9 +16,10 @@ export class FtbLink {
       let url = routingState.routes[this.route];
       if (this.params) {
         for (const key in this.params) {
-          url = url.replace(':' + key, this.params[key] + '');
+          url = url.replace(':' + key, encodeURI(this.params[key] + ''));
         }
       }
+
       this.url = url;
     }
   }

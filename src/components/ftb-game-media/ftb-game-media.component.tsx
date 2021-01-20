@@ -1,15 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import {
-  Game,
-  GamePhoto,
-  translations,
-  userState,
-  GraphqlClient,
-  HttpClient,
-  User,
-  GameService,
-  diState,
-} from 'ftb-models';
+import { Game, GamePhoto, translations, userState, GameService, diState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-game-media',
