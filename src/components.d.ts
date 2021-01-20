@@ -26,7 +26,7 @@ import {
   User,
 } from 'ftb-models';
 import { FtbGameCardField } from './components/ftb-game-card/ftb-game-card-fields';
-import { FtbCustomLinkProp } from '@src/components/ftb-link/ftb-custom-link-prop';
+import { FtbCustomLinkProp } from './components/ftb-link/ftb-custom-link-prop';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 import { FtbTeamLogoMode } from './components/ftb-team-logo/ftb-team-logo-mode';
 export namespace Components {

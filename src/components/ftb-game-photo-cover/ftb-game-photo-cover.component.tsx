@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { Game } from 'ftb-models';
-import { FtbCustomLinkProp } from '@src/components/ftb-link/ftb-custom-link-prop';
+import { FtbCustomLinkProp } from '../ftb-link/ftb-custom-link-prop';
 
 @Component({
   tag: 'ftb-game-photo-cover',
