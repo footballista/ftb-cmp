@@ -1,3 +1,13 @@
+## [1.2.1](https://github.com/footballista/ftb-cmp/compare/1.2.0...1.2.1) (2021-01-21)
+
+
+### Bug Fixes
+
+* added missing translations ([b7cd07d](https://github.com/footballista/ftb-cmp/commit/b7cd07d96f2f22cec117012ff228e808aaced6fc))
+* fixed team-season-card structure ([de8b2cc](https://github.com/footballista/ftb-cmp/commit/de8b2cc580dcd1d2e57c40415492e127f3adf195))
+
+
+
 # [1.2.0](https://github.com/footballista/ftb-cmp/compare/1.1.17...1.2.0) (2021-01-21)
 
 
