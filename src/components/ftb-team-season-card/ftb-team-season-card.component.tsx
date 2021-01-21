@@ -164,7 +164,7 @@ export class FtbTeamSeasonCard {
                       {this.renderGdRow(stats)}
                     </div>
                   ))}
-                    <div class="season-status">{translations.champ.champ_is_finished[userState.language]}</div>
+                  <div class="season-status">{translations.champ.champ_is_finished[userState.language]}</div>
                 </div>
               </div>
             </div>
