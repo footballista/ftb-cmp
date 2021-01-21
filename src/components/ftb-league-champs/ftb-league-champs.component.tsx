@@ -55,7 +55,7 @@ export class FtbLeagueChamps {
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.league.champs.length}
             items={items}
-            renderItem={(c: Champ) => <ftb-champ-card champ={c}></ftb-champ-card>}
+            renderItem={(c: Champ) => <ftb-champ-card champ={c} key={c._id}></ftb-champ-card>}
             rows={this.paginationConfig.rows}
             fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}

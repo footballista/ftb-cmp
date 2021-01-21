@@ -169,7 +169,7 @@ export class FtbStageTable {
                 <div class="gd">
                   {row.scored}-{row.conceded}
                   <span class="diff">
-                    {row.scored > row.conceded && '+'}
+                    {row.scored >= row.conceded && '+'}
                     {row.scored - row.conceded}
                   </span>
                 </div>

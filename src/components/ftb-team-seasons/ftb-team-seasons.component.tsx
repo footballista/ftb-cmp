@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { diState, filter, Season, Team, TeamService, translations, userState } from 'ftb-models';
+import { diState, filter, Team, TeamService, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 
 @Component({
@@ -48,7 +48,9 @@ export class FtbTeamSeasons {
                 <ftb-pagination
                   totalItems={filtersOn ? items.length : this.team.seasons.total}
                   items={items}
-                  renderItem={s => this.renderSeason(s)}
+                  renderItem={s => (
+                    <ftb-team-season-card season={s} team={this.team} key={s._id}></ftb-team-season-card>
+                  )}
                   rows={this.paginationConfig.rows}
                   fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
                   itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
@@ -65,14 +67,6 @@ export class FtbTeamSeasons {
           </div>
         </div>
       </Host>
-    );
-  }
-
-  private renderSeason(s: Season) {
-    return (
-      <ftb-link route="season" params={{ seasonId: s._id, tournamentName: s.champ.name + ' - ' + s.name }}>
-        {s.name}
-      </ftb-link>
     );
   }
 }

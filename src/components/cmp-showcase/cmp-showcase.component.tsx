@@ -282,7 +282,17 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-team-seasons team={this.data.team}></ftb-team-seasons>,
+          e: () => (
+            <ftb-team-seasons
+              team={this.data.team}
+              paginationConfig={{
+                itemMinWidthPx: 290,
+                itemMinHeightPx: 290,
+                XtoY: 1,
+                rows: 2,
+              }}
+            ></ftb-team-seasons>
+          ),
         },
       ],
     };

@@ -665,6 +665,10 @@ export namespace Components {
     player: Player;
     team: Team;
   }
+  interface FtbTeamSeasonCard {
+    season: Season;
+    team: Team;
+  }
   interface FtbTeamSeasons {
     paginationConfig: {
       itemMinWidthPx: number;
@@ -1151,6 +1155,11 @@ declare global {
     prototype: HTMLFtbTeamRosterPlayerCardElement;
     new (): HTMLFtbTeamRosterPlayerCardElement;
   };
+  interface HTMLFtbTeamSeasonCardElement extends Components.FtbTeamSeasonCard, HTMLStencilElement {}
+  var HTMLFtbTeamSeasonCardElement: {
+    prototype: HTMLFtbTeamSeasonCardElement;
+    new (): HTMLFtbTeamSeasonCardElement;
+  };
   interface HTMLFtbTeamSeasonsElement extends Components.FtbTeamSeasons, HTMLStencilElement {}
   var HTMLFtbTeamSeasonsElement: {
     prototype: HTMLFtbTeamSeasonsElement;
@@ -1269,6 +1278,7 @@ declare global {
     'ftb-team-photos': HTMLFtbTeamPhotosElement;
     'ftb-team-roster': HTMLFtbTeamRosterElement;
     'ftb-team-roster-player-card': HTMLFtbTeamRosterPlayerCardElement;
+    'ftb-team-season-card': HTMLFtbTeamSeasonCardElement;
     'ftb-team-seasons': HTMLFtbTeamSeasonsElement;
     'ftb-team-transfer-card': HTMLFtbTeamTransferCardElement;
     'ftb-team-transfers': HTMLFtbTeamTransfersElement;
@@ -1922,6 +1932,10 @@ declare namespace LocalJSX {
     player: Player;
     team: Team;
   }
+  interface FtbTeamSeasonCard {
+    season: Season;
+    team: Team;
+  }
   interface FtbTeamSeasons {
     paginationConfig?: {
       itemMinWidthPx: number;
@@ -2059,6 +2073,7 @@ declare namespace LocalJSX {
     'ftb-team-photos': FtbTeamPhotos;
     'ftb-team-roster': FtbTeamRoster;
     'ftb-team-roster-player-card': FtbTeamRosterPlayerCard;
+    'ftb-team-season-card': FtbTeamSeasonCard;
     'ftb-team-seasons': FtbTeamSeasons;
     'ftb-team-transfer-card': FtbTeamTransferCard;
     'ftb-team-transfers': FtbTeamTransfers;
@@ -2163,6 +2178,7 @@ declare module '@stencil/core' {
       'ftb-team-roster': LocalJSX.FtbTeamRoster & JSXBase.HTMLAttributes<HTMLFtbTeamRosterElement>;
       'ftb-team-roster-player-card': LocalJSX.FtbTeamRosterPlayerCard &
         JSXBase.HTMLAttributes<HTMLFtbTeamRosterPlayerCardElement>;
+      'ftb-team-season-card': LocalJSX.FtbTeamSeasonCard & JSXBase.HTMLAttributes<HTMLFtbTeamSeasonCardElement>;
       'ftb-team-seasons': LocalJSX.FtbTeamSeasons & JSXBase.HTMLAttributes<HTMLFtbTeamSeasonsElement>;
       'ftb-team-transfer-card': LocalJSX.FtbTeamTransferCard & JSXBase.HTMLAttributes<HTMLFtbTeamTransferCardElement>;
       'ftb-team-transfers': LocalJSX.FtbTeamTransfers & JSXBase.HTMLAttributes<HTMLFtbTeamTransfersElement>;

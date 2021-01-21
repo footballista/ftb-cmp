@@ -34,6 +34,7 @@
     background: rgba(0, 0, 0, 0.1);
     width: 402px;
     box-sizing: border-box;
+    display: block;
 
     .spinner-container {
       height: 100%;
@@ -143,6 +144,63 @@
       ftb-player-photo {
         height: 62px;
         width: 62px;
+      }
+    }
+  }
+
+  ftb-team-seasons {
+    display: block;
+    width: 600px;
+    ftb-pagination {
+      width: 600px;
+      display: block;
+
+      ftb-team-season-card {
+        height: calc(100% - 8px);
+        width: calc(100% - 8px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        .ftb-team-season-card__wrapper {
+          height: 100%;
+          width: 100%;
+          .ftb-team-season-card__background {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            .country-flag {
+              height: 50px;
+              width: 50px;
+              display: flex;
+              justify-content: center;
+              margin: 0 auto;
+            }
+            .ftb-team-season-card__content {
+              text-align: center;
+            }
+            .loader-indicator {
+              margin-top: 20px;
+            }
+          }
+
+          transition: opacity 0.2s ease-in-out;
+          &:not(.flag-loaded) {
+            opacity: 0;
+          }
+          &.flag-loaded {
+            opacity: 1;
+          }
+          &:not(.stats-loaded) {
+            .stats-wrapper {
+              display: none;
+            }
+          }
+          &.stats-loaded {
+            .loader-indicator {
+              display: none;
+            }
+          }
+        }
       }
     }
   }

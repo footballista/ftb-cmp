@@ -32,24 +32,29 @@ export class FtbTeamRosterPlayerCard {
 
               <div class="info">
                 <div class="name">
-                  {this.player.lastName} {this.player.firstName} {this.player.middleName}
+                  <div class="last-name">{this.player.lastName}</div>
+                  <div class="first-name">{this.player.firstName}</div>
+                  <div class="middle-name">{this.player.middleName}</div>
                 </div>
                 <div class="age">
                   {this.player.getAge() || '--'}{' '}
                   {translations.player.y_o[userState.language].getForm(this.player.getAge() || 0)}
                 </div>
               </div>
-              {this.player.teams.length > 1 &&
-                this.player.teams
-                  .filter(t => t._id != this.team._id)
-                  .map(t => (
-                    <div class="team">
-                      <ftb-team-logo
-                        team={t}
-                        caption={translations.player.also_playing_in[userState.language] + ' ' + t.name}
-                      ></ftb-team-logo>
-                    </div>
-                  ))}
+              {this.player.teams.length > 1 && (
+                <div class="teams">
+                  {this.player.teams
+                    .filter(t => t._id != this.team._id)
+                    .map(t => (
+                      <div class="team">
+                        <ftb-team-logo
+                          team={t}
+                          caption={translations.player.also_playing_in[userState.language] + ' ' + t.name}
+                        ></ftb-team-logo>
+                      </div>
+                    ))}
+                </div>
+              )}
 
               <div class="position">{this.player.position}</div>
               <div class="number">#{this.player.number}</div>
