@@ -80,7 +80,7 @@ export class FtbTeamRoster {
                   totalItems={filtersOn ? items.length : this.team.players.length}
                   items={items}
                   renderItem={(p: Player) => (
-                    <ftb-team-roster-player-card player={p} team={this.team}></ftb-team-roster-player-card>
+                    <ftb-team-roster-player-card player={p} team={this.team} key={p._id}></ftb-team-roster-player-card>
                   )}
                   rows={this.paginationConfig.rows}
                   fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}

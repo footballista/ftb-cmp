@@ -1,3 +1,13 @@
+## [1.1.15](https://github.com/footballista/ftb-cmp/compare/1.1.14...1.1.15) (2021-01-21)
+
+
+### Bug Fixes
+
+* created team player transfer card and team player roster card components ([7c1d44b](https://github.com/footballista/ftb-cmp/commit/7c1d44bb589e532f30e53b87aa8975e2b85316c2))
+* created team player transfer card and team player roster card components ([5b35bf3](https://github.com/footballista/ftb-cmp/commit/5b35bf32f3febbdfb7b07e0fa7b7039d17e5bcb9))
+
+
+
 ## [1.1.14](https://github.com/footballista/ftb-cmp/compare/1.1.13...1.1.14) (2021-01-21)
 
 

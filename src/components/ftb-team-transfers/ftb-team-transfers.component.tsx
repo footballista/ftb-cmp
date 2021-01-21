@@ -78,7 +78,9 @@ export class FtbTeamTransfers {
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.team.transfers.total}
             items={items}
-            renderItem={t => <ftb-team-transfer-card transfer={t} team={this.team}></ftb-team-transfer-card>}
+            renderItem={t => (
+              <ftb-team-transfer-card transfer={t} team={this.team} key={t._id}></ftb-team-transfer-card>
+            )}
             rows={this.paginationConfig.rows}
             fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
