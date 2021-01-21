@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import Avatar from '../../assets/icons/avatar.svg';
 import { Player, envState } from 'ftb-models';
 @Component({
@@ -12,11 +12,21 @@ export class FtbPlayerPhoto {
   @Prop() version: number;
   @State() showPlaceholder: boolean = false;
   @State() url: string;
+  @Event() loaded: EventEmitter<boolean>;
 
   componentWillLoad() {
     this.url =
       envState.imgHost +
       `img/players/${this.player?._id || this.playerId}.jpg?version=${this.player?.photoId || this.version}`;
+  }
+
+  onImgLoaded() {
+    this.loaded.emit(true);
+  }
+
+  onImgFailed() {
+    this.showPlaceholder = true;
+    this.loaded.emit(true);
   }
 
   render() {
@@ -25,7 +35,7 @@ export class FtbPlayerPhoto {
         {this.showPlaceholder ? (
           <ftb-icon svg={Avatar}></ftb-icon>
         ) : (
-          <ftb-img src={this.url} onFailed={() => (this.showPlaceholder = true)}></ftb-img>
+          <ftb-img src={this.url} onFailed={() => this.onImgFailed()} onLoaded={() => this.onImgLoaded()}></ftb-img>
         )}
       </Host>
     );

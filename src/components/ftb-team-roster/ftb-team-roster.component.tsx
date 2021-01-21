@@ -79,7 +79,9 @@ export class FtbTeamRoster {
                 <ftb-pagination
                   totalItems={filtersOn ? items.length : this.team.players.length}
                   items={items}
-                  renderItem={(p: Player) => this.renderPlayer(p)}
+                  renderItem={(p: Player) => (
+                    <ftb-team-roster-player-card player={p} team={this.team}></ftb-team-roster-player-card>
+                  )}
                   rows={this.paginationConfig.rows}
                   fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
                   itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
@@ -93,43 +95,6 @@ export class FtbTeamRoster {
           </div>
         </div>
       </Host>
-    );
-  }
-
-  private renderPlayer(p: Player) {
-    return (
-      <ftb-link route="player" params={{ playerId: p._id, playerName: p.firstName + ' ' + p.lastName }}>
-        <div class="ftb-team-roster__player">
-          <div class="ftb-team-roster__player-background">
-            <div class="photo">
-              <ftb-player-photo player={p} key={p._id}></ftb-player-photo>
-            </div>
-
-            <div class="info">
-              <div class="name">
-                {p.lastName} {p.firstName} {p.middleName}
-              </div>
-              <div class="age">
-                {p.getAge() || '--'} {translations.player.y_o[userState.language].getForm(p.getAge() || 0)}
-              </div>
-            </div>
-            {p.teams.length > 1 &&
-              p.teams
-                .filter(t => t._id != this.team._id)
-                .map(t => (
-                  <div class="team">
-                    <ftb-team-logo
-                      team={t}
-                      caption={translations.player.also_playing_in[userState.language] + ' ' + t.name}
-                    ></ftb-team-logo>
-                  </div>
-                ))}
-
-            <div class="position">{p.position}</div>
-            <div class="number">#{p.number}</div>
-          </div>
-        </div>
-      </ftb-link>
     );
   }
 }

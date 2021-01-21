@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { AsyncSubject } from 'rxjs';
-import { filter, TransferRequest, translations, Team, userState, TeamService, diState } from 'ftb-models';
+import { filter, translations, Team, userState, TeamService, diState } from 'ftb-models';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-cont
 })
 export class FtbTeamTransfers {
   @Prop() team!: Team;
-  @Prop() paginationConfig: {
+  @Prop() paginationConfig!: {
     itemMinWidthPx: number;
     itemMinHeightPx: number;
     rows?: number;
@@ -78,7 +78,7 @@ export class FtbTeamTransfers {
           <ftb-pagination
             totalItems={filtersOn ? items.length : this.team.transfers.total}
             items={items}
-            renderItem={t => this.renderTransfer(t)}
+            renderItem={t => <ftb-team-transfer-card transfer={t} team={this.team}></ftb-team-transfer-card>}
             rows={this.paginationConfig.rows}
             fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
             itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
@@ -95,7 +95,7 @@ export class FtbTeamTransfers {
     );
   }
 
-  private renderTransfer(t: TransferRequest) {
+  /* private renderTransfer(t: TransferRequest) {
     return (
       <ftb-link
         route="player"
@@ -134,5 +134,5 @@ export class FtbTeamTransfers {
         </div>
       </ftb-link>
     );
-  }
+  }*/
 }

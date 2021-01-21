@@ -294,7 +294,16 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-team-transfers team={this.data.team}></ftb-team-transfers>,
+          e: () => (
+            <ftb-team-transfers
+              team={this.data.team}
+              paginationConfig={{
+                itemMinHeightPx: 100,
+                itemMinWidthPx: 400,
+                rows: 3,
+              }}
+            ></ftb-team-transfers>
+          ),
         },
       ],
     };
@@ -306,7 +315,16 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-team-roster team={this.data.team}></ftb-team-roster>,
+          e: () => (
+            <ftb-team-roster
+              team={this.data.team}
+              paginationConfig={{
+                itemMinHeightPx: 70,
+                itemMinWidthPx: 400,
+                rows: 5,
+              }}
+            ></ftb-team-roster>
+          ),
         },
       ],
     };

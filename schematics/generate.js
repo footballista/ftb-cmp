@@ -40,11 +40,7 @@ export class ${modelName} {
 const lcFirst = (s) => s[0].toLowerCase() + s.slice(1);
 const styleTmp = `${fileName} {
   .${fileName}__wrapper {
-    height: inherit;
-    width: inherit;
     .${fileName}__background {
-      height: inherit;
-      width: inherit;
     }
   }
 }`;
