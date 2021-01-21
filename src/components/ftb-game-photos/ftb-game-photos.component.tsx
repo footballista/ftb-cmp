@@ -1,5 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import { diState, Game, GamePhoto, GameService } from 'ftb-models';
+import { FtbCustomLinkProp } from '../ftb-link/ftb-custom-link-prop';
+
 @Component({
   tag: 'ftb-game-photos',
   styleUrl: 'ftb-game-photos.component.scss',
@@ -16,6 +18,7 @@ export class FtbGamePhotos {
     stretchY?: boolean;
     XtoY?: number;
   };
+  @Prop() customRoute: FtbCustomLinkProp;
   @State() loaded: boolean;
   @State() showGallery: boolean;
   @State() galleryIdx = 0;
