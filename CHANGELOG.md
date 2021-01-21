@@ -1,3 +1,13 @@
+## [1.1.14](https://github.com/footballista/ftb-cmp/compare/1.1.13...1.1.14) (2021-01-21)
+
+
+### Bug Fixes
+
+* removed excessive style from team transfers ([a30b792](https://github.com/footballista/ftb-cmp/commit/a30b792568c5815a459a9777209338a5a87f1204))
+* removed excessive style from team transfers ([7758324](https://github.com/footballista/ftb-cmp/commit/7758324cfead5901f2ab64d95f59e061e1d83c6e))
+
+
+
 ## [1.1.13](https://github.com/footballista/ftb-cmp/compare/1.1.12...1.1.13) (2021-01-20)
 
 
