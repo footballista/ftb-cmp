@@ -134,9 +134,9 @@ export class FtbTeamSeasonCard {
           >
             <div class="ftb-team-season-card__background">
               <div class="ftb-team-season-card__color">
-                <div class="ftb-champ-card__color-layer" style={{ background: this.bg[0] }}></div>
-                <div class="ftb-champ-card__color-layer" style={{ background: this.bg[1] }}></div>
-                <div class="ftb-champ-card__color-layer" style={{ background: this.bg[2] }}></div>
+                <div class="ftb-team-season-card__color-layer" style={{ background: this.bg[0] }}></div>
+                <div class="ftb-team-season-card__color-layer" style={{ background: this.bg[1] }}></div>
+                <div class="ftb-team-season-card__color-layer" style={{ background: this.bg[2] }}></div>
               </div>
               <div class="ftb-team-season-card__content">
                 <ftb-flag
@@ -164,8 +164,7 @@ export class FtbTeamSeasonCard {
                       {this.renderGdRow(stats)}
                     </div>
                   ))}
-                  {!this.season.inProgress && <div class="season-status">season is finished</div>}
-                  {/*    <div class="season-status">{translations.champ.champ_is_finished[userState.language]}</div>*/}
+                    <div class="season-status">{translations.champ.champ_is_finished[userState.language]}</div>
                 </div>
               </div>
             </div>
