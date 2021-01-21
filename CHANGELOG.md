@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/footballista/ftb-cmp/compare/1.1.17...1.2.0) (2021-01-21)
+
+
+### Features
+
+* created team-season-card component ([faa270e](https://github.com/footballista/ftb-cmp/commit/faa270ef6c27fa4f7c77ccc8de1cc8bdb58106ff))
+
+
+
 ## [1.1.17](https://github.com/footballista/ftb-cmp/compare/1.1.14...1.1.17) (2021-01-21)
 
 
