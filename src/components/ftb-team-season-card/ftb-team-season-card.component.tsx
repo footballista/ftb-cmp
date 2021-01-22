@@ -204,7 +204,7 @@ export class FtbTeamSeasonCard {
       </div>
     ) : (
       <div class="param">
-        <div class="label">{translations.standings.wl[userState.language]}</div>
+        <div class="label">{translations.standings.wl[userState.language]}:</div>
         <div class="value">
           {stats.w}-{stats.l}
         </div>
@@ -217,7 +217,7 @@ export class FtbTeamSeasonCard {
       <div class="param">
         <div class="label">{translations.standings.gd[userState.language]}</div>
         <div class="value gd">
-          {stats.scored}-{stats.conceded}
+          {stats.scored}-{stats.conceded}:
           <span class="diff">
             {stats.scored >= stats.conceded && '+'}
             {stats.scored - stats.conceded}

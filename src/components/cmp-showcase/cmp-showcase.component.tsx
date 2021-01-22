@@ -1,28 +1,29 @@
-import { Component, Host, h, State } from '@stencil/core';
+import { Component, h, Host, State } from '@stencil/core';
 import {
-  Team,
-  User,
-  Player,
-  GraphqlClient,
-  Collection,
-  HttpClient,
-  GameService,
-  LeagueService,
-  SeasonService,
-  TeamService,
-  StadiumService,
-  PersonService,
-  PlayerService,
   BannerSlotCode,
   Champ,
+  Collection,
+  envState,
   filter,
   Game,
   GamePhoto,
   GamePhotoImg,
+  GameService,
+  GraphqlClient,
+  HttpClient,
   League,
+  LeagueService,
+  PersonService,
+  Player,
+  PlayerService,
   Season,
+  SeasonService,
   Stadium,
-  envState,
+  StadiumService,
+  StageFormat,
+  Team,
+  TeamService,
+  User,
 } from 'ftb-models';
 import range from 'lodash-es/range';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
@@ -100,6 +101,7 @@ export class CmpTest {
       this.seasonMedia(),
       this.seasonBestPlayers(),
       this.seasonGames(),
+      this.stageChess(),
       this.seasonStandings(),
       this.seasonStandingsTabs(),
       this.seasonBirthdays(),
@@ -419,6 +421,22 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-season-standings season={this.data.season}></ftb-season-standings>,
+        },
+      ],
+    };
+  }
+
+  private stageChess() {
+    return {
+      title: 'Season Standings',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => (
+            <ftb-stage-chess
+              stage={this.data.season.stages.find(s => s.format === StageFormat.league)}
+            ></ftb-stage-chess>
+          ),
         },
       ],
     };

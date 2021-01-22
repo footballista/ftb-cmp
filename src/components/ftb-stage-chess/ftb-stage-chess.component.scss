@@ -1,0 +1,31 @@
+ftb-stage-chess {
+  display: block;
+  .row {
+    display: flex;
+    align-items: center;
+    & > div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .name {
+      justify-content: flex-start;
+    }
+    .game-cell {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      a {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

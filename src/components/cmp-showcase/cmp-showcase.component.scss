@@ -2,6 +2,9 @@
 @import '../../assets/app-styles/afl/afl.colors';
 
 :host {
+  * {
+    font-family: 'Roboto', sans-serif !important;
+  }
   .component {
     margin-bottom: 40px;
     //background: rgba(7, 10, 20, 0.87);
@@ -199,6 +202,135 @@
             .loader-indicator {
               display: none;
             }
+          }
+        }
+      }
+    }
+  }
+
+  ftb-stage-chess {
+    width: 1100px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.1);
+    $cellBorder: 1px solid rgba(0, 0, 0, 0.05);
+    .row {
+      height: 45px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin: 5px 0;
+      & > div {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: $cellBorder;
+      }
+      .position {
+        width: 40px;
+      }
+      .name {
+        box-sizing: border-box;
+        width: 200px;
+        padding: 0 10px;
+        justify-content: flex-start;
+        ftb-team-logo {
+          margin-right: 10px;
+        }
+      }
+      ftb-team-logo {
+        height: 25px;
+        width: 25px;
+      }
+      .game-cell {
+        width: 65px;
+        height: 45px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2px;
+        box-sizing: border-box;
+        &.stub {
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .game {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          padding: 0;
+          margin: 0;
+          a {
+            display: flex;
+            font-size: 10px;
+            padding: 2.5px 7.5px;
+            align-items: center;
+            color: white;
+            border-radius: 2px;
+            font-weight: 600;
+          }
+          &.w a {
+            background: rgb(1 125 52 / 47%);
+          }
+          &.d a {
+            background: rgb(222 136 42 / 51%);
+          }
+          &.l a {
+            background: rgb(189 8 8 / 54%);
+          }
+          .score {
+            .td {
+              font-size: 6px;
+            }
+            .pen {
+              font-size: 8px;
+            }
+          }
+        }
+      }
+      .wdl,
+      .wl {
+        width: 60px;
+      }
+
+      .gd {
+        width: 90px;
+        font-size: 10px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        .diff {
+          margin-top: -8px;
+          margin-left: 2px;
+        }
+      }
+
+      .points {
+        width: 60px;
+      }
+      .games {
+        width: 60px;
+      }
+
+      .form {
+        width: 90px;
+        i {
+          height: 7px;
+          width: 7px;
+          margin: 2px;
+          box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.5);
+          display: inline-block;
+          &.w {
+            background: #0dc190;
+          }
+          &.d {
+            background: #e2bf00;
+          }
+          &.l {
+            background: #ed4c4c;
           }
         }
       }
