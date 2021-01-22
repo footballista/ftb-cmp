@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/footballista/ftb-cmp/compare/1.2.1...1.3.0) (2021-01-22)
+
+
+### Features
+
+* created stage chess component ([d96e494](https://github.com/footballista/ftb-cmp/commit/d96e494e5b6c16bd3eae81ce4928debf76e89ffb))
+
+
+
 ## [1.2.1](https://github.com/footballista/ftb-cmp/compare/1.2.0...1.2.1) (2021-01-21)
 
 
