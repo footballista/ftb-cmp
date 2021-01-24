@@ -1,74 +1,95 @@
 ftb-stage-table {
+  overflow: hidden;
+  display: block;
   .ftb-stage-table__wrapper {
-    .ftb-stage-table__background {
-      .ftb-stage-table__head {
+    width: 100%;
+    overflow: hidden;
+    display: block;
+  }
+
+  .ftb-stage-table__head {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    min-height: 40px;
+  }
+  .ftb-stage-table__body {
+    overflow: hidden;
+
+    .ftb-stage-table__row {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      min-height: 40px;
+    }
+  }
+
+  .ftb-stage-table__head,
+  .ftb-stage-table__body {
+    & > div,
+    .ftb-stage-table__row > div {
+      text-align: center;
+    }
+    .label {
+      max-width: 10px;
+    }
+
+    .position {
+      max-width: 40px;
+      text-align: center;
+    }
+
+    .chess-game {
+      border: 1px solid red;
+      max-width: 100px;
+      min-height: 40px;
+      background: green;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .game a {
         display: flex;
-        align-items: center;
+        background: red;
       }
-      .ftb-stage-table__body {
-        .ftb-stage-table__row {
-          display: flex;
-          align-items: center;
-        }
-      }
+    }
 
-      .ftb-stage-table__head,
-      .ftb-stage-table__body {
-        & > div,
-        .ftb-stage-table__row > div {
-          text-align: center;
-        }
-        .label {
-          max-width: 10px;
-          min-width: 10px;
-        }
+    .points {
+      max-width: 45px;
+    }
 
-        .position {
-          max-width: 40px;
-          min-width: 40px;
-          text-align: center;
-        }
+    .games {
+      max-width: 45px;
+    }
 
-        .points {
-          max-width: 45px;
-          min-width: 35px;
-        }
+    .win-percent {
+      max-width: 45px;
+    }
 
-        .games {
-          max-width: 45px;
-          min-width: 35px;
-        }
+    .name {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
-        .win-percent {
-          max-width: 45px;
-          min-width: 35px;
-        }
+    .wdl,
+    .wl {
+      max-width: 55px;
+    }
 
-        .name {
-          flex: 1;
-          min-width: 65px;
-          display: flex;
-          align-items: center;
-        }
+    .gd {
+      height: 100%;
+      max-width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .wdl,
-        .wl {
-          max-width: 55px;
-          min-width: 45px;
-        }
-
-        .gd {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .form {
-          max-width: 85px;
-          min-width: 75px;
-        }
-      }
+    .form {
+      max-width: 85px;
     }
   }
 }

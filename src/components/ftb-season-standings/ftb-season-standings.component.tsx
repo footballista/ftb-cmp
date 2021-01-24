@@ -19,22 +19,18 @@ export class FtbSeasonStandings {
 
     return (
       <Host>
-        <div class="ftb-season-standings__wrapper">
-          <div class="ftb-season-standings__background">
-            {this.splitToTabs ? (
-              <ftb-tabs
-                tabs={stages.map(s => ({
-                  renderTitle: () => this.renderStageTitle(s),
-                  renderContent: () => this.renderStage(s),
-                }))}
-              ></ftb-tabs>
-            ) : (
-              stages.map(stage => {
-                return [this.season.stages.length > 1 ? this.renderStageTitle(stage) : null, this.renderStage(stage)];
-              })
-            )}
-          </div>
-        </div>
+        {this.splitToTabs ? (
+          <ftb-tabs
+            tabs={stages.map(s => ({
+              renderTitle: () => this.renderStageTitle(s),
+              renderContent: () => this.renderStage(s),
+            }))}
+          ></ftb-tabs>
+        ) : (
+          stages.map(stage => {
+            return [this.season.stages.length > 1 ? this.renderStageTitle(stage) : null, this.renderStage(stage)];
+          })
+        )}
       </Host>
     );
   }
@@ -45,7 +41,7 @@ export class FtbSeasonStandings {
 
   private renderStage(stage: Stage) {
     if (stage.format === StageFormat.league) {
-      return <ftb-stage-table stage={stage}></ftb-stage-table>;
+      return <ftb-stage-table stage={stage} showChess={true}></ftb-stage-table>;
     } else {
       return <ftb-stage-cup-net stage={stage}></ftb-stage-cup-net>;
     }

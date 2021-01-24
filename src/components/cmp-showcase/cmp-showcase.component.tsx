@@ -46,8 +46,8 @@ export class CmpTest {
     game: new Game({ _id: 313283 }),
     league: new League({ _id: 394 }),
     champ: new Champ({ _id: 2117 }),
-    // season: new Season({ _id: 4205 }),
-    season: new Season({ _id: 4270 }),
+    season: new Season({ _id: 4205 }),
+    // season: new Season({ _id: 4270 }),
     team: new Team({ _id: 18804 }),
     person: new User({ _id: 750 }),
     stadium: new Stadium({ _id: 1086 }),
@@ -417,6 +417,7 @@ export class CmpTest {
   private seasonStandings() {
     return {
       title: 'Season Standings',
+      caseStyle: { width: '100%' },
       elements: [
         {
           descr: 'Basic',

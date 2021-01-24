@@ -208,6 +208,37 @@
     }
   }
 
+  .test {
+    height: 100px;
+    width: 100%;
+    max-width: 100%;
+    background: darkred;
+    padding: 10px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    .best {
+      width: 1000px;
+      height: 80px;
+      background: #e2bf00;
+      margin-left: 10px;
+    }
+  }
+
+  ftb-season-standings {
+    width: 100%;
+    display: block;
+    ftb-stage-table {
+      display: block;
+      width: 100%;
+      background: goldenrod;
+
+      ftb-team-logo {
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+
   ftb-stage-chess {
     width: 1100px;
     height: 600px;

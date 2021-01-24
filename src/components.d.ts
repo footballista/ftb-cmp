@@ -589,13 +589,26 @@ export namespace Components {
     stadiumId: number;
     version: number;
   }
-  interface FtbStageChess {
-    stage: Stage;
-  }
   interface FtbStageCupNet {
     stage: Stage;
   }
   interface FtbStageTable {
+    customWidths: {
+      label?: number;
+      position?: number;
+      points?: number;
+      games?: number;
+      chess?: number;
+      name?: number;
+      shortName?: number;
+      fullName?: number;
+      wdl?: number;
+      wl?: number;
+      winPercent?: number;
+      gd?: number;
+      form?: number;
+    };
+    showChess: boolean;
     stage: Stage;
   }
   interface FtbTabs {
@@ -1103,11 +1116,6 @@ declare global {
     prototype: HTMLFtbStadiumPhotoElement;
     new (): HTMLFtbStadiumPhotoElement;
   };
-  interface HTMLFtbStageChessElement extends Components.FtbStageChess, HTMLStencilElement {}
-  var HTMLFtbStageChessElement: {
-    prototype: HTMLFtbStageChessElement;
-    new (): HTMLFtbStageChessElement;
-  };
   interface HTMLFtbStageCupNetElement extends Components.FtbStageCupNet, HTMLStencilElement {}
   var HTMLFtbStageCupNetElement: {
     prototype: HTMLFtbStageCupNetElement;
@@ -1275,7 +1283,6 @@ declare global {
     'ftb-stadium-card': HTMLFtbStadiumCardElement;
     'ftb-stadium-games': HTMLFtbStadiumGamesElement;
     'ftb-stadium-photo': HTMLFtbStadiumPhotoElement;
-    'ftb-stage-chess': HTMLFtbStageChessElement;
     'ftb-stage-cup-net': HTMLFtbStageCupNetElement;
     'ftb-stage-table': HTMLFtbStageTableElement;
     'ftb-tabs': HTMLFtbTabsElement;
@@ -1864,13 +1871,26 @@ declare namespace LocalJSX {
     stadiumId?: number;
     version?: number;
   }
-  interface FtbStageChess {
-    stage: Stage;
-  }
   interface FtbStageCupNet {
     stage: Stage;
   }
   interface FtbStageTable {
+    customWidths?: {
+      label?: number;
+      position?: number;
+      points?: number;
+      games?: number;
+      chess?: number;
+      name?: number;
+      shortName?: number;
+      fullName?: number;
+      wdl?: number;
+      wl?: number;
+      winPercent?: number;
+      gd?: number;
+      form?: number;
+    };
+    showChess?: boolean;
     stage: Stage;
   }
   interface FtbTabs {
@@ -2074,7 +2094,6 @@ declare namespace LocalJSX {
     'ftb-stadium-card': FtbStadiumCard;
     'ftb-stadium-games': FtbStadiumGames;
     'ftb-stadium-photo': FtbStadiumPhoto;
-    'ftb-stage-chess': FtbStageChess;
     'ftb-stage-cup-net': FtbStageCupNet;
     'ftb-stage-table': FtbStageTable;
     'ftb-tabs': FtbTabs;
@@ -2179,7 +2198,6 @@ declare module '@stencil/core' {
       'ftb-stadium-card': LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
       'ftb-stadium-games': LocalJSX.FtbStadiumGames & JSXBase.HTMLAttributes<HTMLFtbStadiumGamesElement>;
       'ftb-stadium-photo': LocalJSX.FtbStadiumPhoto & JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoElement>;
-      'ftb-stage-chess': LocalJSX.FtbStageChess & JSXBase.HTMLAttributes<HTMLFtbStageChessElement>;
       'ftb-stage-cup-net': LocalJSX.FtbStageCupNet & JSXBase.HTMLAttributes<HTMLFtbStageCupNetElement>;
       'ftb-stage-table': LocalJSX.FtbStageTable & JSXBase.HTMLAttributes<HTMLFtbStageTableElement>;
       'ftb-tabs': LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
