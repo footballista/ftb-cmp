@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/footballista/ftb-cmp/compare/1.3.0...1.3.1) (2021-01-24)
+
+
+### Bug Fixes
+
+* chess functionality moved to table component ([9dc858e](https://github.com/footballista/ftb-cmp/commit/9dc858ea5d9497904f06102ae21cfa700c8f4754))
+
+
+
 # [1.3.0](https://github.com/footballista/ftb-cmp/compare/1.2.1...1.3.0) (2021-01-22)
 
 
