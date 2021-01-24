@@ -1,3 +1,12 @@
+## [1.3.3](https://github.com/footballista/ftb-cmp/compare/1.3.2...1.3.3) (2021-01-24)
+
+
+### Bug Fixes
+
+* added extra markup for stage table component ([a578342](https://github.com/footballista/ftb-cmp/commit/a5783428268df5e4138966eb1441b1eb2873816d))
+
+
+
 ## [1.3.2](https://github.com/footballista/ftb-cmp/compare/1.3.1...1.3.2) (2021-01-24)
 
 
