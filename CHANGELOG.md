@@ -1,3 +1,12 @@
+## [1.3.2](https://github.com/footballista/ftb-cmp/compare/1.3.1...1.3.2) (2021-01-24)
+
+
+### Bug Fixes
+
+* removed debug styles from stage table ([75824cc](https://github.com/footballista/ftb-cmp/commit/75824ccecf2bfea047075f7c0a3496fe933518da))
+
+
+
 ## [1.3.1](https://github.com/footballista/ftb-cmp/compare/1.3.0...1.3.1) (2021-01-24)
 
 
