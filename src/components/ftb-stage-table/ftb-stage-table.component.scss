@@ -30,42 +30,21 @@ ftb-stage-table {
     .ftb-stage-table__row > div {
       text-align: center;
     }
-    .label {
-      max-width: 10px;
-    }
 
     .position {
-      max-width: 40px;
       text-align: center;
     }
 
     .chess-game {
-      border: 1px solid red;
-      max-width: 100px;
       min-height: 40px;
-      background: green;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       .game a {
         display: flex;
-        background: red;
       }
     }
-
-    .points {
-      max-width: 45px;
-    }
-
-    .games {
-      max-width: 45px;
-    }
-
-    .win-percent {
-      max-width: 45px;
-    }
-
     .name {
       flex: 1;
       display: flex;
@@ -75,21 +54,11 @@ ftb-stage-table {
       text-overflow: ellipsis;
     }
 
-    .wdl,
-    .wl {
-      max-width: 55px;
-    }
-
     .gd {
       height: 100%;
-      max-width: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .form {
-      max-width: 85px;
     }
   }
 }
