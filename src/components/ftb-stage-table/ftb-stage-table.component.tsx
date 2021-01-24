@@ -152,7 +152,7 @@ export class FtbStageTable {
         {this.structure.shortName && <div class="name" style={this.getFieldStyle('name')}></div>}
         {this.structure.name && (
           <div class="name" style={this.getFieldStyle('name')}>
-            {this.stage.name}
+            <div class="stage-name">{this.stage.name}</div>
           </div>
         )}
         {this.structure.chess &&
@@ -226,7 +226,7 @@ export class FtbStageTable {
               {(this.structure.shortName || this.structure.name) && (
                 <div class="name" style={this.getFieldStyle('name')}>
                   <ftb-team-logo team={row.team}></ftb-team-logo>
-                  {this.structure.name === true ? row.team.name : row.team.shortName}
+                  <div class="team-name">{this.structure.name === true ? row.team.name : row.team.shortName}</div>
                 </div>
               )}
               {this.structure.chess &&
