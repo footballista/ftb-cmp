@@ -35,7 +35,8 @@
   ftb-pagination {
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgba(0, 0, 0, 0.1);
-    width: 402px;
+    //width: 402px;
+    width: 100%;
     box-sizing: border-box;
     display: block;
 
@@ -367,6 +368,24 @@
       }
     }
   }
+
+  ftb-game-photo-preview {
+    width: 100%;
+    height: 100%;
+    .ftb-game-photo-preview__wrapper {
+      width: 100%;
+      height: 100%;
+      .ftb-game-photo-preview__background {
+        width: 100%;
+        height: 100%;
+        ftb-improving-img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
   //}
   //
   //ftb-team-logo {

@@ -1,12 +1,14 @@
 import { Component, Host, h, Prop, State, Watch, Element } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import { translations, userState } from 'ftb-models';
+import ResizeObserver from 'resize-observer-polyfill';
+
 @Component({
   tag: 'ftb-pagination',
   styleUrl: 'ftb-pagination.component.scss',
   shadow: false,
 })
-export class FtbPagination2 {
+export class FtbPagination {
   /** items to render */
   @Prop() items!: any[];
   /** total number of items (this.items.length might be less if not fully loaded) */
@@ -63,10 +65,14 @@ export class FtbPagination2 {
     pageLoaded: false,
     displayedItems: [],
   };
-
   @Element() element: HTMLDivElement;
+  private resizeObserver: ResizeObserver;
 
   async componentWillLoad() {
+    this.resizeObserver = new ResizeObserver(() => {
+      this.defineDimensions();
+    });
+    this.resizeObserver.observe(this.element);
     this.defineDimensions();
     await this.onCurrentIdxChange();
   }
@@ -79,6 +85,10 @@ export class FtbPagination2 {
 
   @Watch('items') onItemsChange() {
     this.defineTotalPages();
+  }
+
+  disconnectedCallback() {
+    this.resizeObserver.disconnect();
   }
 
   /**
