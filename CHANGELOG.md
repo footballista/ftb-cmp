@@ -1,3 +1,13 @@
+## [1.3.4](https://github.com/footballista/ftb-cmp/compare/1.3.3...1.3.4) (2021-02-02)
+
+
+### Bug Fixes
+
+* added ionic router support in ftb-link component ([5eff5ea](https://github.com/footballista/ftb-cmp/commit/5eff5eae72f5df91a053e87f7371275cb9f0c20e))
+* resize observer returned to pagination component ([9f0599c](https://github.com/footballista/ftb-cmp/commit/9f0599c9304900ad2b6fe8cbb0034680a6389bca))
+
+
+
 ## [1.3.3](https://github.com/footballista/ftb-cmp/compare/1.3.2...1.3.3) (2021-01-24)
 
 
