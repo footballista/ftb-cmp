@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { routingState } from 'ftb-models';
+import { envState, routingState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-link',
@@ -25,10 +25,18 @@ export class FtbLink {
   }
 
   render() {
-    return (
-      <a href={this.url}>
-        <slot></slot>
-      </a>
-    );
+    if (envState.appMode === 'ionic') {
+      return (
+        <ion-router-link href={this.url}>
+          <slot></slot>
+        </ion-router-link>
+      );
+    } else {
+      return (
+        <a href={this.url}>
+          <slot></slot>
+        </a>
+      );
+    }
   }
 }
