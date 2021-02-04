@@ -1,3 +1,12 @@
+## [1.3.5](https://github.com/footballista/ftb-cmp/compare/1.3.4...1.3.5) (2021-02-04)
+
+
+### Bug Fixes
+
+* removed unnecessary key code check in searchable content ([f7ca26f](https://github.com/footballista/ftb-cmp/commit/f7ca26f89bf88788de0c724c9e3610dabddc530e))
+
+
+
 ## [1.3.4](https://github.com/footballista/ftb-cmp/compare/1.3.3...1.3.4) (2021-02-02)
 
 
