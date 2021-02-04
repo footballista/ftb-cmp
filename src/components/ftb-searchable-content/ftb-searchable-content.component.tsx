@@ -138,10 +138,7 @@ export class FtbSearchableContent {
   }
 
   private onKeyUp(e: KeyboardEvent) {
-    const inp = String.fromCharCode(e.keyCode);
-    if (/[a-zA-Z0-9-_ ]/.test(inp)) {
-      this.queryChanges$.next(e.target['value']);
-    }
+    this.queryChanges$.next(e.target['value']);
   }
 
   private onCategoryInputKeyDown(c: CategoryInterface, e: KeyboardEvent) {
