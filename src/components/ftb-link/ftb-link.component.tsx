@@ -1,5 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
 import { envState, routingState } from 'ftb-models';
+import { buildRoute } from 'ftb-models/dist/tools/build-route';
 
 @Component({
   tag: 'ftb-link',
@@ -13,14 +14,7 @@ export class FtbLink {
 
   componentWillLoad() {
     if (routingState.routes[this.route]) {
-      let url = routingState.routes[this.route];
-      if (this.params) {
-        for (const key in this.params) {
-          url = url.replace(':' + key, encodeURI(this.params[key] + ''));
-        }
-      }
-
-      this.url = url;
+      this.url = buildRoute(routingState.routes[this.route], this.params);
     }
   }
 
