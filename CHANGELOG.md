@@ -1,3 +1,12 @@
+## [1.3.6](https://github.com/footballista/ftb-cmp/compare/1.3.5...1.3.6) (2021-02-07)
+
+
+### Bug Fixes
+
+* using buildRoute method in ftb-link component ([4c4de6c](https://github.com/footballista/ftb-cmp/commit/4c4de6c9765f6bb7bf5132b164083c105c038a0c))
+
+
+
 ## [1.3.5](https://github.com/footballista/ftb-cmp/compare/1.3.4...1.3.5) (2021-02-04)
 
 
