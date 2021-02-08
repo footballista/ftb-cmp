@@ -1,3 +1,12 @@
+## [1.3.8](https://github.com/footballista/ftb-cmp/compare/1.3.7...1.3.8) (2021-02-08)
+
+
+### Bug Fixes
+
+* teams label in ftb-stage-table ([8dee23f](https://github.com/footballista/ftb-cmp/commit/8dee23fc9be0946f0eeccd5efab0fee1e691a28b))
+
+
+
 ## [1.3.7](https://github.com/footballista/ftb-cmp/compare/1.3.6...1.3.7) (2021-02-08)
 
 
