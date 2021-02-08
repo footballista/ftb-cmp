@@ -1,6 +1,5 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
 import { Team, envState } from 'ftb-models';
-import { FtbTeamLogoMode } from './ftb-team-logo-mode';
 import Shield from '../../assets/icons/shield.svg';
 
 @Component({
@@ -9,7 +8,7 @@ import Shield from '../../assets/icons/shield.svg';
   shadow: false,
 })
 export class FtbTeamLogo {
-  @Prop() mode: FtbTeamLogoMode = FtbTeamLogoMode.min;
+  @Prop() mode: 'min' | 'middle' | 'max' = 'min';
   @Prop() team: Team; // pass team model or separate properties below ↙
   @Prop() logo: string;
   @Prop() name: string;

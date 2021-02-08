@@ -29,7 +29,6 @@ import {
 import { FtbGameCardField } from './components/ftb-game-card/ftb-game-card-fields';
 import { FtbCustomLinkProp } from './components/ftb-link/ftb-custom-link-prop';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
-import { FtbTeamLogoMode } from './components/ftb-team-logo/ftb-team-logo-mode';
 export namespace Components {
   interface CmpShowcase {}
   interface FtbAlertArticle {
@@ -633,7 +632,7 @@ export namespace Components {
   interface FtbTeamLogo {
     caption: string;
     logo: string;
-    mode: FtbTeamLogoMode;
+    mode: 'min' | 'middle' | 'max';
     name: string;
     team: Team;
     version: number;
@@ -1915,7 +1914,7 @@ declare namespace LocalJSX {
   interface FtbTeamLogo {
     caption?: string;
     logo?: string;
-    mode?: FtbTeamLogoMode;
+    mode?: 'min' | 'middle' | 'max';
     name?: string;
     onColor?: (event: CustomEvent<[number, number, number][]>) => void;
     team?: Team;
