@@ -1,3 +1,12 @@
+## [1.3.7](https://github.com/footballista/ftb-cmp/compare/1.3.6...1.3.7) (2021-02-08)
+
+
+### Bug Fixes
+
+* team-logo mode signature simplified ([cd6cd86](https://github.com/footballista/ftb-cmp/commit/cd6cd862a33eea31fc4e026849746895d50a3034))
+
+
+
 ## [1.3.6](https://github.com/footballista/ftb-cmp/compare/1.3.5...1.3.6) (2021-02-07)
 
 
