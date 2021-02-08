@@ -149,7 +149,11 @@ export class FtbStageTable {
       <div class="ftb-stage-table__head">
         {this.structure.label && <div class="label" style={this.getFieldStyle('label')}></div>}
         {this.structure.position && <div class="position" style={this.getFieldStyle('position')}></div>}
-        {this.structure.shortName && <div class="name" style={this.getFieldStyle('name')}></div>}
+        {this.structure.shortName && (
+          <div class="name" style={this.getFieldStyle('name')}>
+            {translations.team.team[userState.language]}
+          </div>
+        )}
         {this.structure.name && (
           <div class="name" style={this.getFieldStyle('name')}>
             <div class="stage-name">{this.stage.name}</div>
