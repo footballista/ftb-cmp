@@ -1,6 +1,5 @@
 import { Component, h, Host, Prop, State } from '@stencil/core';
 import {
-  diState,
   Game,
   Season,
   SeasonService,
@@ -37,7 +36,7 @@ export class FtbTeamSeasonCard {
   }> = [];
 
   componentWillLoad() {
-    new SeasonService(diState.gql).loadSeasonStandings(this.season._id).then(s => {
+    new SeasonService().loadSeasonStandings(this.season._id).then(s => {
       this.season.champ = s.champ;
       this.stagesStats = [];
       sortBy(s.stages, ['sortIdx']).forEach(st => {

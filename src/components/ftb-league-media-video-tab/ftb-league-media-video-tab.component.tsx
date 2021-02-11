@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { Game, League, Post, translations, LeagueService, diState, userState } from 'ftb-models';
+import { Game, League, Post, translations, LeagueService, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-league-media-video-tab',
@@ -18,7 +18,7 @@ export class FtbLeagueMediaVideoTab {
     XtoY?: number;
   };
   private filtersOn = false;
-  private leagueService = new LeagueService(diState.gql);
+  private leagueService = new LeagueService();
   private abortHttpController: AbortController;
 
   componentWillLoad() {

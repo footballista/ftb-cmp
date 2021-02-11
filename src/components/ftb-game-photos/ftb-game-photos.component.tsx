@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { diState, Game, GamePhoto, GameService } from 'ftb-models';
+import { Game, GamePhoto, GameService } from 'ftb-models';
 import { FtbCustomLinkProp } from '../ftb-link/ftb-custom-link-prop';
 
 @Component({
@@ -25,7 +25,7 @@ export class FtbGamePhotos {
   @State() update = 0;
 
   componentWillLoad() {
-    new GameService(diState.gql).loadGamePhotos(this.game._id).then(g => {
+    new GameService().loadGamePhotos(this.game._id).then(g => {
       this.game.photoset = g.photoset;
       if (window?.location.href.includes('#&gid=')) {
         this.galleryIdx = parseInt(window.location.href.split('&pid=')[1]);

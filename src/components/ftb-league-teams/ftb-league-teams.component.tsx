@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { filter, League, translations, userState, Team, LeagueService, diState } from 'ftb-models';
+import { filter, League, translations, userState, Team, LeagueService } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import orderBy from 'lodash-es/orderBy';
 
@@ -22,7 +22,7 @@ export class FtbLeagueTeams {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
-    new LeagueService(diState.gql).loadLeagueTeams(this.league._id).then(l => {
+    new LeagueService().loadLeagueTeams(this.league._id).then(l => {
       l.teams.items = orderBy(l.teams.items, ['rating'], ['desc']);
       this.league.teams = l.teams;
       this.ready$.next(true);

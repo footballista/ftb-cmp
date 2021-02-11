@@ -1,16 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import {
-  Document,
-  filter,
-  League,
-  translations,
-  GraphqlClient,
-  HttpClient,
-  User,
-  LeagueService,
-  userState,
-  envState,
-} from 'ftb-models';
+import { Document, filter, League, translations, LeagueService, userState, envState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import Doc from '../../assets/icons/doc.svg';
 import Pdf from '../../assets/icons/pdf.svg';
@@ -36,9 +25,7 @@ export class FtbLeagueDocuments {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
-    //todo move somewhere
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
-    new LeagueService(gql).loadLeagueDocuments(this.league._id).then(l => {
+    new LeagueService().loadLeagueDocuments(this.league._id).then(l => {
       this.league.documents = l.documents;
       this.ready$.next(true);
       this.ready$.complete();

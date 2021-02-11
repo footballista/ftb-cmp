@@ -1,15 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import {
-  filter,
-  League,
-  Stadium,
-  translations,
-  GraphqlClient,
-  HttpClient,
-  User,
-  LeagueService,
-  userState,
-} from 'ftb-models';
+import { filter, League, Stadium, translations, LeagueService, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 
 @Component({
@@ -32,9 +22,7 @@ export class FtbLeagueStadiums {
   private ready$ = new AsyncSubject<boolean>();
 
   componentWillLoad() {
-    //todo move somewhere
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
-    new LeagueService(gql).loadLeagueStadiums(this.league._id).then(l => {
+    new LeagueService().loadLeagueStadiums(this.league._id).then(l => {
       this.league.stadiums = l.stadiums;
       this.ready$.next(true);
       this.ready$.complete();

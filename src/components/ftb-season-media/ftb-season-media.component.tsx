@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Season, SeasonService, diState } from 'ftb-models';
+import { Season, SeasonService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-season-media',
@@ -11,7 +11,7 @@ export class FtbSeasonMedia {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new SeasonService(diState.gql).loadSeasonMedia(this.season._id).then(s => {
+    new SeasonService().loadSeasonMedia(this.season._id).then(s => {
       this.season.news = s.news;
       this.season.gamesWithPhotos = s.gamesWithPhotos;
       this.season.gamesWithVideos = s.gamesWithVideos;

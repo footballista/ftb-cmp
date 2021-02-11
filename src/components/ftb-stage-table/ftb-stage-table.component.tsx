@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
-import { Stage, TableRow, translations, userState, diState, Sports, GameState } from 'ftb-models';
+import { Stage, TableRow, translations, userState, Sports, GameState } from 'ftb-models';
 import ResizeObserver from 'resize-observer-polyfill';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
@@ -65,7 +65,7 @@ export class FtbStageTable {
   componentWillLoad() {
     this.W = Object.assign(this.W, this.customWidths);
     if (this.showChess) {
-      new StageService(diState.gql).loadStageGames(this.stage._id).then(s => {
+      new StageService().loadStageGames(this.stage._id).then(s => {
         this.stage.games = s.games;
         this.chessLoaded = true;
       });

@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Game, GamePhoto, translations, userState, GameService, diState } from 'ftb-models';
+import { Game, GamePhoto, translations, userState, GameService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-game-media',
@@ -13,7 +13,7 @@ export class FtbGameMedia {
   @State() update = 0;
 
   componentWillLoad() {
-    new GameService(diState.gql).loadGameMedia(this.game._id).then(g => {
+    new GameService().loadGameMedia(this.game._id).then(g => {
       this.game.photoset = g.photoset;
       this.game.videos = g.videos;
       if (window?.location.href.includes('#&gid=')) {

@@ -9,8 +9,6 @@ import {
   GamePhoto,
   GamePhotoImg,
   GameService,
-  GraphqlClient,
-  HttpClient,
   League,
   LeagueService,
   PersonService,
@@ -58,16 +56,15 @@ export class CmpTest {
 
   async componentWillLoad() {
     envState.localHost = location.href.split('/')[0];
-
-    const gql = new GraphqlClient(new HttpClient('AFL_RU', new User()), 'http://localhost:3004/graphql/');
+    envState.envMode = 'dev';
     await Promise.all([
-      (async () => (this.data.game = await new GameService(gql).loadFullGameInfo(this.data.game._id)))(),
-      (async () => (this.data.league = await new LeagueService(gql).loadLeagueInfo(this.data.league._id)))(),
-      (async () => (this.data.season = await new SeasonService(gql).loadSeasonStandings(this.data.season._id)))(),
-      (async () => (this.data.team = await new TeamService(gql).loadTeamInfo(this.data.team._id)))(),
-      (async () => (this.data.stadium = await new StadiumService(gql).loadStadiumGames(this.data.stadium._id)))(),
-      (async () => (this.data.person = await new PersonService(gql).loadPersonInfo(this.data.person._id)))(),
-      (async () => (this.data.player = await new PlayerService(gql).loadPlayerInfo(this.data.player._id)))(),
+      (async () => (this.data.game = await new GameService().loadFullGameInfo(this.data.game._id)))(),
+      (async () => (this.data.league = await new LeagueService().loadLeagueInfo(this.data.league._id)))(),
+      (async () => (this.data.season = await new SeasonService().loadSeasonStandings(this.data.season._id)))(),
+      (async () => (this.data.team = await new TeamService().loadTeamInfo(this.data.team._id)))(),
+      (async () => (this.data.stadium = await new StadiumService().loadStadiumGames(this.data.stadium._id)))(),
+      (async () => (this.data.person = await new PersonService().loadPersonInfo(this.data.person._id)))(),
+      (async () => (this.data.player = await new PlayerService().loadPlayerInfo(this.data.player._id)))(),
     ]);
     // user
     // stadium

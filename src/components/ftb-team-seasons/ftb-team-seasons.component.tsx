@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { diState, filter, Team, TeamService, translations, userState } from 'ftb-models';
+import { filter, Team, TeamService, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ export class FtbTeamSeasons {
   private ready$ = new AsyncSubject();
 
   componentWillLoad() {
-    new TeamService(diState.gql).loadTeamSeasons(this.team._id).then(t => {
+    new TeamService().loadTeamSeasons(this.team._id).then(t => {
       this.team.seasons = t.seasons;
       this.ready$.next(true);
       this.ready$.complete();

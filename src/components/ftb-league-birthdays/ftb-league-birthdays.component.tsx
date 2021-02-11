@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { League, translations, userState, diState, LeagueService, Player } from 'ftb-models';
+import { League, translations, userState, LeagueService, Player } from 'ftb-models';
 
 @Component({
   tag: 'ftb-league-birthdays',
@@ -19,7 +19,7 @@ export class FtbLeagueBirthdays {
   };
 
   async componentWillLoad() {
-    const league = await new LeagueService(diState.gql).loadLeagueBirthdays(this.league._id);
+    const league = await new LeagueService().loadLeagueBirthdays(this.league._id);
     this.league.birthdays = league.birthdays;
   }
 

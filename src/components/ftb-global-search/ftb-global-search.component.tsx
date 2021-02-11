@@ -6,8 +6,6 @@ import {
   League,
   translations,
   userState,
-  diState,
-  envState,
   LeagueService,
   GlobalSearchResult,
   isGlobalSearchResultChamp,
@@ -44,7 +42,7 @@ export class FtbGlobalSearch {
 
   async componentWillLoad() {
     this.savedResults = (await getFromStorage(LS_RESULTS_KEY)) || [];
-    this.leagues = await new LeagueService(diState.gql).loadLeagues();
+    this.leagues = await new LeagueService().loadLeagues();
   }
 
   render() {
@@ -147,12 +145,7 @@ export class FtbGlobalSearch {
     if (!this.filtersOn) return (this.results = []);
     this.searchInProgress = true;
     this.abortHttpController = new AbortController();
-    this.results = await new GlobalSearchService(diState.http, envState.apiHost).search(
-      query,
-      leagueId,
-      cityId,
-      this.abortHttpController.signal,
-    );
+    this.results = await new GlobalSearchService().search(query, leagueId, cityId, this.abortHttpController.signal);
     this.searchInProgress = false;
     return this.results;
   }

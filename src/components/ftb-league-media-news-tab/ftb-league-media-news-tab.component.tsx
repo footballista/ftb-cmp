@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { League, Post, translations, LeagueService, diState, userState } from 'ftb-models';
+import { League, Post, translations, LeagueService, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-league-media-news-tab',
@@ -19,7 +19,7 @@ export class FtbLeagueMediaNewsTab {
   };
 
   private filtersOn = false;
-  private leagueService = new LeagueService(diState.gql);
+  private leagueService = new LeagueService();
   private abortHttpController: AbortController;
 
   componentWillLoad() {

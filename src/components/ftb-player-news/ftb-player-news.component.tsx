@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { diState, Player, PlayerService } from 'ftb-models';
+import { Player, PlayerService } from 'ftb-models';
 @Component({
   tag: 'ftb-player-news',
   styleUrl: 'ftb-player-news.component.scss',
@@ -19,7 +19,7 @@ export class FtbPlayerNews {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new PlayerService(diState.gql).loadPlayerNews(this.player._id).then(p => {
+    new PlayerService().loadPlayerNews(this.player._id).then(p => {
       this.player.news = p.news;
       this.loaded = true;
     });

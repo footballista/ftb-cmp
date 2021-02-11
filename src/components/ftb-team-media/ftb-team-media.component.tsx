@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Team, diState, TeamService } from 'ftb-models';
+import { Team, TeamService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-team-media',
@@ -11,7 +11,7 @@ export class FtbTeamMedia {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new TeamService(diState.gql).loadTeamMedia(this.team._id).then(s => {
+    new TeamService().loadTeamMedia(this.team._id).then(s => {
       this.team.news = s.news;
       this.team.gamesWithPhotos = s.gamesWithPhotos;
       this.team.gamesWithVideos = s.gamesWithVideos;

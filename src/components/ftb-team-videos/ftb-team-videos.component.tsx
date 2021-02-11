@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { diState, Team, TeamService } from 'ftb-models';
+import { Team, TeamService } from 'ftb-models';
 @Component({
   tag: 'ftb-team-videos',
   styleUrl: 'ftb-team-videos.component.scss',
@@ -19,7 +19,7 @@ export class FtbTeamVideos {
   @State() loaded: boolean;
 
   componentWillLoad() {
-    new TeamService(diState.gql).loadTeamVideos(this.team._id).then(t => {
+    new TeamService().loadTeamVideos(this.team._id).then(t => {
       this.team.gamesWithVideos = t.gamesWithVideos;
       this.loaded = true;
     });

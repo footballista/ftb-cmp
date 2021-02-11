@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { filter, translations, Player, PlayerService, userState, diState } from 'ftb-models';
+import { filter, translations, Player, PlayerService, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-player-career',
@@ -11,7 +11,7 @@ export class FtbPlayerCareer {
   @State() loaded = false;
 
   componentWillLoad() {
-    new PlayerService(diState.gql).loadPlayerCareer(this.player._id).then(p => {
+    new PlayerService().loadPlayerCareer(this.player._id).then(p => {
       this.player.career = p.career;
       this.loaded = true;
     });

@@ -1,5 +1,5 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
-import { Banner, BannerSlotCode, User, HttpClient, envState } from 'ftb-models';
+import { Banner, BannerSlotCode, HttpClient, envState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-partner-banner',
@@ -15,7 +15,6 @@ export class FtbPartnerBanner {
   private src: string;
 
   async componentWillLoad() {
-    this.httpClient = new HttpClient(envState.appKey, new User());
     this.banner = await this.loadBanner();
     if (this.banner?._id) {
       this.src = envState.imgHost + '/img/banners/' + this.banner._id + '.gif?version=' + this.banner.photoId;
@@ -27,7 +26,7 @@ export class FtbPartnerBanner {
     headers.append('Content-Type', 'application/json');
 
     return new Banner(
-      await this.httpClient.load({
+      await new HttpClient().load({
         host: envState.apiHost,
         url: `/banners/build_banner`,
         method: 'POST',

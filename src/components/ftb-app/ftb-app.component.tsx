@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { firebaseState, getFromStorage, userState, Language } from 'ftb-models';
+import { getFromStorage, userState, Language } from 'ftb-models';
 
 @Component({
   tag: 'ftb-app',
@@ -20,19 +20,18 @@ export class FtbApp {
 
   async componentWillLoad() {
     const language = (await getFromStorage('language')) || Language.default;
-    if (this.firebaseConfig) {
-      const firebase = (await import('firebase/app')).default;
-      await import('firebase/messaging');
-      const fireApp = await firebase.initializeApp(this.firebaseConfig);
-      firebaseState.messaging = fireApp.messaging();
-      userState.token = await firebaseState.messaging.getToken({
-        vapidKey: this.firebaseConfig.vapidKey,
-      });
-    }
+    // if (this.firebaseConfig) {
+    //   const firebase = (await import('firebase/app')).default;
+    // await import('firebase/messaging');
+    // const fireApp = await firebase.initializeApp(this.firebaseConfig);
+    // firebaseState.messaging = fireApp.messaging();
+    // userState.token = await firebaseState.messaging.getToken({
+    //   vapidKey: this.firebaseConfig.vapidKey,
+    // });
+    // }
 
     userState.language = language;
-    userState.token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjEsImlhdCI6MTYwODg4MDkwNn0.yGTFmJkkynbkm2MKBzZtg8sGcf_LC6okS67Tbz893KY';
+    // userState.token = '';
   }
 
   render() {

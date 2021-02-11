@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { Game, League, Post, translations, diState, userState, LeagueService } from 'ftb-models';
+import { Game, League, Post, translations, userState, LeagueService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-league-media-photo-tab',
@@ -18,7 +18,7 @@ export class FtbLeagueMediaPhotoTab {
     XtoY?: number;
   };
   private filtersOn = false;
-  private leagueService = new LeagueService(diState.gql);
+  private leagueService = new LeagueService();
   private abortHttpController: AbortController;
 
   componentWillLoad() {

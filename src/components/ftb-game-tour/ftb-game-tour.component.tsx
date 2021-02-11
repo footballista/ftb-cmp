@@ -1,4 +1,4 @@
-import { Component, Element, h, Host, Prop } from '@stencil/core';
+import { Component, h, Host, Prop } from '@stencil/core';
 import { Game, StageFormat, translations, userState } from 'ftb-models';
 
 @Component({
@@ -8,7 +8,6 @@ import { Game, StageFormat, translations, userState } from 'ftb-models';
 })
 export class FtbGameTour {
   @Prop() game: Game;
-  @Element() element: HTMLElement;
 
   render() {
     return (
