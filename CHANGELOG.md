@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/footballista/ftb-cmp/compare/2.0.0...2.1.0) (2021-02-11)
+
+
+### Features
+
+* added license agreement component ([bb5e90a](https://github.com/footballista/ftb-cmp/commit/bb5e90a4795d4fb71e7adc80c73b386872ac2f93))
+
+
+
 # [2.0.0](https://github.com/footballista/ftb-cmp/compare/1.3.8...2.0.0) (2021-02-11)
 
 
