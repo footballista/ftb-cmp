@@ -16,6 +16,7 @@ import {
   GameStaff,
   GameVideo,
   League,
+  LicenseAgreement,
   Player,
   PlayerGame,
   Post,
@@ -279,6 +280,9 @@ export namespace Components {
       stretchY?: boolean;
       XtoY?: number;
     };
+  }
+  interface FtbLicenseAgreement {
+    license: LicenseAgreement;
   }
   interface FtbLink {
     params: { [key: string]: string | number };
@@ -950,6 +954,11 @@ declare global {
     prototype: HTMLFtbLeagueTeamsElement;
     new (): HTMLFtbLeagueTeamsElement;
   };
+  interface HTMLFtbLicenseAgreementElement extends Components.FtbLicenseAgreement, HTMLStencilElement {}
+  var HTMLFtbLicenseAgreementElement: {
+    prototype: HTMLFtbLicenseAgreementElement;
+    new (): HTMLFtbLicenseAgreementElement;
+  };
   interface HTMLFtbLinkElement extends Components.FtbLink, HTMLStencilElement {}
   var HTMLFtbLinkElement: {
     prototype: HTMLFtbLinkElement;
@@ -1249,6 +1258,7 @@ declare global {
     'ftb-league-media-video-tab': HTMLFtbLeagueMediaVideoTabElement;
     'ftb-league-stadiums': HTMLFtbLeagueStadiumsElement;
     'ftb-league-teams': HTMLFtbLeagueTeamsElement;
+    'ftb-license-agreement': HTMLFtbLicenseAgreementElement;
     'ftb-link': HTMLFtbLinkElement;
     'ftb-media': HTMLFtbMediaElement;
     'ftb-media-news': HTMLFtbMediaNewsElement;
@@ -1556,6 +1566,9 @@ declare namespace LocalJSX {
       stretchY?: boolean;
       XtoY?: number;
     };
+  }
+  interface FtbLicenseAgreement {
+    license?: LicenseAgreement;
   }
   interface FtbLink {
     params?: { [key: string]: string | number };
@@ -2060,6 +2073,7 @@ declare namespace LocalJSX {
     'ftb-league-media-video-tab': FtbLeagueMediaVideoTab;
     'ftb-league-stadiums': FtbLeagueStadiums;
     'ftb-league-teams': FtbLeagueTeams;
+    'ftb-license-agreement': FtbLicenseAgreement;
     'ftb-link': FtbLink;
     'ftb-media': FtbMedia;
     'ftb-media-news': FtbMediaNews;
@@ -2163,6 +2177,7 @@ declare module '@stencil/core' {
         JSXBase.HTMLAttributes<HTMLFtbLeagueMediaVideoTabElement>;
       'ftb-league-stadiums': LocalJSX.FtbLeagueStadiums & JSXBase.HTMLAttributes<HTMLFtbLeagueStadiumsElement>;
       'ftb-league-teams': LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
+      'ftb-license-agreement': LocalJSX.FtbLicenseAgreement & JSXBase.HTMLAttributes<HTMLFtbLicenseAgreementElement>;
       'ftb-link': LocalJSX.FtbLink & JSXBase.HTMLAttributes<HTMLFtbLinkElement>;
       'ftb-media': LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
       'ftb-media-news': LocalJSX.FtbMediaNews & JSXBase.HTMLAttributes<HTMLFtbMediaNewsElement>;

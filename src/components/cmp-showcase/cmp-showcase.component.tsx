@@ -9,8 +9,10 @@ import {
   GamePhoto,
   GamePhotoImg,
   GameService,
+  Language,
   League,
   LeagueService,
+  LicenseAgreementService,
   PersonService,
   Player,
   PlayerService,
@@ -52,6 +54,7 @@ export class CmpTest {
     player: new Player({ _id: 453593 }),
     showGallery: false,
     galleryIdx: 0,
+    licenseAgreement: null,
   };
 
   async componentWillLoad() {
@@ -65,6 +68,11 @@ export class CmpTest {
       (async () => (this.data.stadium = await new StadiumService().loadStadiumGames(this.data.stadium._id)))(),
       (async () => (this.data.person = await new PersonService().loadPersonInfo(this.data.person._id)))(),
       (async () => (this.data.player = await new PlayerService().loadPlayerInfo(this.data.player._id)))(),
+      (async () =>
+        (this.data.licenseAgreement = await new LicenseAgreementService().loadLicenseAgreement(
+          'AFL_RU',
+          Language.ru,
+        )))(),
     ]);
     // user
     // stadium
@@ -82,6 +90,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.globalSearch(),
+      this.licenseAgreement(),
       this.banner(),
       this.profileAlerts(),
       this.playerCareer(),
@@ -186,6 +195,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-global-search></ftb-global-search>,
+        },
+      ],
+    };
+  }
+
+  private licenseAgreement() {
+    return {
+      title: 'License agreement',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-license-agreement license={this.data.licenseAgreement} />,
         },
       ],
     };
