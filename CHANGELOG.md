@@ -1,3 +1,12 @@
+# [2.2.0](https://github.com/footballista/ftb-cmp/compare/2.1.0...2.2.0) (2021-02-13)
+
+
+### Features
+
+* added "ftb-league-sports-icon" component ([0100870](https://github.com/footballista/ftb-cmp/commit/0100870a7f00ca2d25f1cae6b837a91e215122f1))
+
+
+
 # [2.1.0](https://github.com/footballista/ftb-cmp/compare/2.0.0...2.1.0) (2021-02-11)
 
 
