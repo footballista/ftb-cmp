@@ -257,6 +257,9 @@ export namespace Components {
       XtoY?: number;
     };
   }
+  interface FtbLeagueSportsIcon {
+    league: League;
+  }
   interface FtbLeagueStadiums {
     league: League;
     paginationConfig: {
@@ -944,6 +947,11 @@ declare global {
     prototype: HTMLFtbLeagueMediaVideoTabElement;
     new (): HTMLFtbLeagueMediaVideoTabElement;
   };
+  interface HTMLFtbLeagueSportsIconElement extends Components.FtbLeagueSportsIcon, HTMLStencilElement {}
+  var HTMLFtbLeagueSportsIconElement: {
+    prototype: HTMLFtbLeagueSportsIconElement;
+    new (): HTMLFtbLeagueSportsIconElement;
+  };
   interface HTMLFtbLeagueStadiumsElement extends Components.FtbLeagueStadiums, HTMLStencilElement {}
   var HTMLFtbLeagueStadiumsElement: {
     prototype: HTMLFtbLeagueStadiumsElement;
@@ -1256,6 +1264,7 @@ declare global {
     'ftb-league-media-news-tab': HTMLFtbLeagueMediaNewsTabElement;
     'ftb-league-media-photo-tab': HTMLFtbLeagueMediaPhotoTabElement;
     'ftb-league-media-video-tab': HTMLFtbLeagueMediaVideoTabElement;
+    'ftb-league-sports-icon': HTMLFtbLeagueSportsIconElement;
     'ftb-league-stadiums': HTMLFtbLeagueStadiumsElement;
     'ftb-league-teams': HTMLFtbLeagueTeamsElement;
     'ftb-license-agreement': HTMLFtbLicenseAgreementElement;
@@ -1542,6 +1551,9 @@ declare namespace LocalJSX {
       stretchY?: boolean;
       XtoY?: number;
     };
+  }
+  interface FtbLeagueSportsIcon {
+    league: League;
   }
   interface FtbLeagueStadiums {
     league: League;
@@ -2071,6 +2083,7 @@ declare namespace LocalJSX {
     'ftb-league-media-news-tab': FtbLeagueMediaNewsTab;
     'ftb-league-media-photo-tab': FtbLeagueMediaPhotoTab;
     'ftb-league-media-video-tab': FtbLeagueMediaVideoTab;
+    'ftb-league-sports-icon': FtbLeagueSportsIcon;
     'ftb-league-stadiums': FtbLeagueStadiums;
     'ftb-league-teams': FtbLeagueTeams;
     'ftb-license-agreement': FtbLicenseAgreement;
@@ -2175,6 +2188,7 @@ declare module '@stencil/core' {
         JSXBase.HTMLAttributes<HTMLFtbLeagueMediaPhotoTabElement>;
       'ftb-league-media-video-tab': LocalJSX.FtbLeagueMediaVideoTab &
         JSXBase.HTMLAttributes<HTMLFtbLeagueMediaVideoTabElement>;
+      'ftb-league-sports-icon': LocalJSX.FtbLeagueSportsIcon & JSXBase.HTMLAttributes<HTMLFtbLeagueSportsIconElement>;
       'ftb-league-stadiums': LocalJSX.FtbLeagueStadiums & JSXBase.HTMLAttributes<HTMLFtbLeagueStadiumsElement>;
       'ftb-league-teams': LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
       'ftb-license-agreement': LocalJSX.FtbLicenseAgreement & JSXBase.HTMLAttributes<HTMLFtbLicenseAgreementElement>;

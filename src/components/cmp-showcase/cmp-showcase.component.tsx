@@ -18,6 +18,7 @@ import {
   PlayerService,
   Season,
   SeasonService,
+  Sports,
   Stadium,
   StadiumService,
   StageFormat,
@@ -90,6 +91,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.globalSearch(),
+      this.leagueSportsIcon(),
       this.licenseAgreement(),
       this.banner(),
       this.profileAlerts(),
@@ -166,6 +168,30 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
+  }
+
+  private leagueSportsIcon() {
+    return {
+      title: 'League sports ',
+      elements: [
+        {
+          descr: 'Football',
+          e: () => <ftb-league-sports-icon league={new League({ sports: Sports.football })} />,
+        },
+        {
+          descr: 'Volleyball',
+          e: () => <ftb-league-sports-icon league={new League({ sports: Sports.volleyball })} />,
+        },
+        {
+          descr: 'basketball',
+          e: () => <ftb-league-sports-icon league={new League({ sports: Sports.basketball })} />,
+        },
+        {
+          descr: 'Water polo',
+          e: () => <ftb-league-sports-icon league={new League({ sports: Sports.water_polo })} />,
         },
       ],
     };
