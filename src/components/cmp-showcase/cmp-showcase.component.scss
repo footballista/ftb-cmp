@@ -38,6 +38,34 @@
     --fill: darksalmon;
   }
 
+  .stage-table {
+    width: 500px;
+
+    .base-team {
+      color: goldenrod;
+    }
+
+    .form {
+      width: 90px;
+      i {
+        height: 7px;
+        width: 7px;
+        margin: 2px;
+        box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.5);
+        display: inline-block;
+        &.w {
+          background: #0dc190;
+        }
+        &.d {
+          background: #e2bf00;
+        }
+        &.l {
+          background: #ed4c4c;
+        }
+      }
+    }
+  }
+
   ftb-pagination {
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: rgba(0, 0, 0, 0.1);
@@ -351,26 +379,6 @@
       }
       .games {
         width: 60px;
-      }
-
-      .form {
-        width: 90px;
-        i {
-          height: 7px;
-          width: 7px;
-          margin: 2px;
-          box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.5);
-          display: inline-block;
-          &.w {
-            background: #0dc190;
-          }
-          &.d {
-            background: #e2bf00;
-          }
-          &.l {
-            background: #ed4c4c;
-          }
-        }
       }
     }
   }

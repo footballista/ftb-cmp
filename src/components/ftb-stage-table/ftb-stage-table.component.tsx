@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
-import { Stage, TableRow, translations, userState, Sports, GameState } from 'ftb-models';
+import { Stage, TableRow, translations, userState, Sports, GameState, Team } from 'ftb-models';
 import ResizeObserver from 'resize-observer-polyfill';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
@@ -29,7 +29,13 @@ export class FtbStageTable {
     gd?: number;
     form?: number;
   };
-  @State() chessLoaded: boolean;
+
+  /** you can render only a LIMIT of rows. Component defines which rows to render base on "baseTeam" parameter.
+   *  If base team not provided or not found, top of the table will be rendered */
+  @Prop() rowsLimit: { baseTeam?: Team; limit: number };
+
+  @State()
+  chessLoaded: boolean;
   @State() structure: {
     label: boolean;
     position: boolean;
@@ -207,11 +213,27 @@ export class FtbStageTable {
   }
 
   private renderBody() {
+    let sliceStart = 0;
+    let sliceEnd = this.stage.table.length;
+
+    if (this.rowsLimit) {
+      if (!this.rowsLimit.baseTeam || !this.stage.table.some(row => row.team._id == this.rowsLimit.baseTeam._id)) {
+        sliceStart = 0;
+        sliceEnd = this.rowsLimit.limit;
+        if (this.stage.table.length - 1 === sliceEnd) sliceEnd++; //showing full table if only one row left
+      } else {
+        const basePosition = this.stage.table.findIndex(row => row.team._id == this.rowsLimit.baseTeam._id);
+        sliceStart = Math.round(Math.max(0, basePosition - this.rowsLimit.limit / 2));
+        sliceEnd = Math.min(sliceStart + this.rowsLimit.limit, this.stage.table.length);
+        sliceStart = sliceEnd - this.rowsLimit.limit;
+      }
+    }
+
     return (
       <div class="ftb-stage-table__body">
-        {this.stage.table.map((row: TableRow, idx: number) => (
+        {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
           <ftb-link route="team" params={{ teamId: row.team._id, teamName: row.team.name }}>
-            <div class="ftb-stage-table__row">
+            <div class={{ 'ftb-stage-table__row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
                   {row.label == 'chevron-up' && (

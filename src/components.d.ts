@@ -614,6 +614,10 @@ export namespace Components {
       gd?: number;
       form?: number;
     };
+    /**
+     * you can render only a LIMIT of rows. Component defines which rows to render base on "baseTeam" parameter. If base team not provided or not found, top of the table will be rendered
+     */
+    rowsLimit: { baseTeam?: Team; limit: number };
     showChess: boolean;
     stage: Stage;
   }
@@ -1914,6 +1918,10 @@ declare namespace LocalJSX {
       gd?: number;
       form?: number;
     };
+    /**
+     * you can render only a LIMIT of rows. Component defines which rows to render base on "baseTeam" parameter. If base team not provided or not found, top of the table will be rendered
+     */
+    rowsLimit?: { baseTeam?: Team; limit: number };
     showChess?: boolean;
     stage: Stage;
   }

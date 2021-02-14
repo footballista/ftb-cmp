@@ -75,6 +75,9 @@ export class CmpTest {
           Language.ru,
         )))(),
     ]);
+
+    this.data.season.stages.forEach(s => (s.season = this.data.season));
+
     // user
     // stadium
     setTimeout(() => {
@@ -110,6 +113,7 @@ export class CmpTest {
       this.seasonBestPlayers(),
       this.seasonGames(),
       this.stageChess(),
+      this.stageTable(),
       this.seasonStandings(),
       this.seasonStandingsTabs(),
       this.seasonBirthdays(),
@@ -466,6 +470,24 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-season-standings season={this.data.season}></ftb-season-standings>,
+        },
+      ],
+    };
+  }
+
+  private stageTable() {
+    return {
+      title: 'Stage table',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => (
+            <ftb-stage-table
+              class="stage-table"
+              stage={this.data.season.stages[0]}
+              rowsLimit={{ limit: 5, baseTeam: this.data.team }}
+            />
+          ),
         },
       ],
     };
