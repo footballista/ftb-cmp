@@ -1,3 +1,12 @@
+# [2.3.0](https://github.com/footballista/ftb-cmp/compare/2.2.0...2.3.0) (2021-02-14)
+
+
+### Features
+
+* added "base team" mode in stage table ([1b8eab9](https://github.com/footballista/ftb-cmp/commit/1b8eab9dd2802d6faa433233f275d02838358ca4))
+
+
+
 # [2.2.0](https://github.com/footballista/ftb-cmp/compare/2.1.0...2.2.0) (2021-02-13)
 
 
