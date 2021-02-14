@@ -1,3 +1,12 @@
+## [2.3.1](https://github.com/footballista/ftb-cmp/compare/2.3.0...2.3.1) (2021-02-14)
+
+
+### Bug Fixes
+
+* added no-pagination mode in game-events and game-photo components ([dfd7cf6](https://github.com/footballista/ftb-cmp/commit/dfd7cf64667c10ce4ceff59f9664b50b4b1e12fa))
+
+
+
 # [2.3.0](https://github.com/footballista/ftb-cmp/compare/2.2.0...2.3.0) (2021-02-14)
 
 
