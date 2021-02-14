@@ -87,30 +87,34 @@ export class FtbGameEvents {
       });
     }
 
-    return (
-      <Host>
-        <ftb-searchable-content
-          items={this.game.events}
-          renderItems={items => (
-            <ftb-pagination
-              totalItems={filtersOn ? items.length : this.game.events.length}
-              items={items}
-              renderItem={(e: GameEvent) => this.renderEvent(e, hasEventsWithMinute)}
-              rows={this.paginationConfig.rows}
-              fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
-              itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
-              itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
-              stretchX={this.paginationConfig.stretchX}
-              stretchY={this.paginationConfig.stretchY}
-              XtoY={this.paginationConfig.XtoY}
-            ></ftb-pagination>
-          )}
-          filterFn={filterFn}
-          placeholder={translations.player.search_by_player_name[userState.language]}
-          categories={categories}
-        ></ftb-searchable-content>
-      </Host>
-    );
+    if (!this.paginationConfig) {
+      return <Host>{this.game.events.map(e => this.renderEvent(e, hasEventsWithMinute))}</Host>;
+    } else {
+      return (
+        <Host>
+          <ftb-searchable-content
+            items={this.game.events}
+            renderItems={items => (
+              <ftb-pagination
+                totalItems={filtersOn ? items.length : this.game.events.length}
+                items={items}
+                renderItem={(e: GameEvent) => this.renderEvent(e, hasEventsWithMinute)}
+                rows={this.paginationConfig.rows}
+                fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+                itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+                itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+                stretchX={this.paginationConfig.stretchX}
+                stretchY={this.paginationConfig.stretchY}
+                XtoY={this.paginationConfig.XtoY}
+              ></ftb-pagination>
+            )}
+            filterFn={filterFn}
+            placeholder={translations.player.search_by_player_name[userState.language]}
+            categories={categories}
+          ></ftb-searchable-content>
+        </Host>
+      );
+    }
   }
 
   private renderEvent(e: GameEvent, renderMinute: boolean) {

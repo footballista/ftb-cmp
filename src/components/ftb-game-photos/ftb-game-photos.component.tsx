@@ -50,20 +50,24 @@ export class FtbGamePhotos {
             onSlideChanged={e => (this.galleryIdx = e.detail)}
           ></ftb-photo-gallery>
         )}
-        <ftb-pagination
-          key="game-media-photo"
-          totalItems={this.game.photoset.photos.total}
-          items={this.game.photoset.photos.items}
-          currentIdx={this.galleryIdx}
-          renderItem={i => <ftb-game-photo-preview photo={i} onClick={() => openGallery(i)}></ftb-game-photo-preview>}
-          rows={this.paginationConfig.rows}
-          fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
-          itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
-          itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
-          stretchX={this.paginationConfig.stretchX}
-          stretchY={this.paginationConfig.stretchY}
-          XtoY={this.paginationConfig.XtoY}
-        ></ftb-pagination>
+        {this.paginationConfig ? (
+          <ftb-pagination
+            key="game-media-photo"
+            totalItems={this.game.photoset.photos.total}
+            items={this.game.photoset.photos.items}
+            currentIdx={this.galleryIdx}
+            renderItem={i => <ftb-game-photo-preview photo={i} onClick={() => openGallery(i)} />}
+            rows={this.paginationConfig.rows}
+            fixedContainerHeightPx={this.paginationConfig.fixedContainerHeightPx}
+            itemMinWidthPx={this.paginationConfig.itemMinWidthPx}
+            itemMinHeightPx={this.paginationConfig.itemMinHeightPx}
+            stretchX={this.paginationConfig.stretchX}
+            stretchY={this.paginationConfig.stretchY}
+            XtoY={this.paginationConfig.XtoY}
+          ></ftb-pagination>
+        ) : (
+          this.game.photoset.photos.items.map(i => <ftb-game-photo-preview photo={i} onClick={() => openGallery(i)} />)
+        )}
       </Host>
     );
   }
