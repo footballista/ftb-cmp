@@ -48,7 +48,7 @@ export class FtbGamePhotos {
             onClosed={() => (this.showGallery = false)}
             start={this.galleryIdx}
             onSlideChanged={e => (this.galleryIdx = e.detail)}
-          ></ftb-photo-gallery>
+          />
         )}
         {this.paginationConfig ? (
           <ftb-pagination

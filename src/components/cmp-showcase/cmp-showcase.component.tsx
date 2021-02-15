@@ -12,7 +12,9 @@ import {
   Language,
   League,
   LeagueService,
+  LicenseAgreement,
   LicenseAgreementService,
+  NewsService,
   PersonService,
   Player,
   PlayerService,
@@ -25,6 +27,7 @@ import {
   Team,
   TeamService,
   User,
+  Post,
 } from 'ftb-models';
 import range from 'lodash-es/range';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
@@ -53,9 +56,10 @@ export class CmpTest {
     person: new User({ _id: 750 }),
     stadium: new Stadium({ _id: 1086 }),
     player: new Player({ _id: 453593 }),
+    post: new Post({ _id: 88063 }),
     showGallery: false,
     galleryIdx: 0,
-    licenseAgreement: null,
+    licenseAgreement: new LicenseAgreement(),
   };
 
   async componentWillLoad() {
@@ -69,6 +73,7 @@ export class CmpTest {
       (async () => (this.data.stadium = await new StadiumService().loadStadiumGames(this.data.stadium._id)))(),
       (async () => (this.data.person = await new PersonService().loadPersonInfo(this.data.person._id)))(),
       (async () => (this.data.player = await new PlayerService().loadPlayerInfo(this.data.player._id)))(),
+      (async () => (this.data.post = await new NewsService().loadPostInfo(this.data.post._id)))(),
       (async () =>
         (this.data.licenseAgreement = await new LicenseAgreementService().loadLicenseAgreement(
           'AFL_RU',
@@ -94,6 +99,7 @@ export class CmpTest {
     }> = [
       this.langSelect(),
       this.globalSearch(),
+      this.postBody(),
       this.leagueSportsIcon(),
       this.licenseAgreement(),
       this.banner(),
@@ -225,6 +231,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-global-search></ftb-global-search>,
+        },
+      ],
+    };
+  }
+
+  private postBody() {
+    return {
+      title: 'Post body',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-post-body post={this.data.post} />,
         },
       ],
     };

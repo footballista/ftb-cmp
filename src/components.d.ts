@@ -479,6 +479,9 @@ export namespace Components {
     };
     player: Player;
   }
+  interface FtbPostBody {
+    post: Post;
+  }
   interface FtbPostCover {
     post: Post;
   }
@@ -1066,6 +1069,11 @@ declare global {
     prototype: HTMLFtbPlayerVideosElement;
     new (): HTMLFtbPlayerVideosElement;
   };
+  interface HTMLFtbPostBodyElement extends Components.FtbPostBody, HTMLStencilElement {}
+  var HTMLFtbPostBodyElement: {
+    prototype: HTMLFtbPostBodyElement;
+    new (): HTMLFtbPostBodyElement;
+  };
   interface HTMLFtbPostCoverElement extends Components.FtbPostCover, HTMLStencilElement {}
   var HTMLFtbPostCoverElement: {
     prototype: HTMLFtbPostCoverElement;
@@ -1291,6 +1299,7 @@ declare global {
     'ftb-player-team-card': HTMLFtbPlayerTeamCardElement;
     'ftb-player-transfers': HTMLFtbPlayerTransfersElement;
     'ftb-player-videos': HTMLFtbPlayerVideosElement;
+    'ftb-post-body': HTMLFtbPostBodyElement;
     'ftb-post-cover': HTMLFtbPostCoverElement;
     'ftb-searchable-content': HTMLFtbSearchableContentElement;
     'ftb-season-best-players': HTMLFtbSeasonBestPlayersElement;
@@ -1781,6 +1790,9 @@ declare namespace LocalJSX {
     };
     player: Player;
   }
+  interface FtbPostBody {
+    post: Post;
+  }
   interface FtbPostCover {
     post: Post;
   }
@@ -2114,6 +2126,7 @@ declare namespace LocalJSX {
     'ftb-player-team-card': FtbPlayerTeamCard;
     'ftb-player-transfers': FtbPlayerTransfers;
     'ftb-player-videos': FtbPlayerVideos;
+    'ftb-post-body': FtbPostBody;
     'ftb-post-cover': FtbPostCover;
     'ftb-searchable-content': FtbSearchableContent;
     'ftb-season-best-players': FtbSeasonBestPlayers;
@@ -2219,6 +2232,7 @@ declare module '@stencil/core' {
       'ftb-player-team-card': LocalJSX.FtbPlayerTeamCard & JSXBase.HTMLAttributes<HTMLFtbPlayerTeamCardElement>;
       'ftb-player-transfers': LocalJSX.FtbPlayerTransfers & JSXBase.HTMLAttributes<HTMLFtbPlayerTransfersElement>;
       'ftb-player-videos': LocalJSX.FtbPlayerVideos & JSXBase.HTMLAttributes<HTMLFtbPlayerVideosElement>;
+      'ftb-post-body': LocalJSX.FtbPostBody & JSXBase.HTMLAttributes<HTMLFtbPostBodyElement>;
       'ftb-post-cover': LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
       'ftb-searchable-content': LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
       'ftb-season-best-players': LocalJSX.FtbSeasonBestPlayers &
