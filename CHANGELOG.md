@@ -1,3 +1,12 @@
+# [2.4.0](https://github.com/footballista/ftb-cmp/compare/2.3.1...2.4.0) (2021-02-15)
+
+
+### Features
+
+* added post-body component ([1e74e26](https://github.com/footballista/ftb-cmp/commit/1e74e26adc732ba66aad8b8be0521a6eb8e80870))
+
+
+
 ## [2.3.1](https://github.com/footballista/ftb-cmp/compare/2.3.0...2.3.1) (2021-02-14)
 
 
