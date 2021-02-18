@@ -1,3 +1,12 @@
+## [2.4.1](https://github.com/footballista/ftb-cmp/compare/2.4.0...2.4.1) (2021-02-18)
+
+
+### Bug Fixes
+
+* added league info to team card ([b0a708a](https://github.com/footballista/ftb-cmp/commit/b0a708a2f4aaf91f8ff822a51b16a9ab743020d8))
+
+
+
 # [2.4.0](https://github.com/footballista/ftb-cmp/compare/2.3.1...2.4.0) (2021-02-15)
 
 
