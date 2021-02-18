@@ -65,6 +65,7 @@ export class CmpTest {
   async componentWillLoad() {
     envState.localHost = location.href.split('/')[0];
     envState.envMode = 'dev';
+    envState.imgHost = 'https://footballista.ru/api/';
     await Promise.all([
       (async () => (this.data.game = await new GameService().loadFullGameInfo(this.data.game._id)))(),
       (async () => (this.data.league = await new LeagueService().loadLeagueInfo(this.data.league._id)))(),
@@ -98,6 +99,7 @@ export class CmpTest {
       caseStyle?: { [key: string]: string };
     }> = [
       this.langSelect(),
+      this.ftbImg(),
       this.globalSearch(),
       this.postBody(),
       this.leagueSportsIcon(),
@@ -178,6 +180,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-language-select></ftb-language-select>,
+        },
+      ],
+    };
+  }
+
+  private ftbImg() {
+    return {
+      title: 'Ftb img ',
+      elements: [
+        {
+          descr: 'basic',
+          e: () => [<ftb-img src="https://footballista.ru/api/img/logos/West%20Ham-middle.png?logoId=2" />],
         },
       ],
     };
@@ -569,7 +583,16 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-league-teams league={this.data.league}></ftb-league-teams>,
+          e: () => (
+            <ftb-league-teams
+              league={this.data.league}
+              paginationConfig={{
+                itemMinHeightPx: 100,
+                itemMinWidthPx: 100,
+                rows: 1,
+              }}
+            />
+          ),
         },
       ],
     };

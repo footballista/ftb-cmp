@@ -36,18 +36,24 @@ export class FtbLeagueTeamCard {
           <div class={{ 'ftb-team-card__wrapper': true, 'loaded': this.loaded }}>
             <div class="ftb-team-card__background">
               <div class="ftb-team-card__color">
-                <div class="ftb-team-card__color-layer" style={{ background: this.bg[0] }}></div>
-                <div class="ftb-team-card__color-layer" style={{ background: this.bg[1] }}></div>
-                <div class="ftb-team-card__color-layer" style={{ background: this.bg[2] }}></div>
+                <div class="ftb-team-card__color-layer" style={{ background: this.bg[0] }} />
+                <div class="ftb-team-card__color-layer" style={{ background: this.bg[1] }} />
+                <div class="ftb-team-card__color-layer" style={{ background: this.bg[2] }} />
               </div>
               <div class="ftb-team-card__content">
                 <div class="ftb-team-card__logo-wrapper">
-                  <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)}></ftb-team-logo>
+                  <ftb-team-logo team={this.team} onColor={e => this.onTeamColor(e.detail)} mode="middle" />
                 </div>
                 <div class="ftb-team-card__name-rating">
                   <div class="ftb-team-card__name">{this.team.name}</div>
                   <div class="ftb-team-card__rating">{this.team.rating}</div>
                 </div>
+                {this.team.league && (
+                  <div class="ftb-team-card__league">
+                    <ftb-league-sports-icon league={this.team.league} />
+                    {this.team.league.name}
+                  </div>
+                )}
               </div>
             </div>
           </div>
