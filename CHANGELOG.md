@@ -1,3 +1,12 @@
+## [2.4.2](https://github.com/footballista/ftb-cmp/compare/2.4.1...2.4.2) (2021-02-20)
+
+
+### Bug Fixes
+
+* ftb-video:  not rendering img when none loaded ([f673831](https://github.com/footballista/ftb-cmp/commit/f6738313e77580b646234e8108948ed0e718e20b))
+
+
+
 ## [2.4.1](https://github.com/footballista/ftb-cmp/compare/2.4.0...2.4.1) (2021-02-18)
 
 
