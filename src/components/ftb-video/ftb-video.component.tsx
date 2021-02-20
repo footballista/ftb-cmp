@@ -30,7 +30,7 @@ export class FtbVideo {
           <div class={{ 'ftb-video__background': true, 'loaded': this.firstImgLoaded }}>
             <div
               class="ftb-video__image"
-              style={{ 'background-image': `url('${this.images[this.currentIdx]}')` }}
+              style={this.firstImgLoaded ? { 'background-image': `url('${this.images[this.currentIdx]}')` } : {}}
             ></div>
             <div class="ftb-video__title">{this.renderTitle ? this.renderTitle() : this.video.name}</div>
           </div>
