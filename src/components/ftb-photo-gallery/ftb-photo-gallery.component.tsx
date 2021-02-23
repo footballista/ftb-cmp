@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State, Method } from '@stencil/core';
 import { Game, RoleLevel, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe';
@@ -11,15 +11,10 @@ import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
 })
 export class FtbPhotoGallery {
   @Prop() game!: Game;
-  @Prop() start!: number;
   @State() update = 0;
   @Event() closed: EventEmitter<boolean>;
   @Event() slideChanged: EventEmitter<number>;
-  private destroyed$ = new AsyncSubject<boolean>();
-  private pswpEl: HTMLDivElement;
-  private gallery;
-
-  componentDidLoad() {
+  @Method() async open(startIdx: number) {
     const items = this.game.photoset.photos.items.map(p => ({
       src: p.middle.url,
       currSize: 'middle',
@@ -31,7 +26,7 @@ export class FtbPhotoGallery {
     }));
 
     this.gallery = new PhotoSwipe(this.pswpEl, PhotoSwipeUI_Default, items, {
-      index: this.start,
+      index: startIdx,
       shareEl: true,
       captionEl: true,
       shareButtons: [{ id: 'download', label: 'Download image', url: '{{raw_image_url}}', download: true }],
@@ -40,7 +35,6 @@ export class FtbPhotoGallery {
     this.gallery.listen('destroy', () => {
       this.closed.emit(true);
     });
-
     this.gallery.init();
     this.gallery.listen('afterChange', () => {
       this.update++;
@@ -48,8 +42,14 @@ export class FtbPhotoGallery {
     });
     this.update++;
   }
+  private destroyed$ = new AsyncSubject<boolean>();
+  private pswpEl: HTMLDivElement;
+  private gallery;
+
+  componentDidLoad() {}
 
   disconnectedCallback() {
+    this.gallery = null;
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }

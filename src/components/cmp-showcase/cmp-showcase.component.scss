@@ -456,6 +456,20 @@
     }
   }
 
+  ftb-game-photos {
+    display: flex;
+    flex-wrap: wrap;
+    ftb-game-photo-preview {
+      height: 100px;
+      width: 150px;
+      margin: 2px;
+      ftb-improving-img {
+        height: 100px;
+        width: 150px;
+      }
+    }
+  }
+
   //}
   //
   //ftb-team-logo {

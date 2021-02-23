@@ -395,7 +395,7 @@ export namespace Components {
   }
   interface FtbPhotoGallery {
     game: Game;
-    start: number;
+    open: (startIdx: number) => Promise<void>;
   }
   interface FtbPlayerCareer {
     player: Player;
@@ -1705,7 +1705,6 @@ declare namespace LocalJSX {
     game: Game;
     onClosed?: (event: CustomEvent<boolean>) => void;
     onSlideChanged?: (event: CustomEvent<number>) => void;
-    start: number;
   }
   interface FtbPlayerCareer {
     player: Player;

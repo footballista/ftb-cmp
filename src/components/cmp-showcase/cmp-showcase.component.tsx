@@ -142,6 +142,7 @@ export class CmpTest {
       this.playerPhoto(),
       this.stadiumPhoto(),
       this.photoGallery(),
+      this.gamePhotos(),
       this.improvingImg(),
       this.gamePhotoPreview(),
       this.pagination(),
@@ -1214,11 +1215,7 @@ export class CmpTest {
           e: () => (
             <div class="photo-gallery">
               {this.data.showGallery && (
-                <ftb-photo-gallery
-                  game={this.data.game}
-                  onClosed={() => close()}
-                  start={this.data.galleryIdx}
-                ></ftb-photo-gallery>
+                <ftb-photo-gallery game={this.data.game} onClosed={() => close()}></ftb-photo-gallery>
               )}
               <ftb-pagination
                 totalItems={this.data.game.photoset.photos.total}
@@ -1236,6 +1233,18 @@ export class CmpTest {
               ></ftb-pagination>
             </div>
           ),
+        },
+      ],
+    };
+  }
+
+  private gamePhotos() {
+    return {
+      title: 'photo-gallery',
+      elements: [
+        {
+          descr: 'basic',
+          e: () => <ftb-game-photos game={this.data.game} />,
         },
       ],
     };

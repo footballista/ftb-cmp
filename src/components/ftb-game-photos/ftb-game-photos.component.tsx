@@ -23,6 +23,7 @@ export class FtbGamePhotos {
   @State() showGallery: boolean;
   @State() galleryIdx = 0;
   @State() update = 0;
+  private gallery: HTMLFtbPhotoGalleryElement;
 
   componentWillLoad() {
     new GameService().loadGamePhotos(this.game._id).then(g => {
@@ -34,22 +35,31 @@ export class FtbGamePhotos {
       this.loaded = true;
     });
   }
+
+  connectedCallback() {
+    this.gallery = Object.assign(document.createElement('ftb-photo-gallery'), {
+      game: this.game,
+    });
+    this.gallery.addEventListener('slideChanged', (e: CustomEvent) => (this.galleryIdx = e.detail));
+
+    document.body.appendChild(this.gallery);
+  }
+
   render() {
     const openGallery = (photo: GamePhoto) => {
-      this.galleryIdx = this.game.photoset.photos.items.findIndex(p => p.thumb === photo.thumb);
-      this.showGallery = true;
+      this.gallery.open(this.game.photoset.photos.items.findIndex(p => p.thumb === photo.thumb));
     };
 
     return (
       <Host>
-        {this.showGallery && (
-          <ftb-photo-gallery
-            game={this.game}
-            onClosed={() => (this.showGallery = false)}
-            start={this.galleryIdx}
-            onSlideChanged={e => (this.galleryIdx = e.detail)}
-          />
-        )}
+        {/*{this.showGallery && (*/}
+        {/*  <ftb-photo-gallery*/}
+        {/*    game={this.game}*/}
+        {/*    onClosed={() => (this.showGallery = false)}*/}
+        {/*    start={this.galleryIdx}*/}
+        {/*    onSlideChanged={e => (this.galleryIdx = e.detail)}*/}
+        {/*  />*/}
+        {/*)}*/}
         {this.paginationConfig ? (
           <ftb-pagination
             key="game-media-photo"

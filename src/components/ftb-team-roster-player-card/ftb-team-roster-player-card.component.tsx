@@ -50,7 +50,7 @@ export class FtbTeamRosterPlayerCard {
                         <ftb-team-logo
                           team={t}
                           caption={translations.player.also_playing_in[userState.language] + ' ' + t.name}
-                        ></ftb-team-logo>
+                        />
                       </div>
                     ))}
                 </div>

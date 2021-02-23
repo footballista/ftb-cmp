@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { Game, GamePhoto, translations, userState, GameService } from 'ftb-models';
+import { Game, translations, userState, GameService } from 'ftb-models';
 
 @Component({
   tag: 'ftb-game-media',
@@ -11,6 +11,7 @@ export class FtbGameMedia {
   @State() showGallery: boolean;
   @State() galleryIdx = 0;
   @State() update = 0;
+  private gallery: HTMLFtbPhotoGalleryElement;
 
   componentWillLoad() {
     new GameService().loadGameMedia(this.game._id).then(g => {
@@ -23,6 +24,15 @@ export class FtbGameMedia {
         this.update++;
       }
     });
+  }
+
+  connectedCallback() {
+    this.gallery = Object.assign(document.createElement('ftb-photo-gallery'), {
+      game: this.game,
+    });
+    this.gallery.addEventListener('slideChanged', (e: CustomEvent) => (this.galleryIdx = e.detail));
+
+    document.body.appendChild(this.gallery);
   }
 
   render() {
@@ -55,21 +65,8 @@ export class FtbGameMedia {
   }
 
   private renderPhotoTab() {
-    const openGallery = (photo: GamePhoto) => {
-      this.galleryIdx = this.game.photoset.photos.items.findIndex(p => p.thumb === photo.thumb);
-      this.showGallery = true;
-    };
-
     return (
       <div class="photo-tab">
-        {this.showGallery && (
-          <ftb-photo-gallery
-            game={this.game}
-            onClosed={() => (this.showGallery = false)}
-            start={this.galleryIdx}
-            onSlideChanged={e => (this.galleryIdx = e.detail)}
-          ></ftb-photo-gallery>
-        )}
         <ftb-pagination
           key="game-media-photo"
           totalItems={this.game.photoset.photos.total}
@@ -79,7 +76,7 @@ export class FtbGameMedia {
             <ftb-game-photo-preview
               photo={i}
               style={{ height: '96px', width: '130px' }}
-              onClick={() => openGallery(i)}
+              onClick={() => this.gallery.open(i)}
             ></ftb-game-photo-preview>
           )}
           rows={3}
