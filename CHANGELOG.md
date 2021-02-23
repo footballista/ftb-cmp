@@ -1,3 +1,12 @@
+## [2.4.3](https://github.com/footballista/ftb-cmp/compare/2.4.2...2.4.3) (2021-02-23)
+
+
+### Bug Fixes
+
+* changed photo-gallery initializing mechanism ([0fa6f1d](https://github.com/footballista/ftb-cmp/commit/0fa6f1d1adaf1d9d38e50ef6b9df9bbb9745e91d))
+
+
+
 ## [2.4.2](https://github.com/footballista/ftb-cmp/compare/2.4.1...2.4.2) (2021-02-20)
 
 
