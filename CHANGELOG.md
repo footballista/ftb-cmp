@@ -1,3 +1,7 @@
+## [2.4.4](https://github.com/footballista/ftb-cmp/compare/2.4.3...2.4.4) (2021-08-08)
+
+
+
 ## [2.4.3](https://github.com/footballista/ftb-cmp/compare/2.4.2...2.4.3) (2021-02-23)
 
 
