@@ -24,30 +24,30 @@
     "update": "npm-check-updates -u && npm i"
   },
   "dependencies": {
-    "@capacitor/cli": "^2.4.6",
-    "@capacitor/core": "^2.4.6",
-    "@stencil/core": "^2.4.0",
+    "@capacitor/cli": "^3.1.2",
+    "@capacitor/core": "^3.1.2",
+    "@stencil/core": "^2.6.0",
     "colorthief": "^2.3.2",
     "file-saver": "^2.0.5",
-    "firebase": "^8.2.7",
-    "ftb-models": "^3.0.10",
-    "lodash-es": "^4.17.20",
-    "npm": "^7.5.4",
+    "firebase": "^8.9.0",
+    "ftb-models": "^3.4.4",
+    "lodash-es": "^4.17.21",
+    "npm": "^7.20.5",
     "photoswipe": "^4.1.3",
     "resize-observer-polyfill": "^1.5.1",
-    "rxjs": "^6.6.3"
+    "rxjs": "^7.3.0"
   },
   "license": "MIT",
   "devDependencies": {
     "@stencil/sass": "^1.4.1",
-    "@stencil/store": "^1.3.0",
+    "@stencil/store": "^1.4.1",
     "@types/rx": "^4.1.2",
     "conventional-changelog-cli": "^2.1.1",
-    "inquirer": "^7.3.3",
-    "npm-check-updates": "^11.1.4",
-    "prettier": "^2.2.1",
-    "semver": "^7.3.4",
-    "simple-git": "^2.34.2",
-    "stencil-inline-svg": "^1.0.1"
+    "inquirer": "^8.1.2",
+    "npm-check-updates": "^11.8.3",
+    "prettier": "^2.3.2",
+    "semver": "^7.3.5",
+    "simple-git": "^2.42.0",
+    "stencil-inline-svg": "^1.1.0"
   }
 }
