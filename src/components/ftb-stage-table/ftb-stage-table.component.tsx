@@ -1,6 +1,5 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { Stage, TableRow, translations, userState, Sports, GameState, Team } from 'ftb-models';
-import ResizeObserver from 'resize-observer-polyfill';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';

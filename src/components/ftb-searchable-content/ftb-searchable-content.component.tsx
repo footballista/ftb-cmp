@@ -39,7 +39,7 @@ export class FtbSearchableContent {
   @Element() element: HTMLElement;
   private inputEl: HTMLInputElement;
   private queryChanges$ = new Subject<string>();
-  private categoryUpdated$ = new Subject();
+  private categoryUpdated$ = new Subject<boolean>();
   private onDestroyed$ = new AsyncSubject();
   private ready$ = new AsyncSubject();
   private inputDirty = false;
@@ -188,7 +188,7 @@ export class FtbSearchableContent {
       c.open = false;
       if (this.getCategories) this.categories = this.getCategories(this.categories);
       if (c.lsKey) setToStorage(c.lsKey, o);
-      this.categoryUpdated$.next();
+      this.categoryUpdated$.next(true);
     }
     this.inputEl.focus();
   }
