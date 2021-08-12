@@ -27,7 +27,6 @@ import {
   TransferRequest,
   User,
 } from 'ftb-models';
-import { FtbGameCardField } from './components/ftb-game-card/ftb-game-card-fields';
 import { FtbCustomLinkProp } from './components/ftb-link/ftb-custom-link-prop';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 export namespace Components {
@@ -70,12 +69,60 @@ export namespace Components {
     flag: string;
   }
   interface FtbGameCard {
-    bottomFields: FtbGameCardField[];
+    bottomFields: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
     game: Game;
-    leftFields: FtbGameCardField[];
+    leftFields: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
     playerStats: PlayerGame['stats'];
-    rightFields: FtbGameCardField[];
-    topFields: FtbGameCardField[];
+    rightFields: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
+    topFields: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
   }
   interface FtbGameDate {
     game: Game;
@@ -1375,12 +1422,60 @@ declare namespace LocalJSX {
     onColor?: (event: CustomEvent<[number, number, number][]>) => void;
   }
   interface FtbGameCard {
-    bottomFields?: FtbGameCardField[];
+    bottomFields?: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
     game: Game;
-    leftFields?: FtbGameCardField[];
+    leftFields?: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
     playerStats?: PlayerGame['stats'];
-    rightFields?: FtbGameCardField[];
-    topFields?: FtbGameCardField[];
+    rightFields?: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
+    topFields?: Array<
+      | 'stats'
+      | 'champ'
+      | 'season'
+      | 'champ-season'
+      | 'round'
+      | 'date'
+      | 'time'
+      | 'date-time'
+      | 'stadium'
+      | 'pitch'
+      | 'player-stats'
+    >;
   }
   interface FtbGameDate {
     game: Game;

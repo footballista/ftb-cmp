@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { Game, GameSide, PlayerGame, translations, userState } from 'ftb-models';
-import { FtbGameCardField } from './ftb-game-card-fields';
 
 @Component({
   tag: 'ftb-game-card',
@@ -10,14 +9,62 @@ import { FtbGameCardField } from './ftb-game-card-fields';
 export class FtbGameCard {
   @Prop() game!: Game;
   @Prop() playerStats: PlayerGame['stats'];
-  @Prop() topFields: FtbGameCardField[] = [];
-  @Prop() leftFields: FtbGameCardField[] = [];
-  @Prop() rightFields: FtbGameCardField[] = [];
-  @Prop() bottomFields: FtbGameCardField[] = [];
+  @Prop() topFields: Array<
+    | 'stats'
+    | 'champ'
+    | 'season'
+    | 'champ-season'
+    | 'round'
+    | 'date'
+    | 'time'
+    | 'date-time'
+    | 'stadium'
+    | 'pitch'
+    | 'player-stats'
+  >;
+  @Prop() leftFields: Array<
+    | 'stats'
+    | 'champ'
+    | 'season'
+    | 'champ-season'
+    | 'round'
+    | 'date'
+    | 'time'
+    | 'date-time'
+    | 'stadium'
+    | 'pitch'
+    | 'player-stats'
+  >;
+  @Prop() rightFields: Array<
+    | 'stats'
+    | 'champ'
+    | 'season'
+    | 'champ-season'
+    | 'round'
+    | 'date'
+    | 'time'
+    | 'date-time'
+    | 'stadium'
+    | 'pitch'
+    | 'player-stats'
+  >;
+  @Prop() bottomFields: Array<
+    | 'stats'
+    | 'champ'
+    | 'season'
+    | 'champ-season'
+    | 'round'
+    | 'date'
+    | 'time'
+    | 'date-time'
+    | 'stadium'
+    | 'pitch'
+    | 'player-stats'
+  >;
 
   componentWillLoad() {
     if (this.playerStats) {
-      this.rightFields = [FtbGameCardField.playerStats];
+      this.rightFields = ['player-stats'];
     }
   }
 
@@ -108,16 +155,16 @@ export class FtbGameCard {
   }
 
   private getValueByKey(key) {
-    if (key == FtbGameCardField.date) return <ftb-game-date game={this.game} withtime={false}></ftb-game-date>;
-    if (key == FtbGameCardField.time) return this.game.date && this.game.date.format('HH:mm');
-    if (key == FtbGameCardField.dateTime) return <ftb-game-date game={this.game}></ftb-game-date>;
-    if (key == FtbGameCardField.pitch) return this.game.pitch && this.game.pitch.name;
-    if (key == FtbGameCardField.stadium) return this.game.stadium && this.game.stadium.name;
-    if (key == FtbGameCardField.champ) return this.game.champ.name;
-    if (key == FtbGameCardField.season) return this.game.season.name;
-    if (key == FtbGameCardField.champSeason) return this.game.champ.name + ' - ' + this.game.season.name;
-    if (key == FtbGameCardField.round) return <ftb-game-tour game={this.game}></ftb-game-tour>;
-    if (key == FtbGameCardField.playerStats) {
+    if (key == 'date') return <ftb-game-date game={this.game} withtime={false}></ftb-game-date>;
+    if (key == 'time') return this.game.date && this.game.date.format('HH:mm');
+    if (key == 'date-time') return <ftb-game-date game={this.game}></ftb-game-date>;
+    if (key == 'pitch') return this.game.pitch && this.game.pitch.name;
+    if (key == 'stadium') return this.game.stadium && this.game.stadium.name;
+    if (key == 'champ') return this.game.champ.name;
+    if (key == 'season') return this.game.season.name;
+    if (key == 'champ-season') return this.game.champ.name + ' - ' + this.game.season.name;
+    if (key == 'round') return <ftb-game-tour game={this.game}></ftb-game-tour>;
+    if (key == 'player-stats') {
       if (!this.playerStats) return;
       return (
         <div class="player-stats">
