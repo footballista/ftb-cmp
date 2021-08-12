@@ -31,7 +31,6 @@ import {
 } from 'ftb-models';
 import range from 'lodash-es/range';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
-import { FtbGameCardField } from '../ftb-game-card/ftb-game-card-fields';
 
 /**
  * Test page that demonstrates all existing components
@@ -646,11 +645,7 @@ export class CmpTest {
         {
           descr: 'With date',
           e: () => (
-            <ftb-game-card
-              game={this.data.game}
-              leftFields={[FtbGameCardField.time]}
-              topFields={[FtbGameCardField.date, FtbGameCardField.round]}
-            ></ftb-game-card>
+            <ftb-game-card game={this.data.game} leftFields={['time']} topFields={['date', 'round']}></ftb-game-card>
           ),
         },
         {
@@ -658,8 +653,8 @@ export class CmpTest {
           e: () => (
             <ftb-game-card
               game={this.data.game}
-              leftFields={[FtbGameCardField.time, FtbGameCardField.stadium]}
-              topFields={[FtbGameCardField.champSeason, FtbGameCardField.round]}
+              leftFields={['time', 'stadium']}
+              topFields={['champ-season', 'round']}
             ></ftb-game-card>
           ),
         },
@@ -668,9 +663,9 @@ export class CmpTest {
           e: () => (
             <ftb-game-card
               game={this.data.game}
-              leftFields={[FtbGameCardField.time]}
-              topFields={[FtbGameCardField.date, FtbGameCardField.round]}
-              bottomFields={[FtbGameCardField.champ, FtbGameCardField.season]}
+              leftFields={['time']}
+              topFields={['date', 'round']}
+              bottomFields={['champ', 'season']}
             ></ftb-game-card>
           ),
         },
@@ -679,8 +674,8 @@ export class CmpTest {
           e: () => (
             <ftb-game-card
               game={this.data.game}
-              topFields={[FtbGameCardField.champSeason, FtbGameCardField.round]}
-              rightFields={[FtbGameCardField.playerStats]}
+              topFields={['champ-season', 'round']}
+              rightFields={['player-stats']}
               playerStats={{ teamId: 1, goals: 0, assists: 1, yellow: 2, red: 1 }}
             ></ftb-game-card>
           ),

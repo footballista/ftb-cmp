@@ -21,7 +21,7 @@ export class FtbGameCard {
     | 'stadium'
     | 'pitch'
     | 'player-stats'
-  >;
+  > = [];
   @Prop() leftFields: Array<
     | 'stats'
     | 'champ'
@@ -34,7 +34,7 @@ export class FtbGameCard {
     | 'stadium'
     | 'pitch'
     | 'player-stats'
-  >;
+  > = [];
   @Prop() rightFields: Array<
     | 'stats'
     | 'champ'
@@ -47,7 +47,7 @@ export class FtbGameCard {
     | 'stadium'
     | 'pitch'
     | 'player-stats'
-  >;
+  > = [];
   @Prop() bottomFields: Array<
     | 'stats'
     | 'champ'
@@ -60,7 +60,7 @@ export class FtbGameCard {
     | 'stadium'
     | 'pitch'
     | 'player-stats'
-  >;
+  > = [];
 
   componentWillLoad() {
     if (this.playerStats) {
