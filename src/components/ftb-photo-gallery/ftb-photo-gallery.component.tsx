@@ -1,8 +1,9 @@
 import { Component, Event, EventEmitter, h, Host, Prop, State, Method } from '@stencil/core';
-import { Game, RoleLevel, translations, userState } from 'ftb-models';
+import { Game, RoleLevel, routingState, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default';
+import { buildRoute } from 'ftb-models/dist/tools/build-route';
 
 @Component({
   tag: 'ftb-photo-gallery',
@@ -159,7 +160,15 @@ export class FtbPhotoGallery {
         </div>
         {photographer && (
           <div class="photo-by">
-            {translations.game.photo_by[userState.language]}:<a>{photographer.user.name}</a>
+            {translations.game.photo_by[userState.language]}:
+            <a
+              href={buildRoute(routingState.routes.person, {
+                personId: photographer.user._id,
+                personName: photographer.user.name,
+              })}
+            >
+              {photographer.user.name}
+            </a>
           </div>
         )}
       </div>
