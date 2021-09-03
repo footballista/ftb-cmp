@@ -88,7 +88,15 @@ export class FtbGameEvents {
     }
 
     if (!this.paginationConfig) {
-      return <Host>{this.game.events.map(e => this.renderEvent(e, hasEventsWithMinute))}</Host>;
+      return (
+        <ftb-searchable-content
+          items={this.game.events}
+          renderItems={items => items.map(e => this.renderEvent(e, hasEventsWithMinute))}
+          filterFn={filterFn}
+          placeholder={translations.player.search_by_player_name[userState.language]}
+          categories={categories}
+        />
+      );
     } else {
       return (
         <Host>
