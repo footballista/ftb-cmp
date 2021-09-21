@@ -9,7 +9,7 @@ import { Partner } from 'ftb-models/dist/models/partner.model';
   shadow: false,
 })
 export class FtbPartnerPhoto {
-  @Prop() partner: Partner; // use User model or separate properties below ↙
+  @Prop() partner: Partner; // use Partner model or separate properties below ↙
   @Prop() partnerId: number;
   @Prop() version: number;
   @State() showPlaceholder: boolean = false;

@@ -29,7 +29,7 @@
     "@stencil/core": "^2.8.1",
     "colorthief": "^2.3.2",
     "file-saver": "^2.0.5",
-    "firebase": "^9.0.2",
+    "firebase": "^8.10.0",
     "ftb-models": "^3.7.1",
     "lodash-es": "^4.17.21",
     "npm": "^7.24.0",
