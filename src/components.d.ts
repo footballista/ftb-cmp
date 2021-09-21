@@ -28,6 +28,7 @@ import {
   User,
 } from 'ftb-models';
 import { FtbCustomLinkProp } from './components/ftb-link/ftb-custom-link-prop';
+import { Partner } from 'ftb-models/dist/models/partner.model';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 export namespace Components {
   interface CmpShowcase {}
@@ -436,6 +437,11 @@ export namespace Components {
   interface FtbPartnerBanner {
     leagueId: number;
     slotCode: BannerSlotCode;
+  }
+  interface FtbPartnerPhoto {
+    partner: Partner;
+    partnerId: number;
+    version: number;
   }
   interface FtbPersonGames {
     person: User;
@@ -1056,6 +1062,11 @@ declare global {
     prototype: HTMLFtbPartnerBannerElement;
     new (): HTMLFtbPartnerBannerElement;
   };
+  interface HTMLFtbPartnerPhotoElement extends Components.FtbPartnerPhoto, HTMLStencilElement {}
+  var HTMLFtbPartnerPhotoElement: {
+    prototype: HTMLFtbPartnerPhotoElement;
+    new (): HTMLFtbPartnerPhotoElement;
+  };
   interface HTMLFtbPersonGamesElement extends Components.FtbPersonGames, HTMLStencilElement {}
   var HTMLFtbPersonGamesElement: {
     prototype: HTMLFtbPersonGamesElement;
@@ -1334,6 +1345,7 @@ declare global {
     'ftb-media-videos': HTMLFtbMediaVideosElement;
     'ftb-pagination': HTMLFtbPaginationElement;
     'ftb-partner-banner': HTMLFtbPartnerBannerElement;
+    'ftb-partner-photo': HTMLFtbPartnerPhotoElement;
     'ftb-person-games': HTMLFtbPersonGamesElement;
     'ftb-photo-gallery': HTMLFtbPhotoGalleryElement;
     'ftb-player-career': HTMLFtbPlayerCareerElement;
@@ -1793,6 +1805,11 @@ declare namespace LocalJSX {
     leagueId?: number;
     slotCode: BannerSlotCode;
   }
+  interface FtbPartnerPhoto {
+    partner?: Partner;
+    partnerId?: number;
+    version?: number;
+  }
   interface FtbPersonGames {
     person: User;
   }
@@ -2208,6 +2225,7 @@ declare namespace LocalJSX {
     'ftb-media-videos': FtbMediaVideos;
     'ftb-pagination': FtbPagination;
     'ftb-partner-banner': FtbPartnerBanner;
+    'ftb-partner-photo': FtbPartnerPhoto;
     'ftb-person-games': FtbPersonGames;
     'ftb-photo-gallery': FtbPhotoGallery;
     'ftb-player-career': FtbPlayerCareer;
@@ -2314,6 +2332,7 @@ declare module '@stencil/core' {
       'ftb-media-videos': LocalJSX.FtbMediaVideos & JSXBase.HTMLAttributes<HTMLFtbMediaVideosElement>;
       'ftb-pagination': LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
       'ftb-partner-banner': LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
+      'ftb-partner-photo': LocalJSX.FtbPartnerPhoto & JSXBase.HTMLAttributes<HTMLFtbPartnerPhotoElement>;
       'ftb-person-games': LocalJSX.FtbPersonGames & JSXBase.HTMLAttributes<HTMLFtbPersonGamesElement>;
       'ftb-photo-gallery': LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
       'ftb-player-career': LocalJSX.FtbPlayerCareer & JSXBase.HTMLAttributes<HTMLFtbPlayerCareerElement>;

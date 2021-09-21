@@ -31,6 +31,7 @@ import {
 } from 'ftb-models';
 import range from 'lodash-es/range';
 import { CategoryInterface } from '../ftb-searchable-content/ftb-searchable-content.component';
+import { Partner } from 'ftb-models/dist/models/partner.model';
 
 /**
  * Test page that demonstrates all existing components
@@ -138,6 +139,7 @@ export class CmpTest {
       this.gameLineups(),
       this.teamLogo(),
       this.userPhoto(),
+      this.partnerPhoto(),
       this.playerPhoto(),
       this.stadiumPhoto(),
       this.photoGallery(),
@@ -788,6 +790,23 @@ export class CmpTest {
         {
           descr: 'Incorrect photo',
           e: () => <ftb-user-photo user-id={-1} version={2}></ftb-user-photo>,
+        },
+      ],
+    };
+  }
+
+  private partnerPhoto() {
+    console.log(new Partner({ _id: 2, photoId: 1 }));
+    return {
+      title: 'Partner photo',
+      elements: [
+        {
+          descr: 'Argument object',
+          e: () => <ftb-partner-photo partner={new Partner({ _id: 2, photoId: 1 })} />,
+        },
+        {
+          descr: 'Incorrect photo',
+          e: () => <ftb-partner-photo partner-id={-1} version={2} />,
         },
       ],
     };
