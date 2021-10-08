@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
+import SearchIcon from '../../assets/icons/search.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
 import { getFromStorage, setToStorage } from 'ftb-models';
@@ -200,7 +201,7 @@ export class FtbSearchableContent {
           <div class={{ 'input-wrapper': true, 'hidden': !this.open, 'dirty': this.inputDirty }}>
             <div class="inputs">
               <input
-                class={{ hidden: this.categories.some(c => c.open) }}
+                class={{ 'hidden': this.categories.some(c => c.open), 'main-input': true }}
                 placeholder={this.placeholder}
                 ref={el => (this.inputEl = el)}
                 onKeyUp={e => this.onKeyUp(e)}
@@ -208,6 +209,7 @@ export class FtbSearchableContent {
                 onFocus={() => this.inputFocusChange.emit(true)}
                 onBlur={() => this.inputFocusChange.emit(false)}
               />
+              <ftb-icon svg={SearchIcon} class="search-icon" />
               {this.categories.map(c => (
                 <input
                   class={{ hidden: !c.open }}
