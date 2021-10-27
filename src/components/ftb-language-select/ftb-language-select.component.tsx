@@ -17,13 +17,13 @@ export class FtbLanguageSelect {
           title="English"
           class={{ selected: userState.language === Language.en }}
           onClick={() => (userState.language = Language.en)}
-        ></ftb-icon>
+        />
         <ftb-icon
           svg={Ru}
           title="Русский"
           class={{ selected: userState.language === Language.ru }}
           onClick={() => (userState.language = Language.ru)}
-        ></ftb-icon>
+        />
       </Host>
     );
   }

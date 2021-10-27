@@ -14,6 +14,11 @@ export const config: Config = {
       type: 'dist-custom-elements-bundle',
     },
     {
+      type: 'dist-collection',
+      dir: 'dist',
+      collectionDir: 'dist/collection',
+    },
+    {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
