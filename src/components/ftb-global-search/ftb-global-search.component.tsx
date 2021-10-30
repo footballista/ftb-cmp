@@ -112,7 +112,7 @@ export class FtbGlobalSearch {
               onInputKeyDown={e => this.onInputKeyDown(e.detail)}
               onInputFocusChange={e => (this.inputFocused = e.detail)}
               clear={this.clearSignal}
-            ></ftb-searchable-content>
+            />
           </div>
         </div>
       </Host>

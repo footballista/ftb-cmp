@@ -37,6 +37,8 @@ export class FtbSearchableContent {
   @State() searchInProgress = false;
   @Event() inputKeyDown: EventEmitter<KeyboardEvent>;
   @Event() inputFocusChange: EventEmitter<boolean>;
+  @Event() openCategoryChange: EventEmitter<CategoryInterface>;
+  @Event() searchInProgressCategoryChange: EventEmitter<boolean>;
   @Element() element: HTMLElement;
   private inputEl: HTMLInputElement;
   private queryChanges$ = new Subject<string>();
@@ -97,7 +99,13 @@ export class FtbSearchableContent {
     merge(
       this.queryChanges$.pipe(
         takeUntil(this.onDestroyed$),
-        tap(v => (this.searchInProgress = Boolean(v))),
+        tap(v => {
+          const inProgress = Boolean(v);
+          if (inProgress != this.searchInProgress) {
+            this.searchInProgress = inProgress;
+            this.searchInProgressCategoryChange.emit(inProgress);
+          }
+        }),
         tap(v => (this.inputDirty = Boolean(v))),
         debounce(() => timer(this.debounce)),
       ),
@@ -125,9 +133,13 @@ export class FtbSearchableContent {
   }
 
   private async search() {
-    this.searchInProgress = true;
+    if (this.searchInProgress != true) {
+      this.searchInProgress = true;
+      this.searchInProgressCategoryChange.emit(true);
+    }
     this.filteredItems = await this.filterFn(this.items, this.inputEl?.value || '', this.categories);
     this.searchInProgress = false;
+    this.searchInProgressCategoryChange.emit(false);
   }
 
   private onKeyDown(e: KeyboardEvent) {
