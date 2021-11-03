@@ -242,7 +242,7 @@ export class FtbGlobalSearch {
       return (
         <div class="ftb-global-search__item champ">
           <ftb-link route="season" params={{ seasonId: row.item.seasons[0]._id, tournamentName: row.item.name }}>
-            <ftb-flag flag={row.item.country.flag} key={row.item._id}></ftb-flag>
+            <ftb-flag flag={row.item.country.flag} key={row.item._id} />
             <div class="info">
               <div class="name">{row.item.name}</div>
               <div class="league">{row.item.league.name}</div>
@@ -254,7 +254,7 @@ export class FtbGlobalSearch {
       return (
         <div class="ftb-global-search__item league">
           <ftb-link route="league" params={{ leagueId: row.item._id, leagueName: row.item.name }}>
-            <ftb-league-logo league={row.item} key={row.item._id}></ftb-league-logo>
+            <ftb-league-logo league={row.item} key={row.item._id} />
             <div class="info">
               <div class="name">{row.item.name}</div>
             </div>
@@ -265,7 +265,7 @@ export class FtbGlobalSearch {
       return (
         <div class="ftb-global-search__item person">
           <ftb-link route="person" params={{ personId: row.item._id, personNmae: row.item.name }}>
-            <ftb-user-photo user={row.item} key={row.item._id}></ftb-user-photo>
+            <ftb-user-photo user={row.item} key={row.item._id} />
             <div class="info">
               <div class="name">{row.item.name}</div>
               <div class="league">
@@ -282,7 +282,7 @@ export class FtbGlobalSearch {
       return (
         <div class="ftb-global-search__item stadium">
           <ftb-link route="stadium" params={{ stadiumId: row.item._id, stadiumName: row.item.name }}>
-            <ftb-stadium-photo stadium={row.item} key={row.item._id}></ftb-stadium-photo>
+            <ftb-stadium-photo stadium={row.item} key={row.item._id} />
             <div class="info">
               <div class="name">{row.item.name}</div>
               <div class="league">{row.item.league.name}</div>
