@@ -9,7 +9,7 @@ import Shield from '../../assets/icons/shield.svg';
 })
 export class FtbTeamLogo {
   @Prop() mode: 'min' | 'middle' | 'max' = 'min';
-  @Prop() team: Team; // pass team model or separate properties below ↙
+  @Prop({ mutable: true }) team: Team;
   @Prop() logo: string;
   @Prop() name: string;
   @Prop() version: number;
@@ -20,11 +20,13 @@ export class FtbTeamLogo {
   private isDestroyed: boolean;
 
   componentWillLoad() {
-    if (!this.team) {
+    if (!this.team && this.logo) {
       this.team = new Team({ logo: this.logo, name: this.name, logoId: this.version });
     }
 
-    this.url = envState.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+    if (this.team) {
+      this.url = envState.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+    }
   }
 
   onImgFail() {
@@ -42,6 +44,7 @@ export class FtbTeamLogo {
   }
 
   render() {
+    if (!this.url) return;
     return (
       <Host>
         {this.showPlaceholder ? (

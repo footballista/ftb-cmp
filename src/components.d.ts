@@ -1919,6 +1919,8 @@ declare namespace LocalJSX {
     items: any[];
     onInputFocusChange?: (event: CustomEvent<boolean>) => void;
     onInputKeyDown?: (event: CustomEvent<KeyboardEvent>) => void;
+    onOpenCategoryChange?: (event: CustomEvent<CategoryInterface>) => void;
+    onSearchInProgressCategoryChange?: (event: CustomEvent<boolean>) => void;
     placeholder: string;
     renderItems: (items: any[]) => string | string[];
   }
