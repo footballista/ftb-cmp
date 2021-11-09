@@ -16,12 +16,15 @@ export class FtbPartnerPhoto {
   @State() url: string;
 
   componentWillLoad() {
-    this.url =
-      envState.imgHost +
-      `/img/partners/${this.partner?._id || this.partnerId}.png?version=${this.partner?.photoId || this.version}`;
+    if (this.partner?._id || this.partnerId) {
+      this.url =
+        envState.imgHost +
+        `/img/partners/${this.partner?._id || this.partnerId}.png?version=${this.partner?.photoId || this.version}`;
+    }
   }
 
   render() {
+    if (!this.url) return null;
     return (
       <Host>
         {this.showPlaceholder ? (
