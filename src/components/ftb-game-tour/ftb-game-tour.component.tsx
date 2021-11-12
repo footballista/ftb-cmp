@@ -7,9 +7,10 @@ import { Game, StageFormat, translations, userState } from 'ftb-models';
   shadow: true,
 })
 export class FtbGameTour {
-  @Prop() game: Game;
+  @Prop() game!: Game;
 
   render() {
+    if (!this.game) return null;
     return (
       <Host>
         {this.game.stage.format === StageFormat.cup

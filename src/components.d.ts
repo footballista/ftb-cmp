@@ -1564,7 +1564,7 @@ declare namespace LocalJSX {
     splitToTabs?: boolean;
   }
   interface FtbGameTour {
-    game?: Game;
+    game: Game;
   }
   interface FtbGameVideos {
     game: Game;
