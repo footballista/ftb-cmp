@@ -1541,7 +1541,7 @@ declare namespace LocalJSX {
     game: Game;
   }
   interface FtbGameSideScore {
-    game?: Game;
+    game: Game;
     side: GameSide;
   }
   interface FtbGameStadium {

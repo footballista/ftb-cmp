@@ -7,7 +7,7 @@ import { Game, GameSide, GameState, translations, userState } from 'ftb-models';
   shadow: false,
 })
 export class FtbGameSideScore {
-  @Prop() game: Game;
+  @Prop() game!: Game;
   @Prop() side!: GameSide;
 
   private hasPen() {
@@ -15,6 +15,8 @@ export class FtbGameSideScore {
   }
 
   render() {
+    if (!this.game) return null;
+
     if (this.game.state !== GameState.CLOSED) {
       return (
         <Host>
