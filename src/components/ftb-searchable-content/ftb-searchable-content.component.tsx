@@ -258,13 +258,15 @@ export class FtbSearchableContent {
           <div class="options-container">
             {this.categories.map(c => (
               <div class={'options' + (c.open ? ' open' : '')}>
-                {c.filteredOptions.map(o => (
-                  <div class="option-wrapper">
-                    <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
-                      {c.renderItem(o)}
+                <div class="options-inner">
+                  {c.filteredOptions.map(o => (
+                    <div class="option-wrapper">
+                      <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
+                        {c.renderItem(o)}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
           </div>
