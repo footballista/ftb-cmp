@@ -232,7 +232,7 @@ export class FtbSearchableContent {
                 onKeyUp={e => this.onKeyUp(e)}
                 onKeyDown={e => this.onKeyDown(e)}
                 onFocus={() => this.setFocus(true)}
-                onBlur={() => this.setFocus(true)}
+                onBlur={() => this.setFocus(false)}
               />
               <ftb-icon svg={SearchIcon} class="search-icon" />
               {this.categories.map(c => (
