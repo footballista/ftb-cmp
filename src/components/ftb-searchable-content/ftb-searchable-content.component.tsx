@@ -247,7 +247,7 @@ export class FtbSearchableContent {
               <ftb-spinner class={{ hidden: !this.searchInProgress }}></ftb-spinner>
             </div>
             {this.categories?.map(c => (
-              <div class="category-wrapper" onClick={() => this.toggleCategory(c)}>
+              <div class={'category-wrapper' + (c.open ? ' open' : '')} onClick={() => this.toggleCategory(c)}>
                 <div class="category-background">
                   {c.renderItem(c.options.find(o => o.selected))}
                   <ftb-icon svg={Chevron} class={{ open: c.open }}></ftb-icon>
