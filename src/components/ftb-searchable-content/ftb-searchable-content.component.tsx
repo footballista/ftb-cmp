@@ -27,7 +27,7 @@ export class FtbSearchableContent {
   @Prop() renderItems!: (items: any[]) => string | string[];
   @Prop() filterFn!: (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
   @Prop() placeholder!: string;
-  @Prop() categories: CategoryInterface[];
+  @Prop({ mutable: true }) categories: CategoryInterface[];
   /** alternative to "categories" property. used when categories list should be updated on category change */
   @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;
@@ -255,19 +255,19 @@ export class FtbSearchableContent {
               </div>
             ))}
           </div>
-          {this.categories?.some(c => c.open) && (
-            <div class="options">
-              {this.categories
-                .find(c => c.open)
-                .filteredOptions.map(o => (
+          <div class="options-container">
+            {this.categories.map(c => (
+              <div class={'options' + (c.open ? ' open' : '')}>
+                {c.filteredOptions.map(o => (
                   <div class="option-wrapper">
                     <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
-                      {this.categories.find(c => c.open).renderItem(o)}
+                      {c.renderItem(o)}
                     </div>
                   </div>
                 ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
         <div class="ftb-searchable-content__content">{this.renderItems(this.filteredItems)}</div>
       </Host>
