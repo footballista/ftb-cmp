@@ -35,6 +35,7 @@ export class FtbSearchableContent {
   @State() open = true;
   @State() filteredItems: any[];
   @State() searchInProgress = false;
+  @State() inputFocused: boolean;
   @Event() inputKeyDown: EventEmitter<KeyboardEvent>;
   @Event() inputFocusChange: EventEmitter<boolean>;
   @Event() openCategoryChange: EventEmitter<CategoryInterface>;
@@ -206,11 +207,23 @@ export class FtbSearchableContent {
     this.inputEl.focus();
   }
 
+  setFocus(isFocused: boolean) {
+    this.inputFocused = isFocused;
+    this.inputFocusChange.emit(isFocused);
+  }
+
   render() {
     return (
       <Host style={{ 'min-height': this.minHeightPx + 'px' }}>
         <div class="ftb-searchable-content__search-line">
-          <div class={{ 'input-wrapper': true, 'hidden': !this.open, 'dirty': this.inputDirty }}>
+          <div
+            class={{
+              'input-wrapper': true,
+              'hidden': !this.open,
+              'dirty': this.inputDirty,
+              'focused': this.inputFocused,
+            }}
+          >
             <div class="inputs">
               <input
                 class={{ 'hidden': this.categories.some(c => c.open), 'main-input': true }}
@@ -218,8 +231,8 @@ export class FtbSearchableContent {
                 ref={el => (this.inputEl = el)}
                 onKeyUp={e => this.onKeyUp(e)}
                 onKeyDown={e => this.onKeyDown(e)}
-                onFocus={() => this.inputFocusChange.emit(true)}
-                onBlur={() => this.inputFocusChange.emit(false)}
+                onFocus={() => this.setFocus(true)}
+                onBlur={() => this.setFocus(true)}
               />
               <ftb-icon svg={SearchIcon} class="search-icon" />
               {this.categories.map(c => (
