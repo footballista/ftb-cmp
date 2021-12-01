@@ -13,8 +13,10 @@ export class FtbVirtualScroll {
   render() {
     return (
       <Host>
-        <div class="list" style={{ height: this.items.length * this.itemHeight + 'px' }}>
-          {this.items.map(i => this.renderItem(i))}
+        <div class="virtual-scroll__list-wrapper">
+          <div class="virtual-scroll__list" style={{ height: this.items.length * this.itemHeight + 'px' }}>
+            {this.items.map(i => this.renderItem(i))}
+          </div>
         </div>
       </Host>
     );
