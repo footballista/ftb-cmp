@@ -102,6 +102,7 @@ export class CmpTest {
       this.ftbImg(),
       this.globalSearch(),
       this.postBody(),
+      this.postPhoto(),
       this.leagueSportsIcon(),
       this.licenseAgreement(),
       this.banner(),
@@ -247,7 +248,7 @@ export class CmpTest {
       elements: [
         {
           descr: 'Basic',
-          e: () => <ftb-global-search></ftb-global-search>,
+          e: () => <ftb-global-search />,
         },
       ],
     };
@@ -260,6 +261,18 @@ export class CmpTest {
         {
           descr: 'Basic',
           e: () => <ftb-post-body post={this.data.post} />,
+        },
+      ],
+    };
+  }
+
+  private postPhoto() {
+    return {
+      title: 'Post photo',
+      elements: [
+        {
+          descr: 'Basic',
+          e: () => <ftb-post-photo post={this.data.post} mode="min" />,
         },
       ],
     };

@@ -1,0 +1,10 @@
+ftb-post-photo {
+  display: block;
+  img {
+    height: 100%;
+    width: 100%;
+    &.error {
+      opacity: 0;
+    }
+  }
+}
