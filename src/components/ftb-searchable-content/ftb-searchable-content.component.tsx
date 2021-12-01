@@ -62,8 +62,16 @@ export class FtbSearchableContent {
     this.queryChanges$.next('');
   }
 
-  componentDidRender() {
-    this.minHeightPx ??= this.element.offsetHeight;
+  componentDidLoad() {
+    const checkSize = () => {
+      const height = this.element.offsetHeight;
+      if (!height) {
+        return requestAnimationFrame(checkSize);
+      } else {
+        this.minHeightPx = height;
+      }
+    };
+    checkSize();
   }
 
   async componentWillUpdate() {
@@ -244,13 +252,13 @@ export class FtbSearchableContent {
                   onKeyDown={e => this.onCategoryInputKeyDown(c, e)}
                 />
               ))}
-              <ftb-spinner class={{ hidden: !this.searchInProgress }}></ftb-spinner>
+              <ftb-spinner class={{ hidden: !this.searchInProgress }} />
             </div>
             {this.categories?.map(c => (
               <div class={'category-wrapper' + (c.open ? ' open' : '')} onClick={() => this.toggleCategory(c)}>
                 <div class="category-background">
                   {c.renderItem(c.options.find(o => o.selected))}
-                  <ftb-icon svg={Chevron} class={{ open: c.open }}></ftb-icon>
+                  <ftb-icon svg={Chevron} class={{ open: c.open }} />
                 </div>
               </div>
             ))}
