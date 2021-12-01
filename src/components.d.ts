@@ -800,6 +800,11 @@ export namespace Components {
     renderTitle: () => string;
     video: GameVideo;
   }
+  interface FtbVirtualScroll {
+    itemHeight: number;
+    items: any[];
+    renderItem: (item: any) => string;
+  }
 }
 declare global {
   interface HTMLCmpShowcaseElement extends Components.CmpShowcase, HTMLStencilElement {}
@@ -1292,6 +1297,11 @@ declare global {
     prototype: HTMLFtbVideoElement;
     new (): HTMLFtbVideoElement;
   };
+  interface HTMLFtbVirtualScrollElement extends Components.FtbVirtualScroll, HTMLStencilElement {}
+  var HTMLFtbVirtualScrollElement: {
+    prototype: HTMLFtbVirtualScrollElement;
+    new (): HTMLFtbVirtualScrollElement;
+  };
   interface HTMLElementTagNameMap {
     'cmp-showcase': HTMLCmpShowcaseElement;
     'ftb-alert-article': HTMLFtbAlertArticleElement;
@@ -1391,6 +1401,7 @@ declare global {
     'ftb-team-videos': HTMLFtbTeamVideosElement;
     'ftb-user-photo': HTMLFtbUserPhotoElement;
     'ftb-video': HTMLFtbVideoElement;
+    'ftb-virtual-scroll': HTMLFtbVirtualScrollElement;
   }
 }
 declare namespace LocalJSX {
@@ -2174,6 +2185,11 @@ declare namespace LocalJSX {
     renderTitle?: () => string;
     video: GameVideo;
   }
+  interface FtbVirtualScroll {
+    itemHeight: number;
+    items: any[];
+    renderItem: (item: any) => string;
+  }
   interface IntrinsicElements {
     'cmp-showcase': CmpShowcase;
     'ftb-alert-article': FtbAlertArticle;
@@ -2273,6 +2289,7 @@ declare namespace LocalJSX {
     'ftb-team-videos': FtbTeamVideos;
     'ftb-user-photo': FtbUserPhoto;
     'ftb-video': FtbVideo;
+    'ftb-virtual-scroll': FtbVirtualScroll;
   }
 }
 export { LocalJSX as JSX };
@@ -2382,6 +2399,7 @@ declare module '@stencil/core' {
       'ftb-team-videos': LocalJSX.FtbTeamVideos & JSXBase.HTMLAttributes<HTMLFtbTeamVideosElement>;
       'ftb-user-photo': LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
       'ftb-video': LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
+      'ftb-virtual-scroll': LocalJSX.FtbVirtualScroll & JSXBase.HTMLAttributes<HTMLFtbVirtualScrollElement>;
     }
   }
 }

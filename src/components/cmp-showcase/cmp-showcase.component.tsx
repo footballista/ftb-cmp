@@ -152,6 +152,7 @@ export class CmpTest {
       this.paginationWithFixedHeight2(),
       this.search(),
       this.tabs(),
+      this.virtualScroll(),
     ];
 
     return (
@@ -1259,6 +1260,18 @@ export class CmpTest {
         {
           descr: 'basic',
           e: () => <ftb-game-photos game={this.data.game} />,
+        },
+      ],
+    };
+  }
+
+  private virtualScroll() {
+    return {
+      title: 'virtual-scroll',
+      elements: [
+        {
+          descr: 'basic',
+          e: () => <ftb-virtual-scroll items={[1, 2, 3]} itemHeight={50} renderItem={i => <div>{i}</div>} />,
         },
       ],
     };
