@@ -27,9 +27,9 @@ export class FtbStadiumPhoto {
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Location}></ftb-icon>
+          <ftb-icon svg={Location} />
         ) : (
-          <ftb-img src={this.url} onFailed={() => (this.showPlaceholder = true)}></ftb-img>
+          <ftb-img src={this.url} onFailed={() => (this.showPlaceholder = true)} />
         )}
       </Host>
     );
