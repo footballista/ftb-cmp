@@ -651,6 +651,7 @@ export namespace Components {
     stadium: Stadium;
   }
   interface FtbStadiumPhoto {
+    mode: 'min' | 'middle' | 'max';
     stadium: Stadium;
     stadiumId: number;
     version: number;
@@ -2045,6 +2046,7 @@ declare namespace LocalJSX {
     stadium: Stadium;
   }
   interface FtbStadiumPhoto {
+    mode?: 'min' | 'middle' | 'max';
     stadium?: Stadium;
     stadiumId?: number;
     version?: number;

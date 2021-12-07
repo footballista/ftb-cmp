@@ -8,6 +8,7 @@ import Location from '../../assets/icons/location.svg';
   shadow: false,
 })
 export class FtbStadiumPhoto {
+  @Prop() mode: 'min' | 'middle' | 'max' = 'min';
   @Prop() stadium: Stadium; // use Stadium model or separate properties below ↙
   @Prop() stadiumId: number;
   @Prop() version: number;
@@ -17,7 +18,7 @@ export class FtbStadiumPhoto {
   componentWillLoad() {
     this.url =
       envState.imgHost +
-      `/img/stadiums-photos/${this.stadium?._id || this.stadiumId}.png?version=${
+      `/img/stadiums-photos/${this.stadium?._id || this.stadiumId}-${this.mode}.jpg?version=${
         this.stadium?.photoId || this.version
       }`;
   }
