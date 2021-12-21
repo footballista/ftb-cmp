@@ -1,0 +1,11 @@
+@import '~highlight.js/styles/github-dark-dimmed.css';
+
+ftb-code-snippet {
+  pre {
+    width: fit-content;
+    code {
+      padding: 13px 20px;
+      border-radius: 4px;
+    }
+  }
+}

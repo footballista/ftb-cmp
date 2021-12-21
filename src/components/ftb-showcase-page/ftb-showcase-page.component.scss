@@ -1,0 +1,142 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f6f9fc;
+}
+
+ftb-showcase-page {
+  h2 {
+    margin-top: 40px;
+  }
+
+  .desktop {
+    .header {
+      padding: 0 20px;
+      ion-router-link.main-link {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 18px;
+        color: #2e2e2e;
+        font-family: 'Twinkle Star', cursive;
+        font-weight: 700;
+      }
+    }
+    $contentPadding: 10px;
+    $menuWidth: 230px;
+    .menu {
+      width: $menuWidth;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      ftb-searchable-content {
+        margin-top: 10px;
+        display: block;
+        .ftb-searchable-content__search-line {
+          height: 30px;
+
+        }
+        .main-input {
+          //border: 1px solid rgba(0,0,0,0.1);
+          border: none;
+          outline: none;
+          box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+          height: 30px;
+          width: 100%;
+
+          border-radius: 10px;
+        }
+        .search-icon {
+          height: 14px;
+          width: 14px;
+          top: 9px;
+          left: 10px;
+        }
+      }
+      .ftb-searchable-content__content {
+        .category {
+          h6 {
+            margin: 0;
+            font-size: 13px;
+            height: 25px;
+            margin-top: 20px;
+          }
+          ion-router-link {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            height: 35px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: rgba(0,0,0,0.7);
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            &:hover {
+              color: cornflowerblue;
+            }
+          }
+        }
+      }
+    }
+
+    .content-fog {
+      width: calc(100% - $menuWidth);
+      background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
+      position: absolute;
+      left: $menuWidth;
+      z-index: 1000;
+        height: 30px;
+        top: $contentPadding;
+        border-radius: 10px 10px 0 0 ;
+  }
+
+    ion-nav {
+      margin-left: $menuWidth;
+      background: white;
+      padding: 0 30px;
+      margin-top: $contentPadding;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      padding-bottom: 50px;
+      overflow-y: auto;
+      width: calc(100% - 300px);
+      &::-webkit-scrollbar-thumb {
+        background-color: #999999;
+        position: relative;
+        border-radius: 8px;
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        position: relative;
+        display: block;
+        border-radius: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+//  @media screen and (max-width: 800px) {
+//    .header {
+//      padding: 0 10px;
+//      a {
+//        font-size: 16px;
+//        height: 60px;
+//        ftb-icon {
+//          height: 30px;
+//          width: 30px;
+//          margin-right: 5px;
+//        }
+//      }
+//    }
+//  }
+//}

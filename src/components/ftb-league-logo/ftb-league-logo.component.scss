@@ -1,11 +1,9 @@
 ftb-league-logo {
   display: inline-flex;
-  ftb-img {
-    height: inherit;
-    width: inherit;
-  }
+  overflow: hidden;
+  img,
   ftb-icon {
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
   }
 }

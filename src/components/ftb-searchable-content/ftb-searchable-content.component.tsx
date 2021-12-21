@@ -27,7 +27,7 @@ export class FtbSearchableContent {
   @Prop() renderItems!: (items: any[]) => string | string[];
   @Prop() filterFn!: (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
   @Prop() placeholder!: string;
-  @Prop({ mutable: true }) categories: CategoryInterface[];
+  @Prop({ mutable: true }) categories: CategoryInterface[] = [];
   /** alternative to "categories" property. used when categories list should be updated on category change */
   @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;

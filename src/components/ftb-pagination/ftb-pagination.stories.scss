@@ -1,0 +1,32 @@
+ftb-pagination-stories {
+  ftb-pagination {
+    width: 250px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+
+    .ftb-pagination__nav-line {
+      height: 40px;
+      font-size: 12px;
+      padding: 0 10px;
+      .ftb-pagination__nav-pages-buttons {
+        button {
+          margin: 0 1px;
+          &.selected {
+            box-shadow: inset 0 0 5px 5px goldenrod;
+          }
+        }
+      }
+      .ftb-pagination__nav-chevron-button {
+        width: 35px;
+        .ftb-pagination__chevron-icon {
+          height: 16px;
+          width: 16px;
+        }
+        .ftb-pagination__nav-button-text {
+          display: none;
+        }
+      }
+    }
+  }
+}

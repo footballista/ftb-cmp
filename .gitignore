@@ -1,5 +1,6 @@
 dist/
 www/
+docs/
 loader/
 
 *~
@@ -20,7 +21,10 @@ log.txt
 node_modules/
 $RECYCLE.BIN/
 
+
 src/components.d.ts
+src/environments/environment.ts
+
 
 .DS_Store
 Thumbs.db

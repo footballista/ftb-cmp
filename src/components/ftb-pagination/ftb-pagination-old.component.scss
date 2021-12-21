@@ -1,0 +1,53 @@
+//ftb-pagination {
+//  display: block;
+//  .ftb-pagination__items-background {
+//    display: flex;
+//    flex-wrap: wrap;
+//    justify-content: center;
+//    .item {
+//      box-sizing: border-box;
+//    }
+//  }
+//  .ftb-pagination__pages-wrapper {
+//    display: flex;
+//    align-items: center;
+//    justify-content: space-between;
+//    user-select: none;
+//    .button-wrapper {
+//      height: inherit;
+//      display: flex;
+//      align-items: center;
+//      &:first-of-type {
+//        justify-content: flex-start;
+//      }
+//      &:last-of-type {
+//        justify-content: flex-end;
+//      }
+//      button {
+//        cursor: pointer;
+//        display: flex;
+//        align-items: center;
+//        &.prev {
+//          ftb-icon {
+//            transform: rotate(90deg);
+//          }
+//        }
+//        &.next {
+//          ftb-icon {
+//            transform: rotate(-90deg);
+//          }
+//        }
+//      }
+//    }
+//    .pages {
+//      display: flex;
+//      align-items: center;
+//      justify-content: center;
+//      flex: 1;
+//      height: inherit;
+//      .page {
+//        cursor: pointer;
+//      }
+//    }
+//  }
+//}

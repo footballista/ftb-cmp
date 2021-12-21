@@ -1,4 +1,5 @@
 ftb-searchable-content {
+  display: block;
   .ftb-searchable-content__search-line {
     display: flex;
     justify-content: flex-end;
@@ -12,12 +13,8 @@ ftb-searchable-content {
         display: flex;
         position: relative;
         .search-icon {
-          height: 17px;
-          width: 17px;
           fill: rgba(0, 0, 0, 0.6);
           position: absolute;
-          top: 9px;
-          left: 9px;
         }
         input {
           flex: 1;

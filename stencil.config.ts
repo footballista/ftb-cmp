@@ -11,16 +11,11 @@ export const config: Config = {
       esmLoaderPath: '../loader',
     },
     {
-      type: 'dist-custom-elements-bundle',
-    },
-    {
-      type: 'dist-collection',
-      dir: 'dist',
-      collectionDir: 'dist/collection',
+      type: 'dist-custom-elements',
     },
     {
       type: 'www',
-      serviceWorker: null, // disable service workers
+      serviceWorker: null,
     },
   ],
 };

@@ -1,5 +1,6 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
 import { Banner, BannerSlotCode, HttpClient, envState } from 'ftb-models';
+import { Headers } from 'node-fetch';
 
 @Component({
   tag: 'ftb-partner-banner',

@@ -8,30 +8,20 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   Alert,
   BannerSlotCode,
-  Champ,
-  Collection,
   Game,
-  GamePhoto,
-  GameSide,
-  GameStaff,
   GameVideo,
   League,
   LicenseAgreement,
   Player,
-  PlayerGame,
   Post,
-  Season,
   Stadium,
   Stage,
   Team,
-  TransferRequest,
   User,
 } from 'ftb-models';
-import { FtbCustomLinkProp } from './components/ftb-link/ftb-custom-link-prop';
 import { Partner } from 'ftb-models/dist/models/partner.model';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 export namespace Components {
-  interface CmpShowcase {}
   interface FtbAlertArticle {
     alert: Alert;
   }
@@ -63,475 +53,85 @@ export namespace Components {
       vapidKey: string;
     };
   }
-  interface FtbChampCard {
-    champ: Champ;
+  interface FtbCodeSnippet {
+    code: string;
+    language: string;
   }
   interface FtbFlag {
+    /**
+     * if  passed, component will callback color palette, defined for flag
+     */
+    extractColors?: (RGBs: Array<[number, number, number]>) => any;
     flag: string;
   }
-  interface FtbGameCard {
-    bottomFields: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    game: Game;
-    leftFields: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    playerStats: PlayerGame['stats'];
-    rightFields: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    topFields: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-  }
+  interface FtbFlagStories {}
   interface FtbGameDate {
     game: Game;
     withtime: boolean;
   }
-  interface FtbGameEvents {
+  interface FtbGamePhotoGallery {
     game: Game;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
+    open: (idx: number) => Promise<any>;
   }
-  interface FtbGameLineups {
-    game: Game;
-  }
-  interface FtbGameMedia {
-    game: Game;
-  }
-  interface FtbGameNews {
-    game: Game;
-  }
-  interface FtbGamePerson {
-    person: GameStaff;
-  }
-  interface FtbGamePhotoCover {
-    customRoute: FtbCustomLinkProp;
-    game: Game;
-  }
-  interface FtbGamePhotoPreview {
-    photo: GamePhoto;
-  }
-  interface FtbGamePhotos {
-    customRoute: FtbCustomLinkProp;
-    game: Game;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbGameScoreboard {
-    game: Game;
-  }
-  interface FtbGameSideScore {
-    game: Game;
-    side: GameSide;
-  }
-  interface FtbGameStadium {
-    game: Game;
-  }
+  interface FtbGamePhotoGalleryStories {}
   interface FtbGameState {
     game: Game;
   }
-  interface FtbGameStatsPreview {
-    game: Game;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    splitToTabs: boolean;
-  }
+  interface FtbGameStateStories {}
   interface FtbGameTour {
     game: Game;
   }
-  interface FtbGameVideos {
-    game: Game;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbGameTourStories {}
   interface FtbGlobalSearch {}
   interface FtbIcon {
     svg: string;
   }
-  interface FtbImg {
-    name: string;
-    src: string;
+  interface FtbInfiniteScroll {
+    /**
+     * method that is called when user scrolls to a component
+     */
+    loadData: () => Promise<any>;
   }
-  interface FtbImprovingImg {
-    sources: string[];
-  }
-  interface FtbLanguageSelect {}
-  interface FtbLeagueBirthdays {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueChamps {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueDocuments {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbInfiniteScrollStories {}
   interface FtbLeagueLogo {
-    caption: string;
     league: League;
   }
-  interface FtbLeagueMedia {
-    league: League;
-  }
-  interface FtbLeagueMediaNewsTab {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueMediaPhotoTab {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueMediaVideoTab {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbLeagueLogoStories {}
   interface FtbLeagueSportsIcon {
     league: League;
   }
-  interface FtbLeagueStadiums {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueTeams {
-    league: League;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbLeagueSportsIconStories {}
   interface FtbLicenseAgreement {
     license: LicenseAgreement;
   }
-  interface FtbLink {
-    params: { [key: string]: string | number };
-    route: string;
-  }
-  interface FtbMedia {
-    dataLoaded: boolean;
-    news: Collection<Post>;
-    photoGames: Collection<Game>;
-    videoGames: Collection<Game>;
-  }
-  interface FtbMediaNews {
-    dataLoaded: boolean;
-    news: Collection<Post>;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbMediaPhotos {
-    dataLoaded: boolean;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    photoGames: Collection<Game>;
-  }
-  interface FtbMediaVideos {
-    dataLoaded: boolean;
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    videoGames: Collection<Game>;
-  }
   interface FtbPagination {
     /**
-     * calculate item Width based on Height. [Width = Height * XtoY]
+     * number of items per each page
      */
-    XtoY: number;
+    itemsPerPage: number;
     /**
-     * changing pages from outside
+     * render function for items chunk
      */
-    currentIdx: number;
+    renderPage: (fromIdx, toIdx) => string | string[];
     /**
-     * Use this if container height is predefined. Otherwise provide "rows" property
-     */
-    fixedContainerHeightPx: number;
-    /**
-     * optional render function for interval. Might be useful when each page is loaded separately from server
-     */
-    getItemsForInterval: (items: any[], offset: number, limit: number) => Promise<any[]>;
-    /**
-     * minimal possible height of item container
-     */
-    itemMinHeightPx: number;
-    /**
-     * minimal possible width of item container
-     */
-    itemMinWidthPx: number;
-    /**
-     * items to render
-     */
-    items: any[];
-    /**
-     * jsx render item func
-     */
-    renderItem: (item) => string | string[];
-    /**
-     * Number of rows to display. Either this, or "fixedContainerHeightPx" should be provided
-     */
-    rows: number;
-    /**
-     * whether elements could be stretched horizontally
-     */
-    stretchX: boolean;
-    /**
-     * whether elements could be stretched vertically
-     */
-    stretchY: boolean;
-    /**
-     * total number of items (this.items.length might be less if not fully loaded)
+     * total items
      */
     totalItems: number;
   }
+  interface FtbPaginationStories {}
   interface FtbPartnerBanner {
     leagueId: number;
     slotCode: BannerSlotCode;
   }
   interface FtbPartnerPhoto {
     partner: Partner;
-    partnerId: number;
-    version: number;
   }
-  interface FtbPersonGames {
-    person: User;
-  }
-  interface FtbPhotoGallery {
-    game: Game;
-    open: (startIdx: number) => Promise<void>;
-  }
-  interface FtbPlayerCareer {
-    player: Player;
-  }
-  interface FtbPlayerGames {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
-  interface FtbPlayerMedia {
-    player: Player;
-  }
-  interface FtbPlayerNews {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
+  interface FtbPartnerPhotoStories {}
   interface FtbPlayerPhoto {
-    player: Player;
-    playerId: number;
-    version: number;
-  }
-  interface FtbPlayerPhotos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
+    lazy: boolean;
     player: Player;
   }
-  interface FtbPlayerSeasonCard {
-    data: { season: Season; stats: { [key: string]: number } };
-  }
-  interface FtbPlayerTeamCard {
-    data: {
-      from: any; //dayjs
-      till: any; // dayjs
-      team: Team;
-      stats: { [key: string]: number };
-    };
-  }
-  interface FtbPlayerTransfers {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
-  interface FtbPlayerVideos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
+  interface FtbPlayerPhotoStories {}
   interface FtbPostBody {
     post: Post;
   }
@@ -539,9 +139,13 @@ export namespace Components {
     post: Post;
   }
   interface FtbPostPhoto {
-    mode: 'max' | 'middle' | 'min';
+    /**
+     * If not defined, image resolution will be detected from on element size
+     */
+    mode?: 'min' | 'middle' | 'max';
     post: Post;
   }
+  interface FtbPostPhotoStories {}
   interface FtbSearchableContent {
     categories: CategoryInterface[];
     clear: number;
@@ -555,107 +159,15 @@ export namespace Components {
     placeholder: string;
     renderItems: (items: any[]) => string | string[];
   }
-  interface FtbSeasonBestPlayers {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonBirthdays {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonGames {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonMedia {
-    season: Season;
-  }
-  interface FtbSeasonNews {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonPhotos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonStandings {
-    season: Season;
-    splitToTabs: boolean;
-  }
-  interface FtbSeasonVideos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
+  interface FtbShowcaseMain {}
+  interface FtbShowcasePage {}
   interface FtbSpinner {}
-  interface FtbStadiumCard {
-    stadium: Stadium;
-  }
-  interface FtbStadiumGames {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    stadium: Stadium;
-  }
+  interface FtbSpinnerStories {}
   interface FtbStadiumPhoto {
-    mode: 'min' | 'middle' | 'max';
+    lazy: boolean;
     stadium: Stadium;
-    stadiumId: number;
-    version: number;
   }
+  interface FtbStadiumPhotoStories {}
   interface FtbStageCupNet {
     stage: Stage;
   }
@@ -686,125 +198,27 @@ export namespace Components {
     hideSingleTab: boolean;
     tabs: Array<{ renderTitle: () => string; renderContent: () => string }>;
   }
-  interface FtbTeamCard {
-    team: Team;
-  }
-  interface FtbTeamGames {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
   interface FtbTeamLogo {
-    caption: string;
-    logo: string;
-    mode: 'min' | 'middle' | 'max';
-    name: string;
-    team: Team;
-    version: number;
-  }
-  interface FtbTeamMedia {
-    team: Team;
-  }
-  interface FtbTeamNews {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
+    /**
+     * if  passed, component will callback color palette, defined for logo
+     */
+    extractColors?: (RGBs: Array<[number, number, number]>) => any;
+    /**
+     * If not defined, image resolution will be detected from on element size
+     */
+    mode?: 'min' | 'middle' | 'max';
     team: Team;
   }
-  interface FtbTeamPhotos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamRoster {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamRosterPlayerCard {
-    player: Player;
-    team: Team;
-  }
-  interface FtbTeamSeasonCard {
-    season: Season;
-    team: Team;
-  }
-  interface FtbTeamSeasons {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamTransferCard {
-    team: Team;
-    transfer: TransferRequest;
-  }
-  interface FtbTeamTransfers {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamVideos {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
+  interface FtbTeamLogoStories {}
   interface FtbUserPhoto {
+    lazy: boolean;
     user: User;
-    userId: number;
-    version: number;
   }
-  interface FtbVideo {
-    renderTitle: () => string;
+  interface FtbUserPhotoStories {}
+  interface FtbVideoCover {
     video: GameVideo;
   }
+  interface FtbVideoCoverStories {}
   interface FtbVirtualScroll {
     itemHeight: number;
     items: any[];
@@ -812,11 +226,6 @@ export namespace Components {
   }
 }
 declare global {
-  interface HTMLCmpShowcaseElement extends Components.CmpShowcase, HTMLStencilElement {}
-  var HTMLCmpShowcaseElement: {
-    prototype: HTMLCmpShowcaseElement;
-    new (): HTMLCmpShowcaseElement;
-  };
   interface HTMLFtbAlertArticleElement extends Components.FtbAlertArticle, HTMLStencilElement {}
   var HTMLFtbAlertArticleElement: {
     prototype: HTMLFtbAlertArticleElement;
@@ -857,100 +266,55 @@ declare global {
     prototype: HTMLFtbAppElement;
     new (): HTMLFtbAppElement;
   };
-  interface HTMLFtbChampCardElement extends Components.FtbChampCard, HTMLStencilElement {}
-  var HTMLFtbChampCardElement: {
-    prototype: HTMLFtbChampCardElement;
-    new (): HTMLFtbChampCardElement;
+  interface HTMLFtbCodeSnippetElement extends Components.FtbCodeSnippet, HTMLStencilElement {}
+  var HTMLFtbCodeSnippetElement: {
+    prototype: HTMLFtbCodeSnippetElement;
+    new (): HTMLFtbCodeSnippetElement;
   };
   interface HTMLFtbFlagElement extends Components.FtbFlag, HTMLStencilElement {}
   var HTMLFtbFlagElement: {
     prototype: HTMLFtbFlagElement;
     new (): HTMLFtbFlagElement;
   };
-  interface HTMLFtbGameCardElement extends Components.FtbGameCard, HTMLStencilElement {}
-  var HTMLFtbGameCardElement: {
-    prototype: HTMLFtbGameCardElement;
-    new (): HTMLFtbGameCardElement;
+  interface HTMLFtbFlagStoriesElement extends Components.FtbFlagStories, HTMLStencilElement {}
+  var HTMLFtbFlagStoriesElement: {
+    prototype: HTMLFtbFlagStoriesElement;
+    new (): HTMLFtbFlagStoriesElement;
   };
   interface HTMLFtbGameDateElement extends Components.FtbGameDate, HTMLStencilElement {}
   var HTMLFtbGameDateElement: {
     prototype: HTMLFtbGameDateElement;
     new (): HTMLFtbGameDateElement;
   };
-  interface HTMLFtbGameEventsElement extends Components.FtbGameEvents, HTMLStencilElement {}
-  var HTMLFtbGameEventsElement: {
-    prototype: HTMLFtbGameEventsElement;
-    new (): HTMLFtbGameEventsElement;
+  interface HTMLFtbGamePhotoGalleryElement extends Components.FtbGamePhotoGallery, HTMLStencilElement {}
+  var HTMLFtbGamePhotoGalleryElement: {
+    prototype: HTMLFtbGamePhotoGalleryElement;
+    new (): HTMLFtbGamePhotoGalleryElement;
   };
-  interface HTMLFtbGameLineupsElement extends Components.FtbGameLineups, HTMLStencilElement {}
-  var HTMLFtbGameLineupsElement: {
-    prototype: HTMLFtbGameLineupsElement;
-    new (): HTMLFtbGameLineupsElement;
-  };
-  interface HTMLFtbGameMediaElement extends Components.FtbGameMedia, HTMLStencilElement {}
-  var HTMLFtbGameMediaElement: {
-    prototype: HTMLFtbGameMediaElement;
-    new (): HTMLFtbGameMediaElement;
-  };
-  interface HTMLFtbGameNewsElement extends Components.FtbGameNews, HTMLStencilElement {}
-  var HTMLFtbGameNewsElement: {
-    prototype: HTMLFtbGameNewsElement;
-    new (): HTMLFtbGameNewsElement;
-  };
-  interface HTMLFtbGamePersonElement extends Components.FtbGamePerson, HTMLStencilElement {}
-  var HTMLFtbGamePersonElement: {
-    prototype: HTMLFtbGamePersonElement;
-    new (): HTMLFtbGamePersonElement;
-  };
-  interface HTMLFtbGamePhotoCoverElement extends Components.FtbGamePhotoCover, HTMLStencilElement {}
-  var HTMLFtbGamePhotoCoverElement: {
-    prototype: HTMLFtbGamePhotoCoverElement;
-    new (): HTMLFtbGamePhotoCoverElement;
-  };
-  interface HTMLFtbGamePhotoPreviewElement extends Components.FtbGamePhotoPreview, HTMLStencilElement {}
-  var HTMLFtbGamePhotoPreviewElement: {
-    prototype: HTMLFtbGamePhotoPreviewElement;
-    new (): HTMLFtbGamePhotoPreviewElement;
-  };
-  interface HTMLFtbGamePhotosElement extends Components.FtbGamePhotos, HTMLStencilElement {}
-  var HTMLFtbGamePhotosElement: {
-    prototype: HTMLFtbGamePhotosElement;
-    new (): HTMLFtbGamePhotosElement;
-  };
-  interface HTMLFtbGameScoreboardElement extends Components.FtbGameScoreboard, HTMLStencilElement {}
-  var HTMLFtbGameScoreboardElement: {
-    prototype: HTMLFtbGameScoreboardElement;
-    new (): HTMLFtbGameScoreboardElement;
-  };
-  interface HTMLFtbGameSideScoreElement extends Components.FtbGameSideScore, HTMLStencilElement {}
-  var HTMLFtbGameSideScoreElement: {
-    prototype: HTMLFtbGameSideScoreElement;
-    new (): HTMLFtbGameSideScoreElement;
-  };
-  interface HTMLFtbGameStadiumElement extends Components.FtbGameStadium, HTMLStencilElement {}
-  var HTMLFtbGameStadiumElement: {
-    prototype: HTMLFtbGameStadiumElement;
-    new (): HTMLFtbGameStadiumElement;
+  interface HTMLFtbGamePhotoGalleryStoriesElement extends Components.FtbGamePhotoGalleryStories, HTMLStencilElement {}
+  var HTMLFtbGamePhotoGalleryStoriesElement: {
+    prototype: HTMLFtbGamePhotoGalleryStoriesElement;
+    new (): HTMLFtbGamePhotoGalleryStoriesElement;
   };
   interface HTMLFtbGameStateElement extends Components.FtbGameState, HTMLStencilElement {}
   var HTMLFtbGameStateElement: {
     prototype: HTMLFtbGameStateElement;
     new (): HTMLFtbGameStateElement;
   };
-  interface HTMLFtbGameStatsPreviewElement extends Components.FtbGameStatsPreview, HTMLStencilElement {}
-  var HTMLFtbGameStatsPreviewElement: {
-    prototype: HTMLFtbGameStatsPreviewElement;
-    new (): HTMLFtbGameStatsPreviewElement;
+  interface HTMLFtbGameStateStoriesElement extends Components.FtbGameStateStories, HTMLStencilElement {}
+  var HTMLFtbGameStateStoriesElement: {
+    prototype: HTMLFtbGameStateStoriesElement;
+    new (): HTMLFtbGameStateStoriesElement;
   };
   interface HTMLFtbGameTourElement extends Components.FtbGameTour, HTMLStencilElement {}
   var HTMLFtbGameTourElement: {
     prototype: HTMLFtbGameTourElement;
     new (): HTMLFtbGameTourElement;
   };
-  interface HTMLFtbGameVideosElement extends Components.FtbGameVideos, HTMLStencilElement {}
-  var HTMLFtbGameVideosElement: {
-    prototype: HTMLFtbGameVideosElement;
-    new (): HTMLFtbGameVideosElement;
+  interface HTMLFtbGameTourStoriesElement extends Components.FtbGameTourStories, HTMLStencilElement {}
+  var HTMLFtbGameTourStoriesElement: {
+    prototype: HTMLFtbGameTourStoriesElement;
+    new (): HTMLFtbGameTourStoriesElement;
   };
   interface HTMLFtbGlobalSearchElement extends Components.FtbGlobalSearch, HTMLStencilElement {}
   var HTMLFtbGlobalSearchElement: {
@@ -962,110 +326,50 @@ declare global {
     prototype: HTMLFtbIconElement;
     new (): HTMLFtbIconElement;
   };
-  interface HTMLFtbImgElement extends Components.FtbImg, HTMLStencilElement {}
-  var HTMLFtbImgElement: {
-    prototype: HTMLFtbImgElement;
-    new (): HTMLFtbImgElement;
+  interface HTMLFtbInfiniteScrollElement extends Components.FtbInfiniteScroll, HTMLStencilElement {}
+  var HTMLFtbInfiniteScrollElement: {
+    prototype: HTMLFtbInfiniteScrollElement;
+    new (): HTMLFtbInfiniteScrollElement;
   };
-  interface HTMLFtbImprovingImgElement extends Components.FtbImprovingImg, HTMLStencilElement {}
-  var HTMLFtbImprovingImgElement: {
-    prototype: HTMLFtbImprovingImgElement;
-    new (): HTMLFtbImprovingImgElement;
-  };
-  interface HTMLFtbLanguageSelectElement extends Components.FtbLanguageSelect, HTMLStencilElement {}
-  var HTMLFtbLanguageSelectElement: {
-    prototype: HTMLFtbLanguageSelectElement;
-    new (): HTMLFtbLanguageSelectElement;
-  };
-  interface HTMLFtbLeagueBirthdaysElement extends Components.FtbLeagueBirthdays, HTMLStencilElement {}
-  var HTMLFtbLeagueBirthdaysElement: {
-    prototype: HTMLFtbLeagueBirthdaysElement;
-    new (): HTMLFtbLeagueBirthdaysElement;
-  };
-  interface HTMLFtbLeagueChampsElement extends Components.FtbLeagueChamps, HTMLStencilElement {}
-  var HTMLFtbLeagueChampsElement: {
-    prototype: HTMLFtbLeagueChampsElement;
-    new (): HTMLFtbLeagueChampsElement;
-  };
-  interface HTMLFtbLeagueDocumentsElement extends Components.FtbLeagueDocuments, HTMLStencilElement {}
-  var HTMLFtbLeagueDocumentsElement: {
-    prototype: HTMLFtbLeagueDocumentsElement;
-    new (): HTMLFtbLeagueDocumentsElement;
+  interface HTMLFtbInfiniteScrollStoriesElement extends Components.FtbInfiniteScrollStories, HTMLStencilElement {}
+  var HTMLFtbInfiniteScrollStoriesElement: {
+    prototype: HTMLFtbInfiniteScrollStoriesElement;
+    new (): HTMLFtbInfiniteScrollStoriesElement;
   };
   interface HTMLFtbLeagueLogoElement extends Components.FtbLeagueLogo, HTMLStencilElement {}
   var HTMLFtbLeagueLogoElement: {
     prototype: HTMLFtbLeagueLogoElement;
     new (): HTMLFtbLeagueLogoElement;
   };
-  interface HTMLFtbLeagueMediaElement extends Components.FtbLeagueMedia, HTMLStencilElement {}
-  var HTMLFtbLeagueMediaElement: {
-    prototype: HTMLFtbLeagueMediaElement;
-    new (): HTMLFtbLeagueMediaElement;
-  };
-  interface HTMLFtbLeagueMediaNewsTabElement extends Components.FtbLeagueMediaNewsTab, HTMLStencilElement {}
-  var HTMLFtbLeagueMediaNewsTabElement: {
-    prototype: HTMLFtbLeagueMediaNewsTabElement;
-    new (): HTMLFtbLeagueMediaNewsTabElement;
-  };
-  interface HTMLFtbLeagueMediaPhotoTabElement extends Components.FtbLeagueMediaPhotoTab, HTMLStencilElement {}
-  var HTMLFtbLeagueMediaPhotoTabElement: {
-    prototype: HTMLFtbLeagueMediaPhotoTabElement;
-    new (): HTMLFtbLeagueMediaPhotoTabElement;
-  };
-  interface HTMLFtbLeagueMediaVideoTabElement extends Components.FtbLeagueMediaVideoTab, HTMLStencilElement {}
-  var HTMLFtbLeagueMediaVideoTabElement: {
-    prototype: HTMLFtbLeagueMediaVideoTabElement;
-    new (): HTMLFtbLeagueMediaVideoTabElement;
+  interface HTMLFtbLeagueLogoStoriesElement extends Components.FtbLeagueLogoStories, HTMLStencilElement {}
+  var HTMLFtbLeagueLogoStoriesElement: {
+    prototype: HTMLFtbLeagueLogoStoriesElement;
+    new (): HTMLFtbLeagueLogoStoriesElement;
   };
   interface HTMLFtbLeagueSportsIconElement extends Components.FtbLeagueSportsIcon, HTMLStencilElement {}
   var HTMLFtbLeagueSportsIconElement: {
     prototype: HTMLFtbLeagueSportsIconElement;
     new (): HTMLFtbLeagueSportsIconElement;
   };
-  interface HTMLFtbLeagueStadiumsElement extends Components.FtbLeagueStadiums, HTMLStencilElement {}
-  var HTMLFtbLeagueStadiumsElement: {
-    prototype: HTMLFtbLeagueStadiumsElement;
-    new (): HTMLFtbLeagueStadiumsElement;
-  };
-  interface HTMLFtbLeagueTeamsElement extends Components.FtbLeagueTeams, HTMLStencilElement {}
-  var HTMLFtbLeagueTeamsElement: {
-    prototype: HTMLFtbLeagueTeamsElement;
-    new (): HTMLFtbLeagueTeamsElement;
+  interface HTMLFtbLeagueSportsIconStoriesElement extends Components.FtbLeagueSportsIconStories, HTMLStencilElement {}
+  var HTMLFtbLeagueSportsIconStoriesElement: {
+    prototype: HTMLFtbLeagueSportsIconStoriesElement;
+    new (): HTMLFtbLeagueSportsIconStoriesElement;
   };
   interface HTMLFtbLicenseAgreementElement extends Components.FtbLicenseAgreement, HTMLStencilElement {}
   var HTMLFtbLicenseAgreementElement: {
     prototype: HTMLFtbLicenseAgreementElement;
     new (): HTMLFtbLicenseAgreementElement;
   };
-  interface HTMLFtbLinkElement extends Components.FtbLink, HTMLStencilElement {}
-  var HTMLFtbLinkElement: {
-    prototype: HTMLFtbLinkElement;
-    new (): HTMLFtbLinkElement;
-  };
-  interface HTMLFtbMediaElement extends Components.FtbMedia, HTMLStencilElement {}
-  var HTMLFtbMediaElement: {
-    prototype: HTMLFtbMediaElement;
-    new (): HTMLFtbMediaElement;
-  };
-  interface HTMLFtbMediaNewsElement extends Components.FtbMediaNews, HTMLStencilElement {}
-  var HTMLFtbMediaNewsElement: {
-    prototype: HTMLFtbMediaNewsElement;
-    new (): HTMLFtbMediaNewsElement;
-  };
-  interface HTMLFtbMediaPhotosElement extends Components.FtbMediaPhotos, HTMLStencilElement {}
-  var HTMLFtbMediaPhotosElement: {
-    prototype: HTMLFtbMediaPhotosElement;
-    new (): HTMLFtbMediaPhotosElement;
-  };
-  interface HTMLFtbMediaVideosElement extends Components.FtbMediaVideos, HTMLStencilElement {}
-  var HTMLFtbMediaVideosElement: {
-    prototype: HTMLFtbMediaVideosElement;
-    new (): HTMLFtbMediaVideosElement;
-  };
   interface HTMLFtbPaginationElement extends Components.FtbPagination, HTMLStencilElement {}
   var HTMLFtbPaginationElement: {
     prototype: HTMLFtbPaginationElement;
     new (): HTMLFtbPaginationElement;
+  };
+  interface HTMLFtbPaginationStoriesElement extends Components.FtbPaginationStories, HTMLStencilElement {}
+  var HTMLFtbPaginationStoriesElement: {
+    prototype: HTMLFtbPaginationStoriesElement;
+    new (): HTMLFtbPaginationStoriesElement;
   };
   interface HTMLFtbPartnerBannerElement extends Components.FtbPartnerBanner, HTMLStencilElement {}
   var HTMLFtbPartnerBannerElement: {
@@ -1077,65 +381,20 @@ declare global {
     prototype: HTMLFtbPartnerPhotoElement;
     new (): HTMLFtbPartnerPhotoElement;
   };
-  interface HTMLFtbPersonGamesElement extends Components.FtbPersonGames, HTMLStencilElement {}
-  var HTMLFtbPersonGamesElement: {
-    prototype: HTMLFtbPersonGamesElement;
-    new (): HTMLFtbPersonGamesElement;
-  };
-  interface HTMLFtbPhotoGalleryElement extends Components.FtbPhotoGallery, HTMLStencilElement {}
-  var HTMLFtbPhotoGalleryElement: {
-    prototype: HTMLFtbPhotoGalleryElement;
-    new (): HTMLFtbPhotoGalleryElement;
-  };
-  interface HTMLFtbPlayerCareerElement extends Components.FtbPlayerCareer, HTMLStencilElement {}
-  var HTMLFtbPlayerCareerElement: {
-    prototype: HTMLFtbPlayerCareerElement;
-    new (): HTMLFtbPlayerCareerElement;
-  };
-  interface HTMLFtbPlayerGamesElement extends Components.FtbPlayerGames, HTMLStencilElement {}
-  var HTMLFtbPlayerGamesElement: {
-    prototype: HTMLFtbPlayerGamesElement;
-    new (): HTMLFtbPlayerGamesElement;
-  };
-  interface HTMLFtbPlayerMediaElement extends Components.FtbPlayerMedia, HTMLStencilElement {}
-  var HTMLFtbPlayerMediaElement: {
-    prototype: HTMLFtbPlayerMediaElement;
-    new (): HTMLFtbPlayerMediaElement;
-  };
-  interface HTMLFtbPlayerNewsElement extends Components.FtbPlayerNews, HTMLStencilElement {}
-  var HTMLFtbPlayerNewsElement: {
-    prototype: HTMLFtbPlayerNewsElement;
-    new (): HTMLFtbPlayerNewsElement;
+  interface HTMLFtbPartnerPhotoStoriesElement extends Components.FtbPartnerPhotoStories, HTMLStencilElement {}
+  var HTMLFtbPartnerPhotoStoriesElement: {
+    prototype: HTMLFtbPartnerPhotoStoriesElement;
+    new (): HTMLFtbPartnerPhotoStoriesElement;
   };
   interface HTMLFtbPlayerPhotoElement extends Components.FtbPlayerPhoto, HTMLStencilElement {}
   var HTMLFtbPlayerPhotoElement: {
     prototype: HTMLFtbPlayerPhotoElement;
     new (): HTMLFtbPlayerPhotoElement;
   };
-  interface HTMLFtbPlayerPhotosElement extends Components.FtbPlayerPhotos, HTMLStencilElement {}
-  var HTMLFtbPlayerPhotosElement: {
-    prototype: HTMLFtbPlayerPhotosElement;
-    new (): HTMLFtbPlayerPhotosElement;
-  };
-  interface HTMLFtbPlayerSeasonCardElement extends Components.FtbPlayerSeasonCard, HTMLStencilElement {}
-  var HTMLFtbPlayerSeasonCardElement: {
-    prototype: HTMLFtbPlayerSeasonCardElement;
-    new (): HTMLFtbPlayerSeasonCardElement;
-  };
-  interface HTMLFtbPlayerTeamCardElement extends Components.FtbPlayerTeamCard, HTMLStencilElement {}
-  var HTMLFtbPlayerTeamCardElement: {
-    prototype: HTMLFtbPlayerTeamCardElement;
-    new (): HTMLFtbPlayerTeamCardElement;
-  };
-  interface HTMLFtbPlayerTransfersElement extends Components.FtbPlayerTransfers, HTMLStencilElement {}
-  var HTMLFtbPlayerTransfersElement: {
-    prototype: HTMLFtbPlayerTransfersElement;
-    new (): HTMLFtbPlayerTransfersElement;
-  };
-  interface HTMLFtbPlayerVideosElement extends Components.FtbPlayerVideos, HTMLStencilElement {}
-  var HTMLFtbPlayerVideosElement: {
-    prototype: HTMLFtbPlayerVideosElement;
-    new (): HTMLFtbPlayerVideosElement;
+  interface HTMLFtbPlayerPhotoStoriesElement extends Components.FtbPlayerPhotoStories, HTMLStencilElement {}
+  var HTMLFtbPlayerPhotoStoriesElement: {
+    prototype: HTMLFtbPlayerPhotoStoriesElement;
+    new (): HTMLFtbPlayerPhotoStoriesElement;
   };
   interface HTMLFtbPostBodyElement extends Components.FtbPostBody, HTMLStencilElement {}
   var HTMLFtbPostBodyElement: {
@@ -1152,70 +411,45 @@ declare global {
     prototype: HTMLFtbPostPhotoElement;
     new (): HTMLFtbPostPhotoElement;
   };
+  interface HTMLFtbPostPhotoStoriesElement extends Components.FtbPostPhotoStories, HTMLStencilElement {}
+  var HTMLFtbPostPhotoStoriesElement: {
+    prototype: HTMLFtbPostPhotoStoriesElement;
+    new (): HTMLFtbPostPhotoStoriesElement;
+  };
   interface HTMLFtbSearchableContentElement extends Components.FtbSearchableContent, HTMLStencilElement {}
   var HTMLFtbSearchableContentElement: {
     prototype: HTMLFtbSearchableContentElement;
     new (): HTMLFtbSearchableContentElement;
   };
-  interface HTMLFtbSeasonBestPlayersElement extends Components.FtbSeasonBestPlayers, HTMLStencilElement {}
-  var HTMLFtbSeasonBestPlayersElement: {
-    prototype: HTMLFtbSeasonBestPlayersElement;
-    new (): HTMLFtbSeasonBestPlayersElement;
+  interface HTMLFtbShowcaseMainElement extends Components.FtbShowcaseMain, HTMLStencilElement {}
+  var HTMLFtbShowcaseMainElement: {
+    prototype: HTMLFtbShowcaseMainElement;
+    new (): HTMLFtbShowcaseMainElement;
   };
-  interface HTMLFtbSeasonBirthdaysElement extends Components.FtbSeasonBirthdays, HTMLStencilElement {}
-  var HTMLFtbSeasonBirthdaysElement: {
-    prototype: HTMLFtbSeasonBirthdaysElement;
-    new (): HTMLFtbSeasonBirthdaysElement;
-  };
-  interface HTMLFtbSeasonGamesElement extends Components.FtbSeasonGames, HTMLStencilElement {}
-  var HTMLFtbSeasonGamesElement: {
-    prototype: HTMLFtbSeasonGamesElement;
-    new (): HTMLFtbSeasonGamesElement;
-  };
-  interface HTMLFtbSeasonMediaElement extends Components.FtbSeasonMedia, HTMLStencilElement {}
-  var HTMLFtbSeasonMediaElement: {
-    prototype: HTMLFtbSeasonMediaElement;
-    new (): HTMLFtbSeasonMediaElement;
-  };
-  interface HTMLFtbSeasonNewsElement extends Components.FtbSeasonNews, HTMLStencilElement {}
-  var HTMLFtbSeasonNewsElement: {
-    prototype: HTMLFtbSeasonNewsElement;
-    new (): HTMLFtbSeasonNewsElement;
-  };
-  interface HTMLFtbSeasonPhotosElement extends Components.FtbSeasonPhotos, HTMLStencilElement {}
-  var HTMLFtbSeasonPhotosElement: {
-    prototype: HTMLFtbSeasonPhotosElement;
-    new (): HTMLFtbSeasonPhotosElement;
-  };
-  interface HTMLFtbSeasonStandingsElement extends Components.FtbSeasonStandings, HTMLStencilElement {}
-  var HTMLFtbSeasonStandingsElement: {
-    prototype: HTMLFtbSeasonStandingsElement;
-    new (): HTMLFtbSeasonStandingsElement;
-  };
-  interface HTMLFtbSeasonVideosElement extends Components.FtbSeasonVideos, HTMLStencilElement {}
-  var HTMLFtbSeasonVideosElement: {
-    prototype: HTMLFtbSeasonVideosElement;
-    new (): HTMLFtbSeasonVideosElement;
+  interface HTMLFtbShowcasePageElement extends Components.FtbShowcasePage, HTMLStencilElement {}
+  var HTMLFtbShowcasePageElement: {
+    prototype: HTMLFtbShowcasePageElement;
+    new (): HTMLFtbShowcasePageElement;
   };
   interface HTMLFtbSpinnerElement extends Components.FtbSpinner, HTMLStencilElement {}
   var HTMLFtbSpinnerElement: {
     prototype: HTMLFtbSpinnerElement;
     new (): HTMLFtbSpinnerElement;
   };
-  interface HTMLFtbStadiumCardElement extends Components.FtbStadiumCard, HTMLStencilElement {}
-  var HTMLFtbStadiumCardElement: {
-    prototype: HTMLFtbStadiumCardElement;
-    new (): HTMLFtbStadiumCardElement;
-  };
-  interface HTMLFtbStadiumGamesElement extends Components.FtbStadiumGames, HTMLStencilElement {}
-  var HTMLFtbStadiumGamesElement: {
-    prototype: HTMLFtbStadiumGamesElement;
-    new (): HTMLFtbStadiumGamesElement;
+  interface HTMLFtbSpinnerStoriesElement extends Components.FtbSpinnerStories, HTMLStencilElement {}
+  var HTMLFtbSpinnerStoriesElement: {
+    prototype: HTMLFtbSpinnerStoriesElement;
+    new (): HTMLFtbSpinnerStoriesElement;
   };
   interface HTMLFtbStadiumPhotoElement extends Components.FtbStadiumPhoto, HTMLStencilElement {}
   var HTMLFtbStadiumPhotoElement: {
     prototype: HTMLFtbStadiumPhotoElement;
     new (): HTMLFtbStadiumPhotoElement;
+  };
+  interface HTMLFtbStadiumPhotoStoriesElement extends Components.FtbStadiumPhotoStories, HTMLStencilElement {}
+  var HTMLFtbStadiumPhotoStoriesElement: {
+    prototype: HTMLFtbStadiumPhotoStoriesElement;
+    new (): HTMLFtbStadiumPhotoStoriesElement;
   };
   interface HTMLFtbStageCupNetElement extends Components.FtbStageCupNet, HTMLStencilElement {}
   var HTMLFtbStageCupNetElement: {
@@ -1232,80 +466,35 @@ declare global {
     prototype: HTMLFtbTabsElement;
     new (): HTMLFtbTabsElement;
   };
-  interface HTMLFtbTeamCardElement extends Components.FtbTeamCard, HTMLStencilElement {}
-  var HTMLFtbTeamCardElement: {
-    prototype: HTMLFtbTeamCardElement;
-    new (): HTMLFtbTeamCardElement;
-  };
-  interface HTMLFtbTeamGamesElement extends Components.FtbTeamGames, HTMLStencilElement {}
-  var HTMLFtbTeamGamesElement: {
-    prototype: HTMLFtbTeamGamesElement;
-    new (): HTMLFtbTeamGamesElement;
-  };
   interface HTMLFtbTeamLogoElement extends Components.FtbTeamLogo, HTMLStencilElement {}
   var HTMLFtbTeamLogoElement: {
     prototype: HTMLFtbTeamLogoElement;
     new (): HTMLFtbTeamLogoElement;
   };
-  interface HTMLFtbTeamMediaElement extends Components.FtbTeamMedia, HTMLStencilElement {}
-  var HTMLFtbTeamMediaElement: {
-    prototype: HTMLFtbTeamMediaElement;
-    new (): HTMLFtbTeamMediaElement;
-  };
-  interface HTMLFtbTeamNewsElement extends Components.FtbTeamNews, HTMLStencilElement {}
-  var HTMLFtbTeamNewsElement: {
-    prototype: HTMLFtbTeamNewsElement;
-    new (): HTMLFtbTeamNewsElement;
-  };
-  interface HTMLFtbTeamPhotosElement extends Components.FtbTeamPhotos, HTMLStencilElement {}
-  var HTMLFtbTeamPhotosElement: {
-    prototype: HTMLFtbTeamPhotosElement;
-    new (): HTMLFtbTeamPhotosElement;
-  };
-  interface HTMLFtbTeamRosterElement extends Components.FtbTeamRoster, HTMLStencilElement {}
-  var HTMLFtbTeamRosterElement: {
-    prototype: HTMLFtbTeamRosterElement;
-    new (): HTMLFtbTeamRosterElement;
-  };
-  interface HTMLFtbTeamRosterPlayerCardElement extends Components.FtbTeamRosterPlayerCard, HTMLStencilElement {}
-  var HTMLFtbTeamRosterPlayerCardElement: {
-    prototype: HTMLFtbTeamRosterPlayerCardElement;
-    new (): HTMLFtbTeamRosterPlayerCardElement;
-  };
-  interface HTMLFtbTeamSeasonCardElement extends Components.FtbTeamSeasonCard, HTMLStencilElement {}
-  var HTMLFtbTeamSeasonCardElement: {
-    prototype: HTMLFtbTeamSeasonCardElement;
-    new (): HTMLFtbTeamSeasonCardElement;
-  };
-  interface HTMLFtbTeamSeasonsElement extends Components.FtbTeamSeasons, HTMLStencilElement {}
-  var HTMLFtbTeamSeasonsElement: {
-    prototype: HTMLFtbTeamSeasonsElement;
-    new (): HTMLFtbTeamSeasonsElement;
-  };
-  interface HTMLFtbTeamTransferCardElement extends Components.FtbTeamTransferCard, HTMLStencilElement {}
-  var HTMLFtbTeamTransferCardElement: {
-    prototype: HTMLFtbTeamTransferCardElement;
-    new (): HTMLFtbTeamTransferCardElement;
-  };
-  interface HTMLFtbTeamTransfersElement extends Components.FtbTeamTransfers, HTMLStencilElement {}
-  var HTMLFtbTeamTransfersElement: {
-    prototype: HTMLFtbTeamTransfersElement;
-    new (): HTMLFtbTeamTransfersElement;
-  };
-  interface HTMLFtbTeamVideosElement extends Components.FtbTeamVideos, HTMLStencilElement {}
-  var HTMLFtbTeamVideosElement: {
-    prototype: HTMLFtbTeamVideosElement;
-    new (): HTMLFtbTeamVideosElement;
+  interface HTMLFtbTeamLogoStoriesElement extends Components.FtbTeamLogoStories, HTMLStencilElement {}
+  var HTMLFtbTeamLogoStoriesElement: {
+    prototype: HTMLFtbTeamLogoStoriesElement;
+    new (): HTMLFtbTeamLogoStoriesElement;
   };
   interface HTMLFtbUserPhotoElement extends Components.FtbUserPhoto, HTMLStencilElement {}
   var HTMLFtbUserPhotoElement: {
     prototype: HTMLFtbUserPhotoElement;
     new (): HTMLFtbUserPhotoElement;
   };
-  interface HTMLFtbVideoElement extends Components.FtbVideo, HTMLStencilElement {}
-  var HTMLFtbVideoElement: {
-    prototype: HTMLFtbVideoElement;
-    new (): HTMLFtbVideoElement;
+  interface HTMLFtbUserPhotoStoriesElement extends Components.FtbUserPhotoStories, HTMLStencilElement {}
+  var HTMLFtbUserPhotoStoriesElement: {
+    prototype: HTMLFtbUserPhotoStoriesElement;
+    new (): HTMLFtbUserPhotoStoriesElement;
+  };
+  interface HTMLFtbVideoCoverElement extends Components.FtbVideoCover, HTMLStencilElement {}
+  var HTMLFtbVideoCoverElement: {
+    prototype: HTMLFtbVideoCoverElement;
+    new (): HTMLFtbVideoCoverElement;
+  };
+  interface HTMLFtbVideoCoverStoriesElement extends Components.FtbVideoCoverStories, HTMLStencilElement {}
+  var HTMLFtbVideoCoverStoriesElement: {
+    prototype: HTMLFtbVideoCoverStoriesElement;
+    new (): HTMLFtbVideoCoverStoriesElement;
   };
   interface HTMLFtbVirtualScrollElement extends Components.FtbVirtualScroll, HTMLStencilElement {}
   var HTMLFtbVirtualScrollElement: {
@@ -1313,7 +502,6 @@ declare global {
     new (): HTMLFtbVirtualScrollElement;
   };
   interface HTMLElementTagNameMap {
-    'cmp-showcase': HTMLCmpShowcaseElement;
     'ftb-alert-article': HTMLFtbAlertArticleElement;
     'ftb-alert-date': HTMLFtbAlertDateElement;
     'ftb-alert-photo': HTMLFtbAlertPhotoElement;
@@ -1322,101 +510,56 @@ declare global {
     'ftb-alert-wish': HTMLFtbAlertWishElement;
     'ftb-alerts-feed': HTMLFtbAlertsFeedElement;
     'ftb-app': HTMLFtbAppElement;
-    'ftb-champ-card': HTMLFtbChampCardElement;
+    'ftb-code-snippet': HTMLFtbCodeSnippetElement;
     'ftb-flag': HTMLFtbFlagElement;
-    'ftb-game-card': HTMLFtbGameCardElement;
+    'ftb-flag-stories': HTMLFtbFlagStoriesElement;
     'ftb-game-date': HTMLFtbGameDateElement;
-    'ftb-game-events': HTMLFtbGameEventsElement;
-    'ftb-game-lineups': HTMLFtbGameLineupsElement;
-    'ftb-game-media': HTMLFtbGameMediaElement;
-    'ftb-game-news': HTMLFtbGameNewsElement;
-    'ftb-game-person': HTMLFtbGamePersonElement;
-    'ftb-game-photo-cover': HTMLFtbGamePhotoCoverElement;
-    'ftb-game-photo-preview': HTMLFtbGamePhotoPreviewElement;
-    'ftb-game-photos': HTMLFtbGamePhotosElement;
-    'ftb-game-scoreboard': HTMLFtbGameScoreboardElement;
-    'ftb-game-side-score': HTMLFtbGameSideScoreElement;
-    'ftb-game-stadium': HTMLFtbGameStadiumElement;
+    'ftb-game-photo-gallery': HTMLFtbGamePhotoGalleryElement;
+    'ftb-game-photo-gallery-stories': HTMLFtbGamePhotoGalleryStoriesElement;
     'ftb-game-state': HTMLFtbGameStateElement;
-    'ftb-game-stats-preview': HTMLFtbGameStatsPreviewElement;
+    'ftb-game-state-stories': HTMLFtbGameStateStoriesElement;
     'ftb-game-tour': HTMLFtbGameTourElement;
-    'ftb-game-videos': HTMLFtbGameVideosElement;
+    'ftb-game-tour-stories': HTMLFtbGameTourStoriesElement;
     'ftb-global-search': HTMLFtbGlobalSearchElement;
     'ftb-icon': HTMLFtbIconElement;
-    'ftb-img': HTMLFtbImgElement;
-    'ftb-improving-img': HTMLFtbImprovingImgElement;
-    'ftb-language-select': HTMLFtbLanguageSelectElement;
-    'ftb-league-birthdays': HTMLFtbLeagueBirthdaysElement;
-    'ftb-league-champs': HTMLFtbLeagueChampsElement;
-    'ftb-league-documents': HTMLFtbLeagueDocumentsElement;
+    'ftb-infinite-scroll': HTMLFtbInfiniteScrollElement;
+    'ftb-infinite-scroll-stories': HTMLFtbInfiniteScrollStoriesElement;
     'ftb-league-logo': HTMLFtbLeagueLogoElement;
-    'ftb-league-media': HTMLFtbLeagueMediaElement;
-    'ftb-league-media-news-tab': HTMLFtbLeagueMediaNewsTabElement;
-    'ftb-league-media-photo-tab': HTMLFtbLeagueMediaPhotoTabElement;
-    'ftb-league-media-video-tab': HTMLFtbLeagueMediaVideoTabElement;
+    'ftb-league-logo-stories': HTMLFtbLeagueLogoStoriesElement;
     'ftb-league-sports-icon': HTMLFtbLeagueSportsIconElement;
-    'ftb-league-stadiums': HTMLFtbLeagueStadiumsElement;
-    'ftb-league-teams': HTMLFtbLeagueTeamsElement;
+    'ftb-league-sports-icon-stories': HTMLFtbLeagueSportsIconStoriesElement;
     'ftb-license-agreement': HTMLFtbLicenseAgreementElement;
-    'ftb-link': HTMLFtbLinkElement;
-    'ftb-media': HTMLFtbMediaElement;
-    'ftb-media-news': HTMLFtbMediaNewsElement;
-    'ftb-media-photos': HTMLFtbMediaPhotosElement;
-    'ftb-media-videos': HTMLFtbMediaVideosElement;
     'ftb-pagination': HTMLFtbPaginationElement;
+    'ftb-pagination-stories': HTMLFtbPaginationStoriesElement;
     'ftb-partner-banner': HTMLFtbPartnerBannerElement;
     'ftb-partner-photo': HTMLFtbPartnerPhotoElement;
-    'ftb-person-games': HTMLFtbPersonGamesElement;
-    'ftb-photo-gallery': HTMLFtbPhotoGalleryElement;
-    'ftb-player-career': HTMLFtbPlayerCareerElement;
-    'ftb-player-games': HTMLFtbPlayerGamesElement;
-    'ftb-player-media': HTMLFtbPlayerMediaElement;
-    'ftb-player-news': HTMLFtbPlayerNewsElement;
+    'ftb-partner-photo-stories': HTMLFtbPartnerPhotoStoriesElement;
     'ftb-player-photo': HTMLFtbPlayerPhotoElement;
-    'ftb-player-photos': HTMLFtbPlayerPhotosElement;
-    'ftb-player-season-card': HTMLFtbPlayerSeasonCardElement;
-    'ftb-player-team-card': HTMLFtbPlayerTeamCardElement;
-    'ftb-player-transfers': HTMLFtbPlayerTransfersElement;
-    'ftb-player-videos': HTMLFtbPlayerVideosElement;
+    'ftb-player-photo-stories': HTMLFtbPlayerPhotoStoriesElement;
     'ftb-post-body': HTMLFtbPostBodyElement;
     'ftb-post-cover': HTMLFtbPostCoverElement;
     'ftb-post-photo': HTMLFtbPostPhotoElement;
+    'ftb-post-photo-stories': HTMLFtbPostPhotoStoriesElement;
     'ftb-searchable-content': HTMLFtbSearchableContentElement;
-    'ftb-season-best-players': HTMLFtbSeasonBestPlayersElement;
-    'ftb-season-birthdays': HTMLFtbSeasonBirthdaysElement;
-    'ftb-season-games': HTMLFtbSeasonGamesElement;
-    'ftb-season-media': HTMLFtbSeasonMediaElement;
-    'ftb-season-news': HTMLFtbSeasonNewsElement;
-    'ftb-season-photos': HTMLFtbSeasonPhotosElement;
-    'ftb-season-standings': HTMLFtbSeasonStandingsElement;
-    'ftb-season-videos': HTMLFtbSeasonVideosElement;
+    'ftb-showcase-main': HTMLFtbShowcaseMainElement;
+    'ftb-showcase-page': HTMLFtbShowcasePageElement;
     'ftb-spinner': HTMLFtbSpinnerElement;
-    'ftb-stadium-card': HTMLFtbStadiumCardElement;
-    'ftb-stadium-games': HTMLFtbStadiumGamesElement;
+    'ftb-spinner-stories': HTMLFtbSpinnerStoriesElement;
     'ftb-stadium-photo': HTMLFtbStadiumPhotoElement;
+    'ftb-stadium-photo-stories': HTMLFtbStadiumPhotoStoriesElement;
     'ftb-stage-cup-net': HTMLFtbStageCupNetElement;
     'ftb-stage-table': HTMLFtbStageTableElement;
     'ftb-tabs': HTMLFtbTabsElement;
-    'ftb-team-card': HTMLFtbTeamCardElement;
-    'ftb-team-games': HTMLFtbTeamGamesElement;
     'ftb-team-logo': HTMLFtbTeamLogoElement;
-    'ftb-team-media': HTMLFtbTeamMediaElement;
-    'ftb-team-news': HTMLFtbTeamNewsElement;
-    'ftb-team-photos': HTMLFtbTeamPhotosElement;
-    'ftb-team-roster': HTMLFtbTeamRosterElement;
-    'ftb-team-roster-player-card': HTMLFtbTeamRosterPlayerCardElement;
-    'ftb-team-season-card': HTMLFtbTeamSeasonCardElement;
-    'ftb-team-seasons': HTMLFtbTeamSeasonsElement;
-    'ftb-team-transfer-card': HTMLFtbTeamTransferCardElement;
-    'ftb-team-transfers': HTMLFtbTeamTransfersElement;
-    'ftb-team-videos': HTMLFtbTeamVideosElement;
+    'ftb-team-logo-stories': HTMLFtbTeamLogoStoriesElement;
     'ftb-user-photo': HTMLFtbUserPhotoElement;
-    'ftb-video': HTMLFtbVideoElement;
+    'ftb-user-photo-stories': HTMLFtbUserPhotoStoriesElement;
+    'ftb-video-cover': HTMLFtbVideoCoverElement;
+    'ftb-video-cover-stories': HTMLFtbVideoCoverStoriesElement;
     'ftb-virtual-scroll': HTMLFtbVirtualScrollElement;
   }
 }
 declare namespace LocalJSX {
-  interface CmpShowcase {}
   interface FtbAlertArticle {
     alert: Alert;
   }
@@ -1448,481 +591,84 @@ declare namespace LocalJSX {
       vapidKey: string;
     };
   }
-  interface FtbChampCard {
-    champ: Champ;
+  interface FtbCodeSnippet {
+    code?: string;
+    language?: string;
   }
   interface FtbFlag {
+    /**
+     * if  passed, component will callback color palette, defined for flag
+     */
+    extractColors?: (RGBs: Array<[number, number, number]>) => any;
     flag?: string;
-    onColor?: (event: CustomEvent<[number, number, number][]>) => void;
   }
-  interface FtbGameCard {
-    bottomFields?: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    game: Game;
-    leftFields?: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    playerStats?: PlayerGame['stats'];
-    rightFields?: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-    topFields?: Array<
-      | 'stats'
-      | 'champ'
-      | 'season'
-      | 'champ-season'
-      | 'round'
-      | 'date'
-      | 'time'
-      | 'date-time'
-      | 'stadium'
-      | 'pitch'
-      | 'player-stats'
-    >;
-  }
+  interface FtbFlagStories {}
   interface FtbGameDate {
     game: Game;
     withtime?: boolean;
   }
-  interface FtbGameEvents {
-    game: Game;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbGameLineups {
+  interface FtbGamePhotoGallery {
     game: Game;
   }
-  interface FtbGameMedia {
-    game: Game;
-  }
-  interface FtbGameNews {
-    game: Game;
-  }
-  interface FtbGamePerson {
-    person: GameStaff;
-  }
-  interface FtbGamePhotoCover {
-    customRoute?: FtbCustomLinkProp;
-    game: Game;
-  }
-  interface FtbGamePhotoPreview {
-    photo?: GamePhoto;
-  }
-  interface FtbGamePhotos {
-    customRoute?: FtbCustomLinkProp;
-    game: Game;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbGameScoreboard {
-    game: Game;
-  }
-  interface FtbGameSideScore {
-    game: Game;
-    side: GameSide;
-  }
-  interface FtbGameStadium {
-    game: Game;
-  }
+  interface FtbGamePhotoGalleryStories {}
   interface FtbGameState {
     game: Game;
   }
-  interface FtbGameStatsPreview {
-    game: Game;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    splitToTabs?: boolean;
-  }
+  interface FtbGameStateStories {}
   interface FtbGameTour {
     game: Game;
   }
-  interface FtbGameVideos {
-    game: Game;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbGameTourStories {}
   interface FtbGlobalSearch {}
   interface FtbIcon {
     svg: string;
   }
-  interface FtbImg {
-    name?: string;
-    onColor?: (event: CustomEvent<[number, number, number][]>) => void;
-    onFailed?: (event: CustomEvent<boolean>) => void;
-    onLoaded?: (event: CustomEvent<boolean>) => void;
-    src: string;
+  interface FtbInfiniteScroll {
+    /**
+     * method that is called when user scrolls to a component
+     */
+    loadData: () => Promise<any>;
   }
-  interface FtbImprovingImg {
-    sources: string[];
-  }
-  interface FtbLanguageSelect {}
-  interface FtbLeagueBirthdays {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueChamps {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueDocuments {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbInfiniteScrollStories {}
   interface FtbLeagueLogo {
-    caption?: string;
     league: League;
   }
-  interface FtbLeagueMedia {
-    league: League;
-  }
-  interface FtbLeagueMediaNewsTab {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueMediaPhotoTab {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueMediaVideoTab {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbLeagueLogoStories {}
   interface FtbLeagueSportsIcon {
     league: League;
   }
-  interface FtbLeagueStadiums {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbLeagueTeams {
-    league: League;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
+  interface FtbLeagueSportsIconStories {}
   interface FtbLicenseAgreement {
     license?: LicenseAgreement;
   }
-  interface FtbLink {
-    params?: { [key: string]: string | number };
-    route: string;
-  }
-  interface FtbMedia {
-    dataLoaded?: boolean;
-    news?: Collection<Post>;
-    photoGames?: Collection<Game>;
-    videoGames?: Collection<Game>;
-  }
-  interface FtbMediaNews {
-    dataLoaded?: boolean;
-    news?: Collection<Post>;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-  }
-  interface FtbMediaPhotos {
-    dataLoaded?: boolean;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    photoGames?: Collection<Game>;
-  }
-  interface FtbMediaVideos {
-    dataLoaded?: boolean;
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    videoGames?: Collection<Game>;
-  }
   interface FtbPagination {
     /**
-     * calculate item Width based on Height. [Width = Height * XtoY]
+     * number of items per each page
      */
-    XtoY?: number;
+    itemsPerPage: number;
     /**
-     * changing pages from outside
+     * render function for items chunk
      */
-    currentIdx?: number;
+    renderPage: (fromIdx, toIdx) => string | string[];
     /**
-     * Use this if container height is predefined. Otherwise provide "rows" property
-     */
-    fixedContainerHeightPx?: number;
-    /**
-     * optional render function for interval. Might be useful when each page is loaded separately from server
-     */
-    getItemsForInterval?: (items: any[], offset: number, limit: number) => Promise<any[]>;
-    /**
-     * minimal possible height of item container
-     */
-    itemMinHeightPx: number;
-    /**
-     * minimal possible width of item container
-     */
-    itemMinWidthPx: number;
-    /**
-     * items to render
-     */
-    items: any[];
-    /**
-     * jsx render item func
-     */
-    renderItem: (item) => string | string[];
-    /**
-     * Number of rows to display. Either this, or "fixedContainerHeightPx" should be provided
-     */
-    rows?: number;
-    /**
-     * whether elements could be stretched horizontally
-     */
-    stretchX?: boolean;
-    /**
-     * whether elements could be stretched vertically
-     */
-    stretchY?: boolean;
-    /**
-     * total number of items (this.items.length might be less if not fully loaded)
+     * total items
      */
     totalItems: number;
   }
+  interface FtbPaginationStories {}
   interface FtbPartnerBanner {
     leagueId?: number;
     slotCode: BannerSlotCode;
   }
   interface FtbPartnerPhoto {
-    partner?: Partner;
-    partnerId?: number;
-    version?: number;
+    partner: Partner;
   }
-  interface FtbPersonGames {
-    person: User;
-  }
-  interface FtbPhotoGallery {
-    game: Game;
-    onClosed?: (event: CustomEvent<boolean>) => void;
-    onSlideChanged?: (event: CustomEvent<number>) => void;
-  }
-  interface FtbPlayerCareer {
-    player: Player;
-  }
-  interface FtbPlayerGames {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
-  interface FtbPlayerMedia {
-    player: Player;
-  }
-  interface FtbPlayerNews {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
+  interface FtbPartnerPhotoStories {}
   interface FtbPlayerPhoto {
-    onLoaded?: (event: CustomEvent<boolean>) => void;
-    player?: Player;
-    playerId?: number;
-    version?: number;
-  }
-  interface FtbPlayerPhotos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
+    lazy?: boolean;
     player: Player;
   }
-  interface FtbPlayerSeasonCard {
-    data: { season: Season; stats: { [key: string]: number } };
-  }
-  interface FtbPlayerTeamCard {
-    data: {
-      from: any; //dayjs
-      till: any; // dayjs
-      team: Team;
-      stats: { [key: string]: number };
-    };
-  }
-  interface FtbPlayerTransfers {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
-  interface FtbPlayerVideos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    player: Player;
-  }
+  interface FtbPlayerPhotoStories {}
   interface FtbPostBody {
     post: Post;
   }
@@ -1930,9 +676,13 @@ declare namespace LocalJSX {
     post: Post;
   }
   interface FtbPostPhoto {
-    mode?: 'max' | 'middle' | 'min';
+    /**
+     * If not defined, image resolution will be detected from on element size
+     */
+    mode?: 'min' | 'middle' | 'max';
     post: Post;
   }
+  interface FtbPostPhotoStories {}
   interface FtbSearchableContent {
     categories?: CategoryInterface[];
     clear?: number;
@@ -1950,107 +700,15 @@ declare namespace LocalJSX {
     placeholder: string;
     renderItems: (items: any[]) => string | string[];
   }
-  interface FtbSeasonBestPlayers {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonBirthdays {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonGames {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonMedia {
-    season: Season;
-  }
-  interface FtbSeasonNews {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonPhotos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
-  interface FtbSeasonStandings {
-    season: Season;
-    splitToTabs?: boolean;
-  }
-  interface FtbSeasonVideos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    season: Season;
-  }
+  interface FtbShowcaseMain {}
+  interface FtbShowcasePage {}
   interface FtbSpinner {}
-  interface FtbStadiumCard {
-    stadium: Stadium;
-  }
-  interface FtbStadiumGames {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    stadium: Stadium;
-  }
+  interface FtbSpinnerStories {}
   interface FtbStadiumPhoto {
-    mode?: 'min' | 'middle' | 'max';
-    stadium?: Stadium;
-    stadiumId?: number;
-    version?: number;
+    lazy?: boolean;
+    stadium: Stadium;
   }
+  interface FtbStadiumPhotoStories {}
   interface FtbStageCupNet {
     stage: Stage;
   }
@@ -2081,133 +739,33 @@ declare namespace LocalJSX {
     hideSingleTab?: boolean;
     tabs: Array<{ renderTitle: () => string; renderContent: () => string }>;
   }
-  interface FtbTeamCard {
-    team: Team;
-  }
-  interface FtbTeamGames {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
   interface FtbTeamLogo {
-    caption?: string;
-    logo?: string;
+    /**
+     * if  passed, component will callback color palette, defined for logo
+     */
+    extractColors?: (RGBs: Array<[number, number, number]>) => any;
+    /**
+     * If not defined, image resolution will be detected from on element size
+     */
     mode?: 'min' | 'middle' | 'max';
-    name?: string;
-    onColor?: (event: CustomEvent<[number, number, number][]>) => void;
-    team?: Team;
-    version?: number;
-  }
-  interface FtbTeamMedia {
     team: Team;
   }
-  interface FtbTeamNews {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamPhotos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamRoster {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamRosterPlayerCard {
-    player: Player;
-    team: Team;
-  }
-  interface FtbTeamSeasonCard {
-    season: Season;
-    team: Team;
-  }
-  interface FtbTeamSeasons {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamTransferCard {
-    team?: Team;
-    transfer?: TransferRequest;
-  }
-  interface FtbTeamTransfers {
-    paginationConfig: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
-  interface FtbTeamVideos {
-    paginationConfig?: {
-      itemMinWidthPx: number;
-      itemMinHeightPx: number;
-      rows?: number;
-      fixedContainerHeightPx?: number;
-      stretchX?: boolean;
-      stretchY?: boolean;
-      XtoY?: number;
-    };
-    team: Team;
-  }
+  interface FtbTeamLogoStories {}
   interface FtbUserPhoto {
-    user?: User;
-    userId?: number;
-    version?: number;
+    lazy?: boolean;
+    user: User;
   }
-  interface FtbVideo {
-    renderTitle?: () => string;
+  interface FtbUserPhotoStories {}
+  interface FtbVideoCover {
     video: GameVideo;
   }
+  interface FtbVideoCoverStories {}
   interface FtbVirtualScroll {
     itemHeight: number;
     items: any[];
     renderItem: (item: any) => string;
   }
   interface IntrinsicElements {
-    'cmp-showcase': CmpShowcase;
     'ftb-alert-article': FtbAlertArticle;
     'ftb-alert-date': FtbAlertDate;
     'ftb-alert-photo': FtbAlertPhoto;
@@ -2216,96 +774,52 @@ declare namespace LocalJSX {
     'ftb-alert-wish': FtbAlertWish;
     'ftb-alerts-feed': FtbAlertsFeed;
     'ftb-app': FtbApp;
-    'ftb-champ-card': FtbChampCard;
+    'ftb-code-snippet': FtbCodeSnippet;
     'ftb-flag': FtbFlag;
-    'ftb-game-card': FtbGameCard;
+    'ftb-flag-stories': FtbFlagStories;
     'ftb-game-date': FtbGameDate;
-    'ftb-game-events': FtbGameEvents;
-    'ftb-game-lineups': FtbGameLineups;
-    'ftb-game-media': FtbGameMedia;
-    'ftb-game-news': FtbGameNews;
-    'ftb-game-person': FtbGamePerson;
-    'ftb-game-photo-cover': FtbGamePhotoCover;
-    'ftb-game-photo-preview': FtbGamePhotoPreview;
-    'ftb-game-photos': FtbGamePhotos;
-    'ftb-game-scoreboard': FtbGameScoreboard;
-    'ftb-game-side-score': FtbGameSideScore;
-    'ftb-game-stadium': FtbGameStadium;
+    'ftb-game-photo-gallery': FtbGamePhotoGallery;
+    'ftb-game-photo-gallery-stories': FtbGamePhotoGalleryStories;
     'ftb-game-state': FtbGameState;
-    'ftb-game-stats-preview': FtbGameStatsPreview;
+    'ftb-game-state-stories': FtbGameStateStories;
     'ftb-game-tour': FtbGameTour;
-    'ftb-game-videos': FtbGameVideos;
+    'ftb-game-tour-stories': FtbGameTourStories;
     'ftb-global-search': FtbGlobalSearch;
     'ftb-icon': FtbIcon;
-    'ftb-img': FtbImg;
-    'ftb-improving-img': FtbImprovingImg;
-    'ftb-language-select': FtbLanguageSelect;
-    'ftb-league-birthdays': FtbLeagueBirthdays;
-    'ftb-league-champs': FtbLeagueChamps;
-    'ftb-league-documents': FtbLeagueDocuments;
+    'ftb-infinite-scroll': FtbInfiniteScroll;
+    'ftb-infinite-scroll-stories': FtbInfiniteScrollStories;
     'ftb-league-logo': FtbLeagueLogo;
-    'ftb-league-media': FtbLeagueMedia;
-    'ftb-league-media-news-tab': FtbLeagueMediaNewsTab;
-    'ftb-league-media-photo-tab': FtbLeagueMediaPhotoTab;
-    'ftb-league-media-video-tab': FtbLeagueMediaVideoTab;
+    'ftb-league-logo-stories': FtbLeagueLogoStories;
     'ftb-league-sports-icon': FtbLeagueSportsIcon;
-    'ftb-league-stadiums': FtbLeagueStadiums;
-    'ftb-league-teams': FtbLeagueTeams;
+    'ftb-league-sports-icon-stories': FtbLeagueSportsIconStories;
     'ftb-license-agreement': FtbLicenseAgreement;
-    'ftb-link': FtbLink;
-    'ftb-media': FtbMedia;
-    'ftb-media-news': FtbMediaNews;
-    'ftb-media-photos': FtbMediaPhotos;
-    'ftb-media-videos': FtbMediaVideos;
     'ftb-pagination': FtbPagination;
+    'ftb-pagination-stories': FtbPaginationStories;
     'ftb-partner-banner': FtbPartnerBanner;
     'ftb-partner-photo': FtbPartnerPhoto;
-    'ftb-person-games': FtbPersonGames;
-    'ftb-photo-gallery': FtbPhotoGallery;
-    'ftb-player-career': FtbPlayerCareer;
-    'ftb-player-games': FtbPlayerGames;
-    'ftb-player-media': FtbPlayerMedia;
-    'ftb-player-news': FtbPlayerNews;
+    'ftb-partner-photo-stories': FtbPartnerPhotoStories;
     'ftb-player-photo': FtbPlayerPhoto;
-    'ftb-player-photos': FtbPlayerPhotos;
-    'ftb-player-season-card': FtbPlayerSeasonCard;
-    'ftb-player-team-card': FtbPlayerTeamCard;
-    'ftb-player-transfers': FtbPlayerTransfers;
-    'ftb-player-videos': FtbPlayerVideos;
+    'ftb-player-photo-stories': FtbPlayerPhotoStories;
     'ftb-post-body': FtbPostBody;
     'ftb-post-cover': FtbPostCover;
     'ftb-post-photo': FtbPostPhoto;
+    'ftb-post-photo-stories': FtbPostPhotoStories;
     'ftb-searchable-content': FtbSearchableContent;
-    'ftb-season-best-players': FtbSeasonBestPlayers;
-    'ftb-season-birthdays': FtbSeasonBirthdays;
-    'ftb-season-games': FtbSeasonGames;
-    'ftb-season-media': FtbSeasonMedia;
-    'ftb-season-news': FtbSeasonNews;
-    'ftb-season-photos': FtbSeasonPhotos;
-    'ftb-season-standings': FtbSeasonStandings;
-    'ftb-season-videos': FtbSeasonVideos;
+    'ftb-showcase-main': FtbShowcaseMain;
+    'ftb-showcase-page': FtbShowcasePage;
     'ftb-spinner': FtbSpinner;
-    'ftb-stadium-card': FtbStadiumCard;
-    'ftb-stadium-games': FtbStadiumGames;
+    'ftb-spinner-stories': FtbSpinnerStories;
     'ftb-stadium-photo': FtbStadiumPhoto;
+    'ftb-stadium-photo-stories': FtbStadiumPhotoStories;
     'ftb-stage-cup-net': FtbStageCupNet;
     'ftb-stage-table': FtbStageTable;
     'ftb-tabs': FtbTabs;
-    'ftb-team-card': FtbTeamCard;
-    'ftb-team-games': FtbTeamGames;
     'ftb-team-logo': FtbTeamLogo;
-    'ftb-team-media': FtbTeamMedia;
-    'ftb-team-news': FtbTeamNews;
-    'ftb-team-photos': FtbTeamPhotos;
-    'ftb-team-roster': FtbTeamRoster;
-    'ftb-team-roster-player-card': FtbTeamRosterPlayerCard;
-    'ftb-team-season-card': FtbTeamSeasonCard;
-    'ftb-team-seasons': FtbTeamSeasons;
-    'ftb-team-transfer-card': FtbTeamTransferCard;
-    'ftb-team-transfers': FtbTeamTransfers;
-    'ftb-team-videos': FtbTeamVideos;
+    'ftb-team-logo-stories': FtbTeamLogoStories;
     'ftb-user-photo': FtbUserPhoto;
-    'ftb-video': FtbVideo;
+    'ftb-user-photo-stories': FtbUserPhotoStories;
+    'ftb-video-cover': FtbVideoCover;
+    'ftb-video-cover-stories': FtbVideoCoverStories;
     'ftb-virtual-scroll': FtbVirtualScroll;
   }
 }
@@ -2313,7 +827,6 @@ export { LocalJSX as JSX };
 declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
-      'cmp-showcase': LocalJSX.CmpShowcase & JSXBase.HTMLAttributes<HTMLCmpShowcaseElement>;
       'ftb-alert-article': LocalJSX.FtbAlertArticle & JSXBase.HTMLAttributes<HTMLFtbAlertArticleElement>;
       'ftb-alert-date': LocalJSX.FtbAlertDate & JSXBase.HTMLAttributes<HTMLFtbAlertDateElement>;
       'ftb-alert-photo': LocalJSX.FtbAlertPhoto & JSXBase.HTMLAttributes<HTMLFtbAlertPhotoElement>;
@@ -2322,101 +835,60 @@ declare module '@stencil/core' {
       'ftb-alert-wish': LocalJSX.FtbAlertWish & JSXBase.HTMLAttributes<HTMLFtbAlertWishElement>;
       'ftb-alerts-feed': LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
       'ftb-app': LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
-      'ftb-champ-card': LocalJSX.FtbChampCard & JSXBase.HTMLAttributes<HTMLFtbChampCardElement>;
+      'ftb-code-snippet': LocalJSX.FtbCodeSnippet & JSXBase.HTMLAttributes<HTMLFtbCodeSnippetElement>;
       'ftb-flag': LocalJSX.FtbFlag & JSXBase.HTMLAttributes<HTMLFtbFlagElement>;
-      'ftb-game-card': LocalJSX.FtbGameCard & JSXBase.HTMLAttributes<HTMLFtbGameCardElement>;
+      'ftb-flag-stories': LocalJSX.FtbFlagStories & JSXBase.HTMLAttributes<HTMLFtbFlagStoriesElement>;
       'ftb-game-date': LocalJSX.FtbGameDate & JSXBase.HTMLAttributes<HTMLFtbGameDateElement>;
-      'ftb-game-events': LocalJSX.FtbGameEvents & JSXBase.HTMLAttributes<HTMLFtbGameEventsElement>;
-      'ftb-game-lineups': LocalJSX.FtbGameLineups & JSXBase.HTMLAttributes<HTMLFtbGameLineupsElement>;
-      'ftb-game-media': LocalJSX.FtbGameMedia & JSXBase.HTMLAttributes<HTMLFtbGameMediaElement>;
-      'ftb-game-news': LocalJSX.FtbGameNews & JSXBase.HTMLAttributes<HTMLFtbGameNewsElement>;
-      'ftb-game-person': LocalJSX.FtbGamePerson & JSXBase.HTMLAttributes<HTMLFtbGamePersonElement>;
-      'ftb-game-photo-cover': LocalJSX.FtbGamePhotoCover & JSXBase.HTMLAttributes<HTMLFtbGamePhotoCoverElement>;
-      'ftb-game-photo-preview': LocalJSX.FtbGamePhotoPreview & JSXBase.HTMLAttributes<HTMLFtbGamePhotoPreviewElement>;
-      'ftb-game-photos': LocalJSX.FtbGamePhotos & JSXBase.HTMLAttributes<HTMLFtbGamePhotosElement>;
-      'ftb-game-scoreboard': LocalJSX.FtbGameScoreboard & JSXBase.HTMLAttributes<HTMLFtbGameScoreboardElement>;
-      'ftb-game-side-score': LocalJSX.FtbGameSideScore & JSXBase.HTMLAttributes<HTMLFtbGameSideScoreElement>;
-      'ftb-game-stadium': LocalJSX.FtbGameStadium & JSXBase.HTMLAttributes<HTMLFtbGameStadiumElement>;
+      'ftb-game-photo-gallery': LocalJSX.FtbGamePhotoGallery & JSXBase.HTMLAttributes<HTMLFtbGamePhotoGalleryElement>;
+      'ftb-game-photo-gallery-stories': LocalJSX.FtbGamePhotoGalleryStories &
+        JSXBase.HTMLAttributes<HTMLFtbGamePhotoGalleryStoriesElement>;
       'ftb-game-state': LocalJSX.FtbGameState & JSXBase.HTMLAttributes<HTMLFtbGameStateElement>;
-      'ftb-game-stats-preview': LocalJSX.FtbGameStatsPreview & JSXBase.HTMLAttributes<HTMLFtbGameStatsPreviewElement>;
+      'ftb-game-state-stories': LocalJSX.FtbGameStateStories & JSXBase.HTMLAttributes<HTMLFtbGameStateStoriesElement>;
       'ftb-game-tour': LocalJSX.FtbGameTour & JSXBase.HTMLAttributes<HTMLFtbGameTourElement>;
-      'ftb-game-videos': LocalJSX.FtbGameVideos & JSXBase.HTMLAttributes<HTMLFtbGameVideosElement>;
+      'ftb-game-tour-stories': LocalJSX.FtbGameTourStories & JSXBase.HTMLAttributes<HTMLFtbGameTourStoriesElement>;
       'ftb-global-search': LocalJSX.FtbGlobalSearch & JSXBase.HTMLAttributes<HTMLFtbGlobalSearchElement>;
       'ftb-icon': LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
-      'ftb-img': LocalJSX.FtbImg & JSXBase.HTMLAttributes<HTMLFtbImgElement>;
-      'ftb-improving-img': LocalJSX.FtbImprovingImg & JSXBase.HTMLAttributes<HTMLFtbImprovingImgElement>;
-      'ftb-language-select': LocalJSX.FtbLanguageSelect & JSXBase.HTMLAttributes<HTMLFtbLanguageSelectElement>;
-      'ftb-league-birthdays': LocalJSX.FtbLeagueBirthdays & JSXBase.HTMLAttributes<HTMLFtbLeagueBirthdaysElement>;
-      'ftb-league-champs': LocalJSX.FtbLeagueChamps & JSXBase.HTMLAttributes<HTMLFtbLeagueChampsElement>;
-      'ftb-league-documents': LocalJSX.FtbLeagueDocuments & JSXBase.HTMLAttributes<HTMLFtbLeagueDocumentsElement>;
+      'ftb-infinite-scroll': LocalJSX.FtbInfiniteScroll & JSXBase.HTMLAttributes<HTMLFtbInfiniteScrollElement>;
+      'ftb-infinite-scroll-stories': LocalJSX.FtbInfiniteScrollStories &
+        JSXBase.HTMLAttributes<HTMLFtbInfiniteScrollStoriesElement>;
       'ftb-league-logo': LocalJSX.FtbLeagueLogo & JSXBase.HTMLAttributes<HTMLFtbLeagueLogoElement>;
-      'ftb-league-media': LocalJSX.FtbLeagueMedia & JSXBase.HTMLAttributes<HTMLFtbLeagueMediaElement>;
-      'ftb-league-media-news-tab': LocalJSX.FtbLeagueMediaNewsTab &
-        JSXBase.HTMLAttributes<HTMLFtbLeagueMediaNewsTabElement>;
-      'ftb-league-media-photo-tab': LocalJSX.FtbLeagueMediaPhotoTab &
-        JSXBase.HTMLAttributes<HTMLFtbLeagueMediaPhotoTabElement>;
-      'ftb-league-media-video-tab': LocalJSX.FtbLeagueMediaVideoTab &
-        JSXBase.HTMLAttributes<HTMLFtbLeagueMediaVideoTabElement>;
+      'ftb-league-logo-stories': LocalJSX.FtbLeagueLogoStories &
+        JSXBase.HTMLAttributes<HTMLFtbLeagueLogoStoriesElement>;
       'ftb-league-sports-icon': LocalJSX.FtbLeagueSportsIcon & JSXBase.HTMLAttributes<HTMLFtbLeagueSportsIconElement>;
-      'ftb-league-stadiums': LocalJSX.FtbLeagueStadiums & JSXBase.HTMLAttributes<HTMLFtbLeagueStadiumsElement>;
-      'ftb-league-teams': LocalJSX.FtbLeagueTeams & JSXBase.HTMLAttributes<HTMLFtbLeagueTeamsElement>;
+      'ftb-league-sports-icon-stories': LocalJSX.FtbLeagueSportsIconStories &
+        JSXBase.HTMLAttributes<HTMLFtbLeagueSportsIconStoriesElement>;
       'ftb-license-agreement': LocalJSX.FtbLicenseAgreement & JSXBase.HTMLAttributes<HTMLFtbLicenseAgreementElement>;
-      'ftb-link': LocalJSX.FtbLink & JSXBase.HTMLAttributes<HTMLFtbLinkElement>;
-      'ftb-media': LocalJSX.FtbMedia & JSXBase.HTMLAttributes<HTMLFtbMediaElement>;
-      'ftb-media-news': LocalJSX.FtbMediaNews & JSXBase.HTMLAttributes<HTMLFtbMediaNewsElement>;
-      'ftb-media-photos': LocalJSX.FtbMediaPhotos & JSXBase.HTMLAttributes<HTMLFtbMediaPhotosElement>;
-      'ftb-media-videos': LocalJSX.FtbMediaVideos & JSXBase.HTMLAttributes<HTMLFtbMediaVideosElement>;
       'ftb-pagination': LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
+      'ftb-pagination-stories': LocalJSX.FtbPaginationStories & JSXBase.HTMLAttributes<HTMLFtbPaginationStoriesElement>;
       'ftb-partner-banner': LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
       'ftb-partner-photo': LocalJSX.FtbPartnerPhoto & JSXBase.HTMLAttributes<HTMLFtbPartnerPhotoElement>;
-      'ftb-person-games': LocalJSX.FtbPersonGames & JSXBase.HTMLAttributes<HTMLFtbPersonGamesElement>;
-      'ftb-photo-gallery': LocalJSX.FtbPhotoGallery & JSXBase.HTMLAttributes<HTMLFtbPhotoGalleryElement>;
-      'ftb-player-career': LocalJSX.FtbPlayerCareer & JSXBase.HTMLAttributes<HTMLFtbPlayerCareerElement>;
-      'ftb-player-games': LocalJSX.FtbPlayerGames & JSXBase.HTMLAttributes<HTMLFtbPlayerGamesElement>;
-      'ftb-player-media': LocalJSX.FtbPlayerMedia & JSXBase.HTMLAttributes<HTMLFtbPlayerMediaElement>;
-      'ftb-player-news': LocalJSX.FtbPlayerNews & JSXBase.HTMLAttributes<HTMLFtbPlayerNewsElement>;
+      'ftb-partner-photo-stories': LocalJSX.FtbPartnerPhotoStories &
+        JSXBase.HTMLAttributes<HTMLFtbPartnerPhotoStoriesElement>;
       'ftb-player-photo': LocalJSX.FtbPlayerPhoto & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoElement>;
-      'ftb-player-photos': LocalJSX.FtbPlayerPhotos & JSXBase.HTMLAttributes<HTMLFtbPlayerPhotosElement>;
-      'ftb-player-season-card': LocalJSX.FtbPlayerSeasonCard & JSXBase.HTMLAttributes<HTMLFtbPlayerSeasonCardElement>;
-      'ftb-player-team-card': LocalJSX.FtbPlayerTeamCard & JSXBase.HTMLAttributes<HTMLFtbPlayerTeamCardElement>;
-      'ftb-player-transfers': LocalJSX.FtbPlayerTransfers & JSXBase.HTMLAttributes<HTMLFtbPlayerTransfersElement>;
-      'ftb-player-videos': LocalJSX.FtbPlayerVideos & JSXBase.HTMLAttributes<HTMLFtbPlayerVideosElement>;
+      'ftb-player-photo-stories': LocalJSX.FtbPlayerPhotoStories &
+        JSXBase.HTMLAttributes<HTMLFtbPlayerPhotoStoriesElement>;
       'ftb-post-body': LocalJSX.FtbPostBody & JSXBase.HTMLAttributes<HTMLFtbPostBodyElement>;
       'ftb-post-cover': LocalJSX.FtbPostCover & JSXBase.HTMLAttributes<HTMLFtbPostCoverElement>;
       'ftb-post-photo': LocalJSX.FtbPostPhoto & JSXBase.HTMLAttributes<HTMLFtbPostPhotoElement>;
+      'ftb-post-photo-stories': LocalJSX.FtbPostPhotoStories & JSXBase.HTMLAttributes<HTMLFtbPostPhotoStoriesElement>;
       'ftb-searchable-content': LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
-      'ftb-season-best-players': LocalJSX.FtbSeasonBestPlayers &
-        JSXBase.HTMLAttributes<HTMLFtbSeasonBestPlayersElement>;
-      'ftb-season-birthdays': LocalJSX.FtbSeasonBirthdays & JSXBase.HTMLAttributes<HTMLFtbSeasonBirthdaysElement>;
-      'ftb-season-games': LocalJSX.FtbSeasonGames & JSXBase.HTMLAttributes<HTMLFtbSeasonGamesElement>;
-      'ftb-season-media': LocalJSX.FtbSeasonMedia & JSXBase.HTMLAttributes<HTMLFtbSeasonMediaElement>;
-      'ftb-season-news': LocalJSX.FtbSeasonNews & JSXBase.HTMLAttributes<HTMLFtbSeasonNewsElement>;
-      'ftb-season-photos': LocalJSX.FtbSeasonPhotos & JSXBase.HTMLAttributes<HTMLFtbSeasonPhotosElement>;
-      'ftb-season-standings': LocalJSX.FtbSeasonStandings & JSXBase.HTMLAttributes<HTMLFtbSeasonStandingsElement>;
-      'ftb-season-videos': LocalJSX.FtbSeasonVideos & JSXBase.HTMLAttributes<HTMLFtbSeasonVideosElement>;
+      'ftb-showcase-main': LocalJSX.FtbShowcaseMain & JSXBase.HTMLAttributes<HTMLFtbShowcaseMainElement>;
+      'ftb-showcase-page': LocalJSX.FtbShowcasePage & JSXBase.HTMLAttributes<HTMLFtbShowcasePageElement>;
       'ftb-spinner': LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
-      'ftb-stadium-card': LocalJSX.FtbStadiumCard & JSXBase.HTMLAttributes<HTMLFtbStadiumCardElement>;
-      'ftb-stadium-games': LocalJSX.FtbStadiumGames & JSXBase.HTMLAttributes<HTMLFtbStadiumGamesElement>;
+      'ftb-spinner-stories': LocalJSX.FtbSpinnerStories & JSXBase.HTMLAttributes<HTMLFtbSpinnerStoriesElement>;
       'ftb-stadium-photo': LocalJSX.FtbStadiumPhoto & JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoElement>;
+      'ftb-stadium-photo-stories': LocalJSX.FtbStadiumPhotoStories &
+        JSXBase.HTMLAttributes<HTMLFtbStadiumPhotoStoriesElement>;
       'ftb-stage-cup-net': LocalJSX.FtbStageCupNet & JSXBase.HTMLAttributes<HTMLFtbStageCupNetElement>;
       'ftb-stage-table': LocalJSX.FtbStageTable & JSXBase.HTMLAttributes<HTMLFtbStageTableElement>;
       'ftb-tabs': LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
-      'ftb-team-card': LocalJSX.FtbTeamCard & JSXBase.HTMLAttributes<HTMLFtbTeamCardElement>;
-      'ftb-team-games': LocalJSX.FtbTeamGames & JSXBase.HTMLAttributes<HTMLFtbTeamGamesElement>;
       'ftb-team-logo': LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
-      'ftb-team-media': LocalJSX.FtbTeamMedia & JSXBase.HTMLAttributes<HTMLFtbTeamMediaElement>;
-      'ftb-team-news': LocalJSX.FtbTeamNews & JSXBase.HTMLAttributes<HTMLFtbTeamNewsElement>;
-      'ftb-team-photos': LocalJSX.FtbTeamPhotos & JSXBase.HTMLAttributes<HTMLFtbTeamPhotosElement>;
-      'ftb-team-roster': LocalJSX.FtbTeamRoster & JSXBase.HTMLAttributes<HTMLFtbTeamRosterElement>;
-      'ftb-team-roster-player-card': LocalJSX.FtbTeamRosterPlayerCard &
-        JSXBase.HTMLAttributes<HTMLFtbTeamRosterPlayerCardElement>;
-      'ftb-team-season-card': LocalJSX.FtbTeamSeasonCard & JSXBase.HTMLAttributes<HTMLFtbTeamSeasonCardElement>;
-      'ftb-team-seasons': LocalJSX.FtbTeamSeasons & JSXBase.HTMLAttributes<HTMLFtbTeamSeasonsElement>;
-      'ftb-team-transfer-card': LocalJSX.FtbTeamTransferCard & JSXBase.HTMLAttributes<HTMLFtbTeamTransferCardElement>;
-      'ftb-team-transfers': LocalJSX.FtbTeamTransfers & JSXBase.HTMLAttributes<HTMLFtbTeamTransfersElement>;
-      'ftb-team-videos': LocalJSX.FtbTeamVideos & JSXBase.HTMLAttributes<HTMLFtbTeamVideosElement>;
+      'ftb-team-logo-stories': LocalJSX.FtbTeamLogoStories & JSXBase.HTMLAttributes<HTMLFtbTeamLogoStoriesElement>;
       'ftb-user-photo': LocalJSX.FtbUserPhoto & JSXBase.HTMLAttributes<HTMLFtbUserPhotoElement>;
-      'ftb-video': LocalJSX.FtbVideo & JSXBase.HTMLAttributes<HTMLFtbVideoElement>;
+      'ftb-user-photo-stories': LocalJSX.FtbUserPhotoStories & JSXBase.HTMLAttributes<HTMLFtbUserPhotoStoriesElement>;
+      'ftb-video-cover': LocalJSX.FtbVideoCover & JSXBase.HTMLAttributes<HTMLFtbVideoCoverElement>;
+      'ftb-video-cover-stories': LocalJSX.FtbVideoCoverStories &
+        JSXBase.HTMLAttributes<HTMLFtbVideoCoverStoriesElement>;
       'ftb-virtual-scroll': LocalJSX.FtbVirtualScroll & JSXBase.HTMLAttributes<HTMLFtbVirtualScrollElement>;
     }
   }
