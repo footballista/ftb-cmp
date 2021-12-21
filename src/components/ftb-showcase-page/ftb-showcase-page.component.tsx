@@ -27,14 +27,17 @@ export class FtbShowcasePage {
       ],
     },
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
-    { title: 'Content', items: ['ftb-pagination', 'ftb-infinite-scroll'] },
-    { title: 'Other', items: ['ftb-spinner'] },
+    { title: 'Content', items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll'] },
+    { title: 'Advertisement', items: ['ftb-partner-banner'] },
+    { title: 'Other', items: ['ftb-icon', 'ftb-spinner'] },
   ];
 
   componentWillLoad() {
     envState.imgHost = environment.imgHost;
     envState.apiHost = environment.apiHost;
+    envState.localHost = environment.localHost;
     envState.graphqlHost = environment.graphqlHost;
+    envState.appKey = 'AFL_RU';
 
     function getViewportSize() {
       const object = 'innerWidth' in window ? window : document.documentElement || document.body;

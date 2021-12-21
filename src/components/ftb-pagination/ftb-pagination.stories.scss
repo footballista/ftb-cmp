@@ -1,32 +1,89 @@
 ftb-pagination-stories {
-  ftb-pagination {
-    width: 250px;
+  .pagination-wrapper {
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+    width: 300px;
+  }
+  ftb-pagination {
+    .row {
+      height: 40px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
     .ftb-pagination__nav-line {
-      height: 40px;
+      height: 45px;
       font-size: 12px;
       padding: 0 10px;
+      background: rgba(0, 0, 0, 0.05);
+
+      button {
+        height: 25px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+      }
       .ftb-pagination__nav-pages-buttons {
+        display: flex;
+        align-items: center;
         button {
           margin: 0 1px;
+          transition: color 0.3s ease-in-out;
           &.selected {
-            box-shadow: inset 0 0 5px 5px goldenrod;
+            color: cornflowerblue;
           }
         }
       }
-      .ftb-pagination__nav-chevron-button {
-        width: 35px;
+      .ftb-pagination__nav-button {
+        &:disabled {
+          .ftb-pagination__chevron-icon {
+            fill: rgba(0, 0, 0, 0.3);
+          }
+        }
+        &:hover {
+          ftb-icon {
+            fill: cornflowerblue;
+          }
+        }
+
         .ftb-pagination__chevron-icon {
-          height: 16px;
-          width: 16px;
+          height: 12px;
+          width: 12px;
+          fill: rgba(0, 0, 0, 0.7);
+          transition: fill 0.3s ease-in-out;
         }
         .ftb-pagination__nav-button-text {
           display: none;
         }
       }
+    }
+  }
+
+  ftb-searchable-content {
+    display: block;
+    .ftb-searchable-content__search-line {
+      height: 50px;
+    }
+    .main-input {
+      border: none;
+      outline: none;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+      height: 30px;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 10px;
+      width: calc(100% - 10px);
+      margin: 10px 5px;
+    }
+    .search-icon {
+      height: 14px;
+      width: 14px;
+      top: 18px;
+      left: 20px;
     }
   }
 }

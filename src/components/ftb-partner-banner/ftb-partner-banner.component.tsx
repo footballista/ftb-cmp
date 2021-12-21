@@ -64,7 +64,7 @@ export class FtbPartnerBanner {
         <div class={{ 'ftb-partner-banner__wrapper': true, 'loaded': this.loaded }}>
           <div class="ftb-partner-banner__background">
             <a target="_blank" href={this.banner.link} onMouseDown={() => this.onBannerClick()}>
-              <img src={this.src} onLoad={() => (this.loaded = true)}></img>
+              <img src={this.src} onLoad={() => (this.loaded = true)} loading="lazy" />
             </a>
           </div>
         </div>

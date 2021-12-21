@@ -19,10 +19,16 @@ export class FtbShowcasePage {
               ftb-cmp
             </a>
           </code>{' '}
-          repository, that contains web components for products based on Footballista platform.
+          repository, that contains web components for products based on{' '}
+          <a href="https://demo.footballista.ru">Footballista</a> platform.
         </p>
 
         <p>Check out components in the menu and explore docs, use-cases and code examples.</p>
+
+        <p>
+          If you are looking for Footballista Infographics Storybook, it is located{' '}
+          <a href="https://storybook.footballista.ru">here</a>
+        </p>
 
         <h2>Changelog</h2>
         <div class="changelog-row">

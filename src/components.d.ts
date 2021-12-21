@@ -6,7 +6,6 @@
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
-  Alert,
   BannerSlotCode,
   Game,
   GameVideo,
@@ -22,37 +21,6 @@ import {
 import { Partner } from 'ftb-models/dist/models/partner.model';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 export namespace Components {
-  interface FtbAlertArticle {
-    alert: Alert;
-  }
-  interface FtbAlertDate {
-    alert: Alert;
-  }
-  interface FtbAlertPhoto {
-    alert: Alert;
-  }
-  interface FtbAlertResult {
-    alert: Alert;
-  }
-  interface FtbAlertVideo {
-    alert: Alert;
-  }
-  interface FtbAlertWish {
-    alert: Alert;
-  }
-  interface FtbAlertsFeed {}
-  interface FtbApp {
-    firebaseConfig: {
-      apiKey: string;
-      authDomain: string;
-      databaseURL: string;
-      projectId: string;
-      storageBucket: string;
-      messagingSenderId: string;
-      appId: string;
-      vapidKey: string;
-    };
-  }
   interface FtbCodeSnippet {
     code: string;
     language: string;
@@ -86,6 +54,7 @@ export namespace Components {
   interface FtbIcon {
     svg: string;
   }
+  interface FtbIconStories {}
   interface FtbInfiniteScroll {
     /**
      * method that is called when user scrolls to a component
@@ -123,6 +92,7 @@ export namespace Components {
     leagueId: number;
     slotCode: BannerSlotCode;
   }
+  interface FtbPartnerBannerStories {}
   interface FtbPartnerPhoto {
     partner: Partner;
   }
@@ -159,6 +129,7 @@ export namespace Components {
     placeholder: string;
     renderItems: (items: any[]) => string | string[];
   }
+  interface FtbSearchableContentStories {}
   interface FtbShowcaseMain {}
   interface FtbShowcasePage {}
   interface FtbSpinner {}
@@ -219,53 +190,8 @@ export namespace Components {
     video: GameVideo;
   }
   interface FtbVideoCoverStories {}
-  interface FtbVirtualScroll {
-    itemHeight: number;
-    items: any[];
-    renderItem: (item: any) => string;
-  }
 }
 declare global {
-  interface HTMLFtbAlertArticleElement extends Components.FtbAlertArticle, HTMLStencilElement {}
-  var HTMLFtbAlertArticleElement: {
-    prototype: HTMLFtbAlertArticleElement;
-    new (): HTMLFtbAlertArticleElement;
-  };
-  interface HTMLFtbAlertDateElement extends Components.FtbAlertDate, HTMLStencilElement {}
-  var HTMLFtbAlertDateElement: {
-    prototype: HTMLFtbAlertDateElement;
-    new (): HTMLFtbAlertDateElement;
-  };
-  interface HTMLFtbAlertPhotoElement extends Components.FtbAlertPhoto, HTMLStencilElement {}
-  var HTMLFtbAlertPhotoElement: {
-    prototype: HTMLFtbAlertPhotoElement;
-    new (): HTMLFtbAlertPhotoElement;
-  };
-  interface HTMLFtbAlertResultElement extends Components.FtbAlertResult, HTMLStencilElement {}
-  var HTMLFtbAlertResultElement: {
-    prototype: HTMLFtbAlertResultElement;
-    new (): HTMLFtbAlertResultElement;
-  };
-  interface HTMLFtbAlertVideoElement extends Components.FtbAlertVideo, HTMLStencilElement {}
-  var HTMLFtbAlertVideoElement: {
-    prototype: HTMLFtbAlertVideoElement;
-    new (): HTMLFtbAlertVideoElement;
-  };
-  interface HTMLFtbAlertWishElement extends Components.FtbAlertWish, HTMLStencilElement {}
-  var HTMLFtbAlertWishElement: {
-    prototype: HTMLFtbAlertWishElement;
-    new (): HTMLFtbAlertWishElement;
-  };
-  interface HTMLFtbAlertsFeedElement extends Components.FtbAlertsFeed, HTMLStencilElement {}
-  var HTMLFtbAlertsFeedElement: {
-    prototype: HTMLFtbAlertsFeedElement;
-    new (): HTMLFtbAlertsFeedElement;
-  };
-  interface HTMLFtbAppElement extends Components.FtbApp, HTMLStencilElement {}
-  var HTMLFtbAppElement: {
-    prototype: HTMLFtbAppElement;
-    new (): HTMLFtbAppElement;
-  };
   interface HTMLFtbCodeSnippetElement extends Components.FtbCodeSnippet, HTMLStencilElement {}
   var HTMLFtbCodeSnippetElement: {
     prototype: HTMLFtbCodeSnippetElement;
@@ -326,6 +252,11 @@ declare global {
     prototype: HTMLFtbIconElement;
     new (): HTMLFtbIconElement;
   };
+  interface HTMLFtbIconStoriesElement extends Components.FtbIconStories, HTMLStencilElement {}
+  var HTMLFtbIconStoriesElement: {
+    prototype: HTMLFtbIconStoriesElement;
+    new (): HTMLFtbIconStoriesElement;
+  };
   interface HTMLFtbInfiniteScrollElement extends Components.FtbInfiniteScroll, HTMLStencilElement {}
   var HTMLFtbInfiniteScrollElement: {
     prototype: HTMLFtbInfiniteScrollElement;
@@ -376,6 +307,11 @@ declare global {
     prototype: HTMLFtbPartnerBannerElement;
     new (): HTMLFtbPartnerBannerElement;
   };
+  interface HTMLFtbPartnerBannerStoriesElement extends Components.FtbPartnerBannerStories, HTMLStencilElement {}
+  var HTMLFtbPartnerBannerStoriesElement: {
+    prototype: HTMLFtbPartnerBannerStoriesElement;
+    new (): HTMLFtbPartnerBannerStoriesElement;
+  };
   interface HTMLFtbPartnerPhotoElement extends Components.FtbPartnerPhoto, HTMLStencilElement {}
   var HTMLFtbPartnerPhotoElement: {
     prototype: HTMLFtbPartnerPhotoElement;
@@ -420,6 +356,11 @@ declare global {
   var HTMLFtbSearchableContentElement: {
     prototype: HTMLFtbSearchableContentElement;
     new (): HTMLFtbSearchableContentElement;
+  };
+  interface HTMLFtbSearchableContentStoriesElement extends Components.FtbSearchableContentStories, HTMLStencilElement {}
+  var HTMLFtbSearchableContentStoriesElement: {
+    prototype: HTMLFtbSearchableContentStoriesElement;
+    new (): HTMLFtbSearchableContentStoriesElement;
   };
   interface HTMLFtbShowcaseMainElement extends Components.FtbShowcaseMain, HTMLStencilElement {}
   var HTMLFtbShowcaseMainElement: {
@@ -496,20 +437,7 @@ declare global {
     prototype: HTMLFtbVideoCoverStoriesElement;
     new (): HTMLFtbVideoCoverStoriesElement;
   };
-  interface HTMLFtbVirtualScrollElement extends Components.FtbVirtualScroll, HTMLStencilElement {}
-  var HTMLFtbVirtualScrollElement: {
-    prototype: HTMLFtbVirtualScrollElement;
-    new (): HTMLFtbVirtualScrollElement;
-  };
   interface HTMLElementTagNameMap {
-    'ftb-alert-article': HTMLFtbAlertArticleElement;
-    'ftb-alert-date': HTMLFtbAlertDateElement;
-    'ftb-alert-photo': HTMLFtbAlertPhotoElement;
-    'ftb-alert-result': HTMLFtbAlertResultElement;
-    'ftb-alert-video': HTMLFtbAlertVideoElement;
-    'ftb-alert-wish': HTMLFtbAlertWishElement;
-    'ftb-alerts-feed': HTMLFtbAlertsFeedElement;
-    'ftb-app': HTMLFtbAppElement;
     'ftb-code-snippet': HTMLFtbCodeSnippetElement;
     'ftb-flag': HTMLFtbFlagElement;
     'ftb-flag-stories': HTMLFtbFlagStoriesElement;
@@ -522,6 +450,7 @@ declare global {
     'ftb-game-tour-stories': HTMLFtbGameTourStoriesElement;
     'ftb-global-search': HTMLFtbGlobalSearchElement;
     'ftb-icon': HTMLFtbIconElement;
+    'ftb-icon-stories': HTMLFtbIconStoriesElement;
     'ftb-infinite-scroll': HTMLFtbInfiniteScrollElement;
     'ftb-infinite-scroll-stories': HTMLFtbInfiniteScrollStoriesElement;
     'ftb-league-logo': HTMLFtbLeagueLogoElement;
@@ -532,6 +461,7 @@ declare global {
     'ftb-pagination': HTMLFtbPaginationElement;
     'ftb-pagination-stories': HTMLFtbPaginationStoriesElement;
     'ftb-partner-banner': HTMLFtbPartnerBannerElement;
+    'ftb-partner-banner-stories': HTMLFtbPartnerBannerStoriesElement;
     'ftb-partner-photo': HTMLFtbPartnerPhotoElement;
     'ftb-partner-photo-stories': HTMLFtbPartnerPhotoStoriesElement;
     'ftb-player-photo': HTMLFtbPlayerPhotoElement;
@@ -541,6 +471,7 @@ declare global {
     'ftb-post-photo': HTMLFtbPostPhotoElement;
     'ftb-post-photo-stories': HTMLFtbPostPhotoStoriesElement;
     'ftb-searchable-content': HTMLFtbSearchableContentElement;
+    'ftb-searchable-content-stories': HTMLFtbSearchableContentStoriesElement;
     'ftb-showcase-main': HTMLFtbShowcaseMainElement;
     'ftb-showcase-page': HTMLFtbShowcasePageElement;
     'ftb-spinner': HTMLFtbSpinnerElement;
@@ -556,41 +487,9 @@ declare global {
     'ftb-user-photo-stories': HTMLFtbUserPhotoStoriesElement;
     'ftb-video-cover': HTMLFtbVideoCoverElement;
     'ftb-video-cover-stories': HTMLFtbVideoCoverStoriesElement;
-    'ftb-virtual-scroll': HTMLFtbVirtualScrollElement;
   }
 }
 declare namespace LocalJSX {
-  interface FtbAlertArticle {
-    alert: Alert;
-  }
-  interface FtbAlertDate {
-    alert: Alert;
-  }
-  interface FtbAlertPhoto {
-    alert: Alert;
-  }
-  interface FtbAlertResult {
-    alert: Alert;
-  }
-  interface FtbAlertVideo {
-    alert: Alert;
-  }
-  interface FtbAlertWish {
-    alert: Alert;
-  }
-  interface FtbAlertsFeed {}
-  interface FtbApp {
-    firebaseConfig?: {
-      apiKey: string;
-      authDomain: string;
-      databaseURL: string;
-      projectId: string;
-      storageBucket: string;
-      messagingSenderId: string;
-      appId: string;
-      vapidKey: string;
-    };
-  }
   interface FtbCodeSnippet {
     code?: string;
     language?: string;
@@ -623,6 +522,7 @@ declare namespace LocalJSX {
   interface FtbIcon {
     svg: string;
   }
+  interface FtbIconStories {}
   interface FtbInfiniteScroll {
     /**
      * method that is called when user scrolls to a component
@@ -660,6 +560,7 @@ declare namespace LocalJSX {
     leagueId?: number;
     slotCode: BannerSlotCode;
   }
+  interface FtbPartnerBannerStories {}
   interface FtbPartnerPhoto {
     partner: Partner;
   }
@@ -697,9 +598,10 @@ declare namespace LocalJSX {
     onInputKeyDown?: (event: CustomEvent<KeyboardEvent>) => void;
     onOpenCategoryChange?: (event: CustomEvent<CategoryInterface>) => void;
     onSearchInProgressCategoryChange?: (event: CustomEvent<boolean>) => void;
-    placeholder: string;
+    placeholder?: string;
     renderItems: (items: any[]) => string | string[];
   }
+  interface FtbSearchableContentStories {}
   interface FtbShowcaseMain {}
   interface FtbShowcasePage {}
   interface FtbSpinner {}
@@ -760,20 +662,7 @@ declare namespace LocalJSX {
     video: GameVideo;
   }
   interface FtbVideoCoverStories {}
-  interface FtbVirtualScroll {
-    itemHeight: number;
-    items: any[];
-    renderItem: (item: any) => string;
-  }
   interface IntrinsicElements {
-    'ftb-alert-article': FtbAlertArticle;
-    'ftb-alert-date': FtbAlertDate;
-    'ftb-alert-photo': FtbAlertPhoto;
-    'ftb-alert-result': FtbAlertResult;
-    'ftb-alert-video': FtbAlertVideo;
-    'ftb-alert-wish': FtbAlertWish;
-    'ftb-alerts-feed': FtbAlertsFeed;
-    'ftb-app': FtbApp;
     'ftb-code-snippet': FtbCodeSnippet;
     'ftb-flag': FtbFlag;
     'ftb-flag-stories': FtbFlagStories;
@@ -786,6 +675,7 @@ declare namespace LocalJSX {
     'ftb-game-tour-stories': FtbGameTourStories;
     'ftb-global-search': FtbGlobalSearch;
     'ftb-icon': FtbIcon;
+    'ftb-icon-stories': FtbIconStories;
     'ftb-infinite-scroll': FtbInfiniteScroll;
     'ftb-infinite-scroll-stories': FtbInfiniteScrollStories;
     'ftb-league-logo': FtbLeagueLogo;
@@ -796,6 +686,7 @@ declare namespace LocalJSX {
     'ftb-pagination': FtbPagination;
     'ftb-pagination-stories': FtbPaginationStories;
     'ftb-partner-banner': FtbPartnerBanner;
+    'ftb-partner-banner-stories': FtbPartnerBannerStories;
     'ftb-partner-photo': FtbPartnerPhoto;
     'ftb-partner-photo-stories': FtbPartnerPhotoStories;
     'ftb-player-photo': FtbPlayerPhoto;
@@ -805,6 +696,7 @@ declare namespace LocalJSX {
     'ftb-post-photo': FtbPostPhoto;
     'ftb-post-photo-stories': FtbPostPhotoStories;
     'ftb-searchable-content': FtbSearchableContent;
+    'ftb-searchable-content-stories': FtbSearchableContentStories;
     'ftb-showcase-main': FtbShowcaseMain;
     'ftb-showcase-page': FtbShowcasePage;
     'ftb-spinner': FtbSpinner;
@@ -820,21 +712,12 @@ declare namespace LocalJSX {
     'ftb-user-photo-stories': FtbUserPhotoStories;
     'ftb-video-cover': FtbVideoCover;
     'ftb-video-cover-stories': FtbVideoCoverStories;
-    'ftb-virtual-scroll': FtbVirtualScroll;
   }
 }
 export { LocalJSX as JSX };
 declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
-      'ftb-alert-article': LocalJSX.FtbAlertArticle & JSXBase.HTMLAttributes<HTMLFtbAlertArticleElement>;
-      'ftb-alert-date': LocalJSX.FtbAlertDate & JSXBase.HTMLAttributes<HTMLFtbAlertDateElement>;
-      'ftb-alert-photo': LocalJSX.FtbAlertPhoto & JSXBase.HTMLAttributes<HTMLFtbAlertPhotoElement>;
-      'ftb-alert-result': LocalJSX.FtbAlertResult & JSXBase.HTMLAttributes<HTMLFtbAlertResultElement>;
-      'ftb-alert-video': LocalJSX.FtbAlertVideo & JSXBase.HTMLAttributes<HTMLFtbAlertVideoElement>;
-      'ftb-alert-wish': LocalJSX.FtbAlertWish & JSXBase.HTMLAttributes<HTMLFtbAlertWishElement>;
-      'ftb-alerts-feed': LocalJSX.FtbAlertsFeed & JSXBase.HTMLAttributes<HTMLFtbAlertsFeedElement>;
-      'ftb-app': LocalJSX.FtbApp & JSXBase.HTMLAttributes<HTMLFtbAppElement>;
       'ftb-code-snippet': LocalJSX.FtbCodeSnippet & JSXBase.HTMLAttributes<HTMLFtbCodeSnippetElement>;
       'ftb-flag': LocalJSX.FtbFlag & JSXBase.HTMLAttributes<HTMLFtbFlagElement>;
       'ftb-flag-stories': LocalJSX.FtbFlagStories & JSXBase.HTMLAttributes<HTMLFtbFlagStoriesElement>;
@@ -848,6 +731,7 @@ declare module '@stencil/core' {
       'ftb-game-tour-stories': LocalJSX.FtbGameTourStories & JSXBase.HTMLAttributes<HTMLFtbGameTourStoriesElement>;
       'ftb-global-search': LocalJSX.FtbGlobalSearch & JSXBase.HTMLAttributes<HTMLFtbGlobalSearchElement>;
       'ftb-icon': LocalJSX.FtbIcon & JSXBase.HTMLAttributes<HTMLFtbIconElement>;
+      'ftb-icon-stories': LocalJSX.FtbIconStories & JSXBase.HTMLAttributes<HTMLFtbIconStoriesElement>;
       'ftb-infinite-scroll': LocalJSX.FtbInfiniteScroll & JSXBase.HTMLAttributes<HTMLFtbInfiniteScrollElement>;
       'ftb-infinite-scroll-stories': LocalJSX.FtbInfiniteScrollStories &
         JSXBase.HTMLAttributes<HTMLFtbInfiniteScrollStoriesElement>;
@@ -861,6 +745,8 @@ declare module '@stencil/core' {
       'ftb-pagination': LocalJSX.FtbPagination & JSXBase.HTMLAttributes<HTMLFtbPaginationElement>;
       'ftb-pagination-stories': LocalJSX.FtbPaginationStories & JSXBase.HTMLAttributes<HTMLFtbPaginationStoriesElement>;
       'ftb-partner-banner': LocalJSX.FtbPartnerBanner & JSXBase.HTMLAttributes<HTMLFtbPartnerBannerElement>;
+      'ftb-partner-banner-stories': LocalJSX.FtbPartnerBannerStories &
+        JSXBase.HTMLAttributes<HTMLFtbPartnerBannerStoriesElement>;
       'ftb-partner-photo': LocalJSX.FtbPartnerPhoto & JSXBase.HTMLAttributes<HTMLFtbPartnerPhotoElement>;
       'ftb-partner-photo-stories': LocalJSX.FtbPartnerPhotoStories &
         JSXBase.HTMLAttributes<HTMLFtbPartnerPhotoStoriesElement>;
@@ -872,6 +758,8 @@ declare module '@stencil/core' {
       'ftb-post-photo': LocalJSX.FtbPostPhoto & JSXBase.HTMLAttributes<HTMLFtbPostPhotoElement>;
       'ftb-post-photo-stories': LocalJSX.FtbPostPhotoStories & JSXBase.HTMLAttributes<HTMLFtbPostPhotoStoriesElement>;
       'ftb-searchable-content': LocalJSX.FtbSearchableContent & JSXBase.HTMLAttributes<HTMLFtbSearchableContentElement>;
+      'ftb-searchable-content-stories': LocalJSX.FtbSearchableContentStories &
+        JSXBase.HTMLAttributes<HTMLFtbSearchableContentStoriesElement>;
       'ftb-showcase-main': LocalJSX.FtbShowcaseMain & JSXBase.HTMLAttributes<HTMLFtbShowcaseMainElement>;
       'ftb-showcase-page': LocalJSX.FtbShowcasePage & JSXBase.HTMLAttributes<HTMLFtbShowcasePageElement>;
       'ftb-spinner': LocalJSX.FtbSpinner & JSXBase.HTMLAttributes<HTMLFtbSpinnerElement>;
@@ -889,7 +777,6 @@ declare module '@stencil/core' {
       'ftb-video-cover': LocalJSX.FtbVideoCover & JSXBase.HTMLAttributes<HTMLFtbVideoCoverElement>;
       'ftb-video-cover-stories': LocalJSX.FtbVideoCoverStories &
         JSXBase.HTMLAttributes<HTMLFtbVideoCoverStoriesElement>;
-      'ftb-virtual-scroll': LocalJSX.FtbVirtualScroll & JSXBase.HTMLAttributes<HTMLFtbVirtualScrollElement>;
     }
   }
 }

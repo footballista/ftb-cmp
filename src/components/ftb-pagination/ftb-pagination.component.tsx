@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
-import { translations, userState } from 'ftb-models';
+import { checkElementSize, translations, userState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-pagination',
@@ -19,21 +19,31 @@ export class FtbPagination {
 
   @State() currentPage: number = 0;
 
+  containerEl: HTMLDivElement;
+  minHeightPx: number;
+
+  componentDidLoad() {
+    const { height } = checkElementSize(this.containerEl);
+    this.minHeightPx = height;
+  }
+
   render() {
     if (this.totalItems < 0) throw new Error('Incorrect "totalItems" value. Should be positive number');
     if (this.itemsPerPage < 1) throw new Error('Incorrect "itemsPerPage" value. Should be positive number');
 
     return (
       <Host>
-        <div class="ftb-pagination__items-container">
+        <div
+          class="ftb-pagination__items-container"
+          ref={el => (this.containerEl = el)}
+          style={{ 'min-height': this.minHeightPx + 'px' }}
+        >
           {this.renderPage(this.currentPage * this.itemsPerPage, (this.currentPage + 1) * this.itemsPerPage)}
         </div>
         <div class="ftb-pagination__nav-line">
-          <div class="ftb-pagination__nav-chevron-button">{this.currentPage > 0 && this.renderPrevButton()}</div>
+          {this.renderPrevButton()}
           <div class="ftb-pagination__nav-pages-buttons">{this.renderPageNumbers()}</div>
-          <div class="ftb-pagination__nav-chevron-button">
-            {this.currentPage < this.totalItems / this.itemsPerPage - 1 && this.renderNextButton()}
-          </div>
+          {this.renderNextButton()}
         </div>
       </Host>
     );
@@ -41,7 +51,11 @@ export class FtbPagination {
 
   renderPrevButton() {
     return (
-      <button class="ftb-pagination__nav-button ftb-pagination__prev-button" onClick={() => this.currentPage--}>
+      <button
+        class="ftb-pagination__nav-button ftb-pagination__prev-button"
+        onClick={() => this.currentPage--}
+        disabled={this.currentPage == 0}
+      >
         <ftb-icon svg={Chevron} class="ftb-pagination__chevron-icon" />
         <span class="ftb-pagination__nav-button-text">{translations.navigation.prev[userState.language]}</span>
       </button>
@@ -50,7 +64,11 @@ export class FtbPagination {
 
   renderNextButton() {
     return (
-      <button class="ftb-pagination__nav-button ftb-pagination__next-button" onClick={() => this.currentPage++}>
+      <button
+        class="ftb-pagination__nav-button ftb-pagination__next-button"
+        onClick={() => this.currentPage++}
+        disabled={this.currentPage > this.totalItems / this.itemsPerPage - 1}
+      >
         <ftb-icon svg={Chevron} class="ftb-pagination__chevron-icon" />
         <span class="ftb-pagination__nav-button-text">{translations.navigation.next[userState.language]}</span>
       </button>
@@ -73,7 +91,7 @@ export class FtbPagination {
           if (p > 0 && p < totalPages - 1) displayedPages.push(p);
         });
       }
-      displayedPages.push(totalPages - 1);
+      if (totalPages > 1) displayedPages.push(totalPages - 1);
 
       const displayedEntities = [];
       for (let i = 0; i < displayedPages.length; i++) {

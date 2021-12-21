@@ -15,7 +15,7 @@ export class FtbFlagStories {
         <h1>Flag</h1>
         <ftb-flag flag={new Country({ name: 'USA', flag: 'usa' }).flag} />
         <p>Displays national flag icon</p>
-        <ftb-code-snippet code="<ftb-flag flag={new Country({ name: 'Russia', flag: 'russia' }).flag} />" />
+        <ftb-code-snippet code="<ftb-flag flag={new Country({ name: 'USA', flag: 'usa' }).flag} />" />
 
         <h2>Color palette</h2>
         <p>

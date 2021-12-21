@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+
 @Component({
   tag: 'ftb-icon',
   styleUrl: 'ftb-icon.component.scss',
@@ -8,6 +9,6 @@ export class FtbIcon {
   @Prop() svg!: string;
 
   render() {
-    return <Host innerHTML={this.svg}></Host>;
+    return <Host innerHTML={this.svg} />;
   }
 }
