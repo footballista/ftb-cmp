@@ -26,6 +26,7 @@ export class FtbShowcasePage {
         'ftb-partner-photo',
       ],
     },
+    { title: 'Stage', items: ['ftb-stage-cup-net'] },
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
     { title: 'Content', items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll'] },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },

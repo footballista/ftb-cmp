@@ -25,14 +25,12 @@ export class FtbTeamLogo {
 
   getPalette: (el: HTMLImageElement) => Array<[number, number, number]>;
 
-  async componentWillLoad() {
+  async componentDidLoad() {
     if (!this.mode) {
       const { width } = checkElementSize(this.el);
       if (width > 200) {
         this.mode = 'max';
       } else if (width > 50) {
-        this.mode = 'middle';
-      } else {
         this.mode = 'middle';
       }
     }
@@ -61,8 +59,9 @@ export class FtbTeamLogo {
   render() {
     if (!this.team) return;
 
-    const url = (size, format = 'webp') =>
-      envState.imgHost + `img/logos/${this.team.logo}-` + size + '.' + format + `?logoId=${this.team.logoId}`;
+    const url = (size, _ = 'webp') =>
+      // envState.imgHost + `img/logos/${this.team.logo}-` + size + '.' + format + `?logoId=${this.team.logoId}`;
+      envState.imgHost + `img/logos/${this.team.logo}-` + size + '.png' + `?logoId=${this.team.logoId}`;
 
     return (
       <Host>

@@ -11,8 +11,14 @@ export class FtbPartnerBannerStories {
     return (
       <Host>
         <h1>Partner Banner</h1>
-        <p>Gets image from partner API, that suits provided App Code and Slot Code</p>
         <ftb-partner-banner slotCode={BannerSlotCode.site_footer} leagueId={394} />
+        <p>
+          Gets image from partner API, that suits provided <code>Slot Code</code>
+        </p>
+        <ftb-code-snippet code="<ftb-partner-banner slotCode={BannerSlotCode.site_footer} />" />
+        <p>
+          Banner generation also depends on <code>App Key</code> that is defined at application root level
+        </p>
       </Host>
     );
   }
