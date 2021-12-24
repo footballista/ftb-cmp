@@ -1,5 +1,5 @@
 import { Component, h, Host } from '@stencil/core';
-import { Stage, StageFormat, Team } from 'ftb-models';
+import { CupRounds, GameState, Stage, StageFormat, stageMocks, Team, teamMocks } from 'ftb-models';
 
 @Component({
   tag: 'ftb-stage-cup-net-stories',
@@ -10,6 +10,9 @@ export class FtbStageCupNetStories {
   render() {
     return (
       <Host>
+        <h1>New cup net</h1>
+        <ftb-cup-net-quadratic stage={stageN} />
+
         <h1>Cup Net</h1>
         <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} />" />
         <ftb-stage-cup-net stage={stage} />
@@ -23,19 +26,78 @@ export class FtbStageCupNetStories {
         <p>If not all rounds exists, net will be filled with empty slots</p>
         <ftb-stage-cup-net stage={stageEmpty} />
 
-        <h2>Short/Compact mode</h2>
-        <p>
-          Yon can pass <code>short</code> or <code>compact</code> mode parameter to make cup net look better in narrow
-          containers
-        </p>
-        <ftb-stage-cup-net stage={stage} mode="compact" />
-
         <h2>Ternary structure</h2>
         <p>If cup structure has ternary format, net will have different look</p>
+        {/*<ftb-stage-cup-net stage={StageTernary} />*/}
       </Host>
     );
   }
 }
+const stageN = new Stage({
+  ...stageMocks,
+  ...{
+    cupNet: [
+      {
+        _id: 1,
+        netPosition: 0,
+        tourNumber: CupRounds.final,
+        stateCode: GameState.NOT_STARTED,
+        teamHome: teamMocks.Chelsea,
+        teamAway: teamMocks.Arsenal,
+      },
+      {
+        _id: 2,
+        netPosition: 1,
+        tourNumber: CupRounds['3rd_place'],
+        stateCode: GameState.NOT_STARTED,
+        teamHome: teamMocks.Barcelona,
+        teamAway: teamMocks.Borussia,
+      },
+      {
+        _id: 3,
+        netPosition: 0,
+        tourNumber: CupRounds['1/2'],
+        stateCode: GameState.CLOSED,
+        teamHome: teamMocks.Barcelona,
+        teamAway: teamMocks.Arsenal,
+        scoreFtHome: 3,
+        scoreFtAway: 5,
+      },
+      {
+        _id: 4,
+        netPosition: 0,
+        tourNumber: CupRounds['1/2'],
+        stateCode: GameState.CLOSED,
+        teamHome: teamMocks.Barcelona,
+        teamAway: teamMocks.Arsenal,
+        scoreFtHome: 1,
+        scoreFtAway: 2,
+      },
+      {
+        _id: 5,
+        netPosition: 1,
+        tourNumber: CupRounds['1/2'],
+        stateCode: GameState.CLOSED,
+        teamHome: teamMocks.Chelsea,
+        teamAway: teamMocks.Borussia,
+        scoreFtHome: 2,
+        scoreFtAway: 2,
+      },
+      {
+        _id: 6,
+        netPosition: 1,
+        tourNumber: CupRounds['1/2'],
+        stateCode: GameState.CLOSED,
+        teamHome: teamMocks.Chelsea,
+        teamAway: teamMocks.Borussia,
+        scoreFtHome: 0,
+        scoreFtAway: 0,
+        scorePenHome: 5,
+        scorePenAway: 3,
+      },
+    ],
+  },
+});
 
 const stage = new Stage({
   _id: 10261,
@@ -529,3 +591,277 @@ const stageEmpty = new Stage({
     },
   ],
 });
+
+// const StageTernary = new Stage({
+//   _id: 10262,
+//   name: 'Play-Off',
+//   format: StageFormat.cup,
+//   sortIdx: 3,
+//   cupNet: [
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 3,
+//       scoreFtAway: 2,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 0,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 5,
+//       scoreFtAway: 4,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 1,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 5,
+//       scoreFtAway: 4,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 2,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 2,
+//       scoreFtAway: 2,
+//       scorePenHome: 5,
+//       scorePenAway: 3,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 3,
+//     },
+//
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 2,
+//       scoreFtAway: 2,
+//       scorePenHome: 3,
+//       scorePenAway: 1,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 4,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 2,
+//       scoreFtAway: 0,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 9,
+//       netPosition: 5,
+//     },
+//
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 1,
+//       scoreFtAway: 2,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 8,
+//       netPosition: 0,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 6,
+//       scoreFtAway: 2,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 8,
+//       netPosition: 1,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       scoreFtHome: 4,
+//       scoreFtAway: 0,
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 8,
+//       netPosition: 2,
+//     },
+//
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 0,
+//       netPosition: 0,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 0,
+//       netPosition: 0,
+//     },
+//     {
+//       teamHome: {
+//         _id: 123,
+//         name: 'Chelsea',
+//         shortName: 'CHE',
+//         logo: 'Chelsea',
+//         logoId: 1,
+//       },
+//       teamAway: {
+//         _id: 25373,
+//         name: 'Lokomotiv',
+//         shortName: 'LOK',
+//         logo: 'Lokomotiv Moscow',
+//         logoId: 1,
+//       },
+//       techDefeat: false,
+//       stateCode: GameState.CLOSED,
+//       tourNumber: 0,
+//       netPosition: 0,
+//     },
+//   ],
+// });

@@ -13,7 +13,6 @@ import sortBy from 'lodash-es/sortBy';
 })
 export class FtbStageCupNet {
   @Prop() stage!: Stage;
-  @Prop() mode: 'full' | 'short' | 'compact' = 'full';
   @Prop()
   highlightTeam?: Team; //team to highlight on the net with color
 
@@ -42,7 +41,7 @@ export class FtbStageCupNet {
     const { games, rounds } = this.arrangeGamesAndRounds();
 
     return (
-      <div class={'ftb-stage-cup-net__body ' + this.mode}>
+      <div class={'ftb-stage-cup-net__body '}>
         {rounds.map((r, idx) => (
           <div class="ftb-stage-cup-net__column">
             {sortBy(Object.keys(games[r]), [n => n]).map(netPosition => (
@@ -72,7 +71,7 @@ export class FtbStageCupNet {
       }
       return (
         <div
-          class={'ftb-stage-cup-net__row'}
+          class={'ftb-stage-cup-net__row' + (games[0]?.tourNumber !== 2 ? ' compact' : '')}
           onMouseOver={() => this.setHighlightTeam(side.team)}
           onMouseOut={() => this.setHighlightTeam(this.highlightTeam)}
         >
@@ -208,7 +207,9 @@ export class FtbStageCupNet {
         }
 
         const { game } = this.gameElements[i][netPos];
-        const { game: gameNext } = this.gameElements[i + 1] ? this.gameElements[i + 1][Math.floor(netPos / 2)] : null;
+        const { game: gameNext } = this.gameElements[i + 1]
+          ? this.gameElements[i + 1][Math.floor(netPos / 2)]
+          : { game: null };
 
         const isHighlighted =
           game &&
@@ -217,13 +218,13 @@ export class FtbStageCupNet {
           (gameNext.home.team._id == team?._id || gameNext.away.team._id == team?._id);
 
         if (isHighlighted) {
-          endDots[dotsCounter].classList.add('highlighted');
-          startDots[dotsCounter].classList.add('highlighted');
-          lines[dotsCounter].classList.add('highlighted');
+          endDots[dotsCounter]?.classList.add('highlighted');
+          startDots[dotsCounter]?.classList.add('highlighted');
+          lines[dotsCounter]?.classList.add('highlighted');
         } else {
-          endDots[dotsCounter].classList.remove('highlighted');
-          startDots[dotsCounter].classList.remove('highlighted');
-          lines[dotsCounter].classList.remove('highlighted');
+          endDots[dotsCounter]?.classList.remove('highlighted');
+          startDots[dotsCounter]?.classList.remove('highlighted');
+          lines[dotsCounter]?.classList.remove('highlighted');
         }
       }
     }

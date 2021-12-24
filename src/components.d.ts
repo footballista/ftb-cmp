@@ -13,6 +13,13 @@ export namespace Components {
         "code": string;
         "language": string;
     }
+    interface FtbCupNetQuadratic {
+        /**
+          * team to highlight on the net with color
+         */
+        "highlightTeam"?: Team;
+        "stage": Stage;
+    }
     interface FtbFlag {
         /**
           * if  passed, component will callback color palette, defined for flag
@@ -149,7 +156,6 @@ export namespace Components {
     }
     interface FtbStageCupNet {
         "highlightTeam"?: Team;
-        "mode": 'full' | 'short' | 'compact';
         "stage": Stage;
     }
     interface FtbStageCupNetOld {
@@ -215,6 +221,12 @@ declare global {
     var HTMLFtbCodeSnippetElement: {
         prototype: HTMLFtbCodeSnippetElement;
         new (): HTMLFtbCodeSnippetElement;
+    };
+    interface HTMLFtbCupNetQuadraticElement extends Components.FtbCupNetQuadratic, HTMLStencilElement {
+    }
+    var HTMLFtbCupNetQuadraticElement: {
+        prototype: HTMLFtbCupNetQuadraticElement;
+        new (): HTMLFtbCupNetQuadraticElement;
     };
     interface HTMLFtbFlagElement extends Components.FtbFlag, HTMLStencilElement {
     }
@@ -518,6 +530,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "ftb-code-snippet": HTMLFtbCodeSnippetElement;
+        "ftb-cup-net-quadratic": HTMLFtbCupNetQuadraticElement;
         "ftb-flag": HTMLFtbFlagElement;
         "ftb-flag-stories": HTMLFtbFlagStoriesElement;
         "ftb-game-date": HTMLFtbGameDateElement;
@@ -574,6 +587,13 @@ declare namespace LocalJSX {
     interface FtbCodeSnippet {
         "code"?: string;
         "language"?: string;
+    }
+    interface FtbCupNetQuadratic {
+        /**
+          * team to highlight on the net with color
+         */
+        "highlightTeam"?: Team;
+        "stage": Stage;
     }
     interface FtbFlag {
         /**
@@ -714,7 +734,6 @@ declare namespace LocalJSX {
     }
     interface FtbStageCupNet {
         "highlightTeam"?: Team;
-        "mode"?: 'full' | 'short' | 'compact';
         "stage": Stage;
     }
     interface FtbStageCupNetOld {
@@ -775,6 +794,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "ftb-code-snippet": FtbCodeSnippet;
+        "ftb-cup-net-quadratic": FtbCupNetQuadratic;
         "ftb-flag": FtbFlag;
         "ftb-flag-stories": FtbFlagStories;
         "ftb-game-date": FtbGameDate;
@@ -832,6 +852,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ftb-code-snippet": LocalJSX.FtbCodeSnippet & JSXBase.HTMLAttributes<HTMLFtbCodeSnippetElement>;
+            "ftb-cup-net-quadratic": LocalJSX.FtbCupNetQuadratic & JSXBase.HTMLAttributes<HTMLFtbCupNetQuadraticElement>;
             "ftb-flag": LocalJSX.FtbFlag & JSXBase.HTMLAttributes<HTMLFtbFlagElement>;
             "ftb-flag-stories": LocalJSX.FtbFlagStories & JSXBase.HTMLAttributes<HTMLFtbFlagStoriesElement>;
             "ftb-game-date": LocalJSX.FtbGameDate & JSXBase.HTMLAttributes<HTMLFtbGameDateElement>;

@@ -7,10 +7,10 @@ ftb-stage-cup-net {
     position: relative;
 
     .ftb-stage-cup-net__column {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
+      align-items: center;
 
       .ftb-stage-cup-net__game {
         width: fit-content;
@@ -18,6 +18,10 @@ ftb-stage-cup-net {
         .ftb-stage-cup-net__row {
           display: flex;
           align-items: center;
+
+          ftb-team-logo {
+            position: relative;
+          }
 
           ion-router-link {
             color: inherit;
@@ -63,16 +67,6 @@ ftb-stage-cup-net {
         width: 100%;
         pointer-events: none;
       }
-    }
-  }
-
-  .ftb-stage-cup-net__body.compact {
-    ftb-team-logo {
-      position: relative;
-    }
-
-    ion-router-link {
-      display: none !important;
     }
   }
 }
