@@ -12,36 +12,56 @@ ftb-cup-net-quadratic {
       align-items: stretch;
     }
 
-    ftb-game-tour {
+    .slot {
       text-align: center;
-    }
-
-    .row {
-      display: flex;
-      align-items: center;
-
-      ftb-team-logo {
-        position: relative;
+      ftb-game-tour {
+        text-align: center;
       }
-
-      ion-router-link {
-        color: inherit;
-        display: flex;
-        align-items: center;
-        height: 100%;
-        cursor: pointer;
-        flex: 1;
-      }
-      .score-block {
+      .row {
         display: flex;
         align-items: center;
 
-        .score {
+        ftb-team-logo {
+          position: relative;
+        }
+
+        ion-router-link {
+          color: inherit;
           display: flex;
           align-items: center;
-          justify-content: center;
+          height: 100%;
+          cursor: pointer;
+          flex: 1;
+        }
+        .score-block {
+          display: flex;
+          align-items: center;
+
+          .score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
+    }
+  }
+
+  .net-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+
+    .svg-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
     }
   }
 }

@@ -11,7 +11,10 @@ ftb-stage-cup-net-stories {
           padding-right: 0;
         }
       }
+      .slot {
+      }
       ftb-game-tour {
+        display: block;
         padding: 10px 0;
         font-size: 12px;
         text-transform: uppercase;
@@ -44,7 +47,6 @@ ftb-stage-cup-net-stories {
           }
 
           &.highlighted {
-            //color: goldenrod;
             .ftb-stage-cup-net__score {
               background: rgba(255, 215, 0, 0.3);
             }
@@ -52,7 +54,6 @@ ftb-stage-cup-net-stories {
               background: rgba(255, 215, 0, 0.3);
             }
             ion-router-link {
-              //background: rgba(255, 215, 0, 0.2);
               .ftb-stage-cup-net__team-name {
                 color: darkgoldenrod;
               }
@@ -67,28 +68,66 @@ ftb-stage-cup-net-stories {
             transition: color $netAnimation;
             height: 100%;
           }
-          .score {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
+          .score-block {
             background: rgba(0, 0, 0, 0.05);
-            font-size: 14px;
-            position: relative;
+            height: 50px;
+            .score {
+              width: 50px;
+              //height: 50px;
+              display: flex;
+              align-items: flex-end;
 
-            &:not(:last-of-type) {
-              &:after {
-                display: block;
-                content: ' ';
-                height: 30px;
-                width: 1px;
-                position: absolute;
-                top: 10px;
-                right: 0;
-                background: rgba(0, 0, 0, 0.05);
+              font-size: 14px;
+              position: relative;
+
+              .pen-score {
+                margin-left: 3px;
+                font-size: 10px;
+              }
+
+              &:not(:last-of-type) {
+                &:after {
+                  display: block;
+                  content: ' ';
+                  height: 30px;
+                  width: 1px;
+                  position: absolute;
+                  top: 10px;
+                  right: 0;
+                  background: rgba(0, 0, 0, 0.05);
+                }
               }
             }
           }
+        }
+      }
+    }
+
+    .net-container {
+      .dot {
+        transform: translateX(-50%) translateY(-50%);
+        height: 6px;
+        width: 6px;
+        background-color: #363d46;
+        border-radius: 50%;
+        position: absolute;
+        box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(54, 61, 70, 0.1);
+        z-index: 10;
+        transition: background-color $netAnimation, box-shadow $netAnimation;
+        &.highlighted {
+          background-color: darkgoldenrod;
+          box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(184, 134, 11, 0.1);
+          z-index: 1001;
+        }
+      }
+      .svg-line {
+        fill: transparent;
+        stroke: rgba(0, 0, 0, 0.1);
+        z-index: 0;
+        transition: stroke $netAnimation;
+        &.highlighted {
+          stroke: gold;
+          z-index: 1000;
         }
       }
     }

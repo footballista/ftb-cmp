@@ -3,7 +3,6 @@ import {
   createEntityRoute,
   CupRounds,
   Game,
-  GameSide,
   GameState,
   Stage,
   StageFormat,
@@ -47,6 +46,7 @@ export class FtbStageCupNetQuadratic {
   }> = [];
 
   resizeObserver: ResizeObserver;
+  netContainer: HTMLElement;
 
   componentWillLoad() {
     if (!this.stage.cupNet) {
@@ -98,7 +98,7 @@ export class FtbStageCupNetQuadratic {
         return Object.assign(game, { home: game.away, away: game.home });
       }
 
-      map[tourNumber][netPosition].games.push(getGameWithSortedSides(g, map[tourNumber][netPosition][0]));
+      map[tourNumber][netPosition].games.push(getGameWithSortedSides(g, map[tourNumber][netPosition].games[0]));
 
       return map;
     }, {});
@@ -147,11 +147,8 @@ export class FtbStageCupNetQuadratic {
       }
     }
 
-    console.log(columnsLeft);
     this.columns = [...columnsLeft, ...columnsRight];
   }
-
-  drawNet() {}
 
   highlight(team: Team | null) {
     team;
@@ -166,34 +163,36 @@ export class FtbStageCupNetQuadratic {
               {column.slots.map(s => this.renderSlot(s))}
             </div>
           ))}
+          <div class="net-container" ref={el => (this.netContainer = el)} />
         </div>
       </Host>
     );
   }
 
   renderSlot(s: SlotInterface) {
-    const renderRow = (side?: GameSide) => {
+    const renderRow = (side: 'home' | 'away' | null) => {
       if (!side) {
         return <div class="row empty" />;
       }
+
       return (
         <div
-          class={'row' + (s.games[0]?.tourNumber !== 2 ? ' compact' : '')}
-          onMouseOver={() => this.highlight(side.team)}
+          class={'row'}
+          onMouseOver={() => this.highlight(s.games[0][side].team)}
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
-          <ftb-team-logo team={side.team} />
-          <ion-router-link href={createEntityRoute(side.team)}>
-            <div class={'team-name'}>{side.team.name}</div>
+          <ftb-team-logo team={s.games[0][side].team} />
+          <ion-router-link href={createEntityRoute(s.games[0][side].team)}>
+            <div class={'team-name'}>{s.games[0][side].team.name}</div>
           </ion-router-link>
           <div class="score-block">
             {s.games.map(game => (
               <div class="score">
                 {game.state == GameState.CLOSED ? (
                   [
-                    <div class="ft-score">{side.score.ft}</div>,
-                    (game.home.score.pen || game.away.score.pen) && <div class="pen-score">{side.score.pen}</div>,
-                    game.techDefeat && side.score.ft > 0 && (
+                    <div class="ft-score">{game[side].score.ft}</div>,
+                    (game.home.score.pen || game.away.score.pen) && <div class="pen-score">{game[side].score.pen}</div>,
+                    game.techDefeat && game[side].score.ft > 0 && (
                       <div class="td-mark">{translations.game.td[userState.language]}</div>
                     ),
                   ]
@@ -207,12 +206,51 @@ export class FtbStageCupNetQuadratic {
       );
     };
 
-    return [
-      <ftb-game-tour game={new Game({ tourNumber: s.tourNumber, stage: { format: StageFormat.cup } })} />,
-      <div class="game">
-        {renderRow(s.games ? s.games[0].home : null)}
-        {renderRow(s.games ? s.games[0].away : null)}
-      </div>,
-    ];
+    return (
+      <div class="slot">
+        <ftb-game-tour game={new Game({ tourNumber: s.tourNumber, stage: { format: StageFormat.cup } })} />
+        <div class="game" ref={el => (s.el = el)}>
+          {renderRow(s.games ? 'home' : null)}
+          {renderRow(s.games ? 'away' : null)}
+        </div>
+      </div>
+    );
+  }
+
+  drawNet() {
+    const netElements = {
+      rightDots: [],
+      leftDots: [],
+      lines: [],
+    };
+
+    // const onDrawComplete = () => (this.netContainer.innerHTML = net);
+
+    for (let i = 0; i < this.columns.length - 1; i++) {
+      this.columns[i].slots.forEach(({ el }) => {
+        const rightDot = document.createElement('div');
+        rightDot.classList.add('dot');
+        netElements.rightDots.push(rightDot);
+        rightDot.style.top = el.offsetTop + el.offsetHeight / 2 + 'px';
+        rightDot.style.left = el.offsetLeft + el.offsetWidth + 'px';
+
+        // const leftDot = document.createElement('div');
+        // leftDot.classList.add('dot');
+        // netElements.rightDots.push(leftDot);
+        // netElements.rightDots.push();
+        // const top = el.offsetTop + el.offsetHeight / 2;
+        // const left = el.offsetLeft + el.offsetWidth;
+      });
+      // if (!this.columns[i + 1]) return onDrawComplete();
+      //
+      // for (const j in this.columns[i].slots) {
+      //   const { el } = this.columns[i].slots[j];
+      //   el.style.opacity = '.3s';
+      //   console.log(el);
+      // }
+    }
+
+    this.netContainer.innerHTML = '';
+    this.netContainer.append(...[...netElements.rightDots, ...netElements.leftDots, ...netElements.lines]);
   }
 }
