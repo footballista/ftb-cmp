@@ -11,10 +11,9 @@ ftb-stage-cup-net-stories {
           padding-right: 0;
         }
       }
-      .slot {
-      }
       ftb-game-tour {
         display: block;
+        margin-top: 10px;
         padding: 10px 0;
         font-size: 12px;
         text-transform: uppercase;
@@ -26,7 +25,24 @@ ftb-stage-cup-net-stories {
         &:last-of-type {
           margin-bottom: 0;
         }
-        overflow: hidden;
+
+        .dot {
+          height: 6px;
+          width: 6px;
+          background-color: #363d46;
+          border-radius: 50%;
+          position: absolute;
+          box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(54, 61, 70, 0.1);
+          z-index: 10;
+          transition: background-color $netAnimation, box-shadow $netAnimation;
+          &.highlighted {
+            background-color: darkgoldenrod;
+            box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(184, 134, 11, 0.1);
+            z-index: 1001;
+          }
+        }
+
+        //overflow: hidden;
         border-radius: 10px;
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
         .row {
@@ -36,25 +52,25 @@ ftb-stage-cup-net-stories {
           }
           ftb-team-logo {
             height: 50px;
-            width: 50px;
+            width: 60px;
             background: rgba(0, 0, 0, 0.05);
             img,
             ftb-icon {
-              margin: 10px;
+              margin: 10px 15px;
               height: 30px;
               width: 30px;
             }
           }
 
           &.highlighted {
-            .ftb-stage-cup-net__score {
+            .score-block {
               background: rgba(255, 215, 0, 0.3);
             }
             ftb-team-logo {
               background: rgba(255, 215, 0, 0.3);
             }
             ion-router-link {
-              .ftb-stage-cup-net__team-name {
+              .team-name {
                 color: darkgoldenrod;
               }
             }
@@ -67,13 +83,13 @@ ftb-stage-cup-net-stories {
             font-size: 14px;
             transition: color $netAnimation;
             height: 100%;
+            text-align: left;
           }
           .score-block {
             background: rgba(0, 0, 0, 0.05);
             height: 50px;
             .score {
               width: 50px;
-              //height: 50px;
               display: flex;
               align-items: flex-end;
 
@@ -81,6 +97,10 @@ ftb-stage-cup-net-stories {
               position: relative;
 
               .pen-score {
+                margin-left: 3px;
+                font-size: 10px;
+              }
+              .td-mark {
                 margin-left: 3px;
                 font-size: 10px;
               }
@@ -103,23 +123,25 @@ ftb-stage-cup-net-stories {
       }
     }
 
-    .net-container {
-      .dot {
-        transform: translateX(-50%) translateY(-50%);
-        height: 6px;
-        width: 6px;
-        background-color: #363d46;
-        border-radius: 50%;
-        position: absolute;
-        box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(54, 61, 70, 0.1);
-        z-index: 10;
-        transition: background-color $netAnimation, box-shadow $netAnimation;
-        &.highlighted {
-          background-color: darkgoldenrod;
-          box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(184, 134, 11, 0.1);
-          z-index: 1001;
+    .column.short {
+      ftb-team-logo {
+        &:after {
+          display: block;
+          content: ' ';
+          height: 30px;
+          width: 1px;
+          position: absolute;
+          top: 10px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.05);
         }
       }
+      ion-router-link {
+        display: none !important;
+      }
+    }
+
+    .net-container {
       .svg-line {
         fill: transparent;
         stroke: rgba(0, 0, 0, 0.1);

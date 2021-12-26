@@ -20,7 +20,8 @@ const SPLIT_SIDES_GAMES_THRESHOLD = 4;
 const NET_POS_3RD = -1;
 
 interface SlotInterface {
-  el: HTMLElement;
+  leftDotEl: HTMLElement;
+  rightDotEl: HTMLElement;
   netPosition: number;
   tourNumber: number;
   games: Array<Game>;
@@ -45,10 +46,16 @@ export class FtbStageCupNetQuadratic {
     slots: SlotInterface[];
   }> = [];
 
+  netLines: Array<{
+    from: SlotInterface;
+    to: SlotInterface;
+    el: SVGElement;
+  }> = [];
+
   resizeObserver: ResizeObserver;
   netContainer: HTMLElement;
 
-  componentWillLoad() {
+  async componentWillLoad() {
     if (!this.stage.cupNet) {
       throw new Error('Stage does not have cup net');
     }
@@ -59,8 +66,11 @@ export class FtbStageCupNetQuadratic {
     this.defineColumns();
   }
 
-  componentDidRender() {
+  componentDidLoad() {
     this.drawNet();
+  }
+
+  componentDidRender() {
     this.highlight(this.highlightTeam);
   }
 
@@ -71,7 +81,7 @@ export class FtbStageCupNetQuadratic {
   defineColumns() {
     const slotsMap = this.stage.cupNet.reduce((map, g) => {
       const tourNumber = g.tourNumber != CupRounds['3rd_place'] ? g.tourNumber : CupRounds.final; // display 3-rd place game below final, so it will have same round number
-      const netPosition = g.tourNumber != CupRounds['3rd_place'] ? g.netPosition : NET_POS_3RD; // setting custom net position so it will not be confused with regular net games
+      const netPosition = g.tourNumber != CupRounds['3rd_place'] ? g.netPosition : NET_POS_3RD; // setting custom net position, so it will not be confused with regular net games
       map[tourNumber] ??= {};
       map[tourNumber][netPosition] ??= {
         el: null, // this will be a link to HTMLElement when rendered
@@ -92,11 +102,25 @@ export class FtbStageCupNetQuadratic {
       }
 
       // if we have several games in one block, we need to sort sides so one team will always be hosts and other - guests
-      function getGameWithSortedSides(game: Game, exampleGame?: Game) {
-        if (!exampleGame) return game;
-        if (game.home.team._id === exampleGame.home.team._id) return game;
-        return Object.assign(game, { home: game.away, away: game.home });
-      }
+      const getGameWithSortedSides = (game: Game, exampleGame?: Game) => {
+        if (!exampleGame) {
+          // defining home-away based on how they are located on the net in previous rounds
+          const gameWithTeam = orderBy(this.stage.cupNet, ['tourNumber', 'netPosition'], ['desc', 'asc']).find(
+            g =>
+              [g.home.team._id, g.away.team._id].includes(game.home.team._id) ||
+              [g.home.team._id, g.away.team._id].includes(game.away.team._id),
+          );
+          if ([gameWithTeam.home.team._id, gameWithTeam.away.team._id].includes(game.home.team._id)) {
+            return game;
+          } else {
+            return Object.assign(game, { home: game.away, away: game.home });
+          }
+        } else {
+          // adding more games to existing pair in right order
+          if (game.home.team._id === exampleGame.home.team._id) return game;
+          return Object.assign(game, { home: game.away, away: game.home });
+        }
+      };
 
       map[tourNumber][netPosition].games.push(getGameWithSortedSides(g, map[tourNumber][netPosition].games[0]));
 
@@ -151,18 +175,66 @@ export class FtbStageCupNetQuadratic {
   }
 
   highlight(team: Team | null) {
-    team;
+    const gameHasTeam = (g: Game | null) => {
+      if (!g) return;
+      return g.home.team._id == team?._id || g.away.team._id == team?._id;
+    };
+
+    /** clear all highlighting first */
+    this.netLines.forEach(line => {
+      line.el.classList.remove('highlighted');
+      line.from.leftDotEl.classList.remove('highlighted');
+      line.from.rightDotEl.classList.remove('highlighted');
+
+      Array.from(line.from.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+        r.classList.remove('highlighted'),
+      );
+      Array.from(line.to.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+        r.classList.remove('highlighted'),
+      );
+      line.to.leftDotEl.classList.remove('highlighted');
+      line.to.rightDotEl.classList.remove('highlighted');
+    });
+
+    if (team) {
+      this.netLines?.forEach(line => {
+        if (gameHasTeam(line.from.games[0]) && gameHasTeam(line.to.games[0])) {
+          line.el.classList.add('highlighted');
+          line.from.rightDotEl.classList.add('highlighted');
+          line.to.leftDotEl.classList.add('highlighted');
+        }
+
+        if (line.from.games) {
+          if (line.from.games[0].home.team._id == team._id) {
+            line.from.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+          } else if (line.from.games[0].away.team._id == team._id) {
+            line.from.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+          }
+        }
+
+        if (line.to.games) {
+          if (line.to.games[0].home.team._id == team._id) {
+            line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+          } else if (line.to.games[0].away.team._id == team._id) {
+            line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+          }
+        }
+      });
+    }
   }
 
   render() {
     return (
       <Host>
         <div class="net-body">
-          {this.columns.map(column => (
-            <div class={'column' + (!column.hasNewTeams ? ' short' : '')}>
-              {column.slots.map(s => this.renderSlot(s))}
-            </div>
-          ))}
+          <div class="columns">
+            {this.columns.map(column => (
+              <div class={'column' + (!column.hasNewTeams ? ' short' : '')}>
+                {column.slots.map(s => this.renderSlot(s))}
+              </div>
+            ))}
+          </div>
+
           <div class="net-container" ref={el => (this.netContainer = el)} />
         </div>
       </Host>
@@ -209,7 +281,9 @@ export class FtbStageCupNetQuadratic {
     return (
       <div class="slot">
         <ftb-game-tour game={new Game({ tourNumber: s.tourNumber, stage: { format: StageFormat.cup } })} />
-        <div class="game" ref={el => (s.el = el)}>
+        <div class="game">
+          <div class="dot left" ref={el => (s.leftDotEl = el)} />
+          <div class="dot right" ref={el => (s.rightDotEl = el)} />
           {renderRow(s.games ? 'home' : null)}
           {renderRow(s.games ? 'away' : null)}
         </div>
@@ -218,39 +292,75 @@ export class FtbStageCupNetQuadratic {
   }
 
   drawNet() {
-    const netElements = {
-      rightDots: [],
-      leftDots: [],
-      lines: [],
-    };
+    const netLines: Array<{ from: SlotInterface; to: SlotInterface; el: SVGElement }> = [];
 
-    // const onDrawComplete = () => (this.netContainer.innerHTML = net);
+    this.columns.forEach(c => {
+      c.slots.forEach(s => {
+        const gameEl = s.leftDotEl.parentElement;
+        s.leftDotEl.style.top = s.rightDotEl.style.top = gameEl.offsetTop + gameEl.offsetHeight / 2 + 'px';
+        s.rightDotEl.style.left = gameEl.offsetLeft + gameEl.offsetWidth + 'px';
+        s.leftDotEl.style.left = gameEl.offsetLeft + 'px';
+      });
+    });
 
     for (let i = 0; i < this.columns.length - 1; i++) {
-      this.columns[i].slots.forEach(({ el }) => {
-        const rightDot = document.createElement('div');
-        rightDot.classList.add('dot');
-        netElements.rightDots.push(rightDot);
-        rightDot.style.top = el.offsetTop + el.offsetHeight / 2 + 'px';
-        rightDot.style.left = el.offsetLeft + el.offsetWidth + 'px';
+      this.columns[i].slots.forEach(s => {
+        const nextSlot = this.columns[i + 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
 
-        // const leftDot = document.createElement('div');
-        // leftDot.classList.add('dot');
-        // netElements.rightDots.push(leftDot);
-        // netElements.rightDots.push();
-        // const top = el.offsetTop + el.offsetHeight / 2;
-        // const left = el.offsetLeft + el.offsetWidth;
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.classList.add('svg-line');
+        svg.appendChild(this.connectDots(s.rightDotEl, nextSlot.leftDotEl));
+        netLines.push({
+          from: s,
+          to: nextSlot,
+          el: svg,
+        });
+        s.rightDotEl.classList.add('connected');
+        nextSlot.leftDotEl.classList.add('connected');
       });
-      // if (!this.columns[i + 1]) return onDrawComplete();
-      //
-      // for (const j in this.columns[i].slots) {
-      //   const { el } = this.columns[i].slots[j];
-      //   el.style.opacity = '.3s';
-      //   console.log(el);
-      // }
     }
 
+    this.netLines = netLines;
     this.netContainer.innerHTML = '';
-    this.netContainer.append(...[...netElements.rightDots, ...netElements.leftDots, ...netElements.lines]);
+    this.netContainer.append(...netLines.map(l => l.el));
+  }
+
+  connectDots(leftDot: HTMLElement, rightDot: HTMLElement) {
+    const x0 = leftDot.offsetLeft;
+    const y0 = leftDot.offsetTop;
+    const x1 = rightDot.offsetLeft;
+    const y1 = rightDot.offsetTop;
+
+    let line = `M ${x0}, ${y0}`;
+    if (y0 == y1) {
+      line += 'H' + x1;
+    } else {
+      const xM = x0 + (x1 - x0) / 2;
+
+      const firstCurve = {
+        x0: xM - 10,
+        x1: xM,
+        y0: y0,
+        y1: y0 + (y1 > y0 ? 10 : -10),
+      };
+
+      line += ' H ' + firstCurve.x0;
+      line += ' Q ' + firstCurve.x1 + ',' + firstCurve.y0 + ', ' + firstCurve.x1 + ',' + firstCurve.y1;
+
+      const secondCurve = {
+        x0: xM,
+        x1: xM + 10,
+        y0: y1 - (y1 > y0 ? 10 : -10),
+        y1: y1,
+      };
+      line += ' V ' + secondCurve.y0;
+      line += ' Q ' + secondCurve.x0 + ',' + secondCurve.y1 + ', ' + secondCurve.x1 + ',' + secondCurve.y1;
+      line += ' H ' + x1;
+    }
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', line);
+
+    return path;
   }
 }
