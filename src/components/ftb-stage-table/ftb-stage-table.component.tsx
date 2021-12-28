@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
-import { Stage, TableRow, translations, userState, Sports, GameState, Team } from 'ftb-models';
+import { Stage, TableRow, translations, userState, Sports, GameState, Team, createEntityRoute } from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
@@ -12,8 +12,8 @@ import { StageService } from 'ftb-models/dist/services/stage.service';
 })
 export class FtbStageTable {
   @Prop() stage!: Stage;
-  @Prop() showChess: boolean;
-  @Prop() customWidths: {
+  @Prop() showChess?: boolean;
+  @Prop() customWidths?: {
     label?: number;
     position?: number;
     points?: number;
@@ -126,6 +126,7 @@ export class FtbStageTable {
     structure.gd = currentWidth() + this.W.gd < containerWidth;
 
     if (this.showChess) {
+      console.log(currentWidth() + getTypeWidth('chess') < containerWidth);
       structure.chess = currentWidth() + getTypeWidth('chess') < containerWidth;
     }
 
@@ -151,25 +152,18 @@ export class FtbStageTable {
 
   private renderHead() {
     return (
-      <div class="ftb-stage-table__head">
-        {this.structure.label && <div class="label" style={this.getFieldStyle('label')}></div>}
-        {this.structure.position && <div class="position" style={this.getFieldStyle('position')}></div>}
-        {this.structure.shortName && (
-          <div class="name" style={this.getFieldStyle('name')}>
-            {translations.team.team[userState.language]}
-          </div>
-        )}
-        {this.structure.name && (
-          <div class="name" style={this.getFieldStyle('name')}>
-            <div class="stage-name">{this.stage.name}</div>
-          </div>
-        )}
+      <div class="head">
+        {this.structure.label && <div class="label" style={this.getFieldStyle('label')} />}
+        {this.structure.position && <div class="position" style={this.getFieldStyle('position')} />}
+        <div class="name" style={this.getFieldStyle('name')}>
+          {translations.team.team[userState.language]}
+        </div>
         {this.structure.chess &&
           this.stage.table.map(row => (
             <div class="chess-game" style={this.getFieldStyle('chess')}>
-              <ftb-link route="team" params={{ teamId: row.team._id, teamName: row.team.name }}>
-                <ftb-team-logo team={row.team} key={row.team._id}></ftb-team-logo>
-              </ftb-link>
+              <ion-router-link href={createEntityRoute(row.team)}>
+                <ftb-team-logo team={row.team} key={row.team._id} />
+              </ion-router-link>
             </div>
           ))}
         {this.structure.games && (
@@ -229,18 +223,18 @@ export class FtbStageTable {
     }
 
     return (
-      <div class="ftb-stage-table__body">
+      <div class="body">
         {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
-          <ftb-link route="team" params={{ teamId: row.team._id, teamName: row.team.name }}>
-            <div class={{ 'ftb-stage-table__row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
+          <ion-router-link href={createEntityRoute(row.team)}>
+            <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
                   {row.label == 'chevron-up' && (
-                    <div class="svg-container" innerHTML={Chevron} style={{ transform: 'rotate(180deg)' }}></div>
+                    <div class="svg-container" innerHTML={Chevron} style={{ transform: 'rotate(180deg)' }} />
                   )}
-                  {row.label == 'chevron-down' && <div class="svg-container" innerHTML={Chevron}></div>}
-                  {row.label == 'champions-league' && <div class="svg-container" innerHTML={ChampionsLeague}></div>}
-                  {row.label == 'europa-league' && <div class="svg-container" innerHTML={EuropaLeague}></div>}
+                  {row.label == 'chevron-down' && <div class="svg-container" innerHTML={Chevron} />}
+                  {row.label == 'champions-league' && <div class="svg-container" innerHTML={ChampionsLeague} />}
+                  {row.label == 'europa-league' && <div class="svg-container" innerHTML={EuropaLeague} />}
                 </div>
               )}
               {this.structure.position && (
@@ -250,7 +244,7 @@ export class FtbStageTable {
               )}
               {(this.structure.shortName || this.structure.name) && (
                 <div class="name" style={this.getFieldStyle('name')}>
-                  <ftb-team-logo team={row.team}></ftb-team-logo>
+                  <ftb-team-logo team={row.team} />
                   <div class="team-name">{this.structure.name === true ? row.team.name : row.team.shortName}</div>
                 </div>
               )}
@@ -295,12 +289,12 @@ export class FtbStageTable {
               {this.structure.form && (
                 <div class="form" style={this.getFieldStyle('form')}>
                   {[5, 4, 3, 2, 1].map(idx => (
-                    <i class={this.getFormClass(row, idx)}></i>
+                    <i class={this.getFormClass(row, idx)} />
                   ))}
                 </div>
               )}
             </div>
-          </ftb-link>
+          </ion-router-link>
         ))}
       </div>
     );
@@ -325,14 +319,12 @@ export class FtbStageTable {
       const teamSide = g.home.team._id == teamIdx ? g.home : g.away;
       const opponentSide = g.home.team._id == teamIdx ? g.away : g.home;
       return (
-        <ftb-link
+        <ion-router-link
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
-          route="game"
-          params={{ gameId: g._id, gameTitle: g.home.team.name + ' - ' + g.away.team.name }}
+          url={createEntityRoute(g)}
         >
-          <ftb-game-side-score game={g} side={teamSide}></ftb-game-side-score>:
-          <ftb-game-side-score game={g} side={opponentSide}></ftb-game-side-score>
-        </ftb-link>
+          {teamSide.score.ft}:{opponentSide.score.ft}
+        </ion-router-link>
       );
     });
   }

@@ -1,3 +1,5 @@
+@import '~@ionic/core/css/core.css';
+
 body {
   padding: 0;
   margin: 0;
@@ -5,12 +7,147 @@ body {
   background: #f6f9fc;
 }
 
+
 ftb-showcase-page {
   h2 {
     margin-top: 40px;
   }
 
+  .menu {
+    ftb-searchable-content {
+      margin-top: 10px;
+      display: block;
+      height: calc(100% - 43px);
+      .ftb-searchable-content__search-line {
+        height: 30px;        }
+      .main-input {
+        border: none;
+        outline: none;
+        box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+        height: 30px;
+        width: 100%;
+
+        border-radius: 10px;
+      }
+      .search-icon {
+        height: 14px;
+        width: 14px;
+        top: 9px;
+        left: 10px;
+      }
+    }
+    .ftb-searchable-content__content {
+      overflow-y: auto;
+      height: calc(100% - 72px);
+      direction: rtl;
+      margin-top: 20px;
+      margin-left: -15px;
+      padding-left: 15px;
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #8d9aa1;
+        position: relative;
+        border-radius: 8px;
+      }
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        position: relative;
+        display: block;
+        border-radius: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+      }
+
+      .category {
+        direction: ltr;
+        &:first-of-type {
+          h6 {
+            margin-top: 0 !important;
+          }
+        }
+        &:last-of-type {
+          margin-bottom: 30px;
+        }
+        h6 {
+          margin: 0;
+          font-size: 13px;
+          height: 25px;
+          margin-top: 20px;
+        }
+        ion-router-link {
+          display: flex;
+          align-items: center;
+          font-size: 13px;
+          height: 35px;
+          border-top: 1px solid rgba(0,0,0,0.05);
+          color: rgba(0,0,0,0.7);
+          cursor: pointer;
+          outline: none;
+          user-select: none;
+          &:hover {
+            color: cornflowerblue;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile {
+    ion-header ion-toolbar {
+      ion-title {
+        font-family: 'Twinkle Star', cursive;
+        font-weight: 700;
+        font-size: 18px;
+      }
+    }
+
+    .main-logo {
+      height: 30px;
+      width: 30px;
+      transform: translateX(18px);
+      opacity: .6;
+    }
+
+    ion-nav > .ion-page {
+      display: block;
+      padding: 0 10px;
+      overflow: auto;
+    }
+
+    .menu {
+
+      .header {
+        padding: 0 20px;
+        ion-router-link.main-link {
+          margin-top: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          font-size: 18px;
+          color: #2e2e2e;
+          font-family: 'Twinkle Star', cursive;
+          font-weight: 700;
+        }
+      }
+      ftb-searchable-content {
+        margin: 10px;
+        height: calc(100% - 64px) !important;
+        .ftb-searchable-content__content {
+          //height: calc(100% - 41px) !important;
+        }
+      }
+      input {
+        background: rgba(0,0,0,.1);
+      }
+    }
+  }
+
   .desktop {
+    $menuWidth: 230px;
     .header {
       padding: 0 20px;
       ion-router-link.main-link {
@@ -26,59 +163,16 @@ ftb-showcase-page {
       }
     }
     $contentPadding: 10px;
-    $menuWidth: 230px;
+
     .menu {
       width: $menuWidth;
       height: 100%;
       position: fixed;
       top: 0;
       left: 0;
-
-      ftb-searchable-content {
-        margin-top: 10px;
-        display: block;
-        .ftb-searchable-content__search-line {
-          height: 30px;        }
-        .main-input {
-          //border: 1px solid rgba(0,0,0,0.1);
-          border: none;
-          outline: none;
-          box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
-          height: 30px;
-          width: 100%;
-
-          border-radius: 10px;
-        }
-        .search-icon {
-          height: 14px;
-          width: 14px;
-          top: 9px;
-          left: 10px;
-        }
-      }
-      .ftb-searchable-content__content {
-        .category {
-          h6 {
-            margin: 0;
-            font-size: 13px;
-            height: 25px;
-            margin-top: 20px;
-          }
-          ion-router-link {
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            height: 35px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            color: rgba(0,0,0,0.7);
-            cursor: pointer;
-            outline: none;
-            user-select: none;
-            &:hover {
-              color: cornflowerblue;
-            }
-          }
-        }
+      z-index: 100000;
+      .header {
+        height: 100%;
       }
     }
 
@@ -95,46 +189,36 @@ ftb-showcase-page {
 
     ion-nav {
       margin-left: $menuWidth;
+      height: 100%;
       background: white;
-      padding: 0 30px;
+
       margin-top: $contentPadding;
       border-radius: 10px 10px 0 0;
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
       padding-bottom: 50px;
-      overflow-y: auto;
-      width: calc(100% - 300px);
-      &::-webkit-scrollbar-thumb {
-        background-color: #999999;
-        position: relative;
-        border-radius: 8px;
-      }
+      width: calc(100% - 230px);
 
-      &::-webkit-scrollbar {
-        width: 8px;
-        position: relative;
+      .ion-page {
         display: block;
-        border-radius: 8px;
-      }
-      &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
+        overflow-y: auto;
+        padding: 0 30px;
+        &::-webkit-scrollbar-thumb {
+          background-color: #999999;
+          position: relative;
+          border-radius: 8px;
+        }
+
+        &::-webkit-scrollbar {
+          width: 8px;
+          position: relative;
+          display: block;
+          border-radius: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+          border-radius: 8px;
+        }
       }
     }
   }
 }
-
-//  @media screen and (max-width: 800px) {
-//    .header {
-//      padding: 0 10px;
-//      a {
-//        font-size: 16px;
-//        height: 60px;
-//        ftb-icon {
-//          height: 30px;
-//          width: 30px;
-//          margin-right: 5px;
-//        }
-//      }
-//    }
-//  }
-//}

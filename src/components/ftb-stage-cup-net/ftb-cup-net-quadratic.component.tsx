@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Host, h } from '@stencil/core';
+import { Component, Element, Prop, Host, h, writeTask } from '@stencil/core';
 import {
   createEntityRoute,
   CupRounds,
@@ -11,6 +11,10 @@ import {
   userState,
 } from 'ftb-models';
 import orderBy from 'lodash-es/orderBy';
+import last from 'lodash-es/last';
+import max from 'lodash-es/max';
+import rangeRight from 'lodash-es/rangeRight';
+import range from 'lodash-es/range';
 
 /** if at least one round has more games than this value
  * split net to two sides */
@@ -68,6 +72,7 @@ export class FtbStageCupNetQuadratic {
 
   componentDidLoad() {
     this.drawNet();
+    this.highlight(this.highlightTeam);
   }
 
   componentDidRender() {
@@ -84,7 +89,8 @@ export class FtbStageCupNetQuadratic {
       const netPosition = g.tourNumber != CupRounds['3rd_place'] ? g.netPosition : NET_POS_3RD; // setting custom net position, so it will not be confused with regular net games
       map[tourNumber] ??= {};
       map[tourNumber][netPosition] ??= {
-        el: null, // this will be a link to HTMLElement when rendered
+        leftDotEl: null,
+        rightDotEl: null,
         netPosition,
         tourNumber: g.tourNumber, // using original tour Number, not changed one,
         games: [],
@@ -171,56 +177,90 @@ export class FtbStageCupNetQuadratic {
       }
     }
 
-    this.columns = [...columnsLeft, ...columnsRight];
-  }
+    const lastRound = last(columnsLeft).tourNumber;
+    if (lastRound > 0) {
+      // filling net with rounds with empty games
+      const maxSlotsInOneRound = max([...columnsLeft, ...columnsRight].map(r => r.slots.length));
 
-  highlight(team: Team | null) {
-    const gameHasTeam = (g: Game | null) => {
-      if (!g) return;
-      return g.home.team._id == team?._id || g.away.team._id == team?._id;
-    };
+      rangeRight(lastRound).forEach((r: number) => {
+        if (!splitSides) {
+          const slotsNumber = Math.min(maxSlotsInOneRound, Math.pow(2, r));
 
-    /** clear all highlighting first */
-    this.netLines.forEach(line => {
-      line.el.classList.remove('highlighted');
-      line.from.leftDotEl.classList.remove('highlighted');
-      line.from.rightDotEl.classList.remove('highlighted');
-
-      Array.from(line.from.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
-        r.classList.remove('highlighted'),
-      );
-      Array.from(line.to.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
-        r.classList.remove('highlighted'),
-      );
-      line.to.leftDotEl.classList.remove('highlighted');
-      line.to.rightDotEl.classList.remove('highlighted');
-    });
-
-    if (team) {
-      this.netLines?.forEach(line => {
-        if (gameHasTeam(line.from.games[0]) && gameHasTeam(line.to.games[0])) {
-          line.el.classList.add('highlighted');
-          line.from.rightDotEl.classList.add('highlighted');
-          line.to.leftDotEl.classList.add('highlighted');
-        }
-
-        if (line.from.games) {
-          if (line.from.games[0].home.team._id == team._id) {
-            line.from.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
-          } else if (line.from.games[0].away.team._id == team._id) {
-            line.from.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
-          }
-        }
-
-        if (line.to.games) {
-          if (line.to.games[0].home.team._id == team._id) {
-            line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
-          } else if (line.to.games[0].away.team._id == team._id) {
-            line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+          const slots = range(slotsNumber).reduce(
+            (res, i) => [...res, { netPosition: i, tourNumber: r, games: [] }],
+            [],
+          );
+          columnsLeft.push({ roundNumber: r, showTeamNames: false, slots });
+        } else {
+          const slotsNumber = Math.min(maxSlotsInOneRound, Math.pow(2, r) / 2);
+          const slots = range(slotsNumber).reduce(
+            (res, i) => [...res, { netPosition: i, tourNumber: r, games: [] }],
+            [],
+          );
+          columnsLeft.push({ roundNumber: r, showTeamNames: false, slots });
+          if (r != 0) {
+            const rightSlots = range(slotsNumber).reduce(
+              (res, i) => [...res, { netPosition: i + slotsNumber, tourNumber: r, games: [] }],
+              [],
+            );
+            columnsRight.unshift({ roundNumber: r, showTeamNames: false, slots: rightSlots });
           }
         }
       });
     }
+
+    this.columns = [...columnsLeft, ...columnsRight];
+  }
+
+  highlight(team: Team | null) {
+    writeTask(() => {
+      const gameHasTeam = (g: Game | null) => {
+        if (!g) return;
+        return g.home.team._id == team?._id || g.away.team._id == team?._id;
+      };
+
+      /** clear all highlighting first */
+      this.netLines.forEach(line => {
+        line.el.classList.remove('highlighted');
+        line.from.leftDotEl.classList.remove('highlighted');
+        line.from.rightDotEl.classList.remove('highlighted');
+
+        Array.from(line.from.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+          r.classList.remove('highlighted'),
+        );
+        Array.from(line.to.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+          r.classList.remove('highlighted'),
+        );
+        line.to.leftDotEl.classList.remove('highlighted');
+        line.to.rightDotEl.classList.remove('highlighted');
+      });
+
+      if (team) {
+        this.netLines?.forEach(line => {
+          if (gameHasTeam(line.from.games[0]) && gameHasTeam(line.to.games[0])) {
+            line.el.classList.add('highlighted');
+            line.from.rightDotEl.classList.add('highlighted');
+            line.to.leftDotEl.classList.add('highlighted');
+          }
+
+          if (line.from.games) {
+            if (line.from.games[0].home.team._id == team._id) {
+              line.from.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+            } else if (line.from.games[0].away.team._id == team._id) {
+              line.from.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+            }
+          }
+
+          if (line.to.games) {
+            if (line.to.games[0].home.team._id == team._id) {
+              line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+            } else if (line.to.games[0].away.team._id == team._id) {
+              line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+            }
+          }
+        });
+      }
+    });
   }
 
   render() {
@@ -284,45 +324,67 @@ export class FtbStageCupNetQuadratic {
         <div class="game">
           <div class="dot left" ref={el => (s.leftDotEl = el)} />
           <div class="dot right" ref={el => (s.rightDotEl = el)} />
-          {renderRow(s.games ? 'home' : null)}
-          {renderRow(s.games ? 'away' : null)}
+          {renderRow(s.games?.length ? 'home' : null)}
+          {renderRow(s.games?.length ? 'away' : null)}
         </div>
       </div>
     );
   }
 
   drawNet() {
-    const netLines: Array<{ from: SlotInterface; to: SlotInterface; el: SVGElement }> = [];
+    writeTask(() => {
+      const netLines: Array<{ from: SlotInterface; to: SlotInterface; el: SVGElement }> = [];
 
-    this.columns.forEach(c => {
-      c.slots.forEach(s => {
-        const gameEl = s.leftDotEl.parentElement;
-        s.leftDotEl.style.top = s.rightDotEl.style.top = gameEl.offsetTop + gameEl.offsetHeight / 2 + 'px';
-        s.rightDotEl.style.left = gameEl.offsetLeft + gameEl.offsetWidth + 'px';
-        s.leftDotEl.style.left = gameEl.offsetLeft + 'px';
-      });
-    });
-
-    for (let i = 0; i < this.columns.length - 1; i++) {
-      this.columns[i].slots.forEach(s => {
-        const nextSlot = this.columns[i + 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
-
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.classList.add('svg-line');
-        svg.appendChild(this.connectDots(s.rightDotEl, nextSlot.leftDotEl));
-        netLines.push({
-          from: s,
-          to: nextSlot,
-          el: svg,
+      this.columns.forEach(c => {
+        c.slots.forEach(s => {
+          const gameEl = s.leftDotEl.parentElement;
+          s.leftDotEl.style.top = s.rightDotEl.style.top = gameEl.offsetTop + gameEl.offsetHeight / 2 + 'px';
+          s.rightDotEl.style.left = gameEl.offsetLeft + gameEl.offsetWidth + 'px';
+          s.leftDotEl.style.left = gameEl.offsetLeft + 'px';
         });
-        s.rightDotEl.classList.add('connected');
-        nextSlot.leftDotEl.classList.add('connected');
       });
-    }
 
-    this.netLines = netLines;
-    this.netContainer.innerHTML = '';
-    this.netContainer.append(...netLines.map(l => l.el));
+      for (let i = 0; i < this.columns.filter(s => !s.isReverse).length - 1; i++) {
+        this.columns[i].slots.forEach(s => {
+          const nextSlot = this.columns[i + 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
+
+          if (nextSlot) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.classList.add('svg-line');
+            svg.appendChild(this.connectDots(s.rightDotEl, nextSlot.leftDotEl));
+            netLines.push({
+              from: s,
+              to: nextSlot,
+              el: svg,
+            });
+            s.rightDotEl.classList.add('connected');
+            nextSlot.leftDotEl.classList.add('connected');
+          }
+        });
+      }
+
+      for (let i = this.columns.length - 1; i > this.columns.filter(s => !s.isReverse).length - 1; i--) {
+        this.columns[i].slots.forEach(s => {
+          const nextSlot = this.columns[i - 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
+          if (nextSlot) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.classList.add('svg-line');
+            svg.appendChild(this.connectDots(nextSlot.rightDotEl, s.leftDotEl));
+            netLines.push({
+              from: nextSlot,
+              to: s,
+              el: svg,
+            });
+            s.leftDotEl.classList.add('connected');
+            nextSlot.rightDotEl.classList.add('connected');
+          }
+        });
+      }
+
+      this.netLines = netLines;
+      this.netContainer.innerHTML = '';
+      this.netContainer.append(...netLines.map(l => l.el));
+    });
   }
 
   connectDots(leftDot: HTMLElement, rightDot: HTMLElement) {
@@ -333,7 +395,7 @@ export class FtbStageCupNetQuadratic {
 
     let line = `M ${x0}, ${y0}`;
     if (y0 == y1) {
-      line += 'H' + x1;
+      line += ' H' + x1;
     } else {
       const xM = x0 + (x1 - x0) / 2;
 

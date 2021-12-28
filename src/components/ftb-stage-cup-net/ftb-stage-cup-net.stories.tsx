@@ -1,5 +1,5 @@
 import { Component, h, Host } from '@stencil/core';
-import { CupRounds, GameState, Stage, StageFormat, stageMocks, Team, teamMocks } from 'ftb-models';
+import { CupRounds, Game, GameState, Stage, StageFormat, Team, teamMocks } from 'ftb-models';
 
 @Component({
   tag: 'ftb-stage-cup-net-stories',
@@ -10,899 +10,285 @@ export class FtbStageCupNetStories {
   render() {
     return (
       <Host>
-        <h1>New cup net</h1>
-        <ftb-cup-net-quadratic stage={stageN} />
-
-        <h1>Cup Net</h1>
+        <h1>Cup net</h1>
         <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} />" />
-        <ftb-stage-cup-net stage={stage} />
+        <ftb-cup-net-quadratic stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')} />
 
-        <h2>Highlighting</h2>
-        <p>You can select team to highlight on the net</p>
-        <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} highlightTeam={new Team({ _id: 19417, name: 'Egrisi' })} />" />
-        <ftb-stage-cup-net stage={stage} highlightTeam={new Team({ _id: 19417, name: 'Egrisi' })} />
+        <h2>Split sides</h2>
+        <p>Big structures will be divided horizontally</p>
+        <ftb-cup-net-quadratic
+          stage={createStage(
+            'final',
+            '1/2',
+            '1/2',
+            '1/4',
+            '1/4',
+            '1/4',
+            '1/4',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+          )}
+        />
 
-        <h2>Autofill</h2>
-        <p>If not all rounds exists, net will be filled with empty slots</p>
-        <ftb-stage-cup-net stage={stageEmpty} />
+        <h2>Highlight team</h2>
+        <p>You can programmatically set team to highlight on the net</p>
+        <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} highlightTeam={new Team({_id: 123, name: 'Arsenal'})}/>" />
+        <ftb-cup-net-quadratic
+          stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
+          highlightTeam={new Team(teamMocks.Arsenal)}
+        />
+
+        <h2>Autofill rounds</h2>
+        <p>Rounds that aren't set yet, will be autofilled with empty elements</p>
+        <ftb-cup-net-quadratic stage={createStage('1/4', '1/4', '1/4', '1/4')} />
 
         <h2>Ternary structure</h2>
-        <p>If cup structure has ternary format, net will have different look</p>
-        {/*<ftb-stage-cup-net stage={StageTernary} />*/}
+        <p>Alternative net structure with rounds like "1/3", "1/6", "1/12" will have different appearance:</p>
+        <ftb-code-snippet code="UNDER CONSTRUCTION" />
       </Host>
     );
   }
 }
-const stageN = new Stage({
-  ...stageMocks,
-  ...{
-    cupNet: [
-      {
-        _id: 1,
-        netPosition: 0,
-        tourNumber: CupRounds.final,
-        stateCode: GameState.NOT_STARTED,
-        teamHome: teamMocks.Arsenal,
-        teamAway: teamMocks.Chelsea,
-      },
-      // {
-      //   _id: 2,
-      //   netPosition: 1,
-      //   tourNumber: CupRounds['3rd_place'],
-      //   stateCode: GameState.NOT_STARTED,
-      //   teamHome: teamMocks.Barcelona,
-      //   teamAway: teamMocks.Borussia,
-      // },
-      {
-        _id: 3,
-        netPosition: 0,
-        tourNumber: CupRounds['1/2'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Barcelona,
-        teamAway: teamMocks.Arsenal,
-        scoreFtHome: 3,
-        scoreFtAway: 5,
-      },
-      {
-        _id: 4,
-        netPosition: 0,
-        tourNumber: CupRounds['1/2'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Barcelona,
-        teamAway: teamMocks.Arsenal,
-        scoreFtHome: 1,
-        scoreFtAway: 2,
-      },
-      {
-        _id: 5,
-        netPosition: 1,
-        tourNumber: CupRounds['1/2'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Chelsea,
-        teamAway: teamMocks.Borussia,
-        scoreFtHome: 2,
-        scoreFtAway: 2,
-      },
-      {
-        _id: 6,
-        netPosition: 1,
-        tourNumber: CupRounds['1/2'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Borussia,
-        teamAway: teamMocks.Chelsea,
-        scoreFtHome: 0,
-        scoreFtAway: 0,
-        scorePenHome: 5,
-        scorePenAway: 3,
-      },
-      {
-        _id: 7,
-        netPosition: 0,
-        tourNumber: CupRounds['1/4'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.ManCity,
-        teamAway: teamMocks.Arsenal,
-        scoreFtHome: 1,
-        scoreFtAway: 3,
-      },
-      {
-        _id: 8,
-        netPosition: 1,
-        tourNumber: CupRounds['1/4'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Barcelona,
-        teamAway: teamMocks.Fiorentina,
-        scoreFtHome: 5,
-        scoreFtAway: 0,
-        techDefeat: true,
-      },
-      {
-        _id: 9,
-        netPosition: 2,
-        tourNumber: CupRounds['1/4'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Chelsea,
-        teamAway: teamMocks.ManU,
-        scoreFtHome: 0,
-        scoreFtAway: 1,
-      },
-      {
-        _id: 9,
-        netPosition: 3,
-        tourNumber: CupRounds['1/4'],
-        stateCode: GameState.CLOSED,
-        teamHome: teamMocks.Bayern,
-        teamAway: teamMocks.Borussia,
-        scoreFtHome: 4,
-        scoreFtAway: 6,
-      },
-    ],
-  },
-});
 
-const stage = new Stage({
-  _id: 10261,
-  name: 'Play-Off',
-  format: StageFormat.cup,
-  sortIdx: 3,
-  cupNet: [
-    {
-      _id: 406684,
-      netPosition: 0,
-      stateCode: 2,
-      date: '2021-11-12T16:00:19.000Z',
-      tourNumber: 0,
-      scoreFtHome: 0,
-      scoreFtAway: 0,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19417,
-        name: 'Egrisi',
-        shortName: 'EGR',
-        logo: 'Egrisi',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405311,
-      netPosition: 0,
-      stateCode: 4,
-      date: '2021-10-10T13:20:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 3,
-      scoreFtAway: 3,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 18537,
-        name: 'Benfica',
-        shortName: 'BEN',
-        logo: 'Benfica',
-        logoId: 2,
-      },
-      teamAway: {
-        _id: 19417,
-        name: 'Egrisi',
-        shortName: 'EGR',
-        logo: 'Egrisi',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404987,
-      netPosition: 0,
-      stateCode: 4,
-      date: '2021-10-15T15:40:00.000Z',
-      tourNumber: 1,
-      scoreFtHome: 2,
-      scoreFtAway: 3,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19417,
-        name: 'Egrisi',
-        shortName: 'EGR',
-        logo: 'Egrisi',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404943,
-      netPosition: 0,
-      stateCode: 4,
-      date: '2021-10-02T12:40:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 5,
-      scoreFtAway: 3,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19417,
-        name: 'Egrisi',
-        shortName: 'EGR',
-        logo: 'Egrisi',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18537,
-        name: 'Benfica',
-        shortName: 'BEN',
-        logo: 'Benfica',
-        logoId: 2,
-      },
-    },
-    {
-      _id: 405956,
-      netPosition: 0,
-      stateCode: 4,
-      date: '2021-10-22T15:40:00.000Z',
-      tourNumber: 1,
-      scoreFtHome: 8,
-      scoreFtAway: 4,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19417,
-        name: 'Egrisi',
-        shortName: 'EGR',
-        logo: 'Egrisi',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404988,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-17T14:30:00.000Z',
-      tourNumber: 1,
-      scoreFtHome: 2,
-      scoreFtAway: 2,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 0,
-      },
-    },
-    {
-      _id: 405957,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-24T15:40:00.000Z',
-      tourNumber: 1,
-      scoreFtHome: 0,
-      scoreFtAway: 5,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 0,
-      },
-      teamAway: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405312,
-      netPosition: 2,
-      stateCode: 4,
-      date: '2021-10-10T15:20:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 6,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19032,
-        name: 'LA Galaxy',
-        shortName: 'LAG',
-        logo: 'LA Galaxy',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 2,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 8,
-      scoreFtAway: 2,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19032,
-        name: 'LA Galaxy',
-        shortName: 'LAG',
-        logo: 'LA Galaxy',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 3,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 3,
-      scoreFtAway: 1,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 123,
-        name: 'Chelsea',
-        shortName: 'CHE',
-        logo: 'Chelsea',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 3,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 1,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 123,
-        name: 'Chelsea',
-        shortName: 'CHE',
-        logo: 'Chelsea',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405956,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-22T15:40:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 2,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 321,
-        name: 'Arsenal',
-        shortName: 'Ars',
-        logo: 'Arsenal',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405956,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-22T15:40:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 2,
-      scoreFtAway: 3,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 321,
-        name: 'Arsenal',
-        shortName: 'Ars',
-        logo: 'Arsenal',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-    },
-  ],
-});
+const createStage = (...gameCodes: Array<'final' | '3rd_place' | '1/2' | '1/4' | '1/8'>) => {
+  const stage = new Stage({ _id: 7510, format: StageFormat.cup, name: 'Плей-офф' });
+  const generator = new GamesGanerator();
+  stage.cupNet = gameCodes.reduce((games, code) => [...games, ...generator.getGames(code)], []);
+  return stage;
+};
 
-const stageEmpty = new Stage({
-  _id: 10261,
-  name: 'Play-Off',
-  format: StageFormat.cup,
-  sortIdx: 3,
-  cupNet: [
-    {
-      _id: 405312,
-      netPosition: 2,
-      stateCode: 4,
-      date: '2021-10-10T15:20:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 6,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19032,
-        name: 'LA Galaxy',
-        shortName: 'LAG',
-        logo: 'LA Galaxy',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 2,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 8,
-      scoreFtAway: 2,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 19056,
-        name: 'Chievo',
-        shortName: 'CHI',
-        logo: 'Chievo',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 19032,
-        name: 'LA Galaxy',
-        shortName: 'LAG',
-        logo: 'LA Galaxy',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 3,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 3,
-      scoreFtAway: 1,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 123,
-        name: 'Chelsea',
-        shortName: 'CHE',
-        logo: 'Chelsea',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 404944,
-      netPosition: 3,
-      stateCode: 4,
-      date: '2021-10-01T14:50:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 1,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 25373,
-        name: 'Lokomotiv',
-        shortName: 'LOK',
-        logo: 'Lokomotiv Moscow',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 123,
-        name: 'Chelsea',
-        shortName: 'CHE',
-        logo: 'Chelsea',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405956,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-22T15:40:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 1,
-      scoreFtAway: 2,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 321,
-        name: 'Arsenal',
-        shortName: 'Ars',
-        logo: 'Arsenal',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-    },
-    {
-      _id: 405956,
-      netPosition: 1,
-      stateCode: 4,
-      date: '2021-10-22T15:40:00.000Z',
-      tourNumber: 2,
-      scoreFtHome: 2,
-      scoreFtAway: 3,
-      scorePenHome: null,
-      scorePenAway: null,
-      teamHome: {
-        _id: 321,
-        name: 'Arsenal',
-        shortName: 'Ars',
-        logo: 'Arsenal',
-        logoId: 1,
-      },
-      teamAway: {
-        _id: 18736,
-        name: 'Fiorentina',
-        shortName: 'FIO',
-        logo: 'Fiorentina',
-        logoId: 1,
-      },
-    },
-  ],
-});
+class GamesGanerator {
+  private games = {
+    'final': (function* () {
+      yield [
+        {
+          _id: 1,
+          netPosition: 0,
+          tourNumber: CupRounds.final,
+          stateCode: GameState.NOT_STARTED,
+          teamHome: teamMocks.Arsenal,
+          teamAway: teamMocks.Chelsea,
+        },
+      ];
+    })(),
+    '3rd_place': (function* () {
+      yield [
+        {
+          _id: 2,
+          netPosition: 1,
+          tourNumber: CupRounds['3rd_place'],
+          stateCode: GameState.NOT_STARTED,
+          teamHome: teamMocks.Barcelona,
+          teamAway: teamMocks.Borussia,
+        },
+      ];
+    })(),
+    '1/2': (function* () {
+      yield [
+        {
+          _id: 3,
+          netPosition: 0,
+          tourNumber: CupRounds['1/2'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Barcelona,
+          teamAway: teamMocks.Arsenal,
+          scoreFtHome: 3,
+          scoreFtAway: 5,
+        },
+        {
+          _id: 4,
+          netPosition: 0,
+          tourNumber: CupRounds['1/2'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Barcelona,
+          teamAway: teamMocks.Arsenal,
+          scoreFtHome: 1,
+          scoreFtAway: 2,
+        },
+      ];
+      yield [
+        {
+          _id: 4,
+          netPosition: 1,
+          tourNumber: CupRounds['1/2'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Borussia,
+          teamAway: teamMocks.Chelsea,
+          scoreFtHome: 2,
+          scoreFtAway: 2,
+        },
+        {
+          _id: 5,
+          netPosition: 1,
+          tourNumber: CupRounds['1/2'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Chelsea,
+          teamAway: teamMocks.Borussia,
+          scoreFtHome: 0,
+          scoreFtAway: 0,
+          scorePenHome: 5,
+          scorePenAway: 3,
+        },
+      ];
+    })(),
+    '1/4': (function* () {
+      yield [
+        {
+          _id: 7,
+          netPosition: 0,
+          tourNumber: CupRounds['1/4'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.ManCity,
+          teamAway: teamMocks.Arsenal,
+          scoreFtHome: 1,
+          scoreFtAway: 3,
+        },
+      ];
+      yield [
+        {
+          _id: 8,
+          netPosition: 1,
+          tourNumber: CupRounds['1/4'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Barcelona,
+          teamAway: teamMocks.Fiorentina,
+          scoreFtHome: 5,
+          scoreFtAway: 0,
+          techDefeat: true,
+        },
+      ];
+      yield [
+        {
+          _id: 9,
+          netPosition: 2,
+          tourNumber: CupRounds['1/4'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Chelsea,
+          teamAway: teamMocks.ManU,
+          scoreFtHome: 2,
+          scoreFtAway: 0,
+        },
+      ];
+      yield [
+        {
+          _id: 9,
+          netPosition: 3,
+          tourNumber: CupRounds['1/4'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Bayern,
+          teamAway: teamMocks.Borussia,
+          scoreFtHome: 4,
+          scoreFtAway: 6,
+        },
+      ];
+    })(),
+    '1/8': (function* () {
+      yield [
+        {
+          _id: 10,
+          netPosition: 0,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.ManCity,
+          teamAway: teamMocks.Lecce,
+          scoreFtHome: 2,
+          scoreFtAway: 0,
+        },
+      ];
+      yield [
+        {
+          _id: 11,
+          netPosition: 1,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Arsenal,
+          teamAway: teamMocks.Inter,
+          scoreFtHome: 4,
+          scoreFtAway: 1,
+        },
+      ];
+      yield [
+        {
+          _id: 12,
+          netPosition: 2,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Barcelona,
+          teamAway: teamMocks.Atalanta,
+          scoreFtHome: 5,
+          scoreFtAway: 4,
+        },
+      ];
+      yield [
+        {
+          _id: 13,
+          netPosition: 3,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Fiorentina,
+          teamAway: teamMocks.Betis,
+          scoreFtHome: 8,
+          scoreFtAway: 6,
+        },
+      ];
+      yield [
+        {
+          _id: 14,
+          netPosition: 4,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Chelsea,
+          teamAway: teamMocks.Juventus,
+          scoreFtHome: 4,
+          scoreFtAway: 3,
+        },
+      ];
+      yield [
+        {
+          _id: 15,
+          netPosition: 5,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.ManU,
+          teamAway: teamMocks.Lazio,
+          scoreFtHome: 4,
+          scoreFtAway: 3,
+        },
+      ];
+      yield [
+        {
+          _id: 16,
+          netPosition: 6,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Borussia,
+          teamAway: teamMocks.Liverpool,
+          scoreFtHome: 4,
+          scoreFtAway: 3,
+        },
+      ];
+      yield [
+        {
+          _id: 17,
+          netPosition: 7,
+          tourNumber: CupRounds['1/8'],
+          stateCode: GameState.CLOSED,
+          teamHome: teamMocks.Bayern,
+          teamAway: teamMocks.Napoli,
+          scoreFtHome: 4,
+          scoreFtAway: 3,
+        },
+      ];
+    })(),
+  };
 
-// const StageTernary = new Stage({
-//   _id: 10262,
-//   name: 'Play-Off',
-//   format: StageFormat.cup,
-//   sortIdx: 3,
-//   cupNet: [
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 3,
-//       scoreFtAway: 2,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 0,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 5,
-//       scoreFtAway: 4,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 1,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 5,
-//       scoreFtAway: 4,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 2,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 2,
-//       scoreFtAway: 2,
-//       scorePenHome: 5,
-//       scorePenAway: 3,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 3,
-//     },
-//
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 2,
-//       scoreFtAway: 2,
-//       scorePenHome: 3,
-//       scorePenAway: 1,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 4,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 2,
-//       scoreFtAway: 0,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 9,
-//       netPosition: 5,
-//     },
-//
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 1,
-//       scoreFtAway: 2,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 8,
-//       netPosition: 0,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 6,
-//       scoreFtAway: 2,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 8,
-//       netPosition: 1,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       scoreFtHome: 4,
-//       scoreFtAway: 0,
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 8,
-//       netPosition: 2,
-//     },
-//
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 0,
-//       netPosition: 0,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 0,
-//       netPosition: 0,
-//     },
-//     {
-//       teamHome: {
-//         _id: 123,
-//         name: 'Chelsea',
-//         shortName: 'CHE',
-//         logo: 'Chelsea',
-//         logoId: 1,
-//       },
-//       teamAway: {
-//         _id: 25373,
-//         name: 'Lokomotiv',
-//         shortName: 'LOK',
-//         logo: 'Lokomotiv Moscow',
-//         logoId: 1,
-//       },
-//       techDefeat: false,
-//       stateCode: GameState.CLOSED,
-//       tourNumber: 0,
-//       netPosition: 0,
-//     },
-//   ],
-// });
+  getGames(code: 'final' | '3rd_place' | '1/2' | '1/4' | '1/8') {
+    return (this.games[code].next().value as any[]).map(g => new Game(g));
+  }
+}

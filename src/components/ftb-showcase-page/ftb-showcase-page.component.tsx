@@ -3,6 +3,8 @@ import { envState } from 'ftb-models';
 import { environment } from '@src/environments/environment';
 import '@ionic/core';
 import { fromEvent } from 'rxjs';
+import { menuController } from '@ionic/core';
+import FootballistaIcon from '../../assets/icons/footballista.svg';
 
 @Component({
   tag: 'ftb-showcase-page',
@@ -26,7 +28,7 @@ export class FtbShowcasePage {
         'ftb-partner-photo',
       ],
     },
-    { title: 'Stage', items: ['ftb-stage-cup-net'] },
+    { title: 'Stage', items: ['ftb-stage-table', 'ftb-stage-cup-net'] },
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
     { title: 'Content', items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll'] },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },
@@ -99,8 +101,8 @@ export class FtbShowcasePage {
         </div>
         <div class="content">
           {this.renderRoutes()}
+          <ion-nav animated={false} />
           <div class="content-fog" />
-          <ion-nav />
         </div>
       </ion-app>
     );
@@ -108,44 +110,65 @@ export class FtbShowcasePage {
 
   renderMobile() {
     return (
-      <ion-app>
-        <ion-menu side="start" content-id="main-content">
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Menu</ion-title>
-            </ion-toolbar>
-          </ion-header>
+      <ion-app class="mobile">
+        <ion-menu side="start" content-id="main-content" class="menu" menuId="main">
           <ion-content>
-            <ion-router-link href="/" className="main-link">
-              Ftb-Components
-            </ion-router-link>
-
-            <ion-list>
-              {this.components.map(cat => (
-                <div class="category">
-                  <h6>{cat.title}</h6>
-                  {...cat.items.map(i => (
-                    <ion-item>
-                      <ion-router-link href={'/' + i}>{i}</ion-router-link>
-                    </ion-item>
-                  ))}
-                </div>
-              ))}
-            </ion-list>
+            <div class="header">
+              <ion-router-link href="/" className="main-link" onClick={() => menuController.close('main')}>
+                Ftb-Components
+              </ion-router-link>
+            </div>
+            <ftb-searchable-content
+              items={this.components}
+              filterFn={async (items, query) => {
+                if (!query.trim()) return items;
+                query = query.toLowerCase().trim();
+                const result = items
+                  .filter(
+                    cat =>
+                      cat.title.toLowerCase().includes(query) || cat.items.some(i => i.toLowerCase().includes(query)),
+                  )
+                  .map(cat => {
+                    if (cat.title.toLowerCase().includes(query)) {
+                      return cat;
+                    } else {
+                      return { title: cat.title, items: cat.items.filter(i => i.toLowerCase().includes(query)) };
+                    }
+                  });
+                return result;
+              }}
+              placeholder="Find components"
+              renderItems={categories =>
+                categories.map(cat => (
+                  <div class="category">
+                    <h6>{cat.title}</h6>
+                    {...cat.items.map(i => (
+                      <ion-router-link href={'/' + i} onClick={() => menuController.close('main')}>
+                        {i}
+                      </ion-router-link>
+                    ))}
+                  </div>
+                ))
+              }
+              debounce={0}
+            />
           </ion-content>
         </ion-menu>
 
         <div class="ion-page" id="main-content">
-          <ion-header>
+          <ion-header color="primary">
             <ion-toolbar>
               <ion-buttons slot="start">
                 <ion-menu-button />
               </ion-buttons>
-              <ion-title>Inbox</ion-title>
+              <ion-title>Ftb-Components</ion-title>
+              <ftb-icon svg={FootballistaIcon} class="ftb-icon" slot="end" />
             </ion-toolbar>
           </ion-header>
-          {this.renderRoutes()}
-          <ion-nav />
+          <ion-content class="ion-padding">
+            {this.renderRoutes()}
+            <ion-nav animated={false} />
+          </ion-content>
         </div>
       </ion-app>
     );
@@ -153,14 +176,16 @@ export class FtbShowcasePage {
 
   renderRoutes() {
     return (
-      <ion-router useHash={false}>
-        <ion-route url={'/'} component={'ftb-showcase-main'} />
-        {this.components
-          .reduce((cmps, category) => [...cmps, ...category.items], [])
-          .map(c => (
-            <ion-route url={'/' + c} component={c + '-stories'} />
-          ))}
-      </ion-router>
+      <ion-app>
+        <ion-router useHash={false}>
+          <ion-route url={'/'} component={'ftb-showcase-main'} exact={true} />
+          {this.components
+            .reduce((cmps, category) => [...cmps, ...category.items], [])
+            .map(c => (
+              <ion-route url={'/' + c} component={c + '-stories'} />
+            ))}
+        </ion-router>
+      </ion-app>
     );
   }
 }

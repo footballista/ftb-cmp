@@ -164,7 +164,7 @@ export namespace Components {
     interface FtbStageCupNetStories {
     }
     interface FtbStageTable {
-        "customWidths": {
+        "customWidths"?: {
     label?: number;
     position?: number;
     points?: number;
@@ -183,8 +183,10 @@ export namespace Components {
           * you can render only a LIMIT of rows. Component defines which rows to render base on "baseTeam" parameter. If base team not provided or not found, top of the table will be rendered
          */
         "rowsLimit": { baseTeam?: Team; limit: number };
-        "showChess": boolean;
+        "showChess"?: boolean;
         "stage": Stage;
+    }
+    interface FtbStageTableStories {
     }
     interface FtbTabs {
         "hideSingleTab": boolean;
@@ -486,6 +488,12 @@ declare global {
         prototype: HTMLFtbStageTableElement;
         new (): HTMLFtbStageTableElement;
     };
+    interface HTMLFtbStageTableStoriesElement extends Components.FtbStageTableStories, HTMLStencilElement {
+    }
+    var HTMLFtbStageTableStoriesElement: {
+        prototype: HTMLFtbStageTableStoriesElement;
+        new (): HTMLFtbStageTableStoriesElement;
+    };
     interface HTMLFtbTabsElement extends Components.FtbTabs, HTMLStencilElement {
     }
     var HTMLFtbTabsElement: {
@@ -574,6 +582,7 @@ declare global {
         "ftb-stage-cup-net-old": HTMLFtbStageCupNetOldElement;
         "ftb-stage-cup-net-stories": HTMLFtbStageCupNetStoriesElement;
         "ftb-stage-table": HTMLFtbStageTableElement;
+        "ftb-stage-table-stories": HTMLFtbStageTableStoriesElement;
         "ftb-tabs": HTMLFtbTabsElement;
         "ftb-team-logo": HTMLFtbTeamLogoElement;
         "ftb-team-logo-stories": HTMLFtbTeamLogoStoriesElement;
@@ -764,6 +773,8 @@ declare namespace LocalJSX {
         "showChess"?: boolean;
         "stage": Stage;
     }
+    interface FtbStageTableStories {
+    }
     interface FtbTabs {
         "hideSingleTab"?: boolean;
         "tabs": Array<{ renderTitle: () => string; renderContent: () => string }>;
@@ -838,6 +849,7 @@ declare namespace LocalJSX {
         "ftb-stage-cup-net-old": FtbStageCupNetOld;
         "ftb-stage-cup-net-stories": FtbStageCupNetStories;
         "ftb-stage-table": FtbStageTable;
+        "ftb-stage-table-stories": FtbStageTableStories;
         "ftb-tabs": FtbTabs;
         "ftb-team-logo": FtbTeamLogo;
         "ftb-team-logo-stories": FtbTeamLogoStories;
@@ -896,6 +908,7 @@ declare module "@stencil/core" {
             "ftb-stage-cup-net-old": LocalJSX.FtbStageCupNetOld & JSXBase.HTMLAttributes<HTMLFtbStageCupNetOldElement>;
             "ftb-stage-cup-net-stories": LocalJSX.FtbStageCupNetStories & JSXBase.HTMLAttributes<HTMLFtbStageCupNetStoriesElement>;
             "ftb-stage-table": LocalJSX.FtbStageTable & JSXBase.HTMLAttributes<HTMLFtbStageTableElement>;
+            "ftb-stage-table-stories": LocalJSX.FtbStageTableStories & JSXBase.HTMLAttributes<HTMLFtbStageTableStoriesElement>;
             "ftb-tabs": LocalJSX.FtbTabs & JSXBase.HTMLAttributes<HTMLFtbTabsElement>;
             "ftb-team-logo": LocalJSX.FtbTeamLogo & JSXBase.HTMLAttributes<HTMLFtbTeamLogoElement>;
             "ftb-team-logo-stories": LocalJSX.FtbTeamLogoStories & JSXBase.HTMLAttributes<HTMLFtbTeamLogoStoriesElement>;
