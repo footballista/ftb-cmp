@@ -1,5 +1,7 @@
-import { Component, Host, h, Prop, Element, State } from '@stencil/core';
-import { GameVideo } from 'ftb-models';
+import { Component, Host, h, Prop, Element, writeTask } from '@stencil/core';
+import { checkElementSize, GameVideo } from 'ftb-models';
+
+const HQ_SIZE_THRESHOLD_PX = 180;
 
 @Component({
   tag: 'ftb-video-cover',
@@ -8,7 +10,7 @@ import { GameVideo } from 'ftb-models';
 })
 export class FtbVideoCover {
   @Prop() video!: GameVideo;
-  @State() height: number;
+  height: number;
 
   @Element() el: HTMLElement;
 
@@ -16,25 +18,18 @@ export class FtbVideoCover {
     el.style.display = 'none';
   }
 
-  componentWillLoad() {
-    console.log('test');
-    function checkElementSize(el: HTMLElement, iterationLimit = 40, iteration = 0) {
-      const { offsetWidth, offsetHeight } = el;
-      if (!offsetWidth && !offsetHeight) {
-        if (iteration++ < iterationLimit) {
-          console.log('1', iteration, offsetWidth);
-          return requestAnimationFrame(checkElementSize(el, iterationLimit, iteration));
-        } else {
-          console.log('2', iteration, offsetHeight);
-          return { width: 0, height: 0 };
-        }
-      } else {
-        console.log('3', iteration, offsetWidth);
-        return { width: offsetWidth, height: offsetHeight };
-      }
+  componentDidLoad() {
+    const height = checkElementSize(this.el).height;
+    if (height > HQ_SIZE_THRESHOLD_PX) {
+      const hqImg = document.createElement('img');
+      hqImg.title = this.video.name;
+      hqImg.alt = this.video.name;
+      hqImg.onerror = e => this.onImgFail(e['target'] as HTMLImageElement);
+      hqImg.src = this.video.covers.hq;
+      const pic = document.createElement('picture');
+      pic.appendChild(hqImg);
+      hqImg.onload = () => writeTask(() => this.el.children[0].append(pic));
     }
-    console.log(this.el);
-    console.log(checkElementSize(this.el));
   }
 
   render() {
@@ -49,17 +44,6 @@ export class FtbVideoCover {
               onError={e => this.onImgFail(e.target as HTMLImageElement)}
             />
           </picture>
-          {this.height > 180 ? (
-            <picture>
-              <img
-                src={this.video.covers.hq}
-                title={this.video.name}
-                alt={this.video.name}
-                onError={e => this.onImgFail(e.target as HTMLImageElement)}
-                loading="lazy"
-              />
-            </picture>
-          ) : null}
         </a>
       </Host>
     );

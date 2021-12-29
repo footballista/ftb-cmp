@@ -1,7 +1,7 @@
 ftb-video-cover {
   display: block;
   overflow: hidden;
-  //aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9;
   a {
     display: inline-flex;
     height: 100%;
@@ -13,13 +13,6 @@ ftb-video-cover {
       position: absolute;
       left: 0;
       top: 0;
-      //&.hq {
-      //  height: 130%;
-      //  width: 100%;
-      //  position: absolute;
-      //  left: 0;
-      //  top: -15%;
-      //}
     }
   }
 }
