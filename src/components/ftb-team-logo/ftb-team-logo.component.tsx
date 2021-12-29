@@ -1,61 +1,109 @@
-import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
-import { Team, envState } from 'ftb-models';
-import Shield from '../../assets/icons/shield.svg';
+import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import { checkElementSize, envState, Team } from 'ftb-models';
+import ShieldIcon from '../../assets/icons/shield.svg';
 
+/**
+ * Renders team logo based on team model
+ */
 @Component({
   tag: 'ftb-team-logo',
   styleUrl: 'ftb-team-logo.component.scss',
   shadow: false,
 })
 export class FtbTeamLogo {
-  @Prop() mode: 'min' | 'middle' | 'max' = 'min';
-  @Prop({ mutable: true }) team: Team;
-  @Prop() logo: string;
-  @Prop() name: string;
-  @Prop() version: number;
-  @Prop() caption: string;
-  @Event() color: EventEmitter<[number, number, number][]>;
+  @Prop() team!: Team;
+  /** if  passed, component will callback color palette, defined for logo */
+  @Prop() extractColors?: (RGBs: Array<[number, number, number]>) => any;
+
+  /** If not defined, image resolution will be detected from on element size */
+  @Prop({ mutable: true }) mode?: 'min' | 'middle' | 'max';
+
+  /** Image loading failed (possibly logo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
-  @State() url: string;
-  private isDestroyed: boolean;
 
-  componentWillLoad() {
-    if (!this.team && this.logo) {
-      this.team = new Team({ logo: this.logo, name: this.name, logoId: this.version });
+  @Element() el: HTMLFtbTeamLogoElement;
+
+  getPalette: (el: HTMLImageElement) => Array<[number, number, number]>;
+
+  async componentDidLoad() {
+    if (!this.mode) {
+      const { width } = checkElementSize(this.el);
+      if (width > 200) {
+        this.mode = 'max';
+      } else if (width > 50) {
+        this.mode = 'middle';
+      }
     }
 
-    if (this.team) {
-      this.url = envState.imgHost + `img/logos/${this.team.logo}-${this.mode}.png?logoId=${this.team.logoId}`;
+    if (this.el['extractColors']) {
+      this.getPalette = (await import('colorthief')).default.prototype.getPalette;
     }
   }
 
-  onImgFail() {
-    if (this.isDestroyed) return;
+  onImgFail(el: HTMLImageElement) {
+    el.style.display = 'none';
     this.showPlaceholder = true;
-    this.color.emit([
-      [0, 0, 0],
-      [255, 255, 255],
-      [0, 0, 100],
-    ]);
   }
 
-  disconnectedCallback() {
-    this.isDestroyed = true;
+  onMinImgLoaded(el: HTMLImageElement) {
+    if (this.getPalette) {
+      let image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = async () => {
+        this.extractColors(this.getPalette(image));
+      };
+      image.src = el.src;
+    }
   }
 
   render() {
-    if (!this.url) return;
+    if (!this.team) return;
+
+    const url = (size, _ = 'webp') =>
+      // envState.imgHost + `img/logos/${this.team.logo}-` + size + '.' + format + `?logoId=${this.team.logoId}`;
+      envState.imgHost + `img/logos/${this.team.logo}-` + size + '.png' + `?logoId=${this.team.logoId}`;
+
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Shield} title={this.caption || this.team.name}></ftb-icon>
+          <ftb-icon svg={ShieldIcon} title={this.team.name} class="placeholder-icon" />
         ) : (
-          <ftb-img
-            src={this.url}
-            onFailed={() => this.onImgFail()}
-            onColor={e => !this.isDestroyed && this.color.emit(e.detail)}
-            title={this.caption || this.team.name}
-          ></ftb-img>
+          [
+            <picture>
+              <source srcSet={url('min') + ', ' + url('min2x') + ' 2x'} />
+              <img
+                src={url('min', 'png')}
+                alt={this.team.name}
+                title={this.team.name}
+                onError={e => this.onImgFail(e.target as HTMLImageElement)}
+                onLoad={e => this.onMinImgLoaded(e.target as HTMLImageElement)}
+              />
+            </picture>,
+            this.mode == 'middle' ? (
+              <picture>
+                <source srcSet={url('middle') + ', ' + url('max') + ' 2x'} />
+                <img
+                  src={url('middle', 'png')}
+                  alt={this.team.name}
+                  title={this.team.name}
+                  onError={e => this.onImgFail(e.target as HTMLImageElement)}
+                  loading="lazy"
+                />
+              </picture>
+            ) : null,
+            this.mode == 'max' ? (
+              <picture>
+                <source srcSet={url('max')} />
+                <img
+                  src={url('max', 'png')}
+                  alt={this.team.name}
+                  title={this.team.name}
+                  onError={e => this.onImgFail(e.target as HTMLImageElement)}
+                  loading="lazy"
+                />
+              </picture>
+            ) : null,
+          ]
         )}
       </Host>
     );

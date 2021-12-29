@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop, EventEmitter, Event } from '@stencil/core';
+import { Component, Host, h, State, Prop } from '@stencil/core';
 import Flag from '../../assets/icons/flag.svg';
 import { envState } from 'ftb-models';
 
@@ -36,37 +36,53 @@ const aliases = {
 })
 export class FtbFlag {
   @Prop() flag: string;
-  @State() loaded = false;
-  @State() showPlaceholder = false;
-  @Event() color: EventEmitter<[number, number, number][]>;
-  private flagAlias: string;
-  private url: string;
+  /** if  passed, component will callback color palette, defined for flag */
+  @Prop() extractColors?: (RGBs: Array<[number, number, number]>) => any;
 
-  componentWillLoad() {
-    this.flagAlias = this.flag.toLowerCase();
-    if (aliases[this.flag]) {
-      this.flagAlias = aliases[this.flag];
-    }
+  /** Image loading failed - showing default placeholder */
+  @State() showPlaceholder: boolean = false;
 
-    this.url = envState.localHost + `/assets/flags/${this.flagAlias}.svg`;
+  getPalette: (el: HTMLImageElement) => Array<[number, number, number]>;
+
+  onImgFail(el: HTMLImageElement) {
+    el.style.display = 'none';
+    this.showPlaceholder = true;
   }
 
-  onImgFail() {
-    this.showPlaceholder = true;
-    this.color.emit([
-      [0, 0, 0],
-      [255, 255, 255],
-      [0, 0, 100],
-    ]);
+  async componentWillLoad() {
+    if (this.extractColors) {
+      this.getPalette = (await import('colorthief')).default.prototype.getPalette;
+    }
+  }
+
+  onImgLoad(el: HTMLImageElement) {
+    if (this.getPalette) {
+      let image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = async () => {
+        this.extractColors(this.getPalette(image));
+      };
+      image.src = el.src;
+    }
   }
 
   render() {
+    let flagAlias = this.flag.toLowerCase();
+    if (aliases[this.flag]) {
+      flagAlias = aliases[this.flag];
+    }
+    const url = envState.localHost + `/assets/flags/${flagAlias}.svg`;
+
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Flag}></ftb-icon>
+          <ftb-icon svg={Flag} />
         ) : (
-          <ftb-img src={this.url} onFailed={() => this.onImgFail()} onColor={e => this.color.emit(e.detail)}></ftb-img>
+          <img
+            src={url}
+            onError={e => this.onImgFail(e.target as HTMLImageElement)}
+            onLoad={e => this.onImgLoad(e.target as HTMLImageElement)}
+          />
         )}
       </Host>
     );

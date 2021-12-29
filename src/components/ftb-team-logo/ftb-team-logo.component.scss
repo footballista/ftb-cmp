@@ -1,12 +1,12 @@
 ftb-team-logo {
-  display: inline-flex;
-  ftb-img {
-    height: inherit;
-    width: inherit;
-  }
+  display: block;
+  position: relative;
+  img,
   ftb-icon {
-    height: inherit;
-    width: inherit;
-    filter: drop-shadow(var(--shadow));
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 }

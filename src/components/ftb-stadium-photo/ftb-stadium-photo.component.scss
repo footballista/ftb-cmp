@@ -1,13 +1,11 @@
 ftb-stadium-photo {
   display: inline-flex;
+  overflow: hidden;
+  img,
   ftb-icon {
-    border-radius: inherit;
-    height: inherit;
-    width: inherit;
-  }
-  ftb-img {
-    border-radius: inherit;
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }

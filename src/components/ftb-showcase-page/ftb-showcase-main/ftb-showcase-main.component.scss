@@ -1,0 +1,19 @@
+ftb-showcase-main {
+  ftb-icon.main-logo {
+    position: absolute;
+    top: 25px;
+    left: -25px;
+    height: 40px;
+    width: 40px;
+    transform: scaleX(-1);
+  }
+  a {
+    color: cornflowerblue;
+    text-decoration: none;
+  }
+  .changelog-row {
+    .date {
+      margin-left: 10px;
+    }
+  }
+}

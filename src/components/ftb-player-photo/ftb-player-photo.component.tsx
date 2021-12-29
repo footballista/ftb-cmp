@@ -1,41 +1,46 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
-import Avatar from '../../assets/icons/avatar.svg';
-import { Player, envState } from 'ftb-models';
+import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import AvatarIcon from '../../assets/icons/avatar.svg';
+import { envState, Player } from 'ftb-models';
+
 @Component({
   tag: 'ftb-player-photo',
   styleUrl: 'ftb-player-photo.component.scss',
   shadow: false,
 })
 export class FtbPlayerPhoto {
-  @Prop() player: Player; // use Player model or separate properties below ↙
-  @Prop() playerId: number;
-  @Prop() version: number;
+  @Prop() player!: Player;
+  @Prop() lazy: boolean = true;
+
+  /** Image loading failed (possibly photo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
-  @State() url: string;
-  @Event() loaded: EventEmitter<boolean>;
 
-  componentWillLoad() {
-    this.url =
-      envState.imgHost +
-      `img/players/${this.player?._id || this.playerId}.jpg?version=${this.player?.photoId || this.version}`;
-  }
+  @Element() el: HTMLFtbTeamLogoElement;
 
-  onImgLoaded() {
-    this.loaded.emit(true);
-  }
-
-  onImgFailed() {
+  onImgFail(el: HTMLImageElement) {
+    el.style.display = 'none';
     this.showPlaceholder = true;
-    this.loaded.emit(true);
   }
 
   render() {
+    if (!this.player) return;
     return (
       <Host>
         {this.showPlaceholder ? (
-          <ftb-icon svg={Avatar}></ftb-icon>
+          <ftb-icon
+            svg={AvatarIcon}
+            title={this.player.firstName + ' ' + this.player.lastName}
+            class="placeholder-icon"
+          />
         ) : (
-          <ftb-img src={this.url} onFailed={() => this.onImgFailed()} onLoaded={() => this.onImgLoaded()}></ftb-img>
+          <picture>
+            <img
+              src={envState.imgHost + '/img/players/' + this.player._id + '.jpg?version=' + this.player.photoId}
+              title={this.player.firstName + ' ' + this.player.lastName}
+              alt={this.player.firstName + ' ' + this.player.lastName}
+              onError={e => this.onImgFail(e.target as HTMLImageElement)}
+              loading={this.lazy ? 'lazy' : 'eager'}
+            />
+          </picture>
         )}
       </Host>
     );

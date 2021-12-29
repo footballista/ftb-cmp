@@ -1,0 +1,22 @@
+ftb-team-logo-stories {
+  display: block;
+  ftb-team-logo {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    fill: #22272e;
+  }
+  .palette {
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    margin-bottom: 20px;
+    .color {
+      margin: 0 5px;
+      height: 10px;
+      width: 10px;
+      border-radius: 3px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}

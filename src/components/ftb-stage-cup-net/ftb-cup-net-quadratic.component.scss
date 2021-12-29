@@ -1,0 +1,78 @@
+ftb-cup-net-quadratic {
+  display: block;
+
+  .net-body {
+    position: relative;
+    .columns {
+      display: flex;
+      align-items: stretch;
+      .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: stretch;
+      }
+    }
+
+    .slot {
+      text-align: center;
+      ftb-game-tour {
+        text-align: center;
+      }
+      .game {
+        .dot {
+          position: absolute;
+          transform: translate(-50%, -50%);
+          &:not(.connected) {
+            display: none;
+          }
+        }
+        .row {
+          display: flex;
+          align-items: center;
+
+          ftb-team-logo {
+            position: relative;
+          }
+
+          ion-router-link {
+            color: inherit;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            cursor: pointer;
+            flex: 1;
+          }
+          .score-block {
+            display: flex;
+            align-items: center;
+
+            .score {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .net-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+
+    .svg-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+    }
+  }
+}

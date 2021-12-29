@@ -1,13 +1,10 @@
 ftb-player-photo {
   display: inline-flex;
-  ftb-icon {
-    border-radius: inherit;
-    height: inherit;
-    width: inherit;
-  }
-  ftb-img {
-    border-radius: inherit;
-    height: inherit;
-    width: inherit;
+  overflow: hidden;
+  ftb-icon,
+  img {
+    height: 100%;
+    width: 100%;
+    fill: rgb(34 39 46 / 77%);
   }
 }

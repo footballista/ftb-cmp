@@ -1,0 +1,173 @@
+ftb-stage-cup-net-stories {
+  ftb-cup-net-quadratic {
+    $netAnimation: 0.3s ease-in-out;
+    .net-body {
+      .column {
+        padding: 0 40px;
+        &:first-of-type {
+          padding-left: 0;
+        }
+        &:last-of-type {
+          padding-right: 0;
+        }
+      }
+      ftb-game-tour {
+        display: block;
+        margin-top: 10px;
+        padding: 10px 0;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .game {
+        &:first-of-type {
+          margin-top: 0;
+        }
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+
+        .dot {
+          height: 6px;
+          width: 6px;
+          background-color: #363d46;
+          border-radius: 50%;
+          position: absolute;
+          box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(54, 61, 70, 0.1);
+          z-index: 10;
+          transition: background-color $netAnimation, box-shadow $netAnimation;
+          &.highlighted {
+            background-color: darkgoldenrod;
+            box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(184, 134, 11, 0.1);
+            z-index: 1001;
+          }
+        }
+
+        border-radius: 10px;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        .row {
+          height: 50px;
+          &:not(:last-of-type) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          }
+
+          &.empty {
+            width: 110px;
+            background: rgba(0, 0, 0, 0.05);
+            position: relative;
+            &:before {
+              display: block;
+              content: ' ';
+              position: absolute;
+              left: 50%;
+              height: 30px;
+              top: 10px;
+              width: 1px;
+              background: rgba(0, 0, 0, 0.05);
+            }
+          }
+          ftb-team-logo {
+            height: 50px;
+            width: 60px;
+            background: rgba(0, 0, 0, 0.05);
+            img,
+            ftb-icon {
+              margin: 10px 15px;
+              height: 30px;
+              width: 30px;
+            }
+          }
+
+          &.highlighted {
+            .score-block {
+              background: rgba(255, 215, 0, 0.3);
+            }
+            ftb-team-logo {
+              background: rgba(255, 215, 0, 0.3);
+            }
+            ion-router-link {
+              .team-name {
+                color: darkgoldenrod;
+              }
+            }
+          }
+
+          .team-name {
+            padding-left: 10px;
+            padding-right: 20px;
+            min-width: 110px;
+            font-size: 14px;
+            transition: color $netAnimation;
+            height: 100%;
+            text-align: left;
+            white-space: nowrap;
+          }
+          .score-block {
+            background: rgba(0, 0, 0, 0.05);
+            height: 50px;
+            .score {
+              width: 50px;
+              display: flex;
+              align-items: flex-end;
+
+              font-size: 14px;
+              position: relative;
+
+              .pen-score {
+                margin-left: 3px;
+                font-size: 10px;
+              }
+              .td-mark {
+                margin-left: 3px;
+                font-size: 10px;
+              }
+
+              &:not(:last-of-type) {
+                &:after {
+                  display: block;
+                  content: ' ';
+                  height: 30px;
+                  width: 1px;
+                  position: absolute;
+                  top: 10px;
+                  right: 0;
+                  background: rgba(0, 0, 0, 0.05);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .column.short {
+      ftb-team-logo {
+        &:after {
+          display: block;
+          content: ' ';
+          height: 30px;
+          width: 1px;
+          position: absolute;
+          top: 10px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.05);
+        }
+      }
+      ion-router-link {
+        display: none !important;
+      }
+    }
+
+    .net-container {
+      .svg-line {
+        fill: transparent;
+        stroke: #363d46;
+        z-index: 0;
+        transition: stroke $netAnimation;
+        &.highlighted {
+          stroke: gold;
+          z-index: 1000;
+        }
+      }
+    }
+  }
+}

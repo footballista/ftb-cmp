@@ -1,0 +1,167 @@
+ftb-stage-table-stories {
+  ftb-stage-table {
+    max-width: 750px;
+    &.narrow {
+      width: 270px;
+    }
+  }
+
+  .chess-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 100px;
+    padding: 2px;
+    ftb-stage-table {
+      max-width: 1600px;
+      width: 1600px;
+      margin-bottom: 20px;
+    }
+  }
+
+  ftb-stage-table {
+    border-radius: 20px;
+    background: #fafafa;
+
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    .head {
+      font-size: 14px;
+      background: #f2f2f2;
+      font-weight: 700;
+      height: 50px;
+      border-bottom: 1px solid #ccc;
+      .name {
+        margin-left: 5px;
+      }
+
+      .chess-game {
+        border-left: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chess-game + .games {
+        border-left: 1px solid #eee;
+      }
+
+      ftb-team-logo {
+        height: 30px;
+        width: 30px;
+        margin: 0 auto;
+      }
+
+      .wdl,
+      .gd {
+        font-size: 12px !important;
+      }
+    }
+
+    ion-router-link {
+      color: #2e2e2e;
+      cursor: pointer;
+      &:not(:last-of-type) {
+        .row {
+          border-bottom: 1px solid #eee;
+        }
+      }
+      &:hover {
+        .name {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .row {
+      padding: 10px 0;
+      font-size: 13px;
+
+      > div:not(:last-of-type) {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        &:not(.name) {
+          justify-content: center;
+        }
+      }
+
+      .wdl,
+      .gd {
+        font-size: 12px !important;
+      }
+      .chess-game + .games {
+        border-left: 1px solid #eee;
+      }
+      .chess-game {
+        border-left: 1px solid #eee;
+        font-size: 10px;
+        font-weight: 700;
+        &.stub {
+          position: relative;
+          &::after {
+            display: block;
+            content: ' ';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 6px;
+            width: 6px;
+            background: #999;
+            border-radius: 50%;
+          }
+        }
+        .game {
+          color: white;
+          border-radius: 5px;
+          margin: 2px 0;
+          padding: 3px 10px;
+          box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+          &.w {
+            background: #679e66;
+          }
+          &.d {
+            background: goldenrod;
+          }
+          &.l {
+            background: #8c3636;
+          }
+        }
+      }
+
+      &.base-team {
+        font-weight: 600;
+        background: #fff2af;
+      }
+
+      ftb-team-logo {
+        height: 30px;
+        width: 30px;
+        margin: 0 10px;
+      }
+
+      .diff {
+        font-size: 9px;
+        margin-top: -11px;
+      }
+    }
+
+    .form {
+      width: 90px;
+      i {
+        height: 9px;
+        width: 9px;
+        margin: 2px;
+        border-radius: 3px;
+        display: inline-block;
+        &.w {
+          background: #01ad87;
+        }
+        &.d {
+          background: #e2bf00;
+        }
+        &.l {
+          background: #ed4c4c;
+        }
+      }
+    }
+  }
+}

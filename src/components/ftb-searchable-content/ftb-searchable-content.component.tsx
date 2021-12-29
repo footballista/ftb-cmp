@@ -3,7 +3,7 @@ import Chevron from '../../assets/icons/chevron-down.svg';
 import SearchIcon from '../../assets/icons/search.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
-import { getFromStorage, setToStorage } from 'ftb-models';
+import { checkElementSize, getFromStorage, setToStorage, translations, userState } from 'ftb-models';
 
 export interface CategoryInterface {
   key: string;
@@ -26,8 +26,8 @@ export class FtbSearchableContent {
   @Prop() items!: any[];
   @Prop() renderItems!: (items: any[]) => string | string[];
   @Prop() filterFn!: (items: any[], query: string, categories?: CategoryInterface[]) => Promise<any[]>;
-  @Prop() placeholder!: string;
-  @Prop({ mutable: true }) categories: CategoryInterface[];
+  @Prop() placeholder: string = translations.search.search[userState.language];
+  @Prop({ mutable: true }) categories: CategoryInterface[] = [];
   /** alternative to "categories" property. used when categories list should be updated on category change */
   @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;
@@ -63,15 +63,8 @@ export class FtbSearchableContent {
   }
 
   componentDidLoad() {
-    const checkSize = () => {
-      const height = this.element.offsetHeight;
-      if (!height) {
-        return requestAnimationFrame(checkSize);
-      } else {
-        this.minHeightPx = height;
-      }
-    };
-    checkSize();
+    const { height } = checkElementSize(this.element.querySelector('.ftb-searchable-content__content'));
+    this.minHeightPx = height;
   }
 
   async componentWillUpdate() {
@@ -222,7 +215,7 @@ export class FtbSearchableContent {
 
   render() {
     return (
-      <Host style={{ 'min-height': this.minHeightPx + 'px' }}>
+      <Host>
         <div class="ftb-searchable-content__search-line">
           <div
             class={{
@@ -279,7 +272,9 @@ export class FtbSearchableContent {
             ))}
           </div>
         </div>
-        <div class="ftb-searchable-content__content">{this.renderItems(this.filteredItems)}</div>
+        <div class="ftb-searchable-content__content" style={{ 'min-height': this.minHeightPx + 'px' }}>
+          {this.renderItems(this.filteredItems)}
+        </div>
       </Host>
     );
   }

@@ -9,28 +9,32 @@ import { Partner } from 'ftb-models/dist/models/partner.model';
   shadow: false,
 })
 export class FtbPartnerPhoto {
-  @Prop() partner: Partner; // use Partner model or separate properties below ↙
-  @Prop() partnerId: number;
-  @Prop() version: number;
-  @State() showPlaceholder: boolean = false;
-  @State() url: string;
+  @Prop() partner!: Partner;
 
-  componentWillLoad() {
-    if (this.partner?._id || this.partnerId) {
-      this.url =
-        envState.imgHost +
-        `/img/partners/${this.partner?._id || this.partnerId}.png?version=${this.partner?.photoId || this.version}`;
-    }
+  /** Image loading failed (possibly photo does not exist on server), showing default placeholder */
+  @State() showPlaceholder: boolean = false;
+
+  onImgFail(el: HTMLImageElement) {
+    el.style.display = 'none';
+    this.showPlaceholder = true;
   }
 
   render() {
-    if (!this.url) return null;
+    if (!this.partner) return null;
+
+    const url = envState.imgHost + `/img/partners/${this.partner?._id}.png?version=${this.partner?.photoId}`;
     return (
       <Host>
         {this.showPlaceholder ? (
           <ftb-icon svg={PartnerIcon} />
         ) : (
-          <ftb-img src={this.url} onFailed={() => (this.showPlaceholder = true)} />
+          <img
+            src={url}
+            title={this.partner.name}
+            alt={this.partner.name}
+            loading="lazy"
+            onError={e => this.onImgFail(e.target as HTMLImageElement)}
+          />
         )}
       </Host>
     );

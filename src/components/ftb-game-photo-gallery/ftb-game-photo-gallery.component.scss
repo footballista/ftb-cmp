@@ -1,0 +1,29 @@
+@import '../../assets/styles/swiper.scss';
+@import '../../assets/styles/default-skin/default-skin.scss';
+ftb-game-photo-gallery {
+  display: block;
+  .help-images {
+    max-height: 0;
+    max-width: 0;
+    overflow: hidden;
+  }
+  .pswp__caption__center {
+    max-width: unset;
+    .caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      div {
+        margin: 0 5px;
+        text-align: center;
+      }
+      .photo-by {
+        a {
+          margin-left: 5px;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

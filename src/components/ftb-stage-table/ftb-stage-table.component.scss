@@ -7,28 +7,41 @@ ftb-stage-table {
     display: block;
   }
 
-  .ftb-stage-table__head {
+  .head {
     display: flex;
     align-items: center;
     overflow: hidden;
-    min-height: 40px;
-  }
-  .ftb-stage-table__body {
-    overflow: hidden;
 
-    .ftb-stage-table__row {
+    ion-router-link {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
-      overflow: hidden;
-      min-height: 40px;
+      justify-content: center;
+    }
+  }
+  .body {
+    overflow: hidden;
+
+    ion-router-link {
+      display: block;
+      .row {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
     }
   }
 
-  .ftb-stage-table__head,
-  .ftb-stage-table__body {
+  .head,
+  .body {
     & > div,
-    .ftb-stage-table__row > div {
+    .row > div {
       text-align: center;
+    }
+
+    ion-router-link {
+      display: block;
     }
 
     .position {

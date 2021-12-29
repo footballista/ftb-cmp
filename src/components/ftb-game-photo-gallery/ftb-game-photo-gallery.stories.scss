@@ -1,0 +1,55 @@
+ftb-game-photo-gallery-stories {
+  ftb-spinner {
+    --size: 10px;
+    --color: cornflowerblue;
+  }
+  .photo {
+    height: 100px;
+    width: 150px;
+
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .grid {
+    display: grid;
+    grid-auto-flow: dense;
+    padding: 10px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    .image-container:nth-child(9n - 8) {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: 4 / 2.6;
+    }
+    .image-container:nth-last-child(-n + 7) {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+
+  .image-container {
+    position: relative;
+    border-radius: 5px;
+    cursor: pointer;
+    aspect-ratio: 4 / 2.5;
+    transition: box-shadow 0.3s ease-in-out 0.1s, transform 0.3s ease-in-out 0.1s;
+    overflow: hidden;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s ease-in-out 0.2s;
+    }
+
+    &:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    }
+  }
+}

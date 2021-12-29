@@ -1,10 +1,16 @@
 ftb-post-photo {
   display: block;
+  overflow: hidden;
+  line-height: 100%;
+  text-align: center;
   img {
     height: 100%;
     width: 100%;
-    &.error {
-      opacity: 0;
-    }
+    object-fit: cover;
+    object-position: center;
+  }
+  ftb-icon {
+    height: 80%;
+    margin: 10% auto;
   }
 }

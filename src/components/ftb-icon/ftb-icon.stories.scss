@@ -1,0 +1,13 @@
+ftb-icon-stories {
+  .icons-set {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    ftb-icon {
+      height: 32px;
+      width: 32px;
+      fill: #363d46;
+      margin-right: 10px;
+    }
+  }
+}
