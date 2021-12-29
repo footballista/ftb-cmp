@@ -25,6 +25,7 @@ $RECYCLE.BIN/
 src/components.d.ts
 src/environments/environment.ts
 src/environments/environment.temp.ts
+src/assets/scripts/photoswipe.esm.js
 
 
 .DS_Store
