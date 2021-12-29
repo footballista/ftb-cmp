@@ -70,7 +70,8 @@ export class FtbTeamLogo {
         ) : (
           [
             <picture>
-              <source srcSet={url('min') + ', ' + url('min2x') + ' 2x'} />
+              {/*<source srcSet={url('min') + ', ' + url('min2x') + ' 2x'} />*/}
+              <source srcSet={url('min') + ', ' + url('middle') + ' 2x'} />
               <img
                 src={url('min', 'png')}
                 alt={this.team.name}

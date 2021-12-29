@@ -189,7 +189,7 @@ ftb-showcase-page {
 
     ion-nav {
       margin-left: $menuWidth;
-      height: 100%;
+      height: calc(100% - 60px);
       background: white;
 
       margin-top: $contentPadding;
