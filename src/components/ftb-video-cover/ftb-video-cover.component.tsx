@@ -24,7 +24,6 @@ export class FtbVideoCover {
       const hqImg = document.createElement('img');
       hqImg.title = this.video.name;
       hqImg.alt = this.video.name;
-      hqImg.onerror = e => this.onImgFail(e['target'] as HTMLImageElement);
       hqImg.src = this.video.covers.hq;
       const pic = document.createElement('picture');
       pic.appendChild(hqImg);

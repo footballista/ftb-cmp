@@ -17,10 +17,6 @@ export class FtbGamePhotoGallery {
   }
 
   initGallery(el: HTMLDivElement) {
-    console.log(this.game.photoset.photos.items[0].middle.width);
-    console.log(this.game.photoset.photos.items[0].full.width);
-    console.log(this.game.photoset.photos.items[0].hd.width);
-
     this.lightbox = new PhotoSwipeLightbox({
       gallery: el,
       children: 'a',

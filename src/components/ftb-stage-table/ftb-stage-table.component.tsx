@@ -126,7 +126,6 @@ export class FtbStageTable {
     structure.gd = currentWidth() + this.W.gd < containerWidth;
 
     if (this.showChess) {
-      console.log(currentWidth() + getTypeWidth('chess') < containerWidth);
       structure.chess = currentWidth() + getTypeWidth('chess') < containerWidth;
     }
 
