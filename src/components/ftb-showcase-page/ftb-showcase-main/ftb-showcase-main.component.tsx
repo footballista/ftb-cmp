@@ -34,6 +34,11 @@ export class FtbShowcasePage {
 
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.0.1</b>
+          <span class="date">30 Dec 2021</span>
+          <ul>
+            <li>Fixed hq images loading for video and team logo component</li>
+          </ul>
           <b>3.0.0</b>
           <span class="date">28 Dec 2021</span>
           <ul>
