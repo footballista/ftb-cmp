@@ -7,7 +7,6 @@ body {
   background: #f6f9fc;
 }
 
-
 ftb-showcase-page {
   h2 {
     margin-top: 40px;
@@ -19,11 +18,12 @@ ftb-showcase-page {
       display: block;
       height: calc(100% - 43px);
       .ftb-searchable-content__search-line {
-        height: 30px;        }
+        height: 30px;
+      }
       .main-input {
         border: none;
         outline: none;
-        box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
         height: 30px;
         width: 100%;
 
@@ -82,8 +82,8 @@ ftb-showcase-page {
           align-items: center;
           font-size: 13px;
           height: 35px;
-          border-top: 1px solid rgba(0,0,0,0.05);
-          color: rgba(0,0,0,0.7);
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          color: rgba(0, 0, 0, 0.7);
           cursor: pointer;
           outline: none;
           user-select: none;
@@ -108,7 +108,7 @@ ftb-showcase-page {
       height: 30px;
       width: 30px;
       transform: translateX(18px);
-      opacity: .6;
+      opacity: 0.6;
     }
 
     ion-nav > .ion-page {
@@ -118,7 +118,6 @@ ftb-showcase-page {
     }
 
     .menu {
-
       .header {
         padding: 0 20px;
         ion-router-link.main-link {
@@ -141,7 +140,7 @@ ftb-showcase-page {
         }
       }
       input {
-        background: rgba(0,0,0,.1);
+        background: rgba(0, 0, 0, 0.1);
       }
     }
   }
@@ -182,10 +181,10 @@ ftb-showcase-page {
       position: absolute;
       left: $menuWidth;
       z-index: 1000;
-        height: 30px;
-        top: $contentPadding;
-        border-radius: 10px 10px 0 0 ;
-  }
+      height: 30px;
+      top: $contentPadding;
+      border-radius: 10px 10px 0 0;
+    }
 
     ion-nav {
       margin-left: $menuWidth;
