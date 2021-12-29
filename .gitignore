@@ -24,6 +24,7 @@ $RECYCLE.BIN/
 
 src/components.d.ts
 src/environments/environment.ts
+src/environments/environment.temp.ts
 
 
 .DS_Store
