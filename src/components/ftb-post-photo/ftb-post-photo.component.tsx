@@ -1,6 +1,9 @@
-import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import { Component, Host, h, Prop, State, Element, writeTask } from '@stencil/core';
 import { Post, envState, checkElementSize } from 'ftb-models';
 import ArticleIcon from '../../assets/icons/article.svg';
+
+const MIDDLE_SIZE_THRESHOLD = 50;
+const MAX_SIZE_THRESHOLD = 200;
 
 @Component({
   tag: 'ftb-post-photo',
@@ -10,7 +13,7 @@ import ArticleIcon from '../../assets/icons/article.svg';
 export class FtbPostCover {
   @Prop() post!: Post;
   /** If not defined, image resolution will be detected from on element size */
-  @Prop({ mutable: true }) mode?: 'min' | 'middle' | 'max';
+  @Prop() mode?: 'min' | 'middle' | 'max';
 
   /** Image loading failed (possibly photo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
@@ -23,64 +26,53 @@ export class FtbPostCover {
   }
 
   async componentDidLoad() {
-    if (!this.mode) {
+    const appendImg = (size: 'middle' | 'max') => {
+      const pic = document.createElement('picture');
+      const source = document.createElement('source');
+      const img = document.createElement('img');
+      pic.append(source, img);
+      source.srcset = size == 'middle' ? this.url('middle') : this.url('max');
+      img.src = size == 'middle' ? this.url('middle') : this.url('max');
+      img.onload = () => writeTask(() => this.el.append(pic));
+    };
+
+    if (this.mode == 'middle') {
+      appendImg('middle');
+    } else if (this.mode == 'max') {
+      appendImg('max');
+    } else if (!this.mode) {
       const { width } = checkElementSize(this.el);
-      if (width > 200) {
-        this.mode = 'max';
-      } else if (width > 50) {
-        this.mode = 'middle';
-      } else {
-        this.mode = 'middle';
+      if (width > MAX_SIZE_THRESHOLD) {
+        appendImg('max');
+      } else if (width > MIDDLE_SIZE_THRESHOLD) {
+        appendImg('middle');
       }
     }
   }
 
+  url(_: 'min' | 'middle' | 'max') {
+    return envState.imgHost + 'img/news/' + this.post._id + '.jpg?version=' + this.post.photoId;
+    // todo enable multisize on server
+    // return envState.imgHost + 'img/news/' + this.post._id + '-' + size + '.jpg?version=' + this.post.photoId;
+  }
+
   render() {
     if (!this.post) return;
-
-    const url = size =>
-      envState.imgHost + 'img/news/' + this.post._id + '-' + size + '.jpg?version=' + this.post.photoId;
 
     return (
       <Host>
         {this.showPlaceholder ? (
           <ftb-icon svg={ArticleIcon} title={this.post.title} class="placeholder-icon" />
         ) : (
-          [
-            <picture>
-              <source srcSet={url('min')} />
-              <img
-                src={url('min')}
-                alt={this.post.title}
-                title={this.post.title}
-                onError={e => this.onImgFail(e.target as HTMLImageElement)}
-              />
-            </picture>,
-            this.mode == 'middle' ? (
-              <picture>
-                <source srcSet={url('middle')} />
-                <img
-                  src={url('middle')}
-                  alt={this.post.title}
-                  title={this.post.title}
-                  onError={e => this.onImgFail(e.target as HTMLImageElement)}
-                  loading="lazy"
-                />
-              </picture>
-            ) : null,
-            this.mode == 'max' ? (
-              <picture>
-                <source srcSet={url('max')} />
-                <img
-                  src={url('max')}
-                  alt={this.post.title}
-                  title={this.post.title}
-                  onError={e => this.onImgFail(e.target as HTMLImageElement)}
-                  loading="lazy"
-                />
-              </picture>
-            ) : null,
-          ]
+          <picture>
+            <source srcSet={this.url('min')} />
+            <img
+              src={this.url('min')}
+              alt={this.post.title}
+              title={this.post.title}
+              onError={e => this.onImgFail(e.target as HTMLImageElement)}
+            />
+          </picture>
         )}
       </Host>
     );
