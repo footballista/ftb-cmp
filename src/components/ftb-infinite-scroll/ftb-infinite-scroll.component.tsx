@@ -1,4 +1,4 @@
-import { Component, Prop, State, Element, Host, h, forceUpdate } from '@stencil/core';
+import { Component, Prop, State, Element, Host, h, forceUpdate, Build } from '@stencil/core';
 
 @Component({
   tag: 'ftb-infinite-scroll',
@@ -21,6 +21,7 @@ export class FtbInfiniteScrollComponent {
   }
 
   addIO() {
+    if (!Build.isBrowser) return;
     if (
       typeof (window as any) !== 'undefined' &&
       'IntersectionObserver' in window &&

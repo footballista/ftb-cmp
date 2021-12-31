@@ -1,5 +1,16 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
-import { Stage, TableRow, translations, userState, Sports, GameState, Team, createEntityRoute } from 'ftb-models';
+import {
+  Stage,
+  TableRow,
+  translations,
+  userState,
+  Sports,
+  GameState,
+  Team,
+  createEntityRoute,
+  Build,
+  routingState,
+} from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
@@ -75,11 +86,17 @@ export class FtbStageTable {
         this.chessLoaded = true;
       });
     }
-    this.resizeObserver = new ResizeObserver(() => {
-      this.updateStructure();
-    });
-    this.resizeObserver.observe(this.el);
+
     this.updateStructure();
+  }
+
+  connectedCallback() {
+    if (Build.isBrowser) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateStructure();
+      });
+      this.resizeObserver.observe(this.el);
+    }
   }
 
   disconnectedCallback() {
@@ -160,7 +177,7 @@ export class FtbStageTable {
         {this.structure.chess &&
           this.stage.table.map(row => (
             <div class="chess-game" style={this.getFieldStyle('chess')}>
-              <ion-router-link href={createEntityRoute(row.team)}>
+              <ion-router-link href={routingState.routes.team && createEntityRoute(row.team)}>
                 <ftb-team-logo team={row.team} key={row.team._id} />
               </ion-router-link>
             </div>
@@ -224,7 +241,7 @@ export class FtbStageTable {
     return (
       <div class="body">
         {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
-          <ion-router-link href={createEntityRoute(row.team)}>
+          <ion-router-link href={routingState.routes.team && createEntityRoute(row.team)}>
             <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
@@ -320,7 +337,7 @@ export class FtbStageTable {
       return (
         <ion-router-link
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
-          url={createEntityRoute(g)}
+          url={routingState.routes.game && createEntityRoute(g)}
         >
           {teamSide.score.ft}:{opponentSide.score.ft}
         </ion-router-link>

@@ -5,19 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  BannerSlotCode,
-  Game,
-  GameVideo,
-  League,
-  LicenseAgreement,
-  Player,
-  Post,
-  Stadium,
-  Stage,
-  Team,
-  User,
-} from 'ftb-models';
+import { Game, GameVideo, League, LicenseAgreement, Player, Post, Stadium, Stage, Team, User } from 'ftb-models';
 import { Partner } from 'ftb-models/dist/models/partner.model';
 import { CategoryInterface } from './components/ftb-searchable-content/ftb-searchable-content.component';
 export namespace Components {
@@ -95,10 +83,7 @@ export namespace Components {
     totalItems: number;
   }
   interface FtbPaginationStories {}
-  interface FtbPartnerBanner {
-    leagueId: number;
-    slotCode: BannerSlotCode;
-  }
+  interface FtbPartnerBanner {}
   interface FtbPartnerBannerStories {}
   interface FtbPartnerPhoto {
     partner: Partner;
@@ -600,10 +585,7 @@ declare namespace LocalJSX {
     totalItems: number;
   }
   interface FtbPaginationStories {}
-  interface FtbPartnerBanner {
-    leagueId?: number;
-    slotCode: BannerSlotCode;
-  }
+  interface FtbPartnerBanner {}
   interface FtbPartnerBannerStories {}
   interface FtbPartnerPhoto {
     partner: Partner;

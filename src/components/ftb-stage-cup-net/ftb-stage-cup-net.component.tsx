@@ -1,5 +1,15 @@
 import { Component, h, Prop, Watch } from '@stencil/core';
-import { createEntityRoute, Game, GameSide, GameState, Stage, Team, translations, userState } from 'ftb-models';
+import {
+  createEntityRoute,
+  Game,
+  GameSide,
+  GameState,
+  routingState,
+  Stage,
+  Team,
+  translations,
+  userState,
+} from 'ftb-models';
 
 import last from 'lodash-es/last';
 import range from 'lodash-es/range';
@@ -76,7 +86,7 @@ export class FtbStageCupNet {
           onMouseOut={() => this.setHighlightTeam(this.highlightTeam)}
         >
           <ftb-team-logo team={side.team} />
-          <ion-router-link href={createEntityRoute(side.team)}>
+          <ion-router-link href={routingState.routes.team && createEntityRoute(side.team)}>
             <div class={'ftb-stage-cup-net__team-name'}>{side.team.name}</div>
           </ion-router-link>
           <div class="ftb-stage-cup-net__score-block">

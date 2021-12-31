@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import { envState } from 'ftb-models';
+import { envState, routingState } from 'ftb-models';
 import { environment } from '@src/environments/environment';
 import '@ionic/core';
 import { fromEvent } from 'rxjs';
@@ -41,6 +41,8 @@ export class FtbShowcasePage {
     envState.localHost = environment.localHost;
     envState.graphqlHost = environment.graphqlHost;
     envState.appKey = 'AFL_RU';
+
+    routingState.routes = {};
 
     function getViewportSize() {
       const object = 'innerWidth' in window ? window : document.documentElement || document.body;
@@ -114,7 +116,7 @@ export class FtbShowcasePage {
         <ion-menu side="start" content-id="main-content" class="menu" menuId="main">
           <ion-content>
             <div class="header">
-              <ion-router-link href="/" className="main-link" onClick={() => menuController.close('main')}>
+              <ion-router-link href="/" class="main-link" onClick={() => menuController.close('main')}>
                 Ftb-Components
               </ion-router-link>
             </div>

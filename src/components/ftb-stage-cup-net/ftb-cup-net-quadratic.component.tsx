@@ -1,9 +1,10 @@
-import { Component, Element, Prop, Host, h, writeTask } from '@stencil/core';
+import { Component, Element, Prop, Host, h, writeTask, Build } from '@stencil/core';
 import {
   createEntityRoute,
   CupRounds,
   Game,
   GameState,
+  routingState,
   Stage,
   StageFormat,
   Team,
@@ -63,11 +64,14 @@ export class FtbStageCupNetQuadratic {
     if (!this.stage.cupNet) {
       throw new Error('Stage does not have cup net');
     }
-
-    this.resizeObserver = new ResizeObserver(() => this.drawNet());
-    this.resizeObserver.observe(this.el);
-
     this.defineColumns();
+  }
+
+  connectedCallback() {
+    if (Build.isBrowser) {
+      this.resizeObserver = new ResizeObserver(() => this.drawNet());
+      this.resizeObserver.observe(this.el);
+    }
   }
 
   componentDidLoad() {
@@ -294,7 +298,7 @@ export class FtbStageCupNetQuadratic {
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
           <ftb-team-logo team={s.games[0][side].team} />
-          <ion-router-link href={createEntityRoute(s.games[0][side].team)}>
+          <ion-router-link href={routingState.routes.team && createEntityRoute(s.games[0][side].team)}>
             <div class={'team-name'}>{s.games[0][side].team.name}</div>
           </ion-router-link>
           <div class="score-block">

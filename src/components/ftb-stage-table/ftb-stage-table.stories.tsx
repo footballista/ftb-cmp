@@ -23,11 +23,13 @@ export class FtbStageTableStories {
         <h1>Stage table</h1>
         <p>Renders tournament standings</p>
         <ftb-code-snippet code={'<ftb-stage-table stage={stage} />'} />
-        {this.stage ? (
-          <ftb-stage-table stage={this.stage} customWidths={{ position: 40, form: 110 }} />
-        ) : (
-          this.renderTableSkeleton()
-        )}
+        <div class="table-container basic">
+          {this.stage ? (
+            <ftb-stage-table stage={this.stage} customWidths={{ position: 40, form: 110 }} />
+          ) : (
+            this.renderTableSkeleton(12)
+          )}
+        </div>
 
         <h2>Partial table</h2>
         <p>
@@ -37,28 +39,32 @@ export class FtbStageTableStories {
         <ftb-code-snippet
           code={"<ftb-stage-table stage={stage} rowsLimit={{baseTeam: {_id: 123, name: 'Arsenal'}, limit: 5}} />"}
         />
-        {this.stage ? (
-          <ftb-stage-table
-            stage={this.stage}
-            customWidths={{ position: 40, form: 110 }}
-            rowsLimit={{ baseTeam: this.stage.table[5].team, limit: 5 }}
-          />
-        ) : (
-          this.renderTableSkeleton()
-        )}
+        <div class="table-container short">
+          {this.stage ? (
+            <ftb-stage-table
+              stage={this.stage}
+              customWidths={{ position: 40, form: 110 }}
+              rowsLimit={{ baseTeam: this.stage.table[5].team, limit: 5 }}
+            />
+          ) : (
+            this.renderTableSkeleton(6)
+          )}
+        </div>
 
         <h2>Adaptive content</h2>
         <p>Displayed content depends on container width. </p>
-        {this.stage ? (
-          <ftb-stage-table
-            stage={this.stage}
-            customWidths={{ position: 40, form: 110 }}
-            class="narrow"
-            rowsLimit={{ baseTeam: this.stage.table[5].team, limit: 5 }}
-          />
-        ) : (
-          this.renderTableSkeleton()
-        )}
+        <div class="table-container short narrow">
+          {this.stage ? (
+            <ftb-stage-table
+              stage={this.stage}
+              customWidths={{ position: 40, form: 110 }}
+              class="narrow"
+              rowsLimit={{ baseTeam: this.stage.table[5].team, limit: 5 }}
+            />
+          ) : (
+            this.renderTableSkeleton(6)
+          )}
+        </div>
 
         <h2>Chess</h2>
         <p>Big sized table can load and display all stage games</p>
@@ -71,19 +77,22 @@ export class FtbStageTableStories {
               class="wide"
             />
           ) : (
-            this.renderTableSkeleton()
+            this.renderTableSkeleton(12)
           )}
         </div>
       </Host>
     );
   }
 
-  renderTableSkeleton() {
+  renderTableSkeleton(rows: number) {
     return (
-      <div class="table-skeleton">
-        {range(12).map(() => (
-          <div class="row-skeleton" />
-        ))}
+      <div class="skeleton">
+        <div class="table-head" />
+        <div class="table-body">
+          {range(rows).map(() => (
+            <ion-skeleton-text animated />
+          ))}
+        </div>
       </div>
     );
   }

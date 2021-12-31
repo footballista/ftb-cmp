@@ -11,10 +11,8 @@ export const config: Config = {
       esmLoaderPath: '../loader',
     },
     {
-      type: 'dist-custom-elements',
-    },
-    {
       type: 'www',
+      baseUrl: 'https://ftb-cmp.ru',
       serviceWorker: null,
     },
   ],
