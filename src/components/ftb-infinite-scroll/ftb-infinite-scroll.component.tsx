@@ -69,6 +69,8 @@ export class FtbInfiniteScrollComponent {
   }
 
   render() {
+    if (!this.loadData) return null;
+
     return (
       <Host>
         {this.loading ? <ftb-spinner /> : null}

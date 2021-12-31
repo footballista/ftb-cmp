@@ -1,5 +1,7 @@
 import { Component, Host, h, Prop, State, Element, writeTask } from '@stencil/core';
-import { Post, envState, checkElementSize } from 'ftb-models';
+import { Post, envState } from 'ftb-models';
+import { checkElementSize } from '@src/tools/check-element-size';
+
 import ArticleIcon from '../../assets/icons/article.svg';
 
 const MIDDLE_SIZE_THRESHOLD = 50;
@@ -25,7 +27,8 @@ export class FtbPostCover {
     this.showPlaceholder = true;
   }
 
-  async componentDidLoad() {
+  async connectedCallback() {
+    if (!this.post) return;
     const appendImg = (size: 'middle' | 'max') => {
       const pic = document.createElement('picture');
       const source = document.createElement('source');
@@ -41,12 +44,13 @@ export class FtbPostCover {
     } else if (this.mode == 'max') {
       appendImg('max');
     } else if (!this.mode) {
-      const { width } = checkElementSize(this.el);
-      if (width > MAX_SIZE_THRESHOLD) {
-        appendImg('max');
-      } else if (width > MIDDLE_SIZE_THRESHOLD) {
-        appendImg('middle');
-      }
+      checkElementSize(this.el).then(({ width }) => {
+        if (width > MAX_SIZE_THRESHOLD) {
+          appendImg('max');
+        } else if (width > MIDDLE_SIZE_THRESHOLD) {
+          appendImg('middle');
+        }
+      });
     }
   }
 

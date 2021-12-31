@@ -6,9 +6,11 @@ import { LicenseAgreement } from 'ftb-models';
   shadow: false,
 })
 export class FtbLicenseAgreement {
-  @Prop() license: LicenseAgreement;
+  @Prop() license!: LicenseAgreement;
 
   render() {
+    if (!this.license) return null;
+
     return (
       <Host>
         <div class="ftb-license-agreement__wrapper">

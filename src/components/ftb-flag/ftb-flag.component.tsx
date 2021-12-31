@@ -35,7 +35,7 @@ const aliases = {
   shadow: false,
 })
 export class FtbFlag {
-  @Prop() flag: string;
+  @Prop() flag!: string;
   /** if  passed, component will callback color palette, defined for flag */
   @Prop() extractColors?: (RGBs: Array<[number, number, number]>) => any;
 
@@ -67,6 +67,8 @@ export class FtbFlag {
   }
 
   render() {
+    if (!this.flag) return null;
+
     let flagAlias = this.flag.toLowerCase();
     if (aliases[this.flag]) {
       flagAlias = aliases[this.flag];

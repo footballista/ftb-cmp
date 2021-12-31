@@ -13,6 +13,8 @@ export class FtbLeagueSportsIcon {
   @Prop() league!: League;
 
   render() {
+    if (!this.league) return null;
+
     let svg = '';
     if (this.league.sports == Sports.basketball) {
       svg = BasketballIcon;

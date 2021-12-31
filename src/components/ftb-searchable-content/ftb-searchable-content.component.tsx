@@ -3,7 +3,8 @@ import Chevron from '../../assets/icons/chevron-down.svg';
 import SearchIcon from '../../assets/icons/search.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
-import { checkElementSize, getFromStorage, setToStorage, translations, userState } from 'ftb-models';
+import { getFromStorage, setToStorage, translations, userState } from 'ftb-models';
+import { checkElementSize } from '@src/tools/check-element-size';
 
 export interface CategoryInterface {
   key: string;
@@ -47,9 +48,9 @@ export class FtbSearchableContent {
   private onDestroyed$ = new AsyncSubject();
   private ready$ = new AsyncSubject();
   private inputDirty = false;
-  private minHeightPx: number;
 
   async componentWillLoad() {
+    if (!this.items) return null;
     if (this.getCategories) this.categories = this.getCategories();
     await this.categoryDefaultSelect();
     this.subscribeToQueryChanges();
@@ -62,12 +63,14 @@ export class FtbSearchableContent {
     this.queryChanges$.next('');
   }
 
-  componentDidLoad() {
-    const { height } = checkElementSize(this.element.querySelector('.ftb-searchable-content__content'));
-    this.minHeightPx = height;
+  setMinHeight(el: HTMLDivElement) {
+    checkElementSize(el).then(({ height }) => {
+      el.style['min-height'] = height + 'px';
+    });
   }
 
   async componentWillUpdate() {
+    if (!this.items) return null;
     await this.categoryDefaultSelect();
   }
 
@@ -214,6 +217,8 @@ export class FtbSearchableContent {
   }
 
   render() {
+    if (!this.items) return null;
+
     return (
       <Host>
         <div class="ftb-searchable-content__search-line">
@@ -272,7 +277,7 @@ export class FtbSearchableContent {
             ))}
           </div>
         </div>
-        <div class="ftb-searchable-content__content" style={{ 'min-height': this.minHeightPx + 'px' }}>
+        <div class="ftb-searchable-content__content" ref={el => this.setMinHeight(el)}>
           {this.renderItems(this.filteredItems)}
         </div>
       </Host>

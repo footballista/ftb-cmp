@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, State, Element } from '@stencil/core';
+import { Component, h, Host, Prop, State, Element, Build } from '@stencil/core';
 import {
   Stage,
   TableRow,
@@ -8,7 +8,6 @@ import {
   GameState,
   Team,
   createEntityRoute,
-  Build,
   routingState,
 } from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
@@ -61,7 +60,7 @@ export class FtbStageTable {
     winPercent: boolean;
   };
   @Element() el: HTMLElement;
-  private resizeObserver: ResizeObserver;
+  private resizeObserver;
   private W = {
     label: 10,
     position: 30,
@@ -79,6 +78,7 @@ export class FtbStageTable {
   };
 
   componentWillLoad() {
+    if (!this.stage) return;
     this.W = Object.assign(this.W, this.customWidths);
     if (this.showChess) {
       new StageService().loadStageGames(this.stage._id).then(s => {
@@ -91,6 +91,7 @@ export class FtbStageTable {
   }
 
   connectedCallback() {
+    if (!this.stage) return;
     if (Build.isBrowser) {
       this.resizeObserver = new ResizeObserver(() => {
         this.updateStructure();
@@ -159,6 +160,8 @@ export class FtbStageTable {
   }
 
   render() {
+    if (!this.stage) return;
+
     return (
       <Host>
         <div class="ftb-stage-table__wrapper">{this.structure ? [this.renderHead(), this.renderBody()] : null}</div>
@@ -337,7 +340,7 @@ export class FtbStageTable {
       return (
         <ion-router-link
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
-          url={routingState.routes.game && createEntityRoute(g)}
+          href={routingState.routes.game ? createEntityRoute(g) : ''}
         >
           {teamSide.score.ft}:{opponentSide.score.ft}
         </ion-router-link>

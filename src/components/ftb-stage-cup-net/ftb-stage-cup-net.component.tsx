@@ -34,6 +34,7 @@ export class FtbStageCupNet {
   netContainer: HTMLElement;
 
   componentDidRender() {
+    if (!this.stage) return;
     this.drawNet();
     this.setHighlightTeam(this.highlightTeam);
   }
@@ -44,6 +45,8 @@ export class FtbStageCupNet {
   }
 
   render() {
+    if (!this.stage) return;
+
     if (!this.stage.cupNet.length) {
       return <div class="ftb-stage-cup-net__no-games">{translations.champ.stage_has_no_games[userState.language]}</div>;
     }

@@ -12,6 +12,8 @@ export class FtbGameDate {
   @Prop() withtime = true;
 
   render() {
+    if (!this.game) return null;
+
     if (!this.game.date) return <div class="time-not-set">{translations.game.time_not_set[userState.language]}</div>;
 
     return (

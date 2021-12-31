@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, Element, writeTask } from '@stencil/core';
-import { checkElementSize, GameVideo } from 'ftb-models';
+import { GameVideo } from 'ftb-models';
+import { checkElementSize } from '@src/tools/check-element-size';
 
 const HQ_SIZE_THRESHOLD_PX = 180;
 
@@ -18,20 +19,25 @@ export class FtbVideoCover {
     el.style.display = 'none';
   }
 
-  componentDidLoad() {
-    const height = checkElementSize(this.el).height;
-    if (height > HQ_SIZE_THRESHOLD_PX) {
-      const hqImg = document.createElement('img');
-      hqImg.title = this.video.name;
-      hqImg.alt = this.video.name;
-      hqImg.src = this.video.covers.hq;
-      const pic = document.createElement('picture');
-      pic.appendChild(hqImg);
-      hqImg.onload = () => writeTask(() => this.el.children[0].append(pic));
-    }
+  connectedCallback() {
+    if (!this.video) return;
+
+    checkElementSize(this.el).then(({ height }) => {
+      if (height > HQ_SIZE_THRESHOLD_PX) {
+        const hqImg = document.createElement('img');
+        hqImg.title = this.video.name;
+        hqImg.alt = this.video.name;
+        hqImg.src = this.video.covers.hq;
+        const pic = document.createElement('picture');
+        pic.appendChild(hqImg);
+        hqImg.onload = () => writeTask(() => this.el.children[0].append(pic));
+      }
+    });
   }
 
   render() {
+    if (!this.video) return;
+
     return (
       <Host>
         <a href={this.video.link}>

@@ -35,6 +35,7 @@ export class FtbGamePhotoGallery {
 
   render() {
     if (!this.game) return;
+
     return (
       <Host>
         <div class="gallery" ref={el => this.initGallery(el)}></div>

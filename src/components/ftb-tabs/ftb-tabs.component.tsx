@@ -16,6 +16,8 @@ export class FtbTabs {
   }
 
   render() {
+    if (!this.tabs) return null;
+
     return (
       <Host>
         <div class="ftb-tab-titles">

@@ -16,6 +16,8 @@ export class FtbLeagueLogo {
   }
 
   render() {
+    if (!this.league) return null;
+
     const url = envState.imgHost + `/img/leagues/${this.league._id}.png?version=${this.league.logoId}`;
 
     return (

@@ -9,6 +9,8 @@ export class FtbPostBody {
   @Prop() post!: Post;
 
   render() {
+    if (!this.post) return null;
+
     return (
       <Host>
         <div class="ftb-post-body__wrapper">

@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State, Element, writeTask } from '@stencil/core';
-import { checkElementSize, envState, Team } from 'ftb-models';
+import { envState, Team } from 'ftb-models';
+import { checkElementSize } from '@src/tools/check-element-size';
 import ShieldIcon from '../../assets/icons/shield.svg';
 
 const MIDDLE_SIZE_THRESHOLD = 50;
@@ -28,7 +29,9 @@ export class FtbTeamLogo {
 
   getPalette: (el: HTMLImageElement) => Array<[number, number, number]>;
 
-  async componentDidLoad() {
+  async connectedCallback() {
+    if (!this.team) return;
+
     const appendImg = (size: 'middle' | 'max') => {
       const pic = document.createElement('picture');
       const source = document.createElement('source');
@@ -44,12 +47,13 @@ export class FtbTeamLogo {
     } else if (this.mode == 'max') {
       appendImg('max');
     } else if (!this.mode) {
-      const { width } = checkElementSize(this.el);
-      if (width > MAX_SIZE_THRESHOLD) {
-        appendImg('max');
-      } else if (width > MIDDLE_SIZE_THRESHOLD) {
-        appendImg('middle');
-      }
+      checkElementSize(this.el).then(({ width }) => {
+        if (width > MAX_SIZE_THRESHOLD) {
+          appendImg('max');
+        } else if (width > MIDDLE_SIZE_THRESHOLD) {
+          appendImg('middle');
+        }
+      });
     }
 
     if (this.el['extractColors']) {

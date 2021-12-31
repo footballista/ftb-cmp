@@ -57,10 +57,12 @@ export class FtbStageCupNetQuadratic {
     el: SVGElement;
   }> = [];
 
-  resizeObserver: ResizeObserver;
+  resizeObserver;
   netContainer: HTMLElement;
 
   async componentWillLoad() {
+    if (!this.stage) return;
+
     if (!this.stage.cupNet) {
       throw new Error('Stage does not have cup net');
     }
@@ -68,6 +70,7 @@ export class FtbStageCupNetQuadratic {
   }
 
   connectedCallback() {
+    if (!this.stage) return;
     if (Build.isBrowser) {
       this.resizeObserver = new ResizeObserver(() => this.drawNet());
       this.resizeObserver.observe(this.el);
@@ -75,11 +78,13 @@ export class FtbStageCupNetQuadratic {
   }
 
   componentDidLoad() {
+    if (!this.stage) return;
     this.drawNet();
     this.highlight(this.highlightTeam);
   }
 
   componentDidRender() {
+    if (!this.stage) return;
     this.highlight(this.highlightTeam);
   }
 
@@ -268,6 +273,8 @@ export class FtbStageCupNetQuadratic {
   }
 
   render() {
+    if (!this.stage) return;
+
     return (
       <Host>
         <div class="net-body">

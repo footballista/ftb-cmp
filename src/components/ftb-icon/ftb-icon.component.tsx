@@ -9,6 +9,8 @@ export class FtbIcon {
   @Prop() svg!: string;
 
   render() {
+    if (!this.svg) return null;
+
     return <Host innerHTML={this.svg} />;
   }
 }

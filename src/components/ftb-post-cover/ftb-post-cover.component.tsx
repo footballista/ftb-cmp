@@ -16,6 +16,8 @@ export class FtbPostCover {
   }
 
   render() {
+    if (!this.post) return null;
+
     return (
       <Host>
         <ftb-link route="post" params={{ postId: this.post._id, postTitle: this.post.title }}>

@@ -57,6 +57,17 @@ export class FtbShowcasePage {
     setMode();
   }
 
+  connectedCallback() {
+    setTimeout(() => {
+      for (const category of this.components) {
+        for (const component of category.items) {
+          const page = document.createElement(component);
+          document.body.appendChild(page);
+        }
+      }
+    }, 500);
+  }
+
   render() {
     return envState.platform == 'web' ? this.renderDesktop() : this.renderMobile();
   }
@@ -180,7 +191,7 @@ export class FtbShowcasePage {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url={'/'} component={'ftb-showcase-main'} exact={true} />
+          <ion-route url={'/'} component={'ftb-showcase-main'} />
           {this.components
             .reduce((cmps, category) => [...cmps, ...category.items], [])
             .map(c => (

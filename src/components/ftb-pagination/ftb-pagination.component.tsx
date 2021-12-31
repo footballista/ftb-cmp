@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
-import { checkElementSize, translations, userState } from 'ftb-models';
+import { translations, userState } from 'ftb-models';
+import { checkElementSize } from '@src/tools/check-element-size';
 
 @Component({
   tag: 'ftb-pagination',
@@ -19,25 +20,21 @@ export class FtbPagination {
 
   @State() currentPage: number = 0;
 
-  containerEl: HTMLDivElement;
-  minHeightPx: number;
-
-  componentDidLoad() {
-    const { height } = checkElementSize(this.containerEl);
-    this.minHeightPx = height;
+  setMinHeight(el: HTMLDivElement) {
+    checkElementSize(el).then(({ height }) => {
+      el.style['min-height'] = height + 'px';
+    });
   }
 
   render() {
+    if (this.totalItems == undefined) return null;
+
     if (this.totalItems < 0) throw new Error('Incorrect "totalItems" value. Should be positive number');
     if (this.itemsPerPage < 1) throw new Error('Incorrect "itemsPerPage" value. Should be positive number');
 
     return (
       <Host>
-        <div
-          class="ftb-pagination__items-container"
-          ref={el => (this.containerEl = el)}
-          style={{ 'min-height': this.minHeightPx + 'px' }}
-        >
+        <div class="ftb-pagination__items-container" ref={el => this.setMinHeight(el)}>
           {this.renderPage(this.currentPage * this.itemsPerPage, (this.currentPage + 1) * this.itemsPerPage)}
         </div>
         <div class="ftb-pagination__nav-line">

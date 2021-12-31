@@ -33,7 +33,7 @@ export class FtbGamePhotoGalleryStories {
   render() {
     return (
       <Host>
-        <ion-content padding>
+        <ion-content>
           <ftb-game-photo-gallery game={this.game} ref={el => (this.gallery = el)} />
 
           <h1>Photo gallery</h1>

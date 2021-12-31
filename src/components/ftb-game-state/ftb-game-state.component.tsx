@@ -10,6 +10,8 @@ export class FtbGameState {
   @Prop() game!: Game;
 
   render() {
+    if (!this.game) return null;
+
     if (this.game.state < GameState.STARTED) {
       return <Host>{translations.game.not_started[userState.language]}</Host>;
     } else if (this.game.state < GameState.CLOSED) {
