@@ -36,7 +36,9 @@ export namespace Components {
     game: Game;
     open: (idx: number) => Promise<any>;
   }
-  interface FtbGamePhotoGalleryStories {}
+  interface FtbGamePhotoGalleryStories {
+    prefetchMode: boolean;
+  }
   interface FtbGameState {
     game: Game;
   }
@@ -538,7 +540,9 @@ declare namespace LocalJSX {
   interface FtbGamePhotoGallery {
     game: Game;
   }
-  interface FtbGamePhotoGalleryStories {}
+  interface FtbGamePhotoGalleryStories {
+    prefetchMode?: boolean;
+  }
   interface FtbGameState {
     game: Game;
   }

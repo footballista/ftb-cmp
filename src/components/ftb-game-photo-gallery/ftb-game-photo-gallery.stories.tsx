@@ -1,4 +1,4 @@
-import { Component, h, Host, State } from '@stencil/core';
+import { Component, h, Host, State, Prop } from '@stencil/core';
 import { Game, GameService } from 'ftb-models';
 
 @Component({
@@ -7,11 +7,13 @@ import { Game, GameService } from 'ftb-models';
   shadow: false,
 })
 export class FtbGamePhotoGalleryStories {
+  @Prop() prefetchMode: boolean;
   @State() game: Game;
   gallery: HTMLFtbGamePhotoGalleryElement;
   @State() galleryIdx = 0;
 
   componentWillLoad() {
+    if (this.prefetchMode) return;
     new GameService().loadGamePhotos(313299).then(g => {
       this.game = g;
       this.initGallery();
@@ -31,6 +33,7 @@ export class FtbGamePhotoGalleryStories {
   }
 
   render() {
+    if (this.prefetchMode) return;
     return (
       <Host>
         <ion-content>

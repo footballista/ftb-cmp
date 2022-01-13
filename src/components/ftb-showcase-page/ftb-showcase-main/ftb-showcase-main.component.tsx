@@ -1,6 +1,6 @@
 import { Component, h, Host } from '@stencil/core';
-import FootballistaIcon from '../../../assets/icons/footballista.svg';
-import { envState } from 'ftb-models';
+// import FootballistaIcon from '../../../assets/icons/footballista.svg';
+// import { envState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-showcase-main',
@@ -11,7 +11,7 @@ export class FtbShowcasePage {
   render() {
     return (
       <Host>
-        {envState.platform == 'web' && <ftb-icon svg={FootballistaIcon} class="main-logo" />}
+        {/*{envState.platform == 'web' && <ftb-icon svg={FootballistaIcon} class="main-logo" />}*/}
 
         <h1>Footballista web components</h1>
         <p>

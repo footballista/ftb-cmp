@@ -61,12 +61,12 @@ export class FtbShowcasePage {
     setTimeout(() => {
       for (const category of this.components) {
         for (const component of category.items) {
-          const page = document.createElement(component + '-stories');
+          const page = Object.assign(document.createElement(component + '-stories'), { prefetchMode: true });
           document.body.appendChild(page);
           page.remove();
         }
       }
-    }, 3000);
+    }, 500);
   }
 
   render() {

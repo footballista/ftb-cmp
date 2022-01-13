@@ -21,8 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "gen": "schematics/generate.js",
     "release": "scripts/release.js",
-    "update": "npm-check-updates -u && npm i",
-    "postinstall": "node scripts/postinstall.js"
+    "update": "npm-check-updates -u && npm i"
   },
   "dependencies": {
     "@capacitor/cli": "^3.3.3",
