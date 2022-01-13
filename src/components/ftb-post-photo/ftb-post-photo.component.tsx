@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, State, Element, writeTask } from '@stencil/core';
-import { Post, envState } from 'ftb-models';
-import { checkElementSize } from '@src/tools/check-element-size';
+import { Post, envState, checkElementSize } from 'ftb-models';
 
 import ArticleIcon from '../../assets/icons/article.svg';
 

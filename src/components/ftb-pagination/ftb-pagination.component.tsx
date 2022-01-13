@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
-import { translations, userState } from 'ftb-models';
-import { checkElementSize } from '@src/tools/check-element-size';
+import {checkElementSize, translations, userState} from 'ftb-models';
 
 @Component({
   tag: 'ftb-pagination',

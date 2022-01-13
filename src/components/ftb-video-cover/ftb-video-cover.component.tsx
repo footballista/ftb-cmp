@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, Element, writeTask } from '@stencil/core';
-import { GameVideo } from 'ftb-models';
-import { checkElementSize } from '@src/tools/check-element-size';
+import {checkElementSize, GameVideo} from 'ftb-models';
 
 const HQ_SIZE_THRESHOLD_PX = 180;
 
