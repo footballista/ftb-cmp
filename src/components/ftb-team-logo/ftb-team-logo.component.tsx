@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Element, writeTask } from '@stencil/core';
-import {checkElementSize, envState, Team} from 'ftb-models';
+import { checkElementSize, envState, Team } from 'ftb-models';
 import ShieldIcon from '../../assets/icons/shield.svg';
 
 const MIDDLE_SIZE_THRESHOLD = 50;

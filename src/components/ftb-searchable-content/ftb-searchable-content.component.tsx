@@ -3,7 +3,7 @@ import Chevron from '../../assets/icons/chevron-down.svg';
 import SearchIcon from '../../assets/icons/search.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
-import {checkElementSize, getFromStorage, setToStorage, translations, userState} from 'ftb-models';
+import { checkElementSize, getFromStorage, setToStorage, translations, userState } from 'ftb-models';
 
 export interface CategoryInterface {
   key: string;
