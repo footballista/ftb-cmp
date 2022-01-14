@@ -30,7 +30,10 @@ export class FtbShowcasePage {
     },
     { title: 'Stage', items: ['ftb-stage-table', 'ftb-stage-cup-net'] },
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
-    { title: 'Content', items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll'] },
+    {
+      title: 'Content',
+      items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll', 'ftb-virtual-scroll'],
+    },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },
     { title: 'Other', items: ['ftb-icon', 'ftb-spinner'] },
   ];
