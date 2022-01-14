@@ -28,7 +28,7 @@ export class FtbVirtualScroll {
     this.scrolled$
       .pipe(
         takeUntil(this.onDestroyed$),
-        debounce(() => timer(100)),
+        debounce(() => timer(50)),
         map(() => this.el.scrollTop),
         distinctUntilChanged(),
       )
@@ -50,7 +50,6 @@ export class FtbVirtualScroll {
       from: Math.max(0, startItemIdx - additionalItemsBuffer),
       to: Math.min(this.totalItems, startItemIdx + this.itemsPerViewport + additionalItemsBuffer),
     };
-    console.log(this.range);
   }
 
   render() {
@@ -58,7 +57,10 @@ export class FtbVirtualScroll {
       <Host>
         <div class="ftb-virtual-scroll__content" style={{ height: this.totalItems * this.itemHeightPx + 'px' }}>
           {Boolean(this.range) && (
-            <div class="range" style={{ transform: `translateY(${this.range.from * this.itemHeightPx}px)` }}>
+            <div
+              class="ftb-virtual-scroll__range"
+              style={{ transform: `translateY(${this.range.from * this.itemHeightPx}px)` }}
+            >
               {this.renderRange(this.range.from, this.range.to)}
             </div>
           )}
