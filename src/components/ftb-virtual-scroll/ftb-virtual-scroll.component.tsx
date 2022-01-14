@@ -9,9 +9,9 @@ import { debounce, distinctUntilChanged, takeUntil, map } from 'rxjs/operators';
   shadow: false,
 })
 export class FtbVirtualScroll {
-  @Prop() totalItems!: number;
+  @Prop() items!: any[];
   @Prop() itemHeightPx!: number;
-  @Prop() renderRange!: (from: number, to: number) => string;
+  @Prop() renderItem!: (item: any) => string;
   @State() range: { from: number; to: number };
   containerHeight: number;
   itemsPerViewport: number;
@@ -48,20 +48,20 @@ export class FtbVirtualScroll {
     const startItemIdx = Math.floor(scrollTop / this.itemHeightPx);
     this.range = {
       from: Math.max(0, startItemIdx - additionalItemsBuffer),
-      to: Math.min(this.totalItems, startItemIdx + this.itemsPerViewport + additionalItemsBuffer),
+      to: Math.min(this.items.length, startItemIdx + this.itemsPerViewport + additionalItemsBuffer),
     };
   }
 
   render() {
     return (
       <Host>
-        <div class="ftb-virtual-scroll__content" style={{ height: this.totalItems * this.itemHeightPx + 'px' }}>
+        <div class="ftb-virtual-scroll__content" style={{ height: this.items.length * this.itemHeightPx + 'px' }}>
           {Boolean(this.range) && (
             <div
               class="ftb-virtual-scroll__range"
               style={{ transform: `translateY(${this.range.from * this.itemHeightPx}px)` }}
             >
-              {this.renderRange(this.range.from, this.range.to)}
+              {this.items.slice(this.range.from, this.range.to).map(i => this.renderItem(i))}
             </div>
           )}
         </div>

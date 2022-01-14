@@ -8,8 +8,6 @@ import { Player } from 'ftb-models';
   shadow: false,
 })
 export class FtbVirtualScrollStories {
-  items = range(3000, 53000);
-
   render() {
     return (
       <Host>
@@ -17,29 +15,24 @@ export class FtbVirtualScrollStories {
         <p>Is helpful when you need to display long list of items. Renders only items in viewport.</p>
 
         <ftb-virtual-scroll
-          totalItems={50000}
+          items={range(3000, 53000)}
           itemHeightPx={50}
-          renderRange={(from, to) => this.renderRange(from, to)}
+          renderItem={i => (
+            <div class="item">
+              <ftb-player-photo player={new Player({ _id: i })} key={i} />
+              {i}
+            </div>
+          )}
         />
 
         <ftb-code-snippet
           code="<ftb-virtual-scroll
-  totalItems={50000}
+  items={range(3000, 53000)}
   itemHeightPx={50}
-  renderRange={(from, to) => this.renderRange(from, to)}
+  renderItem={item => ...}
 />"
         />
       </Host>
     );
-  }
-
-  renderRange(from: number, to: number) {
-    const items = this.items.slice(from, to);
-    return items.map(i => (
-      <div class="item">
-        <ftb-player-photo player={new Player({ _id: i })} key={i} />
-        {i}
-      </div>
-    ));
   }
 }

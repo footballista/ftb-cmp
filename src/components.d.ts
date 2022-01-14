@@ -192,8 +192,8 @@ export namespace Components {
   interface FtbVideoCoverStories {}
   interface FtbVirtualScroll {
     itemHeightPx: number;
-    renderRange: (from: number, to: number) => string;
-    totalItems: number;
+    items: any[];
+    renderItem: (item: any) => string;
   }
   interface FtbVirtualScrollStories {}
 }
@@ -718,8 +718,8 @@ declare namespace LocalJSX {
   interface FtbVideoCoverStories {}
   interface FtbVirtualScroll {
     itemHeightPx: number;
-    renderRange: (from: number, to: number) => string;
-    totalItems: number;
+    items: any[];
+    renderItem: (item: any) => string;
   }
   interface FtbVirtualScrollStories {}
   interface IntrinsicElements {
