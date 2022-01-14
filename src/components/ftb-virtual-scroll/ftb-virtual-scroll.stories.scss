@@ -1,0 +1,26 @@
+ftb-virtual-scroll-stories {
+  ftb-virtual-scroll {
+    height: 500px;
+    width: 300px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+
+    .item {
+      height: 50px;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ftb-player-photo {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.3);
+        margin-left: -40px;
+      }
+    }
+  }
+}

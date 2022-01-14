@@ -190,6 +190,12 @@ export namespace Components {
     video: GameVideo;
   }
   interface FtbVideoCoverStories {}
+  interface FtbVirtualScroll {
+    itemHeightPx: number;
+    renderRange: (from: number, to: number) => string;
+    totalItems: number;
+  }
+  interface FtbVirtualScrollStories {}
 }
 declare global {
   interface HTMLFtbCodeSnippetElement extends Components.FtbCodeSnippet, HTMLStencilElement {}
@@ -457,6 +463,16 @@ declare global {
     prototype: HTMLFtbVideoCoverStoriesElement;
     new (): HTMLFtbVideoCoverStoriesElement;
   };
+  interface HTMLFtbVirtualScrollElement extends Components.FtbVirtualScroll, HTMLStencilElement {}
+  var HTMLFtbVirtualScrollElement: {
+    prototype: HTMLFtbVirtualScrollElement;
+    new (): HTMLFtbVirtualScrollElement;
+  };
+  interface HTMLFtbVirtualScrollStoriesElement extends Components.FtbVirtualScrollStories, HTMLStencilElement {}
+  var HTMLFtbVirtualScrollStoriesElement: {
+    prototype: HTMLFtbVirtualScrollStoriesElement;
+    new (): HTMLFtbVirtualScrollStoriesElement;
+  };
   interface HTMLElementTagNameMap {
     'ftb-code-snippet': HTMLFtbCodeSnippetElement;
     'ftb-cup-net-quadratic': HTMLFtbCupNetQuadraticElement;
@@ -511,6 +527,8 @@ declare global {
     'ftb-user-photo-stories': HTMLFtbUserPhotoStoriesElement;
     'ftb-video-cover': HTMLFtbVideoCoverElement;
     'ftb-video-cover-stories': HTMLFtbVideoCoverStoriesElement;
+    'ftb-virtual-scroll': HTMLFtbVirtualScrollElement;
+    'ftb-virtual-scroll-stories': HTMLFtbVirtualScrollStoriesElement;
   }
 }
 declare namespace LocalJSX {
@@ -698,6 +716,12 @@ declare namespace LocalJSX {
     video: GameVideo;
   }
   interface FtbVideoCoverStories {}
+  interface FtbVirtualScroll {
+    itemHeightPx: number;
+    renderRange: (from: number, to: number) => string;
+    totalItems: number;
+  }
+  interface FtbVirtualScrollStories {}
   interface IntrinsicElements {
     'ftb-code-snippet': FtbCodeSnippet;
     'ftb-cup-net-quadratic': FtbCupNetQuadratic;
@@ -752,6 +776,8 @@ declare namespace LocalJSX {
     'ftb-user-photo-stories': FtbUserPhotoStories;
     'ftb-video-cover': FtbVideoCover;
     'ftb-video-cover-stories': FtbVideoCoverStories;
+    'ftb-virtual-scroll': FtbVirtualScroll;
+    'ftb-virtual-scroll-stories': FtbVirtualScrollStories;
   }
 }
 export { LocalJSX as JSX };
@@ -823,6 +849,9 @@ declare module '@stencil/core' {
       'ftb-video-cover': LocalJSX.FtbVideoCover & JSXBase.HTMLAttributes<HTMLFtbVideoCoverElement>;
       'ftb-video-cover-stories': LocalJSX.FtbVideoCoverStories &
         JSXBase.HTMLAttributes<HTMLFtbVideoCoverStoriesElement>;
+      'ftb-virtual-scroll': LocalJSX.FtbVirtualScroll & JSXBase.HTMLAttributes<HTMLFtbVirtualScrollElement>;
+      'ftb-virtual-scroll-stories': LocalJSX.FtbVirtualScrollStories &
+        JSXBase.HTMLAttributes<HTMLFtbVirtualScrollStoriesElement>;
     }
   }
 }
