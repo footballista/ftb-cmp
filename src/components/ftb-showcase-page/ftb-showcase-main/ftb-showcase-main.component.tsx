@@ -34,6 +34,14 @@ export class FtbShowcasePage {
 
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.1.0</b>
+          <span class="date">14 Jan 2021</span>
+          <ul>
+            <li>
+              Created <ion-router-link href={'/ftb-virtual-scroll'}>virtual scroll</ion-router-link> component for
+              rendering long lists
+            </li>
+          </ul>
           <b>3.0.1</b>
           <span class="date">30 Dec 2021</span>
           <ul>
