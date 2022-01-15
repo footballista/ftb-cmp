@@ -12,7 +12,6 @@ export class FtbShowcasePage {
     return (
       <Host>
         {/*{envState.platform == 'web' && <ftb-icon svg={FootballistaIcon} class="main-logo" />}*/}
-
         <h1>Footballista web components</h1>
         <p>
           This is Storybook-alike documentation site for{' '}
@@ -24,21 +23,18 @@ export class FtbShowcasePage {
           repository, that contains web components for products based on{' '}
           <a href="https://demo.footballista.ru">Footballista</a> platform.
         </p>
-
         <p>Check out components in the menu and explore docs, use-cases and code examples.</p>
-
         <p>
           If you are looking for Footballista Infographics Storybook, it is located{' '}
           <a href="https://storybook.footballista.ru">here</a>
         </p>
-
         <h2>Changelog</h2>
         <div class="changelog-row">
           <b>3.1.0</b>
           <span class="date">14 Jan 2021</span>
           <ul>
             <li>
-              Created <ion-router-link href={'/ftb-virtual-scroll'}>virtual scroll</ion-router-link> component for
+              Created <stencil-route-link url={'/ftb-virtual-scroll'}>virtual scroll</stencil-route-link> component for
               rendering long lists
             </li>
           </ul>

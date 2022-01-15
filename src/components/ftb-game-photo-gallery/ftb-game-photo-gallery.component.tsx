@@ -161,14 +161,14 @@
 //         {photographer && (
 //           <div class="photo-by">
 //             {translations.game.photo_by[userState.language]}:
-//             <ion-router-link
+//             <stencil-route-link
 //               href={buildRoute(routingState.routes.person, {
 //                 personId: photographer.user._id,
 //                 personName: photographer.user.name,
 //               })}
 //             >
 //               {photographer.user.name}
-//             </ion-router-link>
+//             </stencil-route-link>
 //           </div>
 //         )}
 //       </div>

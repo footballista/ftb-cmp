@@ -2,6 +2,7 @@ import { Component, h } from '@stencil/core';
 import { envState, routingState } from 'ftb-models';
 import { environment } from '@src/environments/environment';
 import '@ionic/core';
+import '@stencil/router';
 import { fromEvent } from 'rxjs';
 import { menuController } from '@ionic/core';
 import FootballistaIcon from '../../assets/icons/footballista.svg';
@@ -81,9 +82,9 @@ export class FtbShowcasePage {
       <ion-app class="desktop">
         <div class="menu">
           <div class="header">
-            <ion-router-link href="/" class="main-link">
+            <stencil-route-link url="/" class="main-link">
               Ftb-Components
-            </ion-router-link>
+            </stencil-route-link>
             <ftb-searchable-content
               items={this.components}
               filterFn={async (items, query) => {
@@ -108,7 +109,7 @@ export class FtbShowcasePage {
                 categories.map(cat => (
                   <div class="category">
                     <h6>{cat.title}</h6>
-                    {...cat.items.map(i => <ion-router-link href={'/' + i}>{i}</ion-router-link>)}
+                    {...cat.items.map(i => <stencil-route-link url={'/' + i}>{i}</stencil-route-link>)}
                   </div>
                 ))
               }
@@ -118,7 +119,7 @@ export class FtbShowcasePage {
         </div>
         <div class="content">
           {this.renderRoutes()}
-          <ion-nav animated={false} />
+          {/*<ion-nav animated={false} />*/}
           <div class="content-fog" />
         </div>
       </ion-app>
@@ -131,9 +132,9 @@ export class FtbShowcasePage {
         <ion-menu side="start" content-id="main-content" class="menu" menuId="main">
           <ion-content>
             <div class="header">
-              <ion-router-link href="/" class="main-link" onClick={() => menuController.close('main')}>
+              <stencil-route-link url="/" class="main-link" onClick={() => menuController.close('main')}>
                 Ftb-Components
-              </ion-router-link>
+              </stencil-route-link>
             </div>
             <ftb-searchable-content
               items={this.components}
@@ -160,9 +161,9 @@ export class FtbShowcasePage {
                   <div class="category">
                     <h6>{cat.title}</h6>
                     {...cat.items.map(i => (
-                      <ion-router-link href={'/' + i} onClick={() => menuController.close('main')}>
+                      <stencil-route-link url={'/' + i} onClick={() => menuController.close('main')}>
                         {i}
-                      </ion-router-link>
+                      </stencil-route-link>
                     ))}
                   </div>
                 ))
@@ -194,14 +195,22 @@ export class FtbShowcasePage {
   renderRoutes() {
     return (
       <ion-app>
-        <ion-router useHash={false}>
-          <ion-route url={'/'} component={'ftb-showcase-main'} />
+        {/*<ion-router useHash={false}>*/}
+        {/*  <ion-route url={'/'} component={'ftb-showcase-main'} />*/}
+        {/*  {this.components*/}
+        {/*    .reduce((cmps, category) => [...cmps, ...category.items], [])*/}
+        {/*    .map(c => (*/}
+        {/*      <ion-route url={'/' + c} component={c + '-stories'} />*/}
+        {/*    ))}*/}
+        {/*</ion-router>*/}
+        <stencil-router>
+          <stencil-route url={'/'} component={'ftb-showcase-main'} exact={true} />
           {this.components
             .reduce((cmps, category) => [...cmps, ...category.items], [])
             .map(c => (
-              <ion-route url={'/' + c} component={c + '-stories'} />
+              <stencil-route url={'/' + c} component={c + '-stories'} />
             ))}
-        </ion-router>
+        </stencil-router>
       </ion-app>
     );
   }

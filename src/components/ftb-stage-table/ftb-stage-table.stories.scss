@@ -54,7 +54,7 @@ ftb-stage-table-stories {
       }
     }
 
-    ion-router-link {
+    stencil-route-link {
       color: #2e2e2e;
       cursor: pointer;
       &:not(:last-of-type) {

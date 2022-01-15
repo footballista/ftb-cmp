@@ -84,7 +84,7 @@ ftb-stage-cup-net-stories {
             ftb-team-logo {
               background: rgba(255, 215, 0, 0.3);
             }
-            ion-router-link {
+            stencil-route-link {
               .team-name {
                 color: darkgoldenrod;
               }
@@ -152,7 +152,7 @@ ftb-stage-cup-net-stories {
           background: rgba(0, 0, 0, 0.05);
         }
       }
-      ion-router-link {
+      stencil-route-link {
         display: none !important;
       }
     }

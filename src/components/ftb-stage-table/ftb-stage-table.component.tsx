@@ -180,9 +180,9 @@ export class FtbStageTable {
         {this.structure.chess &&
           this.stage.table.map(row => (
             <div class="chess-game" style={this.getFieldStyle('chess')}>
-              <ion-router-link href={routingState.routes.team && createEntityRoute(row.team)}>
+              <stencil-route-link url={routingState.routes.team && createEntityRoute(row.team)}>
                 <ftb-team-logo team={row.team} key={row.team._id} />
-              </ion-router-link>
+              </stencil-route-link>
             </div>
           ))}
         {this.structure.games && (
@@ -244,7 +244,7 @@ export class FtbStageTable {
     return (
       <div class="body">
         {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
-          <ion-router-link href={routingState.routes.team && createEntityRoute(row.team)}>
+          <stencil-route-link url={routingState.routes.team && createEntityRoute(row.team)}>
             <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
@@ -313,7 +313,7 @@ export class FtbStageTable {
                 </div>
               )}
             </div>
-          </ion-router-link>
+          </stencil-route-link>
         ))}
       </div>
     );
@@ -338,12 +338,12 @@ export class FtbStageTable {
       const teamSide = g.home.team._id == teamIdx ? g.home : g.away;
       const opponentSide = g.home.team._id == teamIdx ? g.away : g.home;
       return (
-        <ion-router-link
+        <stencil-route-link
+          url={routingState.routes.game ? createEntityRoute(g) : ''}
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
-          href={routingState.routes.game ? createEntityRoute(g) : ''}
         >
           {teamSide.score.ft}:{opponentSide.score.ft}
-        </ion-router-link>
+        </stencil-route-link>
       );
     });
   }

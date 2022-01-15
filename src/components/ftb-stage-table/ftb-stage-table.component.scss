@@ -12,7 +12,7 @@ ftb-stage-table {
     align-items: center;
     overflow: hidden;
 
-    ion-router-link {
+    stencil-route-link {
       width: 100%;
       height: 100%;
       display: flex;
@@ -23,7 +23,7 @@ ftb-stage-table {
   .body {
     overflow: hidden;
 
-    ion-router-link {
+    stencil-route-link {
       display: block;
       .row {
         display: flex;
@@ -40,7 +40,7 @@ ftb-stage-table {
       text-align: center;
     }
 
-    ion-router-link {
+    stencil-route-link {
       display: block;
     }
 

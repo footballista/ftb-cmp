@@ -305,9 +305,9 @@ export class FtbStageCupNetQuadratic {
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
           <ftb-team-logo team={s.games[0][side].team} />
-          <ion-router-link href={routingState.routes.team && createEntityRoute(s.games[0][side].team)}>
+          <stencil-route-link url={routingState.routes.team && createEntityRoute(s.games[0][side].team)}>
             <div class={'team-name'}>{s.games[0][side].team.name}</div>
-          </ion-router-link>
+          </stencil-route-link>
           <div class="score-block">
             {s.games.map(game => (
               <div class="score">
