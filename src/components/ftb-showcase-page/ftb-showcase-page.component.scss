@@ -77,7 +77,7 @@ ftb-showcase-page {
           height: 25px;
           margin-top: 20px;
         }
-        stencil-route-link a {
+        a {
           display: flex;
           align-items: center;
           font-size: 13px;
@@ -150,7 +150,7 @@ ftb-showcase-page {
     $menuWidth: 230px;
     .header {
       padding: 0 20px;
-      .main-link a {
+      .main-link {
         margin-top: 20px;
         display: flex;
         align-items: center;
@@ -206,6 +206,10 @@ ftb-showcase-page {
       padding-bottom: 50px;
       width: calc(100% - 230px);
       position: relative;
+
+      ion-app {
+        padding-left: 20px;
+      }
 
       .ion-page {
         display: block;

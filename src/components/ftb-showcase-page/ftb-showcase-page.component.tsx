@@ -2,7 +2,9 @@ import { Component, h } from '@stencil/core';
 import { envState, routingState } from 'ftb-models';
 import { environment } from '@src/environments/environment';
 import '@ionic/core';
-import '@stencil/router';
+import { createRouter, Route, href } from 'stencil-router-v2';
+const Router = createRouter();
+
 import { fromEvent } from 'rxjs';
 import { menuController } from '@ionic/core';
 import FootballistaIcon from '../../assets/icons/footballista.svg';
@@ -82,9 +84,9 @@ export class FtbShowcasePage {
       <ion-app class="desktop">
         <div class="menu">
           <div class="header">
-            <stencil-route-link url="/" class="main-link">
+            <a {...href('/')} class="main-link">
               Ftb-Components
-            </stencil-route-link>
+            </a>
             <ftb-searchable-content
               items={this.components}
               filterFn={async (items, query) => {
@@ -109,7 +111,8 @@ export class FtbShowcasePage {
                 categories.map(cat => (
                   <div class="category">
                     <h6>{cat.title}</h6>
-                    {...cat.items.map(i => <stencil-route-link url={'/' + i}>{i}</stencil-route-link>)}
+                    {/*{...cat.items.map(i => <stencil-route-link url={'/' + i}>{i}</stencil-route-link>)}*/}
+                    {...cat.items.map(i => <a {...href('/' + i)}>{i}</a>)}
                   </div>
                 ))
               }
@@ -203,14 +206,29 @@ export class FtbShowcasePage {
         {/*      <ion-route url={'/' + c} component={c + '-stories'} />*/}
         {/*    ))}*/}
         {/*</ion-router>*/}
-        <stencil-router>
-          <stencil-route url={'/'} component={'ftb-showcase-main'} exact={true} />
+
+        {/*<stencil-router>*/}
+        {/*  <stencil-route url={'/'} component={'ftb-showcase-main'} exact={true} />*/}
+        {/*  {this.components*/}
+        {/*    .reduce((cmps, category) => [...cmps, ...category.items], [])*/}
+        {/*    .map(c => (*/}
+        {/*      <stencil-route url={'/' + c} component={c + '-stories'} />*/}
+        {/*    ))}*/}
+        {/*</stencil-router>*/}
+        <Router.Switch>
+          <Route path="/" render={() => <ftb-showcase-main />} />
           {this.components
             .reduce((cmps, category) => [...cmps, ...category.items], [])
             .map(c => (
-              <stencil-route url={'/' + c} component={c + '-stories'} />
+              <Route
+                path={'/' + c}
+                render={() => {
+                  const Cmp = c + '-stories';
+                  return <Cmp />;
+                }}
+              />
             ))}
-        </stencil-router>
+        </Router.Switch>
       </ion-app>
     );
   }

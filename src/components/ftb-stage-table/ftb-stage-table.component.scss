@@ -12,7 +12,7 @@ ftb-stage-table {
     align-items: center;
     overflow: hidden;
 
-    stencil-route-link {
+    a {
       width: 100%;
       height: 100%;
       display: flex;
@@ -23,7 +23,7 @@ ftb-stage-table {
   .body {
     overflow: hidden;
 
-    stencil-route-link {
+    a {
       display: block;
       .row {
         display: flex;
@@ -40,7 +40,7 @@ ftb-stage-table {
       text-align: center;
     }
 
-    stencil-route-link {
+    a {
       display: block;
     }
 

@@ -14,6 +14,7 @@ import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
 import { StageService } from 'ftb-models/dist/services/stage.service';
+import { href } from 'stencil-router-v2';
 
 @Component({
   tag: 'ftb-stage-table',
@@ -180,9 +181,9 @@ export class FtbStageTable {
         {this.structure.chess &&
           this.stage.table.map(row => (
             <div class="chess-game" style={this.getFieldStyle('chess')}>
-              <stencil-route-link url={routingState.routes.team && createEntityRoute(row.team)}>
+              <a {...href(routingState.routes.team && createEntityRoute(row.team))}>
                 <ftb-team-logo team={row.team} key={row.team._id} />
-              </stencil-route-link>
+              </a>
             </div>
           ))}
         {this.structure.games && (
@@ -244,7 +245,7 @@ export class FtbStageTable {
     return (
       <div class="body">
         {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
-          <stencil-route-link url={routingState.routes.team && createEntityRoute(row.team)}>
+          <a {...href(routingState.routes.team && createEntityRoute(row.team))}>
             <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
@@ -313,7 +314,7 @@ export class FtbStageTable {
                 </div>
               )}
             </div>
-          </stencil-route-link>
+          </a>
         ))}
       </div>
     );
@@ -338,12 +339,12 @@ export class FtbStageTable {
       const teamSide = g.home.team._id == teamIdx ? g.home : g.away;
       const opponentSide = g.home.team._id == teamIdx ? g.away : g.home;
       return (
-        <stencil-route-link
-          url={routingState.routes.game ? createEntityRoute(g) : ''}
+        <a
+          {...href(routingState.routes.game ? createEntityRoute(g) : '')}
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
         >
           {teamSide.score.ft}:{opponentSide.score.ft}
-        </stencil-route-link>
+        </a>
       );
     });
   }

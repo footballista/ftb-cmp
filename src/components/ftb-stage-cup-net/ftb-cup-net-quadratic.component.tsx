@@ -16,6 +16,7 @@ import last from 'lodash-es/last';
 import max from 'lodash-es/max';
 import rangeRight from 'lodash-es/rangeRight';
 import range from 'lodash-es/range';
+import { href } from 'stencil-router-v2';
 
 /** if at least one round has more games than this value
  * split net to two sides */
@@ -305,9 +306,9 @@ export class FtbStageCupNetQuadratic {
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
           <ftb-team-logo team={s.games[0][side].team} />
-          <stencil-route-link url={routingState.routes.team && createEntityRoute(s.games[0][side].team)}>
+          <a {...href(routingState.routes.team && createEntityRoute(s.games[0][side].team))}>
             <div class={'team-name'}>{s.games[0][side].team.name}</div>
-          </stencil-route-link>
+          </a>
           <div class="score-block">
             {s.games.map(game => (
               <div class="score">

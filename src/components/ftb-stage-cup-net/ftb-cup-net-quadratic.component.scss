@@ -35,13 +35,17 @@ ftb-cup-net-quadratic {
             position: relative;
           }
 
-          stencil-route-link {
+          a {
             color: inherit;
             display: flex;
             align-items: center;
             height: 100%;
             cursor: pointer;
             flex: 1;
+            .team-name {
+              display: flex;
+              align-items: center;
+            }
           }
           .score-block {
             display: flex;
