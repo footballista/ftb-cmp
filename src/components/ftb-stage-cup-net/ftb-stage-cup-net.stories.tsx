@@ -11,12 +11,12 @@ export class FtbStageCupNetStories {
     return (
       <Host>
         <h1>Cup net</h1>
-        <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} />" />
-        <ftb-cup-net-quadratic stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')} />
+        <ftb-code-snippet code="<ftb-cup-net stage={stage} />" />
+        <ftb-cup-net stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')} />
 
         <h2>Split sides</h2>
         <p>Big structures will be divided horizontally</p>
-        <ftb-cup-net-quadratic
+        <ftb-cup-net
           stage={createStage(
             'final',
             '1/2',
@@ -38,15 +38,15 @@ export class FtbStageCupNetStories {
 
         <h2>Highlight team</h2>
         <p>You can programmatically set team to highlight on the net</p>
-        <ftb-code-snippet code="<ftb-stage-cup-net stage={stage} highlightTeam={new Team({_id: 123, name: 'Arsenal'})}/>" />
-        <ftb-cup-net-quadratic
+        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeam={new Team({_id: 123, name: 'Arsenal'})}/>" />
+        <ftb-cup-net
           stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
           highlightTeam={new Team(teamMocks.Arsenal)}
         />
 
         <h2>Autofill rounds</h2>
         <p>Rounds that aren't set yet, will be autofilled with empty elements</p>
-        <ftb-cup-net-quadratic stage={createStage('1/4', '1/4', '1/4', '1/4')} />
+        <ftb-cup-net stage={createStage('1/4', '1/4', '1/4', '1/4')} />
 
         <h2>Ternary structure</h2>
         <p>Alternative net structure with rounds like "1/3", "1/6", "1/12" will have different appearance:</p>

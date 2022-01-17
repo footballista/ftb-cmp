@@ -105,6 +105,18 @@ ftb-showcase-page {
       }
     }
 
+    .main-link {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 18px;
+      color: #2e2e2e;
+      font-family: 'Twinkle Star', cursive;
+      font-weight: 700;
+    }
+
     .main-logo {
       height: 30px;
       width: 30px;
@@ -112,10 +124,20 @@ ftb-showcase-page {
       opacity: 0.6;
     }
 
+    .content {
+      padding: 0 10px;
+      overflow-y: auto;
+      min-height: calc(100% - 56px);
+    }
+
     ion-nav > .ion-page {
       display: block;
       padding: 0 10px;
       overflow: auto;
+    }
+
+    .ion-page {
+      justify-content: flex-start;
     }
 
     .menu {
@@ -174,6 +196,42 @@ ftb-showcase-page {
       .header {
         height: 100%;
       }
+      .category {
+        direction: ltr;
+        &:first-of-type {
+          h6 {
+            margin-top: 0 !important;
+          }
+        }
+        &:last-of-type {
+          margin-bottom: 30px;
+        }
+        h6 {
+          margin: 0;
+          font-size: 13px;
+          height: 25px;
+          margin-top: 20px;
+        }
+        a {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          height: 35px;
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          color: rgba(0, 0, 0, 0.7);
+          cursor: pointer;
+          outline: none;
+          user-select: none;
+          text-decoration: none;
+          position: relative;
+          background: transparent;
+          white-space: nowrap;
+          padding: 0 5px;
+          &:hover {
+            color: cornflowerblue;
+          }
+        }
+      }
     }
 
     .content-fog {
@@ -187,13 +245,18 @@ ftb-showcase-page {
       border-radius: 10px 10px 0 0;
     }
 
-    stencil-route {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: white;
-      width: calc(100% - 60px);
-      padding: 0 30px;
+    .main-link {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 18px;
+      color: #2e2e2e;
+      font-family: 'Twinkle Star', cursive;
+      font-weight: 700;
+      position: relative;
+      background: transparent;
     }
 
     .content {
@@ -206,7 +269,7 @@ ftb-showcase-page {
       padding-bottom: 50px;
       width: calc(100% - 230px);
       position: relative;
-
+      padding-left: 20px;
       ion-app {
         padding-left: 20px;
       }

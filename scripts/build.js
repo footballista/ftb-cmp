@@ -11,4 +11,4 @@ if (process.env.APIHOST) {
   writeFileSync(__dirname + '/../src/environments/environment.ts', env);
 }
 
-execSync('stencil build', { stdio: [0, 1, 2] });
+execSync('stencil build --prerender', { stdio: [0, 1, 2] });

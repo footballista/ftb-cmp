@@ -7,7 +7,6 @@ const Router = createRouter();
 
 import { fromEvent } from 'rxjs';
 import { menuController } from '@ionic/core';
-import FootballistaIcon from '../../assets/icons/footballista.svg';
 
 @Component({
   tag: 'ftb-showcase-page',
@@ -135,9 +134,9 @@ export class FtbShowcasePage {
         <ion-menu side="start" content-id="main-content" class="menu" menuId="main">
           <ion-content>
             <div class="header">
-              <stencil-route-link url="/" class="main-link" onClick={() => menuController.close('main')}>
+              <a {...href('/')} class="main-link" onClick={() => menuController.close('main')}>
                 Ftb-Components
-              </stencil-route-link>
+              </a>
             </div>
             <ftb-searchable-content
               items={this.components}
@@ -163,11 +162,7 @@ export class FtbShowcasePage {
                 categories.map(cat => (
                   <div class="category">
                     <h6>{cat.title}</h6>
-                    {...cat.items.map(i => (
-                      <stencil-route-link url={'/' + i} onClick={() => menuController.close('main')}>
-                        {i}
-                      </stencil-route-link>
-                    ))}
+                    {...cat.items.map(i => <a {...href('/' + i)}>{i}</a>)}
                   </div>
                 ))
               }
@@ -177,19 +172,18 @@ export class FtbShowcasePage {
         </ion-menu>
 
         <div class="ion-page" id="main-content">
-          <ion-header color="primary">
+          <ion-header>
             <ion-toolbar>
               <ion-buttons slot="start">
-                <ion-menu-button />
+                <ion-button>
+                  <ion-menu-button />
+                </ion-button>
               </ion-buttons>
               <ion-title>Ftb-Components</ion-title>
-              <ftb-icon svg={FootballistaIcon} class="ftb-icon" slot="end" />
             </ion-toolbar>
           </ion-header>
-          <ion-content class="ion-padding">
-            {this.renderRoutes()}
-            <ion-nav animated={false} />
-          </ion-content>
+          {/*<ion-content class="ion-padding">{this.renderRoutes()}</ion-content>*/}
+          <div class="content">{this.renderRoutes()}</div>
         </div>
       </ion-app>
     );
@@ -197,39 +191,20 @@ export class FtbShowcasePage {
 
   renderRoutes() {
     return (
-      <ion-app>
-        {/*<ion-router useHash={false}>*/}
-        {/*  <ion-route url={'/'} component={'ftb-showcase-main'} />*/}
-        {/*  {this.components*/}
-        {/*    .reduce((cmps, category) => [...cmps, ...category.items], [])*/}
-        {/*    .map(c => (*/}
-        {/*      <ion-route url={'/' + c} component={c + '-stories'} />*/}
-        {/*    ))}*/}
-        {/*</ion-router>*/}
-
-        {/*<stencil-router>*/}
-        {/*  <stencil-route url={'/'} component={'ftb-showcase-main'} exact={true} />*/}
-        {/*  {this.components*/}
-        {/*    .reduce((cmps, category) => [...cmps, ...category.items], [])*/}
-        {/*    .map(c => (*/}
-        {/*      <stencil-route url={'/' + c} component={c + '-stories'} />*/}
-        {/*    ))}*/}
-        {/*</stencil-router>*/}
-        <Router.Switch>
-          <Route path="/" render={() => <ftb-showcase-main />} />
-          {this.components
-            .reduce((cmps, category) => [...cmps, ...category.items], [])
-            .map(c => (
-              <Route
-                path={'/' + c}
-                render={() => {
-                  const Cmp = c + '-stories';
-                  return <Cmp />;
-                }}
-              />
-            ))}
-        </Router.Switch>
-      </ion-app>
+      <Router.Switch>
+        <Route path="/" render={() => <ftb-showcase-main />} />
+        {this.components
+          .reduce((cmps, category) => [...cmps, ...category.items], [])
+          .map(c => (
+            <Route
+              path={'/' + c}
+              render={() => {
+                const Cmp = c + '-stories';
+                return <Cmp />;
+              }}
+            />
+          ))}
+      </Router.Switch>
     );
   }
 }

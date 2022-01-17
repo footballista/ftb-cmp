@@ -13,6 +13,10 @@ export namespace Components {
     code: string;
     language: string;
   }
+  interface FtbCupNet {
+    highlightTeam?: Team;
+    stage: Stage;
+  }
   interface FtbCupNetQuadratic {
     /**
      * team to highlight on the net with color
@@ -195,6 +199,11 @@ declare global {
   var HTMLFtbCodeSnippetElement: {
     prototype: HTMLFtbCodeSnippetElement;
     new (): HTMLFtbCodeSnippetElement;
+  };
+  interface HTMLFtbCupNetElement extends Components.FtbCupNet, HTMLStencilElement {}
+  var HTMLFtbCupNetElement: {
+    prototype: HTMLFtbCupNetElement;
+    new (): HTMLFtbCupNetElement;
   };
   interface HTMLFtbCupNetQuadraticElement extends Components.FtbCupNetQuadratic, HTMLStencilElement {}
   var HTMLFtbCupNetQuadraticElement: {
@@ -458,6 +467,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'ftb-code-snippet': HTMLFtbCodeSnippetElement;
+    'ftb-cup-net': HTMLFtbCupNetElement;
     'ftb-cup-net-quadratic': HTMLFtbCupNetQuadraticElement;
     'ftb-flag': HTMLFtbFlagElement;
     'ftb-flag-stories': HTMLFtbFlagStoriesElement;
@@ -516,6 +526,10 @@ declare namespace LocalJSX {
   interface FtbCodeSnippet {
     code?: string;
     language?: string;
+  }
+  interface FtbCupNet {
+    highlightTeam?: Team;
+    stage?: Stage;
   }
   interface FtbCupNetQuadratic {
     /**
@@ -698,6 +712,7 @@ declare namespace LocalJSX {
   interface FtbVirtualScrollStories {}
   interface IntrinsicElements {
     'ftb-code-snippet': FtbCodeSnippet;
+    'ftb-cup-net': FtbCupNet;
     'ftb-cup-net-quadratic': FtbCupNetQuadratic;
     'ftb-flag': FtbFlag;
     'ftb-flag-stories': FtbFlagStories;
@@ -757,6 +772,7 @@ declare module '@stencil/core' {
   export namespace JSX {
     interface IntrinsicElements {
       'ftb-code-snippet': LocalJSX.FtbCodeSnippet & JSXBase.HTMLAttributes<HTMLFtbCodeSnippetElement>;
+      'ftb-cup-net': LocalJSX.FtbCupNet & JSXBase.HTMLAttributes<HTMLFtbCupNetElement>;
       'ftb-cup-net-quadratic': LocalJSX.FtbCupNetQuadratic & JSXBase.HTMLAttributes<HTMLFtbCupNetQuadraticElement>;
       'ftb-flag': LocalJSX.FtbFlag & JSXBase.HTMLAttributes<HTMLFtbFlagElement>;
       'ftb-flag-stories': LocalJSX.FtbFlagStories & JSXBase.HTMLAttributes<HTMLFtbFlagStoriesElement>;
