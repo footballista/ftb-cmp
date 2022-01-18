@@ -270,6 +270,7 @@ ftb-showcase-page {
       width: calc(100% - 230px);
       position: relative;
       padding-left: 20px;
+      overflow-y: auto;
       ion-app {
         padding-left: 20px;
       }

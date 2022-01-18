@@ -30,6 +30,12 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.1.5</b>
+          <span class="date">18 Jan 2021</span>
+          <ul>
+            <li>Fixed team highlighting in stage table when limit is more than table length</li>
+          </ul>
+
           <b>3.1.0</b>
           <span class="date">14 Jan 2021</span>
           <ul>

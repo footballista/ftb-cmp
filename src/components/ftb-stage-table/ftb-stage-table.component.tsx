@@ -229,7 +229,7 @@ export class FtbStageTable {
     let sliceStart = 0;
     let sliceEnd = this.stage.table.length;
 
-    if (this.rowsLimit) {
+    if (this.rowsLimit && this.rowsLimit.limit < this.stage.table.length) {
       if (!this.rowsLimit.baseTeam || !this.stage.table.some(row => row.team._id == this.rowsLimit.baseTeam._id)) {
         sliceStart = 0;
         sliceEnd = this.rowsLimit.limit;
