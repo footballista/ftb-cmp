@@ -10,12 +10,55 @@ export class FtbStageCupNetStories {
   render() {
     return (
       <Host>
+        <h2>Cup net explorer</h2>
+        <p>
+          Big nets with many games aren't best fit for site layouts. It's better to wrap them in a component where they
+          can be dragged and zoomed.
+          <pre class="inline-code">
+            <code> Ftb-cup-net-explorer</code>
+          </pre>{' '}
+          serves this purpose.
+          <ftb-code-snippet
+            code="<ftb-cup-net-explorer>
+  <ftb-cup-net stage={stage}/>
+</ftb-cup-net-explorer>"
+          />
+        </p>
+        <ftb-cup-net-explorer>
+          <ftb-cup-net
+            stage={createStage(
+              'final',
+              '1/2',
+              '1/2',
+              '1/4',
+              '1/4',
+              '1/4',
+              '1/4',
+              '1/8',
+              '1/8',
+              '1/8',
+              '1/8',
+              '1/8',
+              '1/8',
+              '1/8',
+              '1/8',
+            )}
+            splitSidesThreshold={16}
+          />
+        </ftb-cup-net-explorer>
+
         <h1>Cup net</h1>
         <ftb-code-snippet code="<ftb-cup-net stage={stage} />" />
         <ftb-cup-net stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')} />
 
         <h2>Split sides</h2>
-        <p>Big structures will be divided horizontally</p>
+        <p>
+          Big structures will be divided horizontally. You can also pass{' '}
+          <pre class="inline-code">
+            <code>splitSidesThreshold</code> to override division rule
+          </pre>
+        </p>
+        <ftb-code-snippet code="<ftb-cup-net stage={stage}  splitSidesThreshold={16} />" />
         <ftb-cup-net
           stage={createStage(
             'final',

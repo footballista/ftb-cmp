@@ -170,4 +170,51 @@ ftb-stage-cup-net-stories {
       }
     }
   }
+
+  .inline-code {
+    display: inline;
+  }
+
+  ftb-cup-net-explorer {
+    .compact-wrapper {
+      width: calc(100% - 30px);
+      max-width: 600px;
+      height: 300px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.05);
+      box-shadow: inset 0px 0px 15px 15px rgba(0, 0, 0, 0.1);
+      .zoom-button {
+        height: 50px;
+        width: 50px;
+        border-radius: 10px 0 10px 0;
+        background-color: #ddd;
+        outline: none;
+        border: 2px solid #ccc;
+        bottom: -2px;
+        right: -2px;
+        cursor: pointer;
+        box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease-in-out;
+        &:hover {
+          box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
+          ftb-icon {
+            fill: #645800;
+          }
+        }
+        ftb-icon {
+          height: 30px;
+          width: 30px;
+          fill: #555;
+          transition: fill 0.3s ease-in-out;
+        }
+      }
+    }
+
+    ftb-cup-net {
+      display: block;
+      margin-left: 20px;
+      pointer-events: auto;
+    }
+  }
 }

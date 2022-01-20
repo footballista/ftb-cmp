@@ -42,6 +42,7 @@ export class FtbStageCupNetQuadratic {
   @Prop() stage!: Stage;
   /** team to highlight on the net with color */
   @Prop() highlightTeam?: Team;
+  @Prop() splitSidesThreshold?: number;
 
   @Element() el;
 
@@ -79,6 +80,7 @@ export class FtbStageCupNetQuadratic {
   }
 
   componentDidLoad() {
+    console.log(this.splitSidesThreshold);
     if (!this.stage) return;
     this.drawNet();
     this.highlight(this.highlightTeam);
@@ -145,7 +147,9 @@ export class FtbStageCupNetQuadratic {
 
     const splitSides =
       Boolean(slotsMap[CupRounds.final] && slotsMap[CupRounds.final][NET_POS_3RD]) ||
-      Object.values(slotsMap).some(r => Object.keys(r).length > SPLIT_SIDES_GAMES_THRESHOLD);
+      Object.values(slotsMap).some(
+        r => Object.keys(r).length > (this.splitSidesThreshold || SPLIT_SIDES_GAMES_THRESHOLD),
+      );
 
     const columnsLeft = [];
     const columnsRight = [];
