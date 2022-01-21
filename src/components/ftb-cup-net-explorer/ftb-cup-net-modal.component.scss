@@ -1,0 +1,18 @@
+ftb-cup-net-modal {
+  position: absolute;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out, height 0.3s ease-in-out, top 0.3s ease-in-out;
+  .zoom-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+ftb-cup-net-modal.open {
+  height: 90% !important;
+  width: 90% !important;
+  top: 5% !important;
+  left: 5% !important;
+}

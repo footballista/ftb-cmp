@@ -7,7 +7,7 @@ import { Stage, Team } from 'ftb-models';
   shadow: false,
 })
 export class FtbStageCupNet {
-  @Prop() stage: Stage;
+  @Prop() stage!: Stage;
   @Prop() highlightTeam?: Team;
   @Prop() splitSidesThreshold?: number;
 

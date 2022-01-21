@@ -80,7 +80,6 @@ export class FtbStageCupNetQuadratic {
   }
 
   componentDidLoad() {
-    console.log(this.splitSidesThreshold);
     if (!this.stage) return;
     this.drawNet();
     this.highlight(this.highlightTeam);
@@ -363,7 +362,6 @@ export class FtbStageCupNetQuadratic {
       for (let i = 0; i < this.columns.filter(s => !s.isReverse).length - 1; i++) {
         this.columns[i].slots.forEach(s => {
           const nextSlot = this.columns[i + 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
-
           if (nextSlot) {
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.classList.add('svg-line');

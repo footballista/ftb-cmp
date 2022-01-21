@@ -30,7 +30,7 @@ export class FtbShowcasePage {
         'ftb-partner-photo',
       ],
     },
-    { title: 'Stage', items: ['ftb-stage-table', 'ftb-stage-cup-net'] },
+    { title: 'Stage', items: ['ftb-stage-table', 'ftb-stage-cup-net', 'ftb-cup-net-explorer'] },
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
     {
       title: 'Content',

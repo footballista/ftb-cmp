@@ -35,7 +35,7 @@ export class FtbShowcasePage {
           <span class="date">19 Jan 2021</span>
           <ul>
             <li>
-              Created <a {...href('/ftb-cup-net')}>cup net explorer</a> component
+              Created <a {...href('/ftb-cup-net-explorer')}>cup net explorer</a> component
             </li>
             <li>Fixed team highlighting in stage table when limit is more than table length</li>
           </ul>
@@ -44,8 +44,7 @@ export class FtbShowcasePage {
           <span class="date">14 Jan 2021</span>
           <ul>
             <li>
-              Created <stencil-route-link {...href('/ftb-virtual-scroll')}>virtual scroll</stencil-route-link> component
-              for rendering long lists
+              Created <a {...href('/ftb-virtual-scroll')}>virtual scroll</a> component for rendering long lists
             </li>
           </ul>
           <b>3.0.1</b>

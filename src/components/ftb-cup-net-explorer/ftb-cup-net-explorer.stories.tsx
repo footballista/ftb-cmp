@@ -2,27 +2,29 @@ import { Component, h, Host } from '@stencil/core';
 import { CupRounds, Game, GameState, Stage, StageFormat, Team, teamMocks } from 'ftb-models';
 
 @Component({
-  tag: 'ftb-stage-cup-net-stories',
-  styleUrl: 'ftb-stage-cup-net.stories.scss',
+  tag: 'ftb-cup-net-explorer-stories',
+  styleUrl: 'ftb-cup-net-explorer.stories.scss',
   shadow: false,
 })
 export class FtbStageCupNetStories {
   render() {
     return (
       <Host>
-        <h1>Cup net</h1>
-        <ftb-code-snippet code="<ftb-cup-net stage={stage} />" />
-        <ftb-cup-net stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')} />
-
-        <h2>Split sides</h2>
+        <h1>Cup net explorer</h1>
         <p>
-          Big structures will be divided horizontally. You can also pass{' '}
+          Big nets with many games aren't best fit for site layouts. It's better to wrap them in a component where they
+          can be dragged and zoomed.
           <pre class="inline-code">
-            <code>splitSidesThreshold</code> to override division rule
-          </pre>
+            <code> Ftb-cup-net-explorer</code>
+          </pre>{' '}
+          serves this purpose.
+          <ftb-code-snippet
+            code="<ftb-cup-net-explorer>
+  <ftb-cup-net stage={stage}/>
+</ftb-cup-net-explorer>"
+          />
         </p>
-        <ftb-code-snippet code="<ftb-cup-net stage={stage}  splitSidesThreshold={16} />" />
-        <ftb-cup-net
+        <ftb-cup-net-explorer
           stage={createStage(
             'final',
             '1/2',
@@ -40,23 +42,37 @@ export class FtbStageCupNetStories {
             '1/8',
             '1/8',
           )}
+          splitSidesThreshold={16}
         />
 
-        <h2>Highlight team</h2>
-        <p>You can programmatically set team to highlight on the net</p>
-        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeam={new Team({_id: 123, name: 'Arsenal'})}/>" />
-        <ftb-cup-net
-          stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
-          highlightTeam={new Team(teamMocks.Arsenal)}
+        <h2>Team highlighting</h2>
+        <p>If stage has highlighted team, component will search for highlighted nodes and shift nearest to viewport</p>
+        <ftb-cup-net-explorer
+          stage={createStage(
+            'final',
+            '1/2',
+            '1/2',
+            '1/4',
+            '1/4',
+            '1/4',
+            '1/4',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+            '1/8',
+          )}
+          splitSidesThreshold={16}
+          highlightTeam={new Team(teamMocks.Barcelona)}
         />
-
-        <h2>Autofill rounds</h2>
-        <p>Rounds that aren't set yet, will be autofilled with empty elements</p>
-        <ftb-cup-net stage={createStage('1/4', '1/4', '1/4', '1/4')} />
-
-        <h2>Ternary structure</h2>
-        <p>Alternative net structure with rounds like "1/3", "1/6", "1/12" will have different appearance:</p>
-        <ftb-code-snippet code="UNDER CONSTRUCTION" />
+        <ftb-code-snippet
+          code="<ftb-cup-net-explorer>
+  <ftb-cup-net stage={stage} hightlightTeam={team}/>
+</ftb-cup-net-explorer>"
+        />
       </Host>
     );
   }
