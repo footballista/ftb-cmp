@@ -1,0 +1,17 @@
+ftb-cup-net-modal {
+  position: absolute;
+  overflow: hidden;
+  .zoom-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+ftb-cup-net-modal.open {
+  height: 90% !important;
+  width: 90% !important;
+  top: 5% !important;
+  left: 5% !important;
+}

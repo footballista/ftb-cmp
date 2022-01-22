@@ -1,0 +1,13 @@
+ftb-cup-net-explorer-img-layer {
+  display: block;
+  overflow: hidden;
+  cursor: grab;
+  ftb-cup-net {
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    .game {
+      pointer-events: auto;
+    }
+  }
+}

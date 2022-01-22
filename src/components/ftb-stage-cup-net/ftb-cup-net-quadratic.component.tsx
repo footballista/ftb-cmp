@@ -42,6 +42,7 @@ export class FtbStageCupNetQuadratic {
   @Prop() stage!: Stage;
   /** team to highlight on the net with color */
   @Prop() highlightTeam?: Team;
+  @Prop() splitSidesThreshold?: number;
 
   @Element() el;
 
@@ -145,7 +146,9 @@ export class FtbStageCupNetQuadratic {
 
     const splitSides =
       Boolean(slotsMap[CupRounds.final] && slotsMap[CupRounds.final][NET_POS_3RD]) ||
-      Object.values(slotsMap).some(r => Object.keys(r).length > SPLIT_SIDES_GAMES_THRESHOLD);
+      Object.values(slotsMap).some(
+        r => Object.keys(r).length > (this.splitSidesThreshold || SPLIT_SIDES_GAMES_THRESHOLD),
+      );
 
     const columnsLeft = [];
     const columnsRight = [];
@@ -306,7 +309,7 @@ export class FtbStageCupNetQuadratic {
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
           <ftb-team-logo team={s.games[0][side].team} />
-          <a {...href(routingState.routes.team && createEntityRoute(s.games[0][side].team))}>
+          <a {...(routingState.routes.team && href(createEntityRoute(s.games[0][side].team)))}>
             <div class={'team-name'}>{s.games[0][side].team.name}</div>
           </a>
           <div class="score-block">
@@ -359,7 +362,6 @@ export class FtbStageCupNetQuadratic {
       for (let i = 0; i < this.columns.filter(s => !s.isReverse).length - 1; i++) {
         this.columns[i].slots.forEach(s => {
           const nextSlot = this.columns[i + 1].slots.find(sl => sl.netPosition == Math.floor(s.netPosition / 2));
-
           if (nextSlot) {
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.classList.add('svg-line');

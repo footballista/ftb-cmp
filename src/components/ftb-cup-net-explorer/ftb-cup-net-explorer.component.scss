@@ -1,0 +1,11 @@
+ftb-cup-net-explorer {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  .zoom-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
