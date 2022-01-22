@@ -22,14 +22,18 @@ export class FtbCupNetExplorerImgLayer {
   lastMoveY: number;
 
   eventHandlers = [
-    { eventName: 'wheel', handler: this.onWheel },
-    { eventName: 'mousedown', handler: this.onMouseDown },
-    { eventName: 'mousemove', handler: this.onMouseMove },
+    { eventName: 'wheel', handler: this.onWheel, target: () => this.imgLayerEl },
+    { eventName: 'mousedown', handler: this.onMouseDown, target: () => this.imgLayerEl },
+    { eventName: 'mousemove', handler: this.onMouseMove, target: () => this.imgLayerEl },
+    { eventName: 'mouseup', handler: this.onMouseMove, target: () => window },
   ];
 
   constructor() {
     this.eventHandlers.forEach(eh => (eh.handler = eh.handler.bind(this)));
-    this.mouseUp = this.mouseUp.bind(this);
+  }
+
+  applyTransformations() {
+    this.imgLayerEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
   }
 
   componentDidRender() {
@@ -58,7 +62,6 @@ export class FtbCupNetExplorerImgLayer {
             left: containerLeft,
             width: containerWidth,
           } = this.containerEl.parentElement.getBoundingClientRect();
-          console.log(containerTop, containerHeight);
           const elementsTops = e.map(el => el.getBoundingClientRect().top);
           const hasElementsInContainerViewportY = elementsTops.some(
             t => t > containerTop && t < containerTop + containerHeight,
@@ -74,22 +77,20 @@ export class FtbCupNetExplorerImgLayer {
           if (!hasElementsInContainerViewportX) {
             this.translateX -= elementsLefts[0] - containerLeft - SAFETY_PADDING;
           }
-          this.imgLayerEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+          this.applyTransformations();
         }
       });
     }
   }
 
   disconnectedCallback() {
-    this.eventHandlers.forEach(eh => this.containerEl.removeEventListener(eh.eventName, eh.handler));
-    window.removeEventListener('mouseup', this.mouseUp);
+    this.eventHandlers.forEach(eh => eh.target().removeEventListener(eh.eventName, eh.handler));
   }
 
   initLayerEl(el: HTMLElement) {
     if (!this.imgLayerEl) {
       this.imgLayerEl = el;
-      this.eventHandlers.forEach(eh => this.containerEl.addEventListener(eh.eventName, eh.handler));
-      window.addEventListener('mouseup', this.mouseUp);
+      this.eventHandlers.forEach(eh => eh.target().addEventListener(eh.eventName, eh.handler));
     }
   }
 
@@ -101,9 +102,11 @@ export class FtbCupNetExplorerImgLayer {
       this.lastMoveY = e.clientY;
     }
   }
-  mouseUp() {
+
+  onMouseUp() {
     this.grabbing = false;
   }
+
   onMouseMove(e: MouseEvent) {
     if (!this.grabbing) return;
     const diffX = e.clientX - this.lastMoveX;
@@ -111,7 +114,7 @@ export class FtbCupNetExplorerImgLayer {
     this.translateX += diffX;
     this.translateY += diffY;
     this.imgLayerEl.style.transition = 'unset';
-    this.imgLayerEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    this.applyTransformations();
     this.lastMoveX = e.clientX;
     this.lastMoveY = e.clientY;
   }
@@ -125,10 +128,8 @@ export class FtbCupNetExplorerImgLayer {
     const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, this.scale + scaleIncrement));
     if (newScale == this.scale) return;
 
-    /**
-     * First we find diff between mouse position and center of transforming image.
-     * Then, based on this value and scale change, we calculate layer shift so we keep initial point below cursor
-     */
+    /* First we find diff between mouse position and center of transforming image */
+    /* Then, based on this value and scale change, we calculate layer shift so we keep initial point below cursor */
     const { left, top, height, width } = this.imgLayerEl.getBoundingClientRect();
     const middleX = left + width / 2;
     const middleY = top + height / 2;
@@ -140,7 +141,7 @@ export class FtbCupNetExplorerImgLayer {
     this.translateY += shiftY;
     this.scale = newScale;
     this.imgLayerEl.style.transition = 'transform .1s linear';
-    this.imgLayerEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    this.applyTransformations();
   }
 
   render() {

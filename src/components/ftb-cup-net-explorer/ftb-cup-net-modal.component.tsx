@@ -15,9 +15,9 @@ export class FtbCupNetModal {
   @Element() el: HTMLElement;
 
   @Method() async open() {
+    this.el.style.transition = 'all 0.3s ease-in-out';
     window.addEventListener('keydown', this.onKeyPress);
     setTimeout(() => this.el.classList.add('open'), 0);
-    return true;
   }
 
   constructor() {

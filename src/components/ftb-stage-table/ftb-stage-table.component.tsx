@@ -181,7 +181,7 @@ export class FtbStageTable {
         {this.structure.chess &&
           this.stage.table.map(row => (
             <div class="chess-game" style={this.getFieldStyle('chess')}>
-              <a {...href(routingState.routes.team && createEntityRoute(row.team))}>
+              <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
                 <ftb-team-logo team={row.team} key={row.team._id} />
               </a>
             </div>
@@ -245,7 +245,7 @@ export class FtbStageTable {
     return (
       <div class="body">
         {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
-          <a {...href(routingState.routes.team && createEntityRoute(row.team))}>
+          <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
             <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
@@ -340,7 +340,7 @@ export class FtbStageTable {
       const opponentSide = g.home.team._id == teamIdx ? g.away : g.home;
       return (
         <a
-          {...href(routingState.routes.game ? createEntityRoute(g) : '')}
+          {...(routingState.routes.game && href(createEntityRoute(g)))}
           class={{ game: true, w: teamSide.isWinner, l: teamSide.isLoser, d: !teamSide.isWinner && !teamSide.isLoser }}
         >
           {teamSide.score.ft}:{opponentSide.score.ft}

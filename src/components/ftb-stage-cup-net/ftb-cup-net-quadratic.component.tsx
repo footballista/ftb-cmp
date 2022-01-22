@@ -309,7 +309,7 @@ export class FtbStageCupNetQuadratic {
           onMouseOut={() => this.highlight(this.highlightTeam)}
         >
           <ftb-team-logo team={s.games[0][side].team} />
-          <a {...href(routingState.routes.team && createEntityRoute(s.games[0][side].team))}>
+          <a {...(routingState.routes.team && href(createEntityRoute(s.games[0][side].team)))}>
             <div class={'team-name'}>{s.games[0][side].team.name}</div>
           </a>
           <div class="score-block">
