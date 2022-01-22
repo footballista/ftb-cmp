@@ -1,3 +1,12 @@
+## [3.1.6](https://github.com/footballista/ftb-cmp/compare/3.1.5...3.1.6) (2022-01-22)
+
+
+### Features
+
+* cup net explorer ([#4](https://github.com/footballista/ftb-cmp/issues/4)) ([b2ba7a8](https://github.com/footballista/ftb-cmp/commit/b2ba7a818ae1f3771e1cc2f1932412fd99aabd5f))
+
+
+
 ## [3.1.5](https://github.com/footballista/ftb-cmp/compare/3.1.4...3.1.5) (2022-01-18)
 
 
