@@ -22,10 +22,10 @@ export class FtbCupNetExplorerImgLayer {
   lastMoveY: number;
 
   eventHandlers = [
-    { eventName: 'wheel', handler: this.onWheel, target: () => this.imgLayerEl },
-    { eventName: 'mousedown', handler: this.onMouseDown, target: () => this.imgLayerEl },
-    { eventName: 'mousemove', handler: this.onMouseMove, target: () => this.imgLayerEl },
-    { eventName: 'mouseup', handler: this.onMouseMove, target: () => window },
+    { eventName: 'wheel', handler: this.onWheel, target: () => this.containerEl },
+    { eventName: 'mousedown', handler: this.onMouseDown, target: () => this.containerEl },
+    { eventName: 'mousemove', handler: this.onMouseMove, target: () => this.containerEl },
+    { eventName: 'mouseup', handler: this.onMouseUp, target: () => window },
   ];
 
   constructor() {
@@ -90,6 +90,7 @@ export class FtbCupNetExplorerImgLayer {
   initLayerEl(el: HTMLElement) {
     if (!this.imgLayerEl) {
       this.imgLayerEl = el;
+
       this.eventHandlers.forEach(eh => eh.target().addEventListener(eh.eventName, eh.handler));
     }
   }
@@ -122,6 +123,7 @@ export class FtbCupNetExplorerImgLayer {
   onWheel(e: WheelEvent) {
     e.preventDefault();
     e.stopPropagation();
+
     const MIN_SCALE = 0.4;
     const MAX_SCALE = 1;
     const scaleIncrement = e.deltaY * -0.002;
