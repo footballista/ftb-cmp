@@ -398,6 +398,7 @@ export class FtbStageCupNetQuadratic {
       this.netLines = netLines;
       this.netContainer.innerHTML = '';
       this.netContainer.append(...netLines.map(l => l.el));
+      this.highlight(this.highlightTeam);
     });
   }
 

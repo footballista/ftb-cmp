@@ -1,4 +1,4 @@
-import { Component, h, Host } from '@stencil/core';
+import { Component, h, Host, State } from '@stencil/core';
 import { CupRounds, Game, GameState, Stage, StageFormat, Team, teamMocks } from 'ftb-models';
 
 @Component({
@@ -7,6 +7,8 @@ import { CupRounds, Game, GameState, Stage, StageFormat, Team, teamMocks } from 
   shadow: false,
 })
 export class FtbStageCupNetStories {
+  @State() hlT = new Team(teamMocks.Barcelona);
+
   render() {
     return (
       <Host>
@@ -47,6 +49,7 @@ export class FtbStageCupNetStories {
 
         <h2>Team highlighting</h2>
         <p>If stage has highlighted team, component will search for highlighted nodes and shift nearest to viewport</p>
+
         <ftb-cup-net-explorer
           stage={createStage(
             'final',
@@ -66,8 +69,14 @@ export class FtbStageCupNetStories {
             '1/8',
           )}
           splitSidesThreshold={16}
-          highlightTeam={new Team(teamMocks.Barcelona)}
+          highlightTeam={this.hlT}
         />
+        <button
+          class="switch-team-button"
+          onClick={() => (this.hlT = new Team(this.hlT.name == 'Chelsea' ? teamMocks.Barcelona : teamMocks.Chelsea))}
+        >
+          Change team to {this.hlT.name == 'Chelsea' ? 'Barcelona' : 'Chelsea'}
+        </button>
         <ftb-code-snippet
           code="<ftb-cup-net-explorer>
   <ftb-cup-net stage={stage} hightlightTeam={team}/>
