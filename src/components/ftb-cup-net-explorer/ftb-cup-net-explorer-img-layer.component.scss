@@ -1,7 +1,14 @@
 ftb-cup-net-explorer-img-layer {
-  display: block;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   cursor: grab;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
   ftb-cup-net {
     display: block;
     user-select: none;

@@ -1,4 +1,4 @@
-import { Component, Prop, Host, h, Element } from '@stencil/core';
+import { Component, Prop, Host, h, Element, Build } from '@stencil/core';
 import { Stage, Team } from 'ftb-models';
 
 @Component({
@@ -20,6 +20,8 @@ export class FtbCupNetExplorerImgLayer {
   grabbing: boolean;
   lastMoveX: number;
   lastMoveY: number;
+  /** minimal available scale. Will be calculated based on net size so in minimal scale whole net will be visible */
+  minScale = 1;
 
   eventHandlers = [
     { eventName: 'wheel', handler: this.onWheel, target: () => this.containerEl },
@@ -28,8 +30,27 @@ export class FtbCupNetExplorerImgLayer {
     { eventName: 'mouseup', handler: this.onMouseUp, target: () => window },
   ];
 
+  resizeObserver;
+
   constructor() {
     this.eventHandlers.forEach(eh => (eh.handler = eh.handler.bind(this)));
+  }
+
+  componentDidLoad() {
+    const defineMinScale = () => {
+      const { height: imgHeihgt, width: imgWidth } = this.imgLayerEl.getBoundingClientRect();
+      const { height: containerHeight, width: containerWidth } = this.containerEl.getBoundingClientRect();
+      this.minScale = Math.min(containerHeight / imgHeihgt, containerWidth / imgWidth);
+    };
+
+    if (Build.isBrowser) {
+      this.resizeObserver = new ResizeObserver(() => {
+        defineMinScale();
+      });
+      this.resizeObserver.observe(this.containerEl);
+    }
+
+    defineMinScale();
   }
 
   applyTransformations() {
@@ -85,6 +106,7 @@ export class FtbCupNetExplorerImgLayer {
 
   disconnectedCallback() {
     this.eventHandlers.forEach(eh => eh.target().removeEventListener(eh.eventName, eh.handler));
+    this.resizeObserver.disconnect();
   }
 
   initLayerEl(el: HTMLElement) {
@@ -124,10 +146,9 @@ export class FtbCupNetExplorerImgLayer {
     e.preventDefault();
     e.stopPropagation();
 
-    const MIN_SCALE = 0.4;
     const MAX_SCALE = 1;
     const scaleIncrement = e.deltaY * -0.002;
-    const newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, this.scale + scaleIncrement));
+    const newScale = Math.min(MAX_SCALE, Math.max(this.minScale, this.scale + scaleIncrement));
     if (newScale == this.scale) return;
 
     /* First we find diff between mouse position and center of transforming image */
