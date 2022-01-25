@@ -106,7 +106,7 @@ export class FtbCupNetExplorerImgLayer {
 
   disconnectedCallback() {
     this.eventHandlers.forEach(eh => eh.target().removeEventListener(eh.eventName, eh.handler));
-    this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
   }
 
   initLayerEl(el: HTMLElement) {
