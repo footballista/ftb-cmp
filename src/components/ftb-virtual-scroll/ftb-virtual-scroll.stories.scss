@@ -5,7 +5,7 @@ ftb-virtual-scroll-stories {
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 
-    .item {
+    ftb-virtual-scroll-item {
       height: 50px;
       box-sizing: border-box;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);

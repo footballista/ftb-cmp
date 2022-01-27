@@ -29,8 +29,16 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
-          <b>3.2.0</b>
+          <b>3.3.1</b>
           <span class="date">27 Jan 2021</span>
+          <ul>
+            <li>
+              Refactored <a {...href('/ftb-virtual-scroll')}>ftb virtual scroll</a> component to improve performance
+            </li>
+          </ul>
+
+          <b>3.2.0</b>
+          <span class="date">20 Jan 2021</span>
           <ul>
             <li>
               Created <a {...href('/ftb-cup-net-explorer')}>cup net explorer</a> component
