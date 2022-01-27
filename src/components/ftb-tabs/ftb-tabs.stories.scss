@@ -1,0 +1,50 @@
+ftb-tabs-stories {
+  $contentColor: #f0f0f0;
+  $borderColor: #999999;
+  .ftb-tabs {
+    display: block;
+    margin-bottom: 20px;
+    width: fit-content;
+    &__header {
+      padding: 0 20px;
+      &-tab {
+        border: 1px solid $borderColor;
+        border-radius: 5px 5px 0 0;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 6px;
+        padding: 0 30px;
+        cursor: pointer;
+        background: #dddddd;
+        transition: background-color 0.2s ease-in-out;
+        &.selected {
+          border-bottom-color: $contentColor;
+          background: $contentColor;
+          z-index: 10;
+        }
+        &:not(.selected):hover {
+          background-color: #efefef;
+        }
+      }
+    }
+    &__body {
+      border: 1px solid $borderColor;
+      background: $contentColor;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 12px;
+      margin-top: -1px;
+      &-tab {
+        padding: 20px 0;
+      }
+    }
+  }
+
+  .add-tab-button {
+    height: 35px;
+    width: 75px;
+    margin-top: 10px;
+  }
+}

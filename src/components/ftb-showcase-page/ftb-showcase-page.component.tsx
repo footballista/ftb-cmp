@@ -34,7 +34,7 @@ export class FtbShowcasePage {
     { title: 'Game', items: ['ftb-game-tour', 'ftb-game-state', 'ftb-game-photo-gallery'] },
     {
       title: 'Content',
-      items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll', 'ftb-virtual-scroll'],
+      items: ['ftb-searchable-content', 'ftb-pagination', 'ftb-infinite-scroll', 'ftb-virtual-scroll', 'ftb-tabs'],
     },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },
     { title: 'Other', items: ['ftb-icon', 'ftb-spinner'] },

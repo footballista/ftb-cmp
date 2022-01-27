@@ -1,7 +1,5 @@
 import { Component, h, Host } from '@stencil/core';
 import { href } from 'stencil-router-v2';
-// import FootballistaIcon from '../../../assets/icons/footballista.svg';
-// import { envState } from 'ftb-models';
 
 @Component({
   tag: 'ftb-showcase-main',
@@ -15,7 +13,7 @@ export class FtbShowcasePage {
         {/*{envState.platform == 'web' && <ftb-icon svg={FootballistaIcon} class="main-logo" />}*/}
         <h1>Footballista web components</h1>
         <p>
-          This is Storybook-alike documentation site for{' '}
+          This is documentation site for{' '}
           <code>
             <a href="https://github.com/footballista/ftb-cmp" target="_blank">
               ftb-cmp
@@ -32,10 +30,13 @@ export class FtbShowcasePage {
         <h2>Changelog</h2>
         <div class="changelog-row">
           <b>3.2.0</b>
-          <span class="date">19 Jan 2021</span>
+          <span class="date">27 Jan 2021</span>
           <ul>
             <li>
               Created <a {...href('/ftb-cup-net-explorer')}>cup net explorer</a> component
+            </li>
+            <li>
+              Created <a {...href('/ftb-tabs')}>tabs </a> component
             </li>
             <li>Fixed team highlighting in stage table when limit is more than table length</li>
           </ul>
