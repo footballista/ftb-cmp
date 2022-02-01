@@ -10,6 +10,7 @@ import ExpandIcon from '../../assets/icons/expand.svg';
 export class FtbCupNetModal {
   @Prop() stage!: Stage;
   @Prop() highlightTeam?: Team;
+  @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
   @Event() closed: EventEmitter<boolean>;
   @Element() el: HTMLElement;
@@ -84,6 +85,7 @@ export class FtbCupNetModal {
         <ftb-cup-net-explorer-img-layer
           stage={this.stage}
           highlightTeam={this.highlightTeam}
+          highlightTeams={this.highlightTeams}
           splitSidesThreshold={this.splitSidesThreshold}
         />
         <button class="zoom-button" onClick={() => this.close()}>
