@@ -15,7 +15,6 @@ import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
 import { StageService } from 'ftb-models/dist/services/stage.service';
 import { href } from 'stencil-router-v2';
-import uniqBy from 'lodash-es/uniqBy';
 import range from 'lodash-es/range';
 import intersection from 'lodash-es/intersection';
 
@@ -256,22 +255,23 @@ export class FtbStageTable {
           displayingRows.push(...getPositions(team));
         });
       }
-      displayingRows = intersection(displayingRows).sort();
+
+      displayingRows = intersection(displayingRows).sort((a, b) => a - b);
     }
 
     displayingRows = displayingRows.length ? displayingRows.map(idx => this.stage.table[idx]) : this.stage.table;
-
     return (
       <div class="body">
         {displayingRows.map((row: TableRow, idx: number) => (
           <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
             <div
-              class={{
-                'row': true,
-                'base-team':
-                  row.team._id == this.rowsLimit?.baseTeam?._id ||
-                  this.rowsLimit?.baseTeams?.some(team => team._id == row.team._id),
-              }}
+              class={`row
+                ${row.team._id == this.rowsLimit?.baseTeam?._id ? 'base-team' : ''}
+                ${
+                  this.rowsLimit?.baseTeams?.some(team => team._id == row.team._id)
+                    ? `base-team highlight-${this.rowsLimit.baseTeams.indexOf(row.team)}`
+                    : ''
+                }`}
             >
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
