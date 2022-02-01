@@ -1,4 +1,11 @@
 ftb-stage-cup-net-stories {
+  .highlighted-teams {
+    pre {
+      display: inline;
+      margin: 0 5px;
+    }
+  }
+
   ftb-cup-net-quadratic {
     $netAnimation: 0.3s ease-in-out;
     .net-body {
@@ -19,6 +26,7 @@ ftb-stage-cup-net-stories {
         text-transform: uppercase;
       }
       .game {
+        overflow: hidden;
         &:first-of-type {
           margin-top: 0;
         }
@@ -39,6 +47,9 @@ ftb-stage-cup-net-stories {
             background-color: darkgoldenrod;
             box-shadow: 0 0 0 5px white, 0 0 2px 6px rgba(184, 134, 11, 0.1);
             z-index: 1001;
+          }
+          &.highlighted-1 {
+            background: #9ad76c;
           }
         }
 
@@ -88,6 +99,12 @@ ftb-stage-cup-net-stories {
               .team-name {
                 color: darkgoldenrod;
               }
+            }
+          }
+          &.highlighted-1 {
+            .score-block,
+            ftb-team-logo {
+              background: #9ad76c;
             }
           }
 
@@ -166,6 +183,9 @@ ftb-stage-cup-net-stories {
         &.highlighted {
           stroke: gold;
           z-index: 1000;
+        }
+        &.highlighted-1 {
+          stroke: #9ad76c;
         }
       }
     }
