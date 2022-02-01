@@ -15,6 +15,8 @@ import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
 import { StageService } from 'ftb-models/dist/services/stage.service';
 import { href } from 'stencil-router-v2';
+import range from 'lodash-es/range';
+import sortBy from 'lodash-es/sortBy';
 
 @Component({
   tag: 'ftb-stage-table',
@@ -42,7 +44,7 @@ export class FtbStageTable {
 
   /** you can render only a LIMIT of rows. Component defines which rows to render base on "baseTeam" parameter.
    *  If base team not provided or not found, top of the table will be rendered */
-  @Prop() rowsLimit: { baseTeam?: Team; limit: number };
+  @Prop() rowsLimit: { baseTeam?: Team; baseTeams?: Team[]; limit: number };
 
   @State()
   chessLoaded: boolean;
@@ -226,27 +228,51 @@ export class FtbStageTable {
   }
 
   private renderBody() {
-    let sliceStart = 0;
-    let sliceEnd = this.stage.table.length;
+    const displayingPositions = new Set<number>();
 
-    if (this.rowsLimit && this.rowsLimit.limit < this.stage.table.length) {
-      if (!this.rowsLimit.baseTeam || !this.stage.table.some(row => row.team._id == this.rowsLimit.baseTeam._id)) {
+    const getPositions = (baseTeam: Team) => {
+      let sliceStart;
+      let sliceEnd;
+      if (!baseTeam || !this.stage.table.some(row => row.team._id == baseTeam._id)) {
         sliceStart = 0;
         sliceEnd = this.rowsLimit.limit;
         if (this.stage.table.length - 1 === sliceEnd) sliceEnd++; //showing full table if only one row left
       } else {
-        const basePosition = this.stage.table.findIndex(row => row.team._id == this.rowsLimit.baseTeam._id);
+        const basePosition = this.stage.table.findIndex(row => row.team._id == baseTeam._id);
         sliceStart = Math.round(Math.max(0, basePosition - this.rowsLimit.limit / 2));
         sliceEnd = Math.min(sliceStart + this.rowsLimit.limit, this.stage.table.length);
         sliceStart = sliceEnd - this.rowsLimit.limit;
       }
+      return range(sliceStart, sliceEnd);
+    };
+
+    if (this.rowsLimit && this.rowsLimit.limit < this.stage.table.length) {
+      if (this.rowsLimit?.baseTeam) {
+        getPositions(this.rowsLimit.baseTeam).forEach(p => displayingPositions.add(p));
+      }
+      if (this.rowsLimit?.baseTeams?.length) {
+        this.rowsLimit.baseTeams.map(team => {
+          getPositions(team).forEach(p => displayingPositions.add(p));
+        });
+      }
     }
 
+    const displayingRows = displayingPositions.size
+      ? sortBy(Array.from(displayingPositions)).map(idx => this.stage.table[idx])
+      : this.stage.table;
     return (
       <div class="body">
-        {this.stage.table.slice(sliceStart, sliceEnd).map((row: TableRow, idx: number) => (
+        {displayingRows.map((row: TableRow, idx: number) => (
           <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
-            <div class={{ 'row': true, 'base-team': row.team._id == this.rowsLimit?.baseTeam?._id }}>
+            <div
+              class={`row
+                ${row.team._id == this.rowsLimit?.baseTeam?._id ? 'base-team' : ''}
+                ${
+                  this.rowsLimit?.baseTeams?.some(team => team._id == row.team._id)
+                    ? `base-team highlighted-${this.rowsLimit.baseTeams.indexOf(row.team)}`
+                    : ''
+                }`}
+            >
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
                   {row.label == 'chevron-up' && (

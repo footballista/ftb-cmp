@@ -18,6 +18,7 @@ export class FtbStageTableStories {
   }
 
   render() {
+    console.log(this.stage);
     return (
       <Host>
         <h1>Stage table</h1>
@@ -30,14 +31,13 @@ export class FtbStageTableStories {
             this.renderTableSkeleton(12)
           )}
         </div>
-
         <h2>Partial table</h2>
         <p>
           You can programmatically set team to highlight on the table and render only <code>N</code> rows around it's
           position
         </p>
         <ftb-code-snippet
-          code={"<ftb-stage-table stage={stage} rowsLimit={{baseTeam: {_id: 123, name: 'Arsenal'}, limit: 5}} />"}
+          code={"<ftb-stage-table stage={stage} rowsLimit={{baseTeams: [{_id: 123, name: 'Arsenal'}, limit: 5}]} />"}
         />
         <div class="table-container short">
           {this.stage ? (
@@ -50,7 +50,25 @@ export class FtbStageTableStories {
             this.renderTableSkeleton(6)
           )}
         </div>
-
+        <h2>Many teams highlight</h2>
+        <p>
+          You can provide as many teams to highlight as you want. Each highlighted row will have additional unique class
+          if you want to add more styling.
+        </p>
+        <div class="table-container short two-teams">
+          {this.stage ? (
+            <ftb-stage-table
+              stage={this.stage}
+              customWidths={{ position: 40, form: 110 }}
+              rowsLimit={{
+                baseTeams: [this.stage.table[5].team, this.stage.table[2].team, this.stage.table[11].team],
+                limit: 3,
+              }}
+            />
+          ) : (
+            this.renderTableSkeleton(6)
+          )}
+        </div>
         <h2>Adaptive content</h2>
         <p>Displayed content depends on container width. </p>
         <div class="table-container short narrow">
@@ -65,7 +83,6 @@ export class FtbStageTableStories {
             this.renderTableSkeleton(6)
           )}
         </div>
-
         <h2>Chess</h2>
         <p>Big sized table can load and display all stage games</p>
         <div class="chess-table-wrapper">
