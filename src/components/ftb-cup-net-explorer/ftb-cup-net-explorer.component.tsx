@@ -10,6 +10,7 @@ import ExpandIcon from '../../assets/icons/expand.svg';
 export class FtbCupNetExplorer {
   @Prop() stage!: Stage;
   @Prop() highlightTeam?: Team;
+  @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
   @Element() el: HTMLElement;
   modalEl: HTMLFtbCupNetModalElement;
@@ -23,6 +24,7 @@ export class FtbCupNetExplorer {
     Object.assign(this.modalEl, {
       stage: this.stage,
       highlightTeam: this.highlightTeam,
+      highlightTeams: this.highlightTeams,
       splitSidesThreshold: this.splitSidesThreshold,
     });
     this.modalEl.addEventListener('closed', () => {
@@ -50,6 +52,7 @@ export class FtbCupNetExplorer {
         <ftb-cup-net-explorer-img-layer
           stage={this.stage}
           highlightTeam={this.highlightTeam}
+          highlightTeams={this.highlightTeams}
           splitSidesThreshold={this.splitSidesThreshold}
         />
         <button class="zoom-button" onClick={() => this.openFullScreen()}>

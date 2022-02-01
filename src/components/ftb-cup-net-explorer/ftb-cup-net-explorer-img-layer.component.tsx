@@ -9,6 +9,7 @@ import { Stage, Team } from 'ftb-models';
 export class FtbCupNetExplorerImgLayer {
   @Prop() stage!: Stage;
   @Prop() highlightTeam?: Team;
+  @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
 
   @Element() containerEl: HTMLElement;
@@ -58,7 +59,7 @@ export class FtbCupNetExplorerImgLayer {
   }
 
   componentDidRender() {
-    if (this.highlightTeam) {
+    if (this.highlightTeam || this.highlightTeams) {
       const getHightlightedElements = (iteration = 0): Promise<Element[]> =>
         new Promise(resolve => {
           const MAX_ITERATIONS = 10;
@@ -174,6 +175,7 @@ export class FtbCupNetExplorerImgLayer {
           ref={el => this.initLayerEl(el)}
           stage={this.stage}
           highlightTeam={this.highlightTeam}
+          highlightTeams={this.highlightTeams}
           splitSidesThreshold={this.splitSidesThreshold}
         />
       </Host>
