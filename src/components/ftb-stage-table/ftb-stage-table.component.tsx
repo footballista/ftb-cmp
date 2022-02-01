@@ -16,7 +16,7 @@ import EuropaLeague from '../../assets/icons/europa-league.svg';
 import { StageService } from 'ftb-models/dist/services/stage.service';
 import { href } from 'stencil-router-v2';
 import range from 'lodash-es/range';
-import intersection from 'lodash-es/intersection';
+import sortBy from 'lodash-es/sortBy';
 
 @Component({
   tag: 'ftb-stage-table',
@@ -228,7 +228,7 @@ export class FtbStageTable {
   }
 
   private renderBody() {
-    let displayingRows = [];
+    const displayingPositions = new Set<number>();
 
     const getPositions = (baseTeam: Team) => {
       let sliceStart;
@@ -248,18 +248,18 @@ export class FtbStageTable {
 
     if (this.rowsLimit && this.rowsLimit.limit < this.stage.table.length) {
       if (this.rowsLimit?.baseTeam) {
-        displayingRows.push(...getPositions(this.rowsLimit.baseTeam));
+        getPositions(this.rowsLimit.baseTeam).forEach(p => displayingPositions.add(p));
       }
       if (this.rowsLimit?.baseTeams?.length) {
         this.rowsLimit.baseTeams.map(team => {
-          displayingRows.push(...getPositions(team));
+          getPositions(team).forEach(p => displayingPositions.add(p));
         });
       }
-
-      displayingRows = intersection(displayingRows).sort((a, b) => a - b);
     }
 
-    displayingRows = displayingRows.length ? displayingRows.map(idx => this.stage.table[idx]) : this.stage.table;
+    const displayingRows = displayingPositions.size
+      ? sortBy(Array.from(displayingPositions)).map(idx => this.stage.table[idx])
+      : this.stage.table;
     return (
       <div class="body">
         {displayingRows.map((row: TableRow, idx: number) => (
@@ -269,7 +269,7 @@ export class FtbStageTable {
                 ${row.team._id == this.rowsLimit?.baseTeam?._id ? 'base-team' : ''}
                 ${
                   this.rowsLimit?.baseTeams?.some(team => team._id == row.team._id)
-                    ? `base-team highlight-${this.rowsLimit.baseTeams.indexOf(row.team)}`
+                    ? `base-team highlighted-${this.rowsLimit.baseTeams.indexOf(row.team)}`
                     : ''
                 }`}
             >

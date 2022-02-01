@@ -129,6 +129,13 @@ ftb-stage-table-stories {
       &.base-team {
         font-weight: 600;
         background: #fff2af;
+
+        &.highlighted-0 {
+          background: #e3ffb8;
+        }
+        &.highlighted-1 {
+          background: #ffebeb;
+        }
       }
 
       ftb-team-logo {
