@@ -29,7 +29,7 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
-          <b>3.4.0</b>
+          <b>3.3.2</b>
           <span class="date">01 Feb 2022</span>
           <ul>
             <li>
@@ -38,7 +38,7 @@ export class FtbShowcasePage {
             </li>
           </ul>
 
-          <b>3.3.1</b>
+          <b>3.2.1</b>
           <span class="date">27 Jan 2022</span>
           <ul>
             <li>
@@ -46,7 +46,7 @@ export class FtbShowcasePage {
             </li>
           </ul>
 
-          <b>3.2.0</b>
+          <b>3.1.0</b>
           <span class="date">20 Jan 2022</span>
           <ul>
             <li>
@@ -55,16 +55,12 @@ export class FtbShowcasePage {
             <li>
               Created <a {...href('/ftb-tabs')}>tabs </a> component
             </li>
-            <li>Fixed team highlighting in stage table when limit is more than table length</li>
-          </ul>
-
-          <b>3.1.0</b>
-          <span class="date">14 Jan 2022</span>
-          <ul>
             <li>
               Created <a {...href('/ftb-virtual-scroll')}>virtual scroll</a> component for rendering long lists
             </li>
+            <li>Fixed team highlighting in stage table when limit is more than table length</li>
           </ul>
+
           <b>3.0.1</b>
           <span class="date">30 Dec 2021</span>
           <ul>
