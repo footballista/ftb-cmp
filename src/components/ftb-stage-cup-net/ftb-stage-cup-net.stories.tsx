@@ -42,20 +42,12 @@ export class FtbStageCupNetStories {
           )}
         />
 
-        <h2>Highlight team</h2>
-        <p>You can programmatically set team to highlight on the net</p>
-        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeam={new Team({_id: 123, name: 'Arsenal'})}/>" />
+        <h2>Highlight teams</h2>
+        <p class="highlighted-teams">You can set one or multiple teams to be highlighted on the net. Each passed team will have <pre><code>highlighted</code></pre> class and additional unique class to highlight in different colors.</p>
+        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeams={[new Team({_id: 123, name: 'Arsenal'}), new Team({_id: 124, name: 'Chelsea'})]}/>" />
         <ftb-cup-net
           stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
-          highlightTeam={new Team(teamMocks.Arsenal)}
-        />
-
-        <h2>Highlight many teams</h2>
-        <p>You can programmatically set team to highlight on the net</p>
-        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeams={new Team({_id: 123, name: 'Arsenal'}), new Team({_id: 124, name: 'Chelsea'}), new Team({_id: 125, name: Borussia Dortmund})}/>" />
-        <ftb-cup-net
-          stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
-          highlightTeams={[new Team(teamMocks.Arsenal), new Team(teamMocks.Chelsea), new Team(teamMocks.Borussia)]}
+          highlightTeams={[new Team(teamMocks.Arsenal), new Team(teamMocks.Chelsea)]}
         />
 
         <h2>Autofill rounds</h2>

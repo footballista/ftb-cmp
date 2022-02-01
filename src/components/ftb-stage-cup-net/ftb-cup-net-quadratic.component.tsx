@@ -227,8 +227,8 @@ export class FtbStageCupNetQuadratic {
   }
 
   highlight(teams: Team[] | null) {
-    teams?.map(team => {
-      writeTask(() => {
+    writeTask(() => {
+      teams?.map(team => {
         const gameHasTeam = (g: Game | null) => {
           if (!g) return;
           return g.home.team._id == team?._id || g.away.team._id == team?._id;
