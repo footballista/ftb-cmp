@@ -43,7 +43,13 @@ export class FtbStageCupNetStories {
         />
 
         <h2>Highlight teams</h2>
-        <p class="highlighted-teams">You can set one or multiple teams to be highlighted on the net. Each passed team will have <pre><code>highlighted</code></pre> class and additional unique class to highlight in different colors.</p>
+        <p class="highlighted-teams">
+          You can set one or multiple teams to be highlighted on the net. Each passed team will have{' '}
+          <pre>
+            <code>highlighted</code>
+          </pre>{' '}
+          class and additional unique class to highlight in different colors.
+        </p>
         <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeams={[new Team({_id: 123, name: 'Arsenal'}), new Team({_id: 124, name: 'Chelsea'})]}/>" />
         <ftb-cup-net
           stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
