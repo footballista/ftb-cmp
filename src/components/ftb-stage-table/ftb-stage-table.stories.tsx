@@ -18,7 +18,6 @@ export class FtbStageTableStories {
   }
 
   render() {
-    console.log(this.stage);
     return (
       <Host>
         <h1>Stage table</h1>
@@ -54,14 +53,14 @@ export class FtbStageTableStories {
 
         <h2>Two teams highlight</h2>
         <ftb-code-snippet
-          code={"<ftb-stage-table stage={stage} rowsLimit={{baseTeam: [{_id: 123, name: 'Arsenal'}, {_id: 113, name: 'Everton'}], limit: 2}} />"}
+          code={"<ftb-stage-table stage={stage} rowsLimit={{baseTeams: [{_id: 123, name: 'Arsenal'}, {_id: 113, name: 'Everton'}], limit: 3}} />"}
         />
-        <div class="table-container short">
+        <div class="table-container short two-teams">
           {this.stage ? (
             <ftb-stage-table
               stage={this.stage}
               customWidths={{ position: 40, form: 110 }}
-              rowsLimit={{ baseTeams: [this.stage.table[5].team, this.stage.table[2].team], limit: 2 }}
+              rowsLimit={{ baseTeams: [this.stage.table[5].team, this.stage.table[2].team], limit: 3 }}
             />
           ) : (
             this.renderTableSkeleton(6)

@@ -16,6 +16,8 @@ import EuropaLeague from '../../assets/icons/europa-league.svg';
 import { StageService } from 'ftb-models/dist/services/stage.service';
 import { href } from 'stencil-router-v2';
 import uniqBy from 'lodash-es/uniqBy';
+import range from 'lodash-es/range';
+import intersection from 'lodash-es/intersection';
 
 @Component({
   tag: 'ftb-stage-table',
@@ -227,7 +229,7 @@ export class FtbStageTable {
   }
 
   private renderBody() {
-    let res = [];
+    let displayingRows = [];
 
     const getPositions = (baseTeam: Team) => {
       let sliceStart;
@@ -242,26 +244,26 @@ export class FtbStageTable {
         sliceEnd = Math.min(sliceStart + this.rowsLimit.limit, this.stage.table.length);
         sliceStart = sliceEnd - this.rowsLimit.limit;
       }
-      return this.stage.table.slice(sliceStart, sliceEnd);
+      return range(sliceStart, sliceEnd);
     };
 
     if (this.rowsLimit && this.rowsLimit.limit < this.stage.table.length) {
       if (this.rowsLimit?.baseTeam) {
-        res = getPositions(this.rowsLimit.baseTeam);
+        displayingRows.push(...getPositions(this.rowsLimit.baseTeam));
       }
       if (this.rowsLimit?.baseTeams?.length) {
         this.rowsLimit.baseTeams.map(team => {
-          res.push(...getPositions(team));
+          displayingRows.push(...getPositions(team));
         });
       }
-      res = uniqBy(res, '_id').sort((a, b) => a.position - b.position);
+      displayingRows = intersection(displayingRows).sort();
     }
 
-    res = res.length ? res : this.stage.table;
+    displayingRows = displayingRows.length ? displayingRows.map(idx => this.stage.table[idx]) : this.stage.table;
 
     return (
       <div class="body">
-        {res.map((row: TableRow, idx: number) => (
+        {displayingRows.map((row: TableRow, idx: number) => (
           <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
             <div
               class={{
