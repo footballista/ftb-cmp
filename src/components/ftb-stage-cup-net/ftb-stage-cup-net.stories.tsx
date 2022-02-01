@@ -50,6 +50,14 @@ export class FtbStageCupNetStories {
           highlightTeam={new Team(teamMocks.Arsenal)}
         />
 
+        <h2>Highlight many teams</h2>
+        <p>You can programmatically set team to highlight on the net</p>
+        <ftb-code-snippet code="<ftb-cup-net stage={stage} highlightTeams={new Team({_id: 123, name: 'Arsenal'}), new Team({_id: 124, name: 'Chelsea'}), new Team({_id: 125, name: Borussia Dortmund})}/>" />
+        <ftb-cup-net
+          stage={createStage('final', '1/2', '1/2', '1/4', '1/4', '1/4', '1/4')}
+          highlightTeams={[new Team(teamMocks.Arsenal), new Team(teamMocks.Chelsea), new Team(teamMocks.Borussia)]}
+        />
+
         <h2>Autofill rounds</h2>
         <p>Rounds that aren't set yet, will be autofilled with empty elements</p>
         <ftb-cup-net stage={createStage('1/4', '1/4', '1/4', '1/4')} />

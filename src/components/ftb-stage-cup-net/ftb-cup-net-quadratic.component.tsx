@@ -42,6 +42,7 @@ export class FtbStageCupNetQuadratic {
   @Prop() stage!: Stage;
   /** team to highlight on the net with color */
   @Prop() highlightTeam?: Team;
+  @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
 
   @Element() el;
@@ -82,12 +83,12 @@ export class FtbStageCupNetQuadratic {
   componentDidLoad() {
     if (!this.stage) return;
     this.drawNet();
-    this.highlight(this.highlightTeam);
+    this.highlight([this.highlightTeam]);
   }
 
   componentDidRender() {
     if (!this.stage) return;
-    this.highlight(this.highlightTeam);
+    this.highlight([this.highlightTeam]);
   }
 
   disconnectedCallback() {
@@ -225,54 +226,82 @@ export class FtbStageCupNetQuadratic {
     this.columns = [...columnsLeft, ...columnsRight];
   }
 
-  highlight(team: Team | null) {
-    writeTask(() => {
-      const gameHasTeam = (g: Game | null) => {
-        if (!g) return;
-        return g.home.team._id == team?._id || g.away.team._id == team?._id;
-      };
+  highlight(teams: Team[] | null) {
+    teams?.map(team => {
+      writeTask(() => {
+        const gameHasTeam = (g: Game | null) => {
+          if (!g) return;
+          return g.home.team._id == team?._id || g.away.team._id == team?._id;
+        };
+        const idxTeam = this.highlightTeams?.indexOf(team);
 
-      /** clear all highlighting first */
-      this.netLines.forEach(line => {
-        line.el.classList.remove('highlighted');
-        line.from.leftDotEl.classList.remove('highlighted');
-        line.from.rightDotEl.classList.remove('highlighted');
+        /** clear all highlighting first */
+        if (teams.length == 1) {
+          this.netLines.forEach(line => {
+            line.el.classList.remove('highlighted');
+            line.from.leftDotEl.classList.remove('highlighted');
+            line.from.rightDotEl.classList.remove('highlighted');
 
-        Array.from(line.from.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
-          r.classList.remove('highlighted'),
-        );
-        Array.from(line.to.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
-          r.classList.remove('highlighted'),
-        );
-        line.to.leftDotEl.classList.remove('highlighted');
-        line.to.rightDotEl.classList.remove('highlighted');
+            Array.from(line.from.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+              r.classList.remove('highlighted'),
+            );
+            Array.from(line.to.leftDotEl.parentElement.querySelectorAll('.row')).forEach(r =>
+              r.classList.remove('highlighted'),
+            );
+            line.to.leftDotEl.classList.remove('highlighted');
+            line.to.rightDotEl.classList.remove('highlighted');
+          });
+        }
+
+        if (team) {
+          this.netLines?.forEach(line => {
+            if (gameHasTeam(line.from.games[0]) && gameHasTeam(line.to.games[0])) {
+              line.el.classList.add('highlighted');
+              line.from.rightDotEl.classList.add('highlighted');
+              line.to.leftDotEl.classList.add('highlighted');
+
+              /** if there are a lot of teams, then add class by index for style */
+              if (this.highlightTeams) {
+                line.el.classList.add(`highlighted-${idxTeam}`);
+                line.from.rightDotEl.classList.add(`highlighted-${idxTeam}`);
+                line.to.leftDotEl.classList.add(`highlighted-${idxTeam}`);
+              }
+            }
+
+            if (line.from.games) {
+              if (line.from.games[0].home.team._id == team._id) {
+                line.from.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+                if (this.highlightTeams) {
+                  line.from.rightDotEl.parentElement
+                    .querySelectorAll('.row')[0]
+                    .classList.add(`highlighted-${idxTeam}`);
+                }
+              } else if (line.from.games[0].away.team._id == team._id) {
+                line.from.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+                if (this.highlightTeams) {
+                  line.from.rightDotEl.parentElement
+                    .querySelectorAll('.row')[1]
+                    .classList.add(`highlighted-${idxTeam}`);
+                }
+              }
+            }
+
+            if (line.to.games) {
+              if (line.to.games[0].home.team._id == team._id) {
+                line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
+                if (this.highlightTeams) {
+                  line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add(`highlighted-${idxTeam}`);
+                }
+              } else if (line.to.games[0].away.team._id == team._id) {
+                line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
+                if (this.highlightTeams) {
+                  line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add(`highlighted-${idxTeam}`);
+                }
+              }
+            }
+          });
+        }
       });
-
-      if (team) {
-        this.netLines?.forEach(line => {
-          if (gameHasTeam(line.from.games[0]) && gameHasTeam(line.to.games[0])) {
-            line.el.classList.add('highlighted');
-            line.from.rightDotEl.classList.add('highlighted');
-            line.to.leftDotEl.classList.add('highlighted');
-          }
-
-          if (line.from.games) {
-            if (line.from.games[0].home.team._id == team._id) {
-              line.from.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
-            } else if (line.from.games[0].away.team._id == team._id) {
-              line.from.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
-            }
-          }
-
-          if (line.to.games) {
-            if (line.to.games[0].home.team._id == team._id) {
-              line.to.rightDotEl.parentElement.querySelectorAll('.row')[0].classList.add('highlighted');
-            } else if (line.to.games[0].away.team._id == team._id) {
-              line.to.rightDotEl.parentElement.querySelectorAll('.row')[1].classList.add('highlighted');
-            }
-          }
-        });
-      }
     });
   }
 
@@ -305,8 +334,8 @@ export class FtbStageCupNetQuadratic {
       return (
         <div
           class={'row'}
-          onMouseOver={() => this.highlight(s.games[0][side].team)}
-          onMouseOut={() => this.highlight(this.highlightTeam)}
+          onMouseOver={() => !this.highlightTeams && !this.highlightTeam && this.highlight([s.games[0][side].team])}
+          onMouseOut={() => !this.highlightTeams && this.highlight([this.highlightTeam])}
         >
           <ftb-team-logo team={s.games[0][side].team} />
           <a {...(routingState.routes.team && href(createEntityRoute(s.games[0][side].team)))}>
@@ -398,7 +427,7 @@ export class FtbStageCupNetQuadratic {
       this.netLines = netLines;
       this.netContainer.innerHTML = '';
       this.netContainer.append(...netLines.map(l => l.el));
-      this.highlight(this.highlightTeam);
+      this.highlight(this.highlightTeam ? [this.highlightTeam] : this.highlightTeams);
     });
   }
 

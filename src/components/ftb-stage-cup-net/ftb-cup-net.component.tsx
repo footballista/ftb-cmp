@@ -9,6 +9,7 @@ import { Stage, Team } from 'ftb-models';
 export class FtbStageCupNet {
   @Prop() stage!: Stage;
   @Prop() highlightTeam?: Team;
+  @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
 
   render() {
@@ -18,6 +19,7 @@ export class FtbStageCupNet {
         <ftb-cup-net-quadratic
           stage={this.stage}
           highlightTeam={this.highlightTeam}
+          highlightTeams={this.highlightTeams}
           splitSidesThreshold={this.splitSidesThreshold}
         />
       </Host>
