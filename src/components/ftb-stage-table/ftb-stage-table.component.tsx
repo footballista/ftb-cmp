@@ -260,19 +260,26 @@ export class FtbStageTable {
     const displayingRows = displayingPositions.size
       ? sortBy(Array.from(displayingPositions)).map(idx => this.stage.table[idx])
       : this.stage.table;
+
+    const getTableRowClass = (row: TableRow) => {
+      let rowClass = 'row ';
+      let highlightedIdx = -1;
+      if (this.rowsLimit?.baseTeam?._id == row.team._id) {
+        highlightedIdx = 0;
+      } else if (this.rowsLimit?.baseTeams) {
+        highlightedIdx = this.rowsLimit.baseTeams.findIndex(t => t._id == row.team._id);
+      }
+      if (highlightedIdx != -1) {
+        rowClass += 'base-team highlighted-' + highlightedIdx;
+      }
+      return rowClass;
+    };
+
     return (
       <div class="body">
         {displayingRows.map((row: TableRow, idx: number) => (
           <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
-            <div
-              class={`row
-                ${row.team._id == this.rowsLimit?.baseTeam?._id ? 'base-team' : ''}
-                ${
-                  this.rowsLimit?.baseTeams?.some(team => team._id == row.team._id)
-                    ? `base-team highlighted-${this.rowsLimit.baseTeams.indexOf(row.team)}`
-                    : ''
-                }`}
-            >
+            <div class={getTableRowClass(row)}>
               {this.structure.label && (
                 <div class="label" style={this.getFieldStyle('label')}>
                   {row.label == 'chevron-up' && (
