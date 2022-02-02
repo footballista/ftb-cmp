@@ -275,9 +275,20 @@ export class FtbStageTable {
       return rowClass;
     };
 
+    const hasGap = (row, idx) => {
+      if (!displayingRows[idx - 1]) {
+        return false;
+      } else if (displayingRows[idx - 1].position == row.position - 1) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
     return (
       <div class="body">
-        {displayingRows.map((row: TableRow, idx: number) => (
+        {displayingRows.map((row: TableRow, idx: number) => [
+          hasGap(row, idx) ? <div class="gap" /> : null,
           <a {...(routingState.routes.team && href(createEntityRoute(row.team)))}>
             <div class={getTableRowClass(row)}>
               {this.structure.label && (
@@ -347,8 +358,8 @@ export class FtbStageTable {
                 </div>
               )}
             </div>
-          </a>
-        ))}
+          </a>,
+        ])}
       </div>
     );
   }
