@@ -347,10 +347,10 @@ export class FtbStageCupNetQuadratic {
                 {game.state == GameState.CLOSED ? (
                   [
                     <div class="ft-score">{game[side].score.ft}</div>,
-                    (game.home.score.pen || game.away.score.pen) && <div class="pen-score">{game[side].score.pen}</div>,
-                    game.techDefeat && game[side].score.ft > 0 && (
+                    game.hasPenalties() && <div class="pen-score">{game[side].score.pen}</div>,
+                    game.techDefeat && game[side].score.ft > 0 ? (
                       <div class="td-mark">{translations.game.td[userState.language]}</div>
-                    ),
+                    ) : null,
                   ]
                 ) : (
                   <div class="no-score">-</div>
