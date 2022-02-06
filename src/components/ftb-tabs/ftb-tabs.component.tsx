@@ -1,15 +1,55 @@
-import { Component, Host, h, Prop, writeTask, Element } from '@stencil/core';
+import { Component, Host, h, Prop, writeTask, Element, Watch } from '@stencil/core';
+import fromPairs from 'lodash-es/fromPairs';
+
 @Component({
   tag: 'ftb-tabs',
   styleUrl: 'ftb-tabs.component.scss',
   shadow: false,
 })
 export class FtbTabs {
-  @Prop() tabs!: Array<{ title: () => string; body: () => string }>;
-  @Prop({ mutable: true }) selectedTab?: { title: () => string; body: () => string };
+  @Prop() tabs!: Array<{ title: () => string; body: () => string; key: string }>;
+  /** unique key for using in hash navigation */
+  @Prop({ mutable: true }) navKey?: string = 'tabs';
+  selectedTab?: { title: () => string; body: () => string; key: string };
 
   @Element() el: HTMLElement;
   tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement }> = [];
+
+  constructor() {
+    this.onHashChange = this.onHashChange.bind(this);
+  }
+
+  @Watch('tabs') onTabsChange() {
+    this.onHashChange();
+  }
+
+  connectedCallback() {
+    window.addEventListener('hashchange', this.onHashChange);
+    this.onHashChange();
+  }
+
+  disconnectedCallback() {
+    window.addEventListener('hashchange', this.onHashChange);
+  }
+
+  onHashChange() {
+    const keys = this.readHash();
+    if (keys[this.navKey]) {
+      const tab = this.tabs.find(t => t.key == keys[this.navKey]);
+      if (tab) {
+        this.onTabSelected(tab);
+      }
+    }
+  }
+
+  readHash() {
+    const hash = location.hash?.slice(1);
+    if (hash) {
+      return fromPairs(hash.split(';').map(s => s.split(':')));
+    } else {
+      return {};
+    }
+  }
 
   componentDidRender() {
     const tabsEls = [];
@@ -20,10 +60,10 @@ export class FtbTabs {
       tabsEls.push({ headerEl: headerEls[i], bodyEl: bodyEls[i] });
     }
     this.tabsEls = tabsEls;
-    this.onTabClicked(this.selectedTab);
+    this.onTabSelected(this.selectedTab);
   }
 
-  private onTabClicked(tab: { title: () => string; body: () => string }) {
+  private onTabSelected(tab: { title: () => string; body: () => string; key: string }) {
     this.selectedTab = tab;
     const selectedIdx = this.tabs.findIndex(t => t === this.selectedTab);
     writeTask(() => {
@@ -37,6 +77,17 @@ export class FtbTabs {
         }
       });
     });
+
+    const hash = this.readHash();
+    hash[this.navKey] = tab.key;
+    const hashKeys = Object.keys(hash)
+      .map(key => key + ':' + hash[key])
+      .join(';');
+
+    const newLocation = location.pathname + '#' + hashKeys;
+    if (location.href != location.origin + newLocation) {
+      history.replaceState(null, '', newLocation);
+    }
   }
 
   render() {
@@ -52,7 +103,7 @@ export class FtbTabs {
           {this.tabs.map(t => (
             <button
               class={'ftb-tabs__header-tab' + (this.selectedTab == t ? ' selected' : '')}
-              onClick={() => this.onTabClicked(t)}
+              onClick={() => this.onTabSelected(t)}
             >
               {t.title()}
             </button>

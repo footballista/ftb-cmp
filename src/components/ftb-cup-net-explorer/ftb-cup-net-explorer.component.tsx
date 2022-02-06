@@ -38,10 +38,10 @@ export class FtbCupNetExplorer {
 
   async openFullScreen() {
     const { left, top, height, width } = this.el.getBoundingClientRect();
-    this.modalEl.style.left = left + 'px';
-    this.modalEl.style.top = top + 'px';
-    this.modalEl.style.height = height + 'px';
-    this.modalEl.style.width = width + 'px';
+    this.modalEl.children[1]['style'].left = left + 'px';
+    this.modalEl.children[1]['style'].top = top + 'px';
+    this.modalEl.children[1]['style'].height = height + 'px';
+    this.modalEl.children[1]['style'].width = width + 'px';
     document.body.appendChild(this.modalEl);
     this.modalEl.open();
   }
@@ -50,10 +50,12 @@ export class FtbCupNetExplorer {
     return (
       <Host>
         <ftb-cup-net-explorer-img-layer
+          onMouseDown={() => this.openFullScreen()}
           stage={this.stage}
           highlightTeam={this.highlightTeam}
           highlightTeams={this.highlightTeams}
           splitSidesThreshold={this.splitSidesThreshold}
+          disabled={true}
         />
         <button class="zoom-button" onClick={() => this.openFullScreen()}>
           <ftb-icon svg={ExpandIcon} />

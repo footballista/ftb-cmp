@@ -18,7 +18,6 @@ export class FtbStageTableStories {
   }
 
   render() {
-    console.log(this.stage);
     return (
       <Host>
         <h1>Stage table</h1>

@@ -1,6 +1,6 @@
 import { Component, Prop, Host, h, Element, Method, Event, EventEmitter } from '@stencil/core';
 import { Stage, Team } from 'ftb-models';
-import ExpandIcon from '../../assets/icons/expand.svg';
+import CollapseIcon from '../../assets/icons/collapse.svg';
 
 @Component({
   tag: 'ftb-cup-net-modal',
@@ -23,7 +23,8 @@ export class FtbCupNetModal {
   };
 
   @Method() async open() {
-    this.el.style.transition = 'all 0.3s ease-in-out';
+    const [backdropEl, modalEl] = Array.from(this.el.children) as HTMLElement[];
+    modalEl.style.transition = 'all 0.3s ease-in-out';
     window.addEventListener('keydown', this.onKeyPress);
     setTimeout(() => {
       const { height: netHeight, width: netWidth } = this.el
@@ -47,15 +48,22 @@ export class FtbCupNetModal {
       const { innerHeight: windowHeight, innerWidth: windowWidth } = window;
       const modalWidth = Math.min(windowWidth * 0.9, netWidth + SAFETY_PADDING);
       const modalHeight = Math.min(windowHeight * 0.9, netHeight + SAFETY_PADDING);
-      this.el.style.height = modalHeight + 'px';
-      this.el.style.width = modalWidth + 'px';
-      this.el.style.top = (windowHeight - modalHeight) / 2 + 'px';
-      this.el.style.left = (windowWidth - modalWidth) / 2 + 'px';
+
+      this.el.style.top = '0';
+      this.el.style.left = '0';
+      this.el.style.height = '100%';
+      this.el.style.width = '100%';
+
+      backdropEl.style.opacity = '1';
+
+      modalEl.style.height = modalHeight + 'px';
+      modalEl.style.width = modalWidth + 'px';
     }, 0);
   }
 
   constructor() {
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   disconnectedCallback() {
@@ -64,6 +72,13 @@ export class FtbCupNetModal {
 
   onKeyPress(e: KeyboardEvent) {
     if (e.key == 'Escape') {
+      this.close();
+    }
+  }
+
+  onClick(e: MouseEvent) {
+    if (e.target['tagName'] == this.el.tagName) {
+      //clicking on backdrop, not content
       this.close();
     }
   }
@@ -82,15 +97,18 @@ export class FtbCupNetModal {
   render() {
     return (
       <Host>
-        <ftb-cup-net-explorer-img-layer
-          stage={this.stage}
-          highlightTeam={this.highlightTeam}
-          highlightTeams={this.highlightTeams}
-          splitSidesThreshold={this.splitSidesThreshold}
-        />
-        <button class="zoom-button" onClick={() => this.close()}>
-          <ftb-icon svg={ExpandIcon} />
-        </button>
+        <div class="backdrop" onClick={e => this.onClick(e)} />
+        <div class="modal">
+          <ftb-cup-net-explorer-img-layer
+            stage={this.stage}
+            highlightTeam={this.highlightTeam}
+            highlightTeams={this.highlightTeams}
+            splitSidesThreshold={this.splitSidesThreshold}
+          />
+          <button class="zoom-button" onClick={() => this.close()}>
+            <ftb-icon svg={CollapseIcon} />
+          </button>
+        </div>
       </Host>
     );
   }

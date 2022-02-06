@@ -11,6 +11,7 @@ export class FtbCupNetExplorerImgLayer {
   @Prop() highlightTeam?: Team;
   @Prop() highlightTeams?: Team[];
   @Prop() splitSidesThreshold?: number;
+  @Prop() disabled?: boolean;
 
   @Element() containerEl: HTMLElement;
   imgLayerEl: HTMLElement;
@@ -111,7 +112,7 @@ export class FtbCupNetExplorerImgLayer {
   }
 
   initLayerEl(el: HTMLElement) {
-    if (!this.imgLayerEl) {
+    if (!this.imgLayerEl && !this.disabled) {
       this.imgLayerEl = el;
 
       this.eventHandlers.forEach(eh => eh.target().addEventListener(eh.eventName, eh.handler));

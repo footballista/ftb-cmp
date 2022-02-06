@@ -8,6 +8,7 @@ import { Component, Host, h, State } from '@stencil/core';
 export class FtbTabsStroies {
   @State() tabs = [
     {
+      key: 'oop',
       title: () => 'OOP',
       body: () => (
         <ul>
@@ -18,6 +19,7 @@ export class FtbTabsStroies {
       ),
     },
     {
+      key: 'rainbow',
       title: () => 'Rainbow',
       body: () => (
         <ul>
@@ -32,24 +34,75 @@ export class FtbTabsStroies {
     },
   ];
 
+  @State() second = [
+    {
+      key: 'ftb',
+      title: () => 'Footballista',
+      body: () => (
+        <ul>
+          <li>Website</li>
+          <li>Mobile App</li>
+          <li>Admin panel</li>
+          <li>Infographics</li>
+          <li>API</li>
+          <li>Web components</li>
+
+          <a href={'#second:players'}>switch to Players</a>
+        </ul>
+      ),
+    },
+    {
+      key: 'players',
+      title: () => 'Players',
+      body: () => (
+        <ul>
+          <li>Goalkeeper</li>
+          <li>Defender</li>
+          <li>Midfielder</li>
+          <li>Striker</li>
+        </ul>
+      ),
+    },
+  ];
+
   render() {
     return (
       <Host>
         <h1>Tabs</h1>
-        <p>Organizes content into tabs</p>
+        <p>Organizes content into tabs. Uses hash navigation, so active tab could be passed by url.</p>
 
-        <ftb-tabs tabs={this.tabs} selectedTab={this.tabs[1]} />
-
-        <ftb-code-snippet code={'<ftb-tabs tabs={this.tabs} selectedTab={this.tabs[1]} />'} />
+        <ftb-tabs tabs={this.tabs} navKey="demo" />
 
         <button
           class="add-tab-button"
           onClick={() =>
-            (this.tabs = [{ title: () => 'Added tab', body: () => <ul>Hi, I was added dynamically</ul> }, ...this.tabs])
+            (this.tabs = [
+              {
+                key: 'dynamic' + this.tabs.length,
+                title: () => 'Added tab',
+                body: () => <ul>Hi, I was added dynamically</ul>,
+              },
+              ...this.tabs,
+            ])
           }
         >
           Add tab
         </button>
+
+        <ftb-code-snippet code={'<ftb-tabs tabs={this.tabs}/>'} />
+
+        <h2>Multiple components</h2>
+        <p>
+          Add
+          <pre class="inline-code">
+            <code>navKey</code>
+          </pre>{' '}
+          parameter to use hash navigation for multiple tabs on one page.
+        </p>
+
+        <ftb-tabs tabs={this.second} navKey="second" />
+
+        <ftb-code-snippet code={'<ftb-tabs tabs={this.tabs} navKey="second"/>'} />
       </Host>
     );
   }

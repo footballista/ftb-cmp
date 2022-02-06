@@ -29,6 +29,14 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.4.0</b>
+          <span class="date">04 Feb 2022</span>
+          <ul>
+            <li>Fixed photo gallery</li>
+            <li>Added hash navigation for tabs</li>
+            <li>Changed cup net behavior when open</li>
+          </ul>
+
           <b>3.3.2</b>
           <span class="date">01 Feb 2022</span>
           <ul>
