@@ -140,6 +140,27 @@ export class FtbCupNetExplorerImgLayer {
     const diffY = e.clientY - this.lastMoveY;
     this.translateX += diffX;
     this.translateY += diffY;
+
+    const maxShiftY =
+      (this.imgLayerEl.getBoundingClientRect().height - this.containerEl.getBoundingClientRect().height) / 2;
+    if (maxShiftY >= 0) {
+      this.translateY = Math.min(this.translateY, maxShiftY);
+      this.translateY = Math.max(this.translateY, -1 * maxShiftY);
+    } else {
+      this.translateY = Math.max(this.translateY, maxShiftY);
+      this.translateY = Math.min(this.translateY, -1 * maxShiftY);
+    }
+
+    const maxShiftX =
+      (this.imgLayerEl.getBoundingClientRect().width - this.containerEl.getBoundingClientRect().width) / 2;
+    if (maxShiftX >= 0) {
+      this.translateX = Math.min(this.translateX, maxShiftX);
+      this.translateX = Math.max(this.translateX, -1 * maxShiftX);
+    } else {
+      this.translateX = Math.max(this.translateX, maxShiftX);
+      this.translateX = Math.min(this.translateX, -1 * maxShiftX);
+    }
+
     this.imgLayerEl.style.transition = 'unset';
     this.applyTransformations();
     this.lastMoveX = e.clientX;
@@ -166,8 +187,9 @@ export class FtbCupNetExplorerImgLayer {
     const shiftY = (diffY - diffY * (newScale / this.scale)) * (this.scale / newScale);
     this.translateX += shiftX;
     this.translateY += shiftY;
+
     this.scale = newScale;
-    this.imgLayerEl.style.transition = 'transform .1s linear';
+    this.imgLayerEl.style.transition = 'all .1s linear';
     this.applyTransformations();
   }
 

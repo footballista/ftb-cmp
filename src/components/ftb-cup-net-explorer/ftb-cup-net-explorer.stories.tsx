@@ -47,45 +47,45 @@ export class FtbStageCupNetStories {
           splitSidesThreshold={16}
         />
 
-        <h2>Team highlighting</h2>
-        <p>If stage has highlighted team, component will search for highlighted nodes and shift nearest to viewport</p>
+        {/*<h2>Team highlighting</h2>*/}
+        {/*<p>If stage has highlighted team, component will search for highlighted nodes and shift nearest to viewport</p>*/}
 
-        <ftb-cup-net-explorer
-          stage={createStage(
-            'final',
-            '1/2',
-            '1/2',
-            '1/4',
-            '1/4',
-            '1/4',
-            '1/4',
-            '1/8',
-            '1/8',
-            '1/8',
-            '1/8',
-            '1/8',
-            '1/8',
-            '1/8',
-            '1/8',
-          )}
-          splitSidesThreshold={16}
-          highlightTeam={this.hlT}
-        />
-        <button
-          class="switch-team-button"
-          onClick={() => (this.hlT = new Team(this.hlT.name == 'Chelsea' ? teamMocks.Barcelona : teamMocks.Chelsea))}
-        >
-          Change team to {this.hlT.name == 'Chelsea' ? 'Barcelona' : 'Chelsea'}
-        </button>
-        <ftb-code-snippet
-          code="<ftb-cup-net-explorer>
-          <ftb-cup-net stage={stage} hightlightTeam={team}/>
-        </ftb-cup-net-explorer>"
-        />
+        {/*<ftb-cup-net-explorer*/}
+        {/*  stage={createStage(*/}
+        {/*    'final',*/}
+        {/*    '1/2',*/}
+        {/*    '1/2',*/}
+        {/*    '1/4',*/}
+        {/*    '1/4',*/}
+        {/*    '1/4',*/}
+        {/*    '1/4',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*    '1/8',*/}
+        {/*  )}*/}
+        {/*  splitSidesThreshold={16}*/}
+        {/*  highlightTeam={this.hlT}*/}
+        {/*/>*/}
+        {/*<button*/}
+        {/*  class="switch-team-button"*/}
+        {/*  onClick={() => (this.hlT = new Team(this.hlT.name == 'Chelsea' ? teamMocks.Barcelona : teamMocks.Chelsea))}*/}
+        {/*>*/}
+        {/*  Change team to {this.hlT.name == 'Chelsea' ? 'Barcelona' : 'Chelsea'}*/}
+        {/*</button>*/}
+        {/*<ftb-code-snippet*/}
+        {/*  code="<ftb-cup-net-explorer>*/}
+        {/*  <ftb-cup-net stage={stage} hightlightTeam={team}/>*/}
+        {/*</ftb-cup-net-explorer>"*/}
+        {/*/>*/}
 
-        <h2>Small net</h2>
-        <p>For small nets modal size will be reduced to fit net size.</p>
-        <ftb-cup-net-explorer stage={createStage('final', '1/2', '1/2')} />
+        {/*<h2>Small net</h2>*/}
+        {/*<p>For small nets modal size will be reduced to fit net size.</p>*/}
+        {/*<ftb-cup-net-explorer stage={createStage('final', '1/2', '1/2')} />*/}
       </Host>
     );
   }
