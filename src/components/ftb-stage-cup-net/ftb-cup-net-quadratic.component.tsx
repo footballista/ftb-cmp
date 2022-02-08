@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Host, h, writeTask, Build } from '@stencil/core';
+import { Component, Element, Prop, Host, h, writeTask, Build, Method } from '@stencil/core';
 import {
   createEntityRoute,
   CupRounds,
@@ -92,7 +92,7 @@ export class FtbStageCupNetQuadratic {
   }
 
   disconnectedCallback() {
-    this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
   }
 
   defineColumns() {
@@ -375,7 +375,7 @@ export class FtbStageCupNetQuadratic {
     );
   }
 
-  drawNet() {
+  @Method() async drawNet() {
     writeTask(() => {
       const netLines: Array<{ from: SlotInterface; to: SlotInterface; el: SVGElement }> = [];
 

@@ -110,6 +110,7 @@ ftb-cup-net-quadratic {
         .score-block {
           background: rgba(0, 0, 0, 0.05);
           height: 50px;
+          height: 50px;
           .score {
             width: 50px;
             display: flex;
@@ -158,9 +159,6 @@ ftb-cup-net-quadratic {
         background: rgba(0, 0, 0, 0.05);
       }
     }
-    stencil-route-link {
-      display: none !important;
-    }
   }
 
   .net-container {
@@ -178,39 +176,48 @@ ftb-cup-net-quadratic {
 }
 
 ftb-cup-net-explorer {
-  width: calc(100% - 30px);
-  max-width: 600px;
-  height: 300px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0px 0px 15px 15px rgba(0, 0, 0, 0.1);
-  &:hover {
-    .zoom-button {
-      box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
-      ftb-icon {
-        fill: #645800;
-      }
-    }
-  }
-  .zoom-button {
-    height: 50px;
-    width: 50px;
-    border-radius: 10px 0 10px 0;
-    background-color: #ddd;
-    outline: none;
-    border: 2px solid #ccc;
-    bottom: -2px;
-    right: -2px;
-    cursor: pointer;
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease-in-out;
-    ftb-icon {
-      height: 30px;
-      width: 30px;
-      fill: #555;
-      transition: fill 0.3s ease-in-out;
-    }
+  max-width: 630px;
+}
+
+ftb-cup-net-explorer,
+ftb-cup-net-modal {
+  .net-wrapper {
+    width: calc(100% - 30px);
+    height: 300px;
+    //border: 2px solid #ccc;
+    border-radius: 10px;
+    background: #f2f2f2;
+    box-shadow: inset 0px 0px 15px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+
+    //&:hover {
+    //  .zoom-button {
+    //    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
+    //    ftb-icon {
+    //      fill: #645800;
+    //    }
+    //  }
+    //}
+    //.zoom-button {
+    //  height: 50px;
+    //  width: 50px;
+    //  border-radius: 10px 0 10px 0;
+    //  background-color: #ddd;
+    //  outline: none;
+    //  border: 2px solid #ccc;
+    //  bottom: -2px;
+    //  right: -2px;
+    //  cursor: pointer;
+    //  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+    //  transition: box-shadow 0.3s ease-in-out;
+    //  ftb-icon {
+    //    height: 30px;
+    //    width: 30px;
+    //    fill: #555;
+    //    transition: fill 0.3s ease-in-out;
+    //  }
+    //}
   }
 }
 
@@ -219,37 +226,30 @@ ftb-cup-net {
   margin-left: 20px;
 }
 
-ftb-cup-net-modal {
-  .modal {
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background: #f2f2f2;
-    box-shadow: inset 0px 0px 15px 15px rgba(0, 0, 0, 0.1), 0 25px 50px -12px rgb(0 0 0 / 0.25);
-
-    .zoom-button {
-      height: 50px;
-      width: 50px;
-      border-radius: 10px 0 10px 0;
-      background-color: #ddd;
-      outline: none;
-      border: 2px solid #ccc;
-      bottom: -2px;
-      right: -2px;
-      cursor: pointer;
-      box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
-      transition: box-shadow 0.3s ease-in-out;
-      &:hover {
-        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
-        ftb-icon {
-          fill: #645800;
-        }
-      }
-      ftb-icon {
-        height: 20px;
-        width: 20px;
-        fill: #555;
-        transition: fill 0.3s ease-in-out;
-      }
-    }
-  }
-}
+//ftb-cup-net-modal {
+//  .zoom-button {
+//    height: 50px;
+//    width: 50px;
+//    border-radius: 10px 0 10px 0;
+//    background-color: #ddd;
+//    outline: none;
+//    border: 2px solid #ccc;
+//    bottom: -2px;
+//    right: -2px;
+//    cursor: pointer;
+//    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+//    transition: box-shadow 0.3s ease-in-out;
+//    &:hover {
+//      box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
+//      ftb-icon {
+//        fill: #645800;
+//      }
+//    }
+//    ftb-icon {
+//      height: 20px;
+//      width: 20px;
+//      fill: #555;
+//      transition: fill 0.3s ease-in-out;
+//    }
+//  }
+//}

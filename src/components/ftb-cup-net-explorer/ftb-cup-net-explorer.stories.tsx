@@ -79,8 +79,8 @@ export class FtbStageCupNetStories {
         </button>
         <ftb-code-snippet
           code="<ftb-cup-net-explorer>
-  <ftb-cup-net stage={stage} hightlightTeam={team}/>
-</ftb-cup-net-explorer>"
+          <ftb-cup-net stage={stage} hightlightTeam={team}/>
+        </ftb-cup-net-explorer>"
         />
 
         <h2>Small net</h2>

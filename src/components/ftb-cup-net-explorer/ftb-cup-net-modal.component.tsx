@@ -1,6 +1,8 @@
-import { Component, Prop, Host, h, Element, Method, Event, EventEmitter } from '@stencil/core';
-import { Stage, Team } from 'ftb-models';
-import CollapseIcon from '../../assets/icons/collapse.svg';
+import { Component, Host, h, Method, Element, Event, EventEmitter } from '@stencil/core';
+
+// import { Component, Prop, Host, h, Element, Method, Event, EventEmitter } from '@stencil/core';
+// import { Stage, Team } from 'ftb-models';
+// import CollapseIcon from '../../assets/icons/collapse.svg';
 
 @Component({
   tag: 'ftb-cup-net-modal',
@@ -8,12 +10,13 @@ import CollapseIcon from '../../assets/icons/collapse.svg';
   shadow: false,
 })
 export class FtbCupNetModal {
-  @Prop() stage!: Stage;
-  @Prop() highlightTeam?: Team;
-  @Prop() highlightTeams?: Team[];
-  @Prop() splitSidesThreshold?: number;
-  @Event() closed: EventEmitter<boolean>;
+  // @Prop() stage!: Stage;
+  // @Prop() highlightTeam?: Team;
+  // @Prop() highlightTeams?: Team[];
+  // @Prop() splitSidesThreshold?: number;
+  @Event() closed: EventEmitter<HTMLElement>;
   @Element() el: HTMLElement;
+  netEl: HTMLElement;
 
   initialMeasures: {
     height: number;
@@ -22,93 +25,91 @@ export class FtbCupNetModal {
     left: number;
   };
 
-  @Method() async open() {
-    const [backdropEl, modalEl] = Array.from(this.el.children) as HTMLElement[];
-    modalEl.style.transition = 'all 0.3s ease-in-out';
-    window.addEventListener('keydown', this.onKeyPress);
-    setTimeout(() => {
-      const { height: netHeight, width: netWidth } = this.el
-        .querySelector('ftb-cup-net-explorer-img-layer ftb-cup-net')
-        .getBoundingClientRect();
+  constructor() {
+    this.onKeyDown = this.onKeyDown.bind(this);
+  }
 
-      const {
-        height: initialHeight,
-        width: initialWidth,
-        top: initialTop,
-        left: initialLeft,
-      } = this.el.getBoundingClientRect();
-      this.initialMeasures = {
-        height: initialHeight,
-        width: initialWidth,
-        top: initialTop,
-        left: initialLeft,
-      };
+  @Method() async open(netEl: HTMLElement) {
+    window.addEventListener('keydown', this.onKeyDown);
+    this.el.classList.add('open');
+
+    // const el = netEl.firstChild.cloneNode();
+    // const { stage, highlightTeam, highlightTeams, splitSidesThreshold } =
+    //   netEl.firstChild as HTMLFtbCupNetExplorerImgLayerElement;
+    // Object.assign(el, { stage, highlightTeam, highlightTeams, splitSidesThreshold });
+    // this.netEl = document.createElement('div');
+    // this.netEl.classList.add('net-wrapper');
+    // this.netEl.append(el);
+    // this.el.append(this.netEl);
+    // console.log(this.netEl);
+    this.netEl = document.createElement('div');
+    this.netEl.classList.add('net-wrapper');
+    const { top, left, height, width } = netEl.getBoundingClientRect();
+
+    this.netEl.style.top = top + 'px';
+    this.netEl.style.left = left + 'px';
+    this.netEl.style.width = width + 'px';
+    this.netEl.style.height = height + 'px';
+    this.initialMeasures = { height, width, top, left };
+
+    const imgLayerEl = document.createElement('ftb-cup-net-explorer-img-layer');
+    const { stage, highlightTeam, highlightTeams, splitSidesThreshold } =
+      netEl.firstChild as HTMLFtbCupNetExplorerImgLayerElement;
+    Object.assign(imgLayerEl, { stage, highlightTeam, highlightTeams, splitSidesThreshold });
+    this.netEl.append(imgLayerEl);
+    imgLayerEl.style.opacity = '0';
+    this.el.appendChild(this.netEl);
+
+    this.netEl.style.transition = 'all 0.3s ease-in-out';
+    setTimeout(() => {
+      imgLayerEl.style.opacity = '1';
+      const { height: netHeight, width: netWidth } = this.netEl.querySelector('ftb-cup-net').getBoundingClientRect();
 
       const SAFETY_PADDING = 40;
       const { innerHeight: windowHeight, innerWidth: windowWidth } = window;
       const modalWidth = Math.min(windowWidth * 0.9, netWidth + SAFETY_PADDING);
       const modalHeight = Math.min(windowHeight * 0.9, netHeight + SAFETY_PADDING);
 
-      this.el.style.top = '0';
-      this.el.style.left = '0';
-      this.el.style.height = '100%';
-      this.el.style.width = '100%';
-
-      backdropEl.style.opacity = '1';
-
-      modalEl.style.height = modalHeight + 'px';
-      modalEl.style.width = modalWidth + 'px';
-    }, 0);
-  }
-
-  constructor() {
-    this.onKeyPress = this.onKeyPress.bind(this);
-    this.onClick = this.onClick.bind(this);
+      this.netEl.style.top = (windowHeight - modalHeight) / 2 + 'px';
+      this.netEl.style.left = (windowWidth - modalWidth) / 2 + 'px';
+      this.netEl.style.height = modalHeight + 'px';
+      this.netEl.style.width = modalWidth + 'px';
+    }, 50);
   }
 
   disconnectedCallback() {
-    window.removeEventListener('keydown', this.onKeyPress);
+    window.removeEventListener('keydown', this.onKeyDown);
   }
 
-  onKeyPress(e: KeyboardEvent) {
+  onKeyDown(e: KeyboardEvent) {
     if (e.key == 'Escape') {
       this.close();
     }
   }
 
-  onClick(e: MouseEvent) {
-    if (e.target['tagName'] == this.el.tagName) {
+  onBackdropClick(e: MouseEvent) {
+    if (e.target['className'] == 'backdrop') {
       //clicking on backdrop, not content
       this.close();
     }
   }
 
   close() {
-    this.el.style.height = this.initialMeasures.height + 'px';
-    this.el.style.width = this.initialMeasures.width + 'px';
-    this.el.style.top = this.initialMeasures.top + 'px';
-    this.el.style.left = this.initialMeasures.left + 'px';
+    this.el.classList.remove('open');
+    this.netEl.style.height = this.initialMeasures.height + 'px';
+    this.netEl.style.width = this.initialMeasures.width + 'px';
+    this.netEl.style.top = this.initialMeasures.top + 'px';
+    this.netEl.style.left = this.initialMeasures.left + 'px';
     setTimeout(() => {
       this.el.remove();
-      this.closed.emit(true);
+      this.closed.emit(this.netEl);
     }, 300);
   }
 
   render() {
     return (
       <Host>
-        <div class="backdrop" onClick={e => this.onClick(e)} />
-        <div class="modal">
-          <ftb-cup-net-explorer-img-layer
-            stage={this.stage}
-            highlightTeam={this.highlightTeam}
-            highlightTeams={this.highlightTeams}
-            splitSidesThreshold={this.splitSidesThreshold}
-          />
-          <button class="zoom-button" onClick={() => this.close()}>
-            <ftb-icon svg={CollapseIcon} />
-          </button>
-        </div>
+        <div onClick={e => this.onBackdropClick(e)} class="backdrop" />
       </Host>
     );
   }

@@ -112,10 +112,12 @@ export class FtbCupNetExplorerImgLayer {
   }
 
   initLayerEl(el: HTMLElement) {
-    if (!this.imgLayerEl && !this.disabled) {
+    if (!this.imgLayerEl) {
       this.imgLayerEl = el;
 
-      this.eventHandlers.forEach(eh => eh.target().addEventListener(eh.eventName, eh.handler));
+      if (!this.disabled) {
+        this.eventHandlers.forEach(eh => eh.target().addEventListener(eh.eventName, eh.handler));
+      }
     }
   }
 
