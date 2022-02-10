@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, Method, forceUpdate } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, Method, forceUpdate, Element } from '@stencil/core';
 import { createEntityRoute, Game, RoleLevel, translations, userState } from 'ftb-models';
 import { AsyncSubject } from 'rxjs';
 import PhotoSwipe from 'photoswipe/';
@@ -15,17 +15,31 @@ export class FtbPhotoGallery {
 
   @Event() slideChanged: EventEmitter<number>;
   @Event() closed: EventEmitter<boolean>;
+  @Element() el: HTMLElement;
 
   @Method() async open(startIdx: number) {
-    const items = this.game.photoset.photos.items.map(p => ({
-      src: p.middle.url,
-      currSize: 'middle',
-      msrc: p.thumb.url,
-      w: p.hd?.width || p.full?.width || p.middle?.width || p.thumb?.width,
-      h: p.hd?.height || p.full?.height || p.middle?.height || p.thumb?.height,
-      all: p,
-      title: 'test title',
-    }));
+    const width = this.el.offsetWidth;
+    const items = this.game.photoset.photos.items.map(p => {
+      const getUrl = () => {
+        if (width > p.full.width) {
+          return p.hd.url;
+        } else if (width > p.middle.width) {
+          return p.full.url;
+        } else {
+          return p.middle.url;
+        }
+      };
+
+      return {
+        src: getUrl(),
+        currSize: 'middle',
+        msrc: p.thumb.url,
+        w: p.hd?.width || p.full?.width || p.middle?.width || p.thumb?.width,
+        h: p.hd?.height || p.full?.height || p.middle?.height || p.thumb?.height,
+        all: p,
+        title: 'test title',
+      };
+    });
 
     this.gallery = new PhotoSwipe(this.pswpEl, PhotoSwipeUI_Default, items, {
       index: startIdx,
@@ -39,10 +53,10 @@ export class FtbPhotoGallery {
     });
     this.gallery.init();
     this.gallery.listen('afterChange', () => {
-      forceUpdate(this.pswpEl);
+      forceUpdate(this.el);
       this.slideChanged.emit(this.gallery.getCurrentIndex());
     });
-    forceUpdate(this.pswpEl);
+    forceUpdate(this.el);
   }
 
   private pswpEl: HTMLDivElement;
