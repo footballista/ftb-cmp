@@ -56,6 +56,8 @@ export class FtbPhotoGallery {
   }
 
   render() {
+    if (!this.game) return;
+
     return (
       <Host>
         {this.renderSlider()}
