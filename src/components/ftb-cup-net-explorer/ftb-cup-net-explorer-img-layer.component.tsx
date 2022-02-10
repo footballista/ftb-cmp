@@ -1,4 +1,4 @@
-import { Component, Prop, Host, h, Element, Build } from '@stencil/core';
+import { Component, Prop, Host, h, Element, Build, readTask } from '@stencil/core';
 import { Stage, Team } from 'ftb-models';
 
 @Component({
@@ -57,6 +57,35 @@ export class FtbCupNetExplorerImgLayer {
 
   applyTransformations() {
     this.imgLayerEl.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    readTask(() => {
+      let newTranslateY = this.translateY;
+      const maxShiftY =
+        (this.imgLayerEl.getBoundingClientRect().height - this.containerEl.getBoundingClientRect().height) / 2;
+      if (maxShiftY >= 0) {
+        newTranslateY = Math.min(newTranslateY, maxShiftY);
+        newTranslateY = Math.max(newTranslateY, -1 * maxShiftY);
+      } else {
+        newTranslateY = Math.max(newTranslateY, maxShiftY);
+        newTranslateY = Math.min(newTranslateY, -1 * maxShiftY);
+      }
+
+      let newTranslateX = this.translateX;
+      const maxShiftX =
+        (this.imgLayerEl.getBoundingClientRect().width - this.containerEl.getBoundingClientRect().width) / 2;
+
+      if (maxShiftX >= 0) {
+        newTranslateX = Math.min(newTranslateX, maxShiftX);
+        newTranslateX = Math.max(newTranslateX, -1 * maxShiftX);
+      } else {
+        newTranslateX = Math.max(newTranslateX, maxShiftX);
+        newTranslateX = Math.min(newTranslateX, -1 * maxShiftX);
+      }
+      if (newTranslateX != this.translateX || newTranslateY != this.translateY) {
+        this.translateX = newTranslateX;
+        this.translateY = newTranslateY;
+        this.applyTransformations();
+      }
+    });
   }
 
   componentDidRender() {
@@ -141,26 +170,6 @@ export class FtbCupNetExplorerImgLayer {
     this.translateX += diffX;
     this.translateY += diffY;
 
-    const maxShiftY =
-      (this.imgLayerEl.getBoundingClientRect().height - this.containerEl.getBoundingClientRect().height) / 2;
-    if (maxShiftY >= 0) {
-      this.translateY = Math.min(this.translateY, maxShiftY);
-      this.translateY = Math.max(this.translateY, -1 * maxShiftY);
-    } else {
-      this.translateY = Math.max(this.translateY, maxShiftY);
-      this.translateY = Math.min(this.translateY, -1 * maxShiftY);
-    }
-
-    const maxShiftX =
-      (this.imgLayerEl.getBoundingClientRect().width - this.containerEl.getBoundingClientRect().width) / 2;
-    if (maxShiftX >= 0) {
-      this.translateX = Math.min(this.translateX, maxShiftX);
-      this.translateX = Math.max(this.translateX, -1 * maxShiftX);
-    } else {
-      this.translateX = Math.max(this.translateX, maxShiftX);
-      this.translateX = Math.min(this.translateX, -1 * maxShiftX);
-    }
-
     this.imgLayerEl.style.transition = 'unset';
     this.applyTransformations();
     this.lastMoveX = e.clientX;
@@ -189,7 +198,7 @@ export class FtbCupNetExplorerImgLayer {
     this.translateY += shiftY;
 
     this.scale = newScale;
-    this.imgLayerEl.style.transition = 'all .1s linear';
+    // this.imgLayerEl.style.transition = 'all .1s linear';
     this.applyTransformations();
   }
 
