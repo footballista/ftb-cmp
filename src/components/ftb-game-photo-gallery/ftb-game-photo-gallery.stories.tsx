@@ -16,24 +16,11 @@ export class FtbGamePhotoGalleryStories {
     if (this.prefetchMode) return;
     new GameService().loadGamePhotos(313299).then(g => {
       this.game = g;
-      this.initGallery();
     });
   }
 
-  initGallery() {
-    // this.gallery = Object.assign(document.createElement('ftb-game-photo-gallery-2'), {
-    //   game: this.game,
-    // }) as HTMLFtbGamePhotoGalleryElement;
-    // this.gallery.addEventListener('slideChanged', (e: CustomEvent) => (this.galleryIdx = e.detail));
-    // document.body.appendChild(this.gallery);
-    // if (window?.location.href.includes('#&gid=')) {
-    //   this.galleryIdx = parseInt(window.location.href.split('&pid=')[1]);
-    //   this.gallery.open(this.galleryIdx);
-    // }
-  }
-
   render() {
-    if (this.prefetchMode) return;
+    if (this.prefetchMode || !this.game) return;
     return (
       <Host>
         <ion-content>

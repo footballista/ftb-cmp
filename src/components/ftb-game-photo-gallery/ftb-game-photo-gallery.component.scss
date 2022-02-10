@@ -1,5 +1,6 @@
 @import '../../assets/styles/swiper.scss';
 @import '../../assets/styles/default-skin/default-skin.scss';
+
 ftb-game-photo-gallery {
   display: block;
   .help-images {
@@ -7,6 +8,10 @@ ftb-game-photo-gallery {
     max-width: 0;
     overflow: hidden;
   }
+  .pswp {
+    z-index: 1000000;
+  }
+
   .pswp__caption__center {
     max-width: unset;
     .caption {
