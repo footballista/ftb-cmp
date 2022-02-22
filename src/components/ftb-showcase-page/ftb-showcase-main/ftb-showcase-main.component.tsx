@@ -29,6 +29,12 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.5.0</b>
+          <span class="date">22 Feb 2022</span>
+          <ul>
+            <li>Added drag-n-drop sorting in ftb-virtual scroll</li>
+          </ul>
+
           <b>3.4.0</b>
           <span class="date">04 Feb 2022</span>
           <ul>

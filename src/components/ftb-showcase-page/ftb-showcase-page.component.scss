@@ -133,6 +133,8 @@ ftb-showcase-page {
       padding: 0 10px;
       overflow-y: auto;
       min-height: calc(100% - 56px);
+      width: 100vw;
+      box-sizing: border-box;
     }
 
     ion-nav > .ion-page {
