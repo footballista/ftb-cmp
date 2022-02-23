@@ -34,6 +34,7 @@ export class FtbShowcasePage {
           <ul>
             <li>Created ftb-virtual-viewport component</li>
             <li>Added drag-n-drop sorting in ftb-virtual scroll</li>
+            <li>Added mobile filter view for ftb-searchable-content</li>
             <li>Fixed nesting in tabs component </li>
           </ul>
 

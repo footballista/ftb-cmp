@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Element, Watch, Build } from '@stencil/core';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import SearchIcon from '../../assets/icons/search.svg';
+import FilterIcon from '../../assets/icons/filter.svg';
 import { Subject, AsyncSubject, timer, merge } from 'rxjs';
 import { takeUntil, tap, debounce, filter, distinctUntilChanged } from 'rxjs/operators';
 import { checkElementSize, getFromStorage, setToStorage, translations, userState } from 'ftb-models';
@@ -10,6 +11,7 @@ export interface CategoryInterface {
   placeholder?: string;
   filterFn: (query: string, options: CategoryInterface['options']) => CategoryInterface['options'];
   renderItem: (item: CategoryInterface['options'][0]) => string;
+  title?: string;
   options: any;
   filteredOptions?: any;
   open?: boolean;
@@ -32,10 +34,13 @@ export class FtbSearchableContent {
   @Prop() getCategories: (currentCategories?: CategoryInterface[]) => CategoryInterface[];
   @Prop() debounce = 300;
   @Prop() clear: number;
+  /** on which width to render mobile view */
+  @Prop() mobileThreshold? = 400;
   @State() open = true;
   @State() filteredItems: any[];
   @State() searchInProgress = false;
   @State() inputFocused: boolean;
+  @State() mobileMode: boolean;
   @Event() inputKeyDown: EventEmitter<KeyboardEvent>;
   @Event() inputFocusChange: EventEmitter<boolean>;
   @Event() openCategoryChange: EventEmitter<CategoryInterface>;
@@ -47,6 +52,7 @@ export class FtbSearchableContent {
   private onDestroyed$ = new AsyncSubject();
   private ready$ = new AsyncSubject();
   private inputDirty = false;
+  private resizeObserver;
 
   async componentWillLoad() {
     if (!this.items) return null;
@@ -60,6 +66,17 @@ export class FtbSearchableContent {
   @Watch('clear') onClearSignal() {
     this.inputEl.value = '';
     this.queryChanges$.next('');
+  }
+
+  componentDidLoad() {
+    if (Build.isBrowser) {
+      if (!this.resizeObserver) {
+        this.resizeObserver = new ResizeObserver(() => {
+          this.mobileMode = this.mobileThreshold > this.element.getBoundingClientRect().width;
+        });
+        this.resizeObserver.observe(this.element);
+      }
+    }
   }
 
   setMinHeight(el: HTMLDivElement) {
@@ -132,6 +149,7 @@ export class FtbSearchableContent {
   }
 
   disconnectedCallback() {
+    this.resizeObserver?.disconnect();
     this.onDestroyed$.next(true);
     this.onDestroyed$.complete();
   }
@@ -240,41 +258,63 @@ export class FtbSearchableContent {
                 onBlur={() => this.setFocus(false)}
               />
               <ftb-icon svg={SearchIcon} class="search-icon" />
-              {this.categories.map(c => (
-                <input
-                  class={{ hidden: !c.open }}
-                  placeholder={c.placeholder}
-                  ref={el => (c.inputEl = el)}
-                  onKeyUp={e => this.onCategoryInputKeyUp(c, e)}
-                  onKeyDown={e => this.onCategoryInputKeyDown(c, e)}
-                />
-              ))}
+              {!this.mobileMode &&
+                this.categories.map(c => (
+                  <input
+                    class={{ hidden: !c.open }}
+                    placeholder={c.placeholder}
+                    ref={el => (c.inputEl = el)}
+                    onKeyUp={e => this.onCategoryInputKeyUp(c, e)}
+                    onKeyDown={e => this.onCategoryInputKeyDown(c, e)}
+                  />
+                ))}
               <ftb-spinner class={{ hidden: !this.searchInProgress }} />
+              {this.mobileMode && this.categories.length > 0 && (
+                <ftb-icon svg={FilterIcon} class="filter-icon" onClick={() => (this.open = true)} />
+              )}
             </div>
-            {this.categories?.map(c => (
-              <div class={'category-wrapper' + (c.open ? ' open' : '')} onClick={() => this.toggleCategory(c)}>
-                <div class="category-background">
-                  {c.renderItem(c.options.find(o => o.selected))}
-                  <ftb-icon svg={Chevron} class={{ open: c.open }} />
+            {!this.mobileMode &&
+              this.categories?.map(c => (
+                <div class={'category-wrapper' + (c.open ? ' open' : '')} onClick={() => this.toggleCategory(c)}>
+                  <div class="category-background">
+                    {c.renderItem(c.options.find(o => o.selected))}
+                    <ftb-icon svg={Chevron} class={{ open: c.open }} />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
-          <div class="options-container">
-            {this.categories.map(c => (
-              <div class={'options' + (c.open ? ' open' : '')}>
-                <div class="options-inner">
-                  {c.filteredOptions.map(o => (
-                    <div class="option-wrapper">
-                      <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
-                        {c.renderItem(o)}
+
+          {!this.mobileMode ? (
+            <div class="options-container desktop">
+              {this.categories.map(c => (
+                <div class={'options' + (c.open ? ' open' : '')}>
+                  <div class="options-inner">
+                    {c.filteredOptions.map(o => (
+                      <div class="option-wrapper">
+                        <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
+                          {c.renderItem(o)}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            // todo append to window?
+            <div class={'options-container mobile ' + (this.open ? 'open' : '')}>
+              {this.categories.map(c => [
+                <div class="category-title">{c.title}</div>,
+                c.filteredOptions.map(o => (
+                  <div class="option-wrapper">
+                    <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
+                      {c.renderItem(o)}
+                    </div>
+                  </div>
+                )),
+              ])}
+            </div>
+          )}
         </div>
         <div class="ftb-searchable-content__content" ref={el => this.setMinHeight(el)}>
           {this.renderItems(this.filteredItems)}
