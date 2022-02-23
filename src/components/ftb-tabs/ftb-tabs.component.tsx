@@ -53,8 +53,12 @@ export class FtbTabs {
 
   componentDidRender() {
     const tabsEls = [];
-    const headerEls: HTMLElement[] = Array.from(this.el.querySelectorAll('.ftb-tabs__header-tab'));
-    const bodyEls: HTMLElement[] = Array.from(this.el.querySelectorAll('.ftb-tabs__body-tab'));
+    const headerEls: HTMLElement[] = Array.from(
+      this.el.parentElement.querySelectorAll(`#${this.navKey} > .ftb-tabs__header > .ftb-tabs__header-tab`),
+    );
+    const bodyEls: HTMLElement[] = Array.from(
+      this.el.parentElement.querySelectorAll(`#${this.navKey} > .ftb-tabs__body > .ftb-tabs__body-tab`),
+    );
 
     for (let i = 0; i < this.tabs.length; i++) {
       tabsEls.push({ headerEl: headerEls[i], bodyEl: bodyEls[i] });
@@ -98,7 +102,7 @@ export class FtbTabs {
     }
 
     return (
-      <Host class="ftb-tabs">
+      <Host class="ftb-tabs" id={this.navKey}>
         <div class="ftb-tabs__header">
           {this.tabs.map(t => (
             <button

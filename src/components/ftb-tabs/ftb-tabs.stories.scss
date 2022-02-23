@@ -5,6 +5,7 @@ ftb-tabs-stories {
     display: block;
     margin-bottom: 20px;
     width: fit-content;
+    max-width: calc(100% - 20px);
     &__header {
       padding: 0 20px;
       &-tab {
@@ -36,8 +37,12 @@ ftb-tabs-stories {
       width: 100%;
       font-size: 12px;
       margin-top: -1px;
+      padding: 0 10px;
       &-tab {
         padding: 20px 0;
+      }
+      p {
+        margin-bottom: 20px;
       }
     }
   }

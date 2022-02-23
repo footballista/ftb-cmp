@@ -37,7 +37,7 @@ export class FtbTabsStroies {
   @State() second = [
     {
       key: 'ftb',
-      title: () => 'Footballista',
+      title: () => 'Ftb',
       body: () => (
         <ul>
           <li>Website</li>
@@ -47,21 +47,33 @@ export class FtbTabsStroies {
           <li>API</li>
           <li>Web components</li>
 
-          <a href={'#second:players'}>switch to Players</a>
+          <a href={'#second:nested'}>switch to tab with nested tabs</a>
         </ul>
       ),
     },
     {
-      key: 'players',
-      title: () => 'Players',
-      body: () => (
-        <ul>
-          <li>Goalkeeper</li>
-          <li>Defender</li>
-          <li>Midfielder</li>
-          <li>Striker</li>
-        </ul>
-      ),
+      key: 'nested',
+      title: () => 'Nested',
+      body: () => [
+        <p>
+          You can place tabs inside tabs. Using <i>navKey</i> parameter for all tabs is mandatory
+        </p>,
+        <ftb-tabs
+          navKey={'nested'}
+          tabs={[
+            {
+              key: 'first-nested',
+              title: () => 'First',
+              body: () => 'First nested tab',
+            },
+            {
+              key: 'second-nested',
+              title: () => 'Second',
+              body: () => 'Second nested tab',
+            },
+          ]}
+        />,
+      ],
     },
   ];
 
