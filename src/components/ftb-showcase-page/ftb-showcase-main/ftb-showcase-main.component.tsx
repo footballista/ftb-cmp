@@ -32,7 +32,9 @@ export class FtbShowcasePage {
           <b>3.5.0</b>
           <span class="date">22 Feb 2022</span>
           <ul>
+            <li>Created ftb-virtual-viewport component</li>
             <li>Added drag-n-drop sorting in ftb-virtual scroll</li>
+            <li>Fixed nesting in tabs component </li>
           </ul>
 
           <b>3.4.0</b>

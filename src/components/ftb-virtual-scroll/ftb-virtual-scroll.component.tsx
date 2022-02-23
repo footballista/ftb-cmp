@@ -105,7 +105,6 @@ export class FtbVirtualScroll {
 
   onTouchEnd() {
     if (this.draggedItem) {
-      console.log(this.draggedItem);
       const el = this.draggedItem;
       if (el.dragShift) {
         el.dragShift = 0;

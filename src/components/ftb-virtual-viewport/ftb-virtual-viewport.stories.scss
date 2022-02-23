@@ -1,0 +1,27 @@
+ftb-virtual-viewport-stories {
+  ftb-virtual-viewport {
+    width: calc(100% + 20px);
+    max-width: 400px;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    ftb-virtual-viewport-item .item {
+      height: 50px;
+      box-sizing: border-box;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+
+      ftb-player-photo {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.3);
+        margin-left: -40px;
+      }
+    }
+  }
+}
