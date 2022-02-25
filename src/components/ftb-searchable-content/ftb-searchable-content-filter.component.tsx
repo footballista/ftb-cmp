@@ -43,14 +43,16 @@ export class FtbSearchableContentFilter {
         <div class={'options-container mobile ' + (this.isOpen ? 'open' : '')}>
           {this.categories?.map(c => [
             <div class="category-title">{c.title}</div>,
-            c.filteredOptions.map(o => (
-              <div class="option-wrapper">
-                <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(c, o)}>
-                  {c.renderItem(o)}
-                  <div class={'radio ' + (o.selected ? 'selected' : '')} />
+            <div class="category-options">
+              {c.filteredOptions.map(o => (
+                <div class="option-wrapper">
+                  <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(c, o)}>
+                    {c.renderItem(o)}
+                    <div class={'radio ' + (o.selected ? 'selected' : '')} />
+                  </div>
                 </div>
-              </div>
-            )),
+              ))}
+            </div>,
           ])}
           <button class="confirm-button" onClick={() => (this.isOpen = false)} />
         </div>

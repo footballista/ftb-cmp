@@ -27,24 +27,24 @@ export class FtbPlayerPhotoStories {
 
     return (
       <Host>
-        {/*        <h1>Searchable content</h1>*/}
-        {/*        <p>Renders content that can be searched and categorized</p>*/}
-        {/*        <ftb-searchable-content*/}
-        {/*          items={this.items}*/}
-        {/*          filterFn={filterFn}*/}
-        {/*          placeholder="Search by mark or model"*/}
-        {/*          renderItems={i => this.renderItems(i)}*/}
-        {/*        />*/}
-        {/*        <ftb-code-snippet*/}
-        {/*          code={`*/}
-        {/*<ftb-searchable-content*/}
-        {/*  items={...}*/}
-        {/*  filterFn={filterFn}*/}
-        {/*  placeholder="Search by mark or model"*/}
-        {/*  renderItems={renderFn}*/}
-        {/*/>*/}
-        {/*        `}*/}
-        {/*        />*/}
+        <h1>Searchable content</h1>
+        <p>Renders content that can be searched and categorized</p>
+        <ftb-searchable-content
+          items={this.items}
+          filterFn={filterFn}
+          placeholder="Search by mark or model"
+          renderItems={i => this.renderItems(i)}
+        />
+        <ftb-code-snippet
+          code={`
+        <ftb-searchable-content
+          items={...}
+          filterFn={filterFn}
+          placeholder="Search by mark or model"
+          renderItems={renderFn}
+        />
+                `}
+        />
 
         <h2>Filters</h2>
         <p>Add categories to create additional filter ability</p>
@@ -71,32 +71,32 @@ export class FtbPlayerPhotoStories {
             },
           ]}
         />
-        {/*        <ftb-code-snippet*/}
-        {/*          code={`*/}
-        {/*<ftb-searchable-content*/}
-        {/*  items={...}*/}
-        {/*  filterFn={filterFn}*/}
-        {/*  placeholder="Search by mark or model"*/}
-        {/*  renderItems={renderFn}*/}
-        {/*  categories={...}*/}
-        {/*/>*/}
-        {/*        `}*/}
-        {/*        />*/}
-        {/*        <p>inspect stories component code to understand how to work with filters and categories</p>*/}
+        <ftb-code-snippet
+          code={`
+        <ftb-searchable-content
+          items={...}
+          filterFn={filterFn}
+          placeholder="Search by mark or model"
+          renderItems={renderFn}
+          categories={...}
+        />
+                `}
+        />
+        <p>inspect stories component code to understand how to work with filters and categories</p>
 
-        {/*        <h2>Debounce</h2>*/}
-        {/*        <p>*/}
-        {/*          If content loading/rendering is a heavy operation (e.g. performing service call at every change), you can*/}
-        {/*          increase input debounce value*/}
-        {/*        </p>*/}
-        {/*        <ftb-searchable-content*/}
-        {/*          items={this.items}*/}
-        {/*          filterFn={filterFn}*/}
-        {/*          placeholder="Search by mark or model"*/}
-        {/*          renderItems={i => this.renderItems(i)}*/}
-        {/*          debounce={1000}*/}
-        {/*        />*/}
-        {/*        <ftb-code-snippet code={`<ftb-searchable-content ...  debounce={1000} />`} />*/}
+        <h2>Debounce</h2>
+        <p>
+          If content loading/rendering is a heavy operation (e.g. performing service call at every change), you can
+          increase input debounce value
+        </p>
+        <ftb-searchable-content
+          items={this.items}
+          filterFn={filterFn}
+          placeholder="Search by mark or model"
+          renderItems={i => this.renderItems(i)}
+          debounce={1000}
+        />
+        <ftb-code-snippet code={`<ftb-searchable-content ...  debounce={1000} />`} />
       </Host>
     );
   }
