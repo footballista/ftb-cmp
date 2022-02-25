@@ -29,7 +29,7 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
-          <b>3.5.0</b>
+          <b>3.5.1</b>
           <span class="date">22 Feb 2022</span>
           <ul>
             <li>Created ftb-virtual-viewport component</li>

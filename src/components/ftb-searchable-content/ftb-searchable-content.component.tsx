@@ -53,6 +53,7 @@ export class FtbSearchableContent {
   private ready$ = new AsyncSubject();
   private inputDirty = false;
   private resizeObserver;
+  private mobileFilterEl: HTMLElement;
 
   async componentWillLoad() {
     if (!this.items) return null;
@@ -76,7 +77,32 @@ export class FtbSearchableContent {
         });
         this.resizeObserver.observe(this.element);
       }
+
+      this.createFilterModal();
     }
+  }
+
+  createFilterModal() {
+    const modal = document.createElement('ftb-searchable-content-filter');
+    Object.assign(modal, { categories: this.categories || this.getCategories() });
+    this.mobileFilterEl = modal;
+    this.mobileFilterEl.addEventListener(
+      'selected',
+      e => {
+        this.categories = e['detail'] as CategoryInterface[];
+        this.categoryUpdated$.next(true);
+        this.inputEl.focus();
+        this.mobileFilterEl.addEventListener(
+          'transitionend',
+          () => {
+            this.mobileFilterEl.remove();
+            this.createFilterModal();
+          },
+          { once: true },
+        );
+      },
+      { once: true },
+    );
   }
 
   setMinHeight(el: HTMLDivElement) {
@@ -233,6 +259,15 @@ export class FtbSearchableContent {
     this.inputFocusChange.emit(isFocused);
   }
 
+  openFilter() {
+    document.body.append(this.mobileFilterEl);
+    this.mobileFilterEl['open']();
+  }
+
+  isFilterActive() {
+    return this.categories.some(c => c.options.slice(1).some(o => o.selected));
+  }
+
   render() {
     if (!this.items) return null;
 
@@ -270,7 +305,11 @@ export class FtbSearchableContent {
                 ))}
               <ftb-spinner class={{ hidden: !this.searchInProgress }} />
               {this.mobileMode && this.categories.length > 0 && (
-                <ftb-icon svg={FilterIcon} class="filter-icon" onClick={() => (this.open = true)} />
+                <ftb-icon
+                  svg={FilterIcon}
+                  class={'filter-icon ' + (this.isFilterActive() ? 'active' : '')}
+                  onClick={() => this.openFilter()}
+                />
               )}
             </div>
             {!this.mobileMode &&
@@ -284,7 +323,7 @@ export class FtbSearchableContent {
               ))}
           </div>
 
-          {!this.mobileMode ? (
+          {!this.mobileMode && (
             <div class="options-container desktop">
               {this.categories.map(c => (
                 <div class={'options' + (c.open ? ' open' : '')}>
@@ -299,20 +338,6 @@ export class FtbSearchableContent {
                   </div>
                 </div>
               ))}
-            </div>
-          ) : (
-            // todo append to window?
-            <div class={'options-container mobile ' + (this.open ? 'open' : '')}>
-              {this.categories.map(c => [
-                <div class="category-title">{c.title}</div>,
-                c.filteredOptions.map(o => (
-                  <div class="option-wrapper">
-                    <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(o)}>
-                      {c.renderItem(o)}
-                    </div>
-                  </div>
-                )),
-              ])}
             </div>
           )}
         </div>
