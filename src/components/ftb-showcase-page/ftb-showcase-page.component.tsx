@@ -28,6 +28,7 @@ export class FtbShowcasePage {
         'ftb-league-sports-icon',
         'ftb-flag',
         'ftb-partner-photo',
+        'ftb-country-photo',
       ],
     },
     { title: 'Stage', items: ['ftb-stage-table', 'ftb-stage-cup-net', 'ftb-cup-net-explorer'] },
