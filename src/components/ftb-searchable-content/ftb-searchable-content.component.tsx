@@ -103,6 +103,16 @@ export class FtbSearchableContent {
       },
       { once: true },
     );
+    document.addEventListener(
+      'ionBackButton',
+      ev => {
+        ev['detail'].register(-1, () => {
+          this.mobileFilterEl.remove();
+          this.createFilterModal();
+        });
+      },
+      { once: true },
+    );
   }
 
   setMinHeight(el: HTMLDivElement) {
