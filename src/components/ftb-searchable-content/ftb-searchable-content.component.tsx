@@ -91,7 +91,7 @@ export class FtbSearchableContent {
       e => {
         this.categories = e['detail'] as CategoryInterface[];
         this.categoryUpdated$.next(true);
-        this.inputEl.focus();
+        // this.inputEl.focus();
         this.mobileFilterEl.addEventListener(
           'transitionend',
           () => {
