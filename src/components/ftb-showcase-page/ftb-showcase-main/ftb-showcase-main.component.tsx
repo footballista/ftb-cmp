@@ -29,6 +29,13 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.6.0</b>
+          <span class="date">25 May 2022</span>
+          <ul>
+            <li>Created ftb-collapsible-tabs component</li>
+          </ul>
+        </div>
+        <div class="changelog-row">
           <b>3.5.1</b>
           <span class="date">22 Feb 2022</span>
           <ul>

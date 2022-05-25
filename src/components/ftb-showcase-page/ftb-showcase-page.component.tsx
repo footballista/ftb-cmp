@@ -42,6 +42,7 @@ export class FtbShowcasePage {
         'ftb-virtual-scroll',
         'ftb-virtual-viewport',
         'ftb-tabs',
+        'ftb-collapsible-tabs',
       ],
     },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },

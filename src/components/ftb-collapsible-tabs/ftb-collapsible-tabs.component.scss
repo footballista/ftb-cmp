@@ -1,0 +1,83 @@
+@import '~swiper/swiper-bundle.min.css';
+
+ftb-collapsible-tabs {
+  .header,
+  .body {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .ftb-c-tabs__header {
+    width: 100%;
+    height: 50px;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    //justify-content: space-evenly;
+
+    &-tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex: 1;
+    }
+  }
+
+  .body {
+    height: 100%;
+    width: 100%;
+    .ftb-c-tabs__body {
+      height: 100%;
+      width: 100%;
+      &-tab {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        .inner {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      //&-tab {
+      //  position: absolute;
+      //  overflow-y: auto;
+      //  height: 100%;
+      //  top: 0;
+      //  bottom: 0;
+      //  left: 0;
+      //  right: 0;
+      //  opacity: 0;
+      //  z-index: -1;
+      //  pointer-events: none;
+      //  &.selected {
+      //    z-index: 1;
+      //    opacity: 1;
+      //    pointer-events: auto;
+      //    position: relative;
+      //  }
+      //  .inner {
+      //    transition: transform 0.3s ease-in-out;
+      //  }
+      //}
+    }
+  }
+
+  .swiper {
+    height: 100%;
+    width: 100%;
+    .swiper-slide {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+  }
+}

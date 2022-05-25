@@ -11,7 +11,6 @@ export class FtbTabs {
   /** unique key for using in hash navigation */
   @Prop({ mutable: true }) navKey?: string = 'tabs';
   selectedTab?: { title: () => string; body: () => string; key: string };
-
   @Element() el: HTMLElement;
   tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement }> = [];
 
@@ -29,7 +28,7 @@ export class FtbTabs {
   }
 
   disconnectedCallback() {
-    window.addEventListener('hashchange', this.onHashChange);
+    window.removeEventListener('hashchange', this.onHashChange);
   }
 
   onHashChange() {
