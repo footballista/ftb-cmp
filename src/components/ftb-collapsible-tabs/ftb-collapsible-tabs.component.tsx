@@ -89,10 +89,6 @@ export class FtbCollapsibleTabsComponent {
       if (target.scrollTop >= COLLAPSED_PADDING) {
         this.collapse();
       }
-    } else {
-      if (target.scrollTop == 0) {
-        this.expand();
-      }
     }
   }
 
