@@ -86,23 +86,20 @@ export class FtbSearchableContent {
     const modal = document.createElement('ftb-searchable-content-filter');
     Object.assign(modal, { categories: this.categories || this.getCategories() });
     this.mobileFilterEl = modal;
-    this.mobileFilterEl.addEventListener(
-      'selected',
-      e => {
-        this.categories = e['detail'] as CategoryInterface[];
-        this.categoryUpdated$.next(true);
-        // this.inputEl.focus();
-        this.mobileFilterEl.addEventListener(
-          'transitionend',
-          () => {
-            this.mobileFilterEl.remove();
-            this.createFilterModal();
-          },
-          { once: true },
-        );
-      },
-      { once: true },
-    );
+
+    this.mobileFilterEl.addEventListener('selected', e => {
+      this.categories = e['detail'] as CategoryInterface[];
+      this.categoryUpdated$.next(true);
+      // this.inputEl.focus();
+      this.mobileFilterEl.addEventListener(
+        'transitionend',
+        () => {
+          this.mobileFilterEl.remove();
+          this.createFilterModal();
+        },
+        { once: true },
+      );
+    });
     document.addEventListener(
       'ionBackButton',
       ev => {

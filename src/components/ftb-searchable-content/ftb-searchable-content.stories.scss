@@ -176,48 +176,8 @@ ftb-searchable-content-stories {
     }
   }
 }
-
-ftb-searchable-content-filter {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  &.open {
-    pointer-events: auto;
-    .backdrop {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .options-container {
-      transform: translateY(0);
-    }
-  }
-  .backdrop {
-    background: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: opacity 0.3s ease-in-out;
-    opacity: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+ion-modal {
   .options-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-    background: white;
-    transition: transform 0.3s ease-in-out;
-    transform: translateY(calc(100% + 4px));
-    max-height: 90%;
-
     .category-title {
       padding: 15px;
       font-weight: 600;
@@ -237,20 +197,6 @@ ftb-searchable-content-filter {
         &.selected {
           background: rgba(0, 0, 0, 0.6);
         }
-      }
-    }
-    .confirm-button {
-      width: 100%;
-      height: 45px;
-      border: none;
-      background: cornflowerblue;
-      color: white;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 12px;
-      &:after {
-        display: block;
-        content: 'Confirm';
       }
     }
   }
