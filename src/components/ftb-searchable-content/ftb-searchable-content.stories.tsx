@@ -53,6 +53,7 @@ export class FtbPlayerPhotoStories {
           filterFn={filterFn}
           placeholder="Search by mark or model"
           renderItems={i => this.renderItems(i)}
+          class="with-filters"
           categories={[
             {
               key: 'color',

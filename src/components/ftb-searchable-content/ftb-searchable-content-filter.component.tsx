@@ -1,4 +1,5 @@
 import { Component, EventEmitter, h, Host, Method, Prop, State, Event, Element, forceUpdate } from '@stencil/core';
+import { translations, userState } from 'ftb-models';
 
 export interface CategoryInterface {
   key: string;
@@ -38,24 +39,36 @@ export class FtbSearchableContentFilter {
 
   render() {
     return (
-      <Host class={this.isOpen ? 'open' : ''}>
-        <div class={'backdrop ' + (this.isOpen ? 'open' : '')} onClick={() => (this.isOpen = false)} />
-        <div class={'options-container mobile ' + (this.isOpen ? 'open' : '')}>
-          {this.categories?.map(c => [
-            <div class="category-title">{c.title}</div>,
-            <div class="category-options">
-              {c.filteredOptions.map(o => (
-                <div class="option-wrapper">
-                  <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(c, o)}>
-                    {c.renderItem(o)}
-                    <div class={'radio ' + (o.selected ? 'selected' : '')} />
-                  </div>
-                </div>
-              ))}
-            </div>,
-          ])}
-          <button class="confirm-button" onClick={() => (this.isOpen = false)} />
-        </div>
+      <Host>
+        <ion-modal
+          onIonModalDidDismiss={() => {
+            this.isOpen = false;
+          }}
+          mode="ios"
+          isOpen={this.isOpen}
+          class={'ftb-searchable-content-filter-modal ' + this.el.classList.toString()}
+        >
+          <div class={'options-container mobile ' + (this.isOpen ? 'open' : '')}>
+            <div class="categories-container">
+              {this.categories?.map(c => [
+                <div class="category-title">{c.title}</div>,
+                <div class="category-options">
+                  {c.filteredOptions.map(o => (
+                    <div class="option-wrapper">
+                      <div class={{ option: true, focused: o.focused }} onClick={() => this.selectOption(c, o)}>
+                        {c.renderItem(o)}
+                        <div class={'radio ' + (o.selected ? 'selected' : '')} />
+                      </div>
+                    </div>
+                  ))}
+                </div>,
+              ])}
+            </div>
+          </div>
+          <button class="select-button" onClick={() => (this.isOpen = false)}>
+            {translations.navigation.done[userState.language]}
+          </button>
+        </ion-modal>
       </Host>
     );
   }

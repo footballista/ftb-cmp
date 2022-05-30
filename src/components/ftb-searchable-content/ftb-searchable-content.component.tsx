@@ -85,34 +85,36 @@ export class FtbSearchableContent {
   createFilterModal() {
     const modal = document.createElement('ftb-searchable-content-filter');
     Object.assign(modal, { categories: this.categories || this.getCategories() });
+    this.element.classList.forEach(c => {
+      console.log(c);
+      modal.classList.add(c);
+    });
+    console.log(modal);
     this.mobileFilterEl = modal;
-    this.mobileFilterEl.addEventListener(
-      'selected',
-      e => {
-        this.categories = e['detail'] as CategoryInterface[];
-        this.categoryUpdated$.next(true);
-        // this.inputEl.focus();
-        this.mobileFilterEl.addEventListener(
-          'transitionend',
-          () => {
-            this.mobileFilterEl.remove();
-            this.createFilterModal();
-          },
-          { once: true },
-        );
-      },
-      { once: true },
-    );
-    document.addEventListener(
-      'ionBackButton',
-      ev => {
-        ev['detail'].register(-1, () => {
+
+    this.mobileFilterEl.addEventListener('selected', e => {
+      this.categories = e['detail'] as CategoryInterface[];
+      this.categoryUpdated$.next(true);
+      // this.inputEl.focus();
+      this.mobileFilterEl.addEventListener(
+        'transitionend',
+        () => {
           this.mobileFilterEl.remove();
           this.createFilterModal();
-        });
-      },
-      { once: true },
-    );
+        },
+        { once: true },
+      );
+    });
+    // document.addEventListener(
+    //   'ionBackButton',
+    //   ev => {
+    //     ev['detail'].register(-1, () => {
+    //       this.mobileFilterEl.remove();
+    //       this.createFilterModal();
+    //     });
+    //   },
+    //   { once: true },
+    // );
   }
 
   setMinHeight(el: HTMLDivElement) {
