@@ -29,6 +29,13 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.7.0</b>
+          <span class="date">30 May 2022</span>
+          <ul>
+            <li>Ftb-searchable-content now uses filter in ionic-modal</li>
+          </ul>
+        </div>
+        <div class="changelog-row">
           <b>3.6.0</b>
           <span class="date">25 May 2022</span>
           <ul>
