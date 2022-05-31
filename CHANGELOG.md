@@ -1,3 +1,12 @@
+## [3.7.1](https://github.com/footballista/ftb-cmp/compare/3.7.0...3.7.1) (2022-05-31)
+
+
+### Features
+
+* loading for img ([#10](https://github.com/footballista/ftb-cmp/issues/10)) ([0820755](https://github.com/footballista/ftb-cmp/commit/0820755459c26c24f4656444be29a6bff8d83039))
+
+
+
 # [3.7.0](https://github.com/footballista/ftb-cmp/compare/3.6.1...3.7.0) (2022-05-30)
 
 
