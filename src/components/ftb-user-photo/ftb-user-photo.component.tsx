@@ -24,7 +24,7 @@ export class FtbUserPhoto {
   render() {
     if (!this.user) return;
     return (
-      <Host>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-icon svg={AvatarIcon} title={this.user.name} class="placeholder-icon" />
         ) : (
@@ -33,7 +33,13 @@ export class FtbUserPhoto {
               src={envState.imgHost + '/img/users/' + this.user._id + '.jpg?version=' + this.user.photoId}
               title={this.user.name}
               alt={this.user.name}
-              onError={e => this.onImgFail(e.target as HTMLImageElement)}
+              onError={e => {
+                this.onImgFail(e.target as HTMLImageElement);
+                this.el.classList.remove('loading');
+              }}
+              onLoad={() => {
+                this.el.classList.remove('loading');
+              }}
               loading={this.lazy ? 'lazy' : 'eager'}
             />
           </picture>

@@ -25,7 +25,7 @@ export class FtbStadiumPhoto {
   render() {
     if (!this.stadium) return;
     return (
-      <Host>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-icon svg={StadiumIcon} title={this.stadium.name} class="placeholder-icon" />
         ) : (
@@ -36,7 +36,13 @@ export class FtbStadiumPhoto {
               }
               title={this.stadium.name}
               alt={this.stadium.name}
-              onError={e => this.onImgFail(e.target as HTMLImageElement)}
+              onError={e => {
+                this.onImgFail(e.target as HTMLImageElement);
+                this.el.classList.remove('loading');
+              }}
+              onLoad={() => {
+                this.el.classList.remove('loading');
+              }}
               loading={this.lazy ? 'lazy' : 'eager'}
             />
           </picture>
