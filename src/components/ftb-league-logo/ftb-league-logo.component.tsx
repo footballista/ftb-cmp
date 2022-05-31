@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Host, h, Prop, State, Element } from '@stencil/core';
 import { League, envState } from 'ftb-models';
 
 @Component({
@@ -11,6 +11,8 @@ export class FtbLeagueLogo {
   @State() showPlaceholder: boolean = false;
   @State() loading: boolean = true;
 
+  @Element() el: HTMLFtbLeagueLogoElement;
+
   onImgFail(el: HTMLImageElement) {
     el.style.display = 'none';
     this.showPlaceholder = true;
@@ -22,7 +24,7 @@ export class FtbLeagueLogo {
     const url = envState.imgHost + `/img/leagues/${this.league._id}.png?version=${this.league.logoId}`;
 
     return (
-      <Host class={{ loading: this.loading }}>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-league-sports-icon league={this.league} />
         ) : (
@@ -30,10 +32,10 @@ export class FtbLeagueLogo {
             src={url}
             onError={e => {
               this.onImgFail(e.target as HTMLImageElement);
-              this.loading = false;
+              this.el.classList.remove('loading');
             }}
             onLoad={() => {
-              this.loading = false;
+              this.el.classList.remove('loading');
             }}
             alt={this.league.name}
             title={this.league.name}

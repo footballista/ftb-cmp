@@ -13,7 +13,6 @@ export class FtbUserPhoto {
 
   /** Image loading failed (possibly photo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
-  @State() loading: boolean = true;
 
   @Element() el: HTMLFtbTeamLogoElement;
 
@@ -25,7 +24,7 @@ export class FtbUserPhoto {
   render() {
     if (!this.user) return;
     return (
-      <Host class={{ loading: this.loading }}>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-icon svg={AvatarIcon} title={this.user.name} class="placeholder-icon" />
         ) : (
@@ -36,9 +35,11 @@ export class FtbUserPhoto {
               alt={this.user.name}
               onError={e => {
                 this.onImgFail(e.target as HTMLImageElement);
-                this.loading = false;
+                this.el.classList.remove('loading');
               }}
-              onLoad={() => (this.loading = false)}
+              onLoad={() => {
+                this.el.classList.remove('loading');
+              }}
               loading={this.lazy ? 'lazy' : 'eager'}
             />
           </picture>

@@ -14,7 +14,6 @@ export class FtbStadiumPhoto {
 
   /** Image loading failed (possibly photo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
-  @State() loading: boolean = true;
 
   @Element() el: HTMLFtbTeamLogoElement;
 
@@ -26,7 +25,7 @@ export class FtbStadiumPhoto {
   render() {
     if (!this.stadium) return;
     return (
-      <Host class={{ loading: this.loading }}>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-icon svg={StadiumIcon} title={this.stadium.name} class="placeholder-icon" />
         ) : (
@@ -39,10 +38,10 @@ export class FtbStadiumPhoto {
               alt={this.stadium.name}
               onError={e => {
                 this.onImgFail(e.target as HTMLImageElement);
-                this.loading = false;
+                this.el.classList.remove('loading');
               }}
               onLoad={() => {
-                this.loading = false;
+                this.el.classList.remove('loading');
               }}
               loading={this.lazy ? 'lazy' : 'eager'}
             />

@@ -23,7 +23,6 @@ export class FtbTeamLogo {
 
   /** Image loading failed (possibly logo does not exist on server), showing default placeholder */
   @State() showPlaceholder: boolean = false;
-  @State() loading: boolean = true;
 
   @Element() el: HTMLFtbTeamLogoElement;
 
@@ -85,7 +84,7 @@ export class FtbTeamLogo {
     if (!this.team) return;
 
     return (
-      <Host class={{ loading: this.loading }}>
+      <Host class="loading">
         {this.showPlaceholder ? (
           <ftb-icon svg={ShieldIcon} title={this.team.name} class="placeholder-icon" />
         ) : (
@@ -98,11 +97,11 @@ export class FtbTeamLogo {
               title={this.team.name}
               onError={e => {
                 this.onImgFail(e.target as HTMLImageElement);
-                this.loading = false;
+                this.el.classList.remove('loading');
               }}
               onLoad={e => {
                 this.onMinImgLoaded(e.target as HTMLImageElement);
-                this.loading = false;
+                this.el.classList.remove('loading');
               }}
             />
           </picture>
