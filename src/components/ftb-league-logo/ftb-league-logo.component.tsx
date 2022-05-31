@@ -9,7 +9,6 @@ import { League, envState } from 'ftb-models';
 export class FtbLeagueLogo {
   @Prop() league!: League;
   @State() showPlaceholder: boolean = false;
-  @State() loading: boolean = true;
 
   @Element() el: HTMLFtbLeagueLogoElement;
 
