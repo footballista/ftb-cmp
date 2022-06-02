@@ -86,10 +86,8 @@ export class FtbSearchableContent {
     const modal = document.createElement('ftb-searchable-content-filter');
     Object.assign(modal, { categories: this.categories || this.getCategories() });
     this.element.classList.forEach(c => {
-      console.log(c);
       modal.classList.add(c);
     });
-    console.log(modal);
     this.mobileFilterEl = modal;
 
     this.mobileFilterEl.addEventListener('selected', e => {
