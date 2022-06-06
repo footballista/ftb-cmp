@@ -14,7 +14,8 @@ export class FtbVirtualViewport {
   @Prop() items!: any[];
   @Prop() itemHeightPx!: number;
   /** element to listen for scroll events */
-  @Prop() scrollableElement!: HTMLElement;
+  @Prop() scrollableElement!: HTMLElement | (() => HTMLElement);
+  scrollableEl;
   @Prop() renderItem!: (item: any) => string;
 
   @Element() el: HTMLElement;
@@ -25,18 +26,21 @@ export class FtbVirtualViewport {
   }
 
   async componentDidLoad() {
+    if (this.scrollableElement instanceof Function) {
+      this.scrollableEl = this.scrollableElement();
+    } else {
+      this.scrollableEl = this.scrollableElement;
+    }
     this.renderRange();
-    this.scrollableElement.addEventListener('scroll', this.renderRange);
+    this.scrollableEl.addEventListener('scroll', this.renderRange);
   }
 
-  onParentScroll() {}
-
   disconnectedCallback() {
-    this.scrollableElement.removeEventListener('scroll', this.renderRange);
+    this.scrollableEl.removeEventListener('scroll', this.renderRange);
   }
 
   renderRange() {
-    const { top: containerTop, bottom: containerBottom } = this.scrollableElement.getBoundingClientRect();
+    const { top: containerTop, bottom: containerBottom } = this.scrollableEl.getBoundingClientRect();
     const { top: elTop } = this.el.getBoundingClientRect();
 
     const visibleHeight = containerBottom - Math.max(containerTop, elTop);

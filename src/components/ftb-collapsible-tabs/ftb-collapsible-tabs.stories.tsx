@@ -1,4 +1,4 @@
-import { Component, h, Host } from '@stencil/core';
+import { Component, h, Host, Element } from '@stencil/core';
 import range from 'lodash-es/range';
 import { Player } from 'ftb-models';
 
@@ -8,6 +8,8 @@ import { Player } from 'ftb-models';
   shadow: false,
 })
 export class FtbCollapsibleTabsStories {
+  @Element() el;
+
   renderRandomList() {
     return range(30).map(i => (
       <div class="row">
@@ -16,14 +18,35 @@ export class FtbCollapsibleTabsStories {
     ));
   }
 
-  renderVirtualList() {
+  renderVirtualScrollList() {
     return (
       <ftb-virtual-scroll
         items={range(30000, 50000)}
         itemHeightPx={40}
         renderItem={i => (
           <div class="item">
-            <ftb-player-photo player={new Player({ _id: i })} key={i} /> {i}
+            <ftb-player-photo player={new Player({ _id: i })} key={i} /> virtual scroll
+          </div>
+        )}
+      />
+    );
+  }
+
+  renderVirtualViewportList() {
+    // const tabs = Array.from(this.el.querySelectorAll('ftb-collapsible-tabs .ftb-c-tabs__body-tab'));
+
+    return (
+      <ftb-virtual-viewport
+        items={range(30000, 50000)}
+        itemHeightPx={40}
+        scrollableElement={() =>
+          this.el.querySelectorAll(
+            'ftb-collapsible-tabs .ftb-c-tabs__body > .swiper-wrapper > .ftb-c-tabs__body-tab',
+          )[2]
+        }
+        renderItem={i => (
+          <div class="item">
+            <ftb-player-photo player={new Player({ _id: i })} key={i} /> virtual viewport
           </div>
         )}
       />
@@ -33,8 +56,8 @@ export class FtbCollapsibleTabsStories {
   render() {
     const tabs = [
       { key: 'first', title: () => 'First', body: () => this.renderRandomList() },
-      { key: 'second', title: () => 'Virtual', body: () => this.renderVirtualList() },
-      { key: 'third', title: () => 'Third', body: () => this.renderRandomList() },
+      { key: 'second', title: () => 'Vs', body: () => this.renderVirtualScrollList() },
+      { key: 'third', title: () => 'Vw', body: () => this.renderVirtualViewportList() },
       { key: 'fourth', title: () => 'Fourth', body: () => this.renderRandomList() },
       { key: 'fifth', title: () => 'Fifth', body: () => this.renderRandomList() },
       { key: 'sixth', title: () => 'Sixth', body: () => this.renderRandomList() },
