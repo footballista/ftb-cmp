@@ -1,5 +1,6 @@
 import { Component, h, Host } from '@stencil/core';
 import range from 'lodash-es/range';
+import { Player } from 'ftb-models';
 
 @Component({
   tag: 'ftb-collapsible-tabs-stories',
@@ -15,10 +16,24 @@ export class FtbCollapsibleTabsStories {
     ));
   }
 
+  renderVirtualList() {
+    return (
+      <ftb-virtual-scroll
+        items={range(30000, 50000)}
+        itemHeightPx={40}
+        renderItem={i => (
+          <div class="item">
+            <ftb-player-photo player={new Player({ _id: i })} key={i} /> {i}
+          </div>
+        )}
+      />
+    );
+  }
+
   render() {
     const tabs = [
       { key: 'first', title: () => 'First', body: () => this.renderRandomList() },
-      { key: 'second', title: () => 'Second', body: () => this.renderRandomList() },
+      { key: 'second', title: () => 'Virtual', body: () => this.renderVirtualList() },
       { key: 'third', title: () => 'Third', body: () => this.renderRandomList() },
       { key: 'fourth', title: () => 'Fourth', body: () => this.renderRandomList() },
       { key: 'fifth', title: () => 'Fifth', body: () => this.renderRandomList() },

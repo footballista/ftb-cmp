@@ -43,27 +43,6 @@ ftb-collapsible-tabs {
           width: 100%;
         }
       }
-      //&-tab {
-      //  position: absolute;
-      //  overflow-y: auto;
-      //  height: 100%;
-      //  top: 0;
-      //  bottom: 0;
-      //  left: 0;
-      //  right: 0;
-      //  opacity: 0;
-      //  z-index: -1;
-      //  pointer-events: none;
-      //  &.selected {
-      //    z-index: 1;
-      //    opacity: 1;
-      //    pointer-events: auto;
-      //    position: relative;
-      //  }
-      //  .inner {
-      //    transition: transform 0.3s ease-in-out;
-      //  }
-      //}
     }
   }
 
@@ -79,5 +58,10 @@ ftb-collapsible-tabs {
       color: white;
       font-weight: 600;
     }
+  }
+
+  ftb-virtual-scroll {
+    height: 100%;
+    width: 100%;
   }
 }

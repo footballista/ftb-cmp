@@ -54,5 +54,20 @@ ftb-collapsible-tabs-stories {
         }
       }
     }
+
+    ftb-virtual-scroll-item .item {
+      height: 40px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      ftb-player-photo {
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+    }
   }
 }

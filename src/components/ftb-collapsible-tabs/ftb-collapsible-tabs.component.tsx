@@ -73,8 +73,16 @@ export class FtbCollapsibleTabsComponent {
       tabsEls.push({ headerEl: headerEls[i], bodyEl: bodyEls[i] });
     }
 
-    bodyEls.forEach(el => el.removeEventListener('scroll', this.onTabScroll));
-    bodyEls.forEach(el => el.addEventListener('scroll', this.onTabScroll));
+    bodyEls.forEach(el => {
+      const vsEl = el.querySelector('ftb-virtual-scroll');
+      if (vsEl) {
+        vsEl.removeEventListener('scroll', this.onTabScroll);
+        vsEl.addEventListener('scroll', this.onTabScroll);
+      } else {
+        el.removeEventListener('scroll', this.onTabScroll);
+        el.addEventListener('scroll', this.onTabScroll);
+      }
+    });
 
     this.tabsEls = tabsEls;
     if (!this.selectedTab) {

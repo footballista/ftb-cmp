@@ -29,6 +29,13 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.7.1</b>
+          <span class="date">06 June 2022</span>
+          <ul>
+            <li>Added ftb-virtual-scroll support for Collapsible Tabs component</li>
+          </ul>
+        </div>
+        <div class="changelog-row">
           <b>3.7.0</b>
           <span class="date">30 May 2022</span>
           <ul>
