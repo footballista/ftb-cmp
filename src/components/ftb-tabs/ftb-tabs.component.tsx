@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, writeTask, Element, Watch } from '@stencil/core';
 import fromPairs from 'lodash-es/fromPairs';
+import smoothscroll from 'smoothscroll-polyfill';
 
 @Component({
   tag: 'ftb-tabs',
@@ -23,6 +24,7 @@ export class FtbTabs {
   }
 
   connectedCallback() {
+    smoothscroll.polyfill();
     window.addEventListener('hashchange', this.onHashChange);
     this.onHashChange();
   }
@@ -67,29 +69,34 @@ export class FtbTabs {
   }
 
   private onTabSelected(tab: { title: () => string; body: () => string; key: string }) {
-    this.selectedTab = tab;
-    const selectedIdx = this.tabs.findIndex(t => t === this.selectedTab);
-    writeTask(() => {
-      this.tabsEls.forEach(({ headerEl, bodyEl }, idx) => {
-        if (idx == selectedIdx) {
-          headerEl.classList.add('selected');
-          bodyEl.classList.add('selected');
-        } else {
-          headerEl.classList.remove('selected');
-          bodyEl.classList.remove('selected');
-        }
+    if (this.selectedTab == tab) {
+      const activeTabIdx = this.tabs.findIndex(t => t.key == tab.key);
+      this.tabsEls[activeTabIdx].bodyEl.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      this.selectedTab = tab;
+      const selectedIdx = this.tabs.findIndex(t => t === this.selectedTab);
+      writeTask(() => {
+        this.tabsEls.forEach(({ headerEl, bodyEl }, idx) => {
+          if (idx == selectedIdx) {
+            headerEl.classList.add('selected');
+            bodyEl.classList.add('selected');
+          } else {
+            headerEl.classList.remove('selected');
+            bodyEl.classList.remove('selected');
+          }
+        });
       });
-    });
 
-    const hash = this.readHash();
-    hash[this.navKey] = tab.key;
-    const hashKeys = Object.keys(hash)
-      .map(key => key + ':' + hash[key])
-      .join(';');
+      const hash = this.readHash();
+      hash[this.navKey] = tab.key;
+      const hashKeys = Object.keys(hash)
+        .map(key => key + ':' + hash[key])
+        .join(';');
 
-    const newLocation = location.pathname + '#' + hashKeys;
-    if (location.href != location.origin + newLocation) {
-      history.replaceState(null, '', newLocation);
+      const newLocation = location.pathname + '#' + hashKeys;
+      if (location.href != location.origin + newLocation) {
+        history.replaceState(null, '', newLocation);
+      }
     }
   }
 
