@@ -9,8 +9,6 @@ interface TabInterface {
   key: string;
 }
 
-const COLLAPSED_PADDING = 50;
-
 @Component({
   tag: 'ftb-collapsible-tabs',
   styleUrl: 'ftb-collapsible-tabs.component.scss',
@@ -21,6 +19,7 @@ export class FtbCollapsibleTabsComponent {
   @Prop() tabs!: Array<{ title: () => string; body: () => string; key: string }>;
   /** unique key for using in hash navigation */
   @Prop({ mutable: true }) navKey?: string = 'tabs';
+  @Prop() collapsedPadding = 50;
   isCollapsed: boolean;
   tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement }> = [];
   selectedTab?: { title: () => string; body: () => string; key: string };
@@ -94,7 +93,7 @@ export class FtbCollapsibleTabsComponent {
   onTabScroll() {
     const { target } = arguments[0];
     if (!this.isCollapsed) {
-      if (target.scrollTop >= COLLAPSED_PADDING) {
+      if (target.scrollTop >= this.collapsedPadding) {
         this.collapse();
       }
     }
