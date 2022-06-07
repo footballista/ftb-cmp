@@ -84,7 +84,7 @@ export class FtbTeamLogo {
     if (!this.team) return;
 
     return (
-      <Host class="loading">
+      <Host>
         {this.showPlaceholder ? (
           <ftb-icon svg={ShieldIcon} title={this.team.name} class="placeholder-icon" />
         ) : (
@@ -95,14 +95,8 @@ export class FtbTeamLogo {
               src={this.url('min', 'png')}
               alt={this.team.name}
               title={this.team.name}
-              onError={e => {
-                this.onImgFail(e.target as HTMLImageElement);
-                this.el.classList.remove('loading');
-              }}
-              onLoad={e => {
-                this.onMinImgLoaded(e.target as HTMLImageElement);
-                this.el.classList.remove('loading');
-              }}
+              onError={e => this.onImgFail(e.target as HTMLImageElement)}
+              onLoad={e => this.onMinImgLoaded(e.target as HTMLImageElement)}
             />
           </picture>
         )}
