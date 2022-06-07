@@ -71,7 +71,7 @@ export class FtbTabs {
   private onTabSelected(tab: { title: () => string; body: () => string; key: string }) {
     if (this.selectedTab == tab) {
       const activeTabIdx = this.tabs.findIndex(t => t.key == tab.key);
-      this.tabsEls[activeTabIdx].bodyEl.scrollIntoView({ behavior: 'smooth' });
+      this.tabsEls[activeTabIdx].bodyEl.scrollIntoView({ block: 'start', behavior: 'smooth' });
     } else {
       this.selectedTab = tab;
       const selectedIdx = this.tabs.findIndex(t => t === this.selectedTab);
