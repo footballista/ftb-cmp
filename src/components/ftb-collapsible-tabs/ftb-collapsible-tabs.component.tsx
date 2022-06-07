@@ -37,7 +37,7 @@ export class FtbCollapsibleTabsComponent {
     this.onHashChange();
   }
 
-  @Method() update() {
+  @Method() async update() {
     this.swiper.update();
   }
 
