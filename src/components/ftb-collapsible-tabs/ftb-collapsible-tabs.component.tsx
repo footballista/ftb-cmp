@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, writeTask, Watch } from '@stencil/core';
+import { Component, Host, h, Prop, writeTask, Watch, Method } from '@stencil/core';
 import fromPairs from 'lodash-es/fromPairs';
 import Swiper from 'swiper';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -35,6 +35,10 @@ export class FtbCollapsibleTabsComponent {
 
   @Watch('tabs') onTabsChange() {
     this.onHashChange();
+  }
+
+  @Method() update() {
+    this.swiper.update();
   }
 
   connectedCallback() {
