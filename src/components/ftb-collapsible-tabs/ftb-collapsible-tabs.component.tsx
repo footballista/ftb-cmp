@@ -41,6 +41,10 @@ export class FtbCollapsibleTabsComponent {
     this.swiper.update();
   }
 
+  @Method() async getSwiper() {
+    return this.swiper;
+  }
+
   connectedCallback() {
     smoothscroll.polyfill();
     window.addEventListener('hashchange', this.onHashChange);
