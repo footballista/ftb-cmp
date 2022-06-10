@@ -4,14 +4,14 @@ import { envState } from 'ftb-models';
 
 const aliases = {
   ru: 'russia',
-  en: 'united kingdom',
-  eng: 'united kingdom',
+  en: 'united_kingdom',
+  eng: 'united_kingdom',
   ua: 'ukraine',
   pl: 'poland',
   es: 'spain',
   fr: 'france',
   th: 'thailand',
-  eu: 'european union',
+  eu: 'european_union',
   esp: 'spain',
   ger: 'germany',
   fra: 'france',
@@ -20,13 +20,13 @@ const aliases = {
   ita: 'italy',
   rus: 'russia',
   srb: 'serbia',
-  usa: 'united states',
+  usa: 'united_states',
   ausswi: 'switzerland',
   bel: 'belgium',
   ned: 'netherlands',
-  gbr: 'united kingdom',
+  gbr: 'united_kingdom',
   aus: 'austria',
-  cis: 'christmas island',
+  cis: 'christmas_island',
 };
 
 @Component({
@@ -69,7 +69,7 @@ export class FtbFlag {
   render() {
     if (!this.flag) return null;
 
-    let flagAlias = this.flag.toLowerCase();
+    let flagAlias = this.flag.toLowerCase().replace(new RegExp(' ', 'g'), '_');
     if (aliases[this.flag]) {
       flagAlias = aliases[this.flag];
     }
