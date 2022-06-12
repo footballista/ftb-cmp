@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, writeTask, Watch, Method } from '@stencil/cor
 import fromPairs from 'lodash-es/fromPairs';
 import Swiper from 'swiper';
 import smoothscroll from 'smoothscroll-polyfill';
+import { createGesture, Gesture } from '@ionic/core';
 
 interface TabInterface {
   title: () => string;
@@ -21,16 +22,18 @@ export class FtbCollapsibleTabsComponent {
   @Prop({ mutable: true }) navKey?: string = 'tabs';
   @Prop() collapsedPadding = 50;
   isCollapsed: boolean;
-  tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement }> = [];
+  tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement; wheel: 0; gesture: Gesture }> = [];
   selectedTab?: { title: () => string; body: () => string; key: string };
   headerEl;
   bodyEl;
   swiperEl;
   swiper;
+  gesture;
 
   constructor() {
     this.onHashChange = this.onHashChange.bind(this);
     this.onTabScroll = this.onTabScroll.bind(this);
+    this.onTabWheel = this.onTabWheel.bind(this);
   }
 
   @Watch('tabs') onTabsChange() {
@@ -53,6 +56,15 @@ export class FtbCollapsibleTabsComponent {
 
   disconnectedCallback() {
     window.removeEventListener('hashchange', this.onHashChange);
+
+    Array.from(this.bodyEl.querySelectorAll(`.ftb-c-tabs__body > .swiper-wrapper > .ftb-c-tabs__body-tab`)).forEach(
+      (el: HTMLElement) => {
+        const vsEl = el.querySelector('ftb-virtual-scroll') || el;
+        vsEl.removeEventListener('scroll', this.onTabScroll);
+        vsEl.removeEventListener('wheel', this.onTabWheel);
+      },
+    );
+    this.tabsEls.forEach(el => el.gesture.destroy());
   }
 
   componentDidLoad() {
@@ -80,15 +92,37 @@ export class FtbCollapsibleTabsComponent {
       tabsEls.push({ headerEl: headerEls[i], bodyEl: bodyEls[i] });
     }
 
-    bodyEls.forEach(el => {
-      const vsEl = el.querySelector('ftb-virtual-scroll');
-      if (vsEl) {
-        vsEl.removeEventListener('scroll', this.onTabScroll);
-        vsEl.addEventListener('scroll', this.onTabScroll);
-      } else {
-        el.removeEventListener('scroll', this.onTabScroll);
-        el.addEventListener('scroll', this.onTabScroll);
-      }
+    bodyEls.forEach((el, idx) => {
+      const vsEl = el.querySelector('ftb-virtual-scroll') || el;
+      vsEl.removeEventListener('scroll', this.onTabScroll);
+      vsEl.addEventListener('scroll', this.onTabScroll);
+      vsEl.removeEventListener('wheel', this.onTabWheel);
+      vsEl.addEventListener('wheel', this.onTabWheel);
+
+      tabsEls[idx].gesture = createGesture({
+        el,
+        gestureName: 'refresher',
+        gesturePriority: 31,
+        direction: 'y',
+        threshold: 20,
+        passive: false,
+        onMove: e => {
+          if (e.deltaY < 0) {
+            for (const idx in this.tabsEls) {
+              this.tabsEls[idx].wheel = 0;
+            }
+          } else {
+            if (el.scrollTop == 0) {
+              this.tabsEls[idx].wheel += e.deltaY;
+              if (this.tabsEls[idx].wheel > 250) {
+                this.expand();
+                this.tabsEls.forEach(e => (e.wheel = 0));
+              }
+            }
+          }
+        },
+      });
+      tabsEls[idx].gesture.enable(true);
     });
 
     this.tabsEls = tabsEls;
@@ -103,6 +137,23 @@ export class FtbCollapsibleTabsComponent {
     if (!this.isCollapsed) {
       if (target.scrollTop >= this.collapsedPadding) {
         this.collapse();
+      }
+    }
+  }
+
+  onTabWheel(e) {
+    const tabIdx = this.tabsEls.findIndex(t => t.bodyEl == e.target.closest('.ftb-c-tabs__body-tab'));
+    if (e.deltaY > 0) {
+      for (const idx in this.tabsEls) {
+        this.tabsEls[idx].wheel = 0;
+      }
+    } else {
+      if (e.target.scrollTop == 0) {
+        this.tabsEls[tabIdx].wheel -= e.deltaY;
+        if (this.tabsEls[tabIdx].wheel > 250) {
+          this.expand();
+          this.tabsEls.forEach(e => (e.wheel = 0));
+        }
       }
     }
   }

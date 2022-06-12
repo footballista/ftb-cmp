@@ -11,6 +11,10 @@ ftb-collapsible-tabs-stories {
     background: #fafafa;
     overflow: hidden;
 
+    .header {
+      padding: 0 !important;
+    }
+
     .header-panel {
       height: 100px;
       background: rgba(139, 0, 0, 0.6);
