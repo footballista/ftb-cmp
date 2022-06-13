@@ -114,7 +114,7 @@ export class FtbCollapsibleTabsComponent {
           } else {
             if (el.scrollTop == 0) {
               this.tabsEls[idx].wheel += e.deltaY;
-              if (this.tabsEls[idx].wheel > 250) {
+              if (this.tabsEls[idx].wheel > 100) {
                 this.expand();
                 this.tabsEls.forEach(e => (e.wheel = 0));
               }
