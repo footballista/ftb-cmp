@@ -3,6 +3,7 @@ import fromPairs from 'lodash-es/fromPairs';
 import Swiper from 'swiper';
 import smoothscroll from 'smoothscroll-polyfill';
 import { createGesture, Gesture } from '@ionic/core';
+import { envState } from 'ftb-models';
 
 interface TabInterface {
   title: () => string;
@@ -99,30 +100,80 @@ export class FtbCollapsibleTabsComponent {
       vsEl.removeEventListener('wheel', this.onTabWheel);
       vsEl.addEventListener('wheel', this.onTabWheel);
 
-      tabsEls[idx].gesture = createGesture({
-        el,
-        gestureName: 'refresher',
-        gesturePriority: 31,
-        direction: 'y',
-        threshold: 20,
-        passive: false,
-        onMove: e => {
-          if (e.deltaY < 0) {
-            for (const idx in this.tabsEls) {
-              this.tabsEls[idx].wheel = 0;
-            }
-          } else {
-            if (el.scrollTop == 0) {
-              this.tabsEls[idx].wheel += e.deltaY;
-              if (this.tabsEls[idx].wheel > 100) {
-                this.expand();
-                this.tabsEls.forEach(e => (e.wheel = 0));
+      if (envState.platform == 'web') {
+        tabsEls[idx].gesture = createGesture({
+          el,
+          gestureName: 'refresher',
+          gesturePriority: 31,
+          direction: 'y',
+          threshold: 20,
+          passive: false,
+          onMove: e => {
+            if (e.deltaY < 0) {
+              for (const idx in this.tabsEls) {
+                this.tabsEls[idx].wheel = 0;
+              }
+            } else {
+              if (el.scrollTop == 0) {
+                this.tabsEls[idx].wheel += e.deltaY;
+                if (this.tabsEls[idx].wheel > 100) {
+                  this.expand();
+                  this.tabsEls.forEach(e => (e.wheel = 0));
+                }
               }
             }
-          }
-        },
-      });
-      tabsEls[idx].gesture.enable(true);
+          },
+        });
+        tabsEls[idx].gesture.enable(true);
+      } else if (envState.platform == 'android') {
+        tabsEls[idx].gesture = createGesture({
+          el,
+          gestureName: 'refresher',
+          gesturePriority: 31,
+          direction: 'y',
+          threshold: 5,
+          onMove: e => {
+            if (e.deltaY < 0) {
+              for (const idx in this.tabsEls) {
+                this.tabsEls[idx].wheel = 0;
+              }
+            } else {
+              if (el.scrollTop == 0) {
+                this.tabsEls[idx].wheel += e.deltaY;
+                if (this.tabsEls[idx].wheel > 100) {
+                  this.expand();
+                  this.tabsEls.forEach(e => (e.wheel = 0));
+                }
+              }
+            }
+          },
+        });
+        tabsEls[idx].gesture.enable(true);
+      } else if (envState.platform == 'ios') {
+        tabsEls[idx].gesture = createGesture({
+          el,
+          gestureName: 'refresher',
+          gesturePriority: 31,
+          direction: 'y',
+          threshold: 5,
+          onMove: e => {
+            if (e.deltaY < 0) {
+              for (const idx in this.tabsEls) {
+                this.tabsEls[idx].wheel = 0;
+              }
+            } else {
+              if (el.scrollTop == 0) {
+                this.tabsEls[idx].wheel += e.deltaY;
+                if (this.tabsEls[idx].wheel > 100) {
+                  this.expand();
+                  this.tabsEls.forEach(e => (e.wheel = 0));
+                }
+              }
+            }
+          },
+        });
+        tabsEls[idx].gesture.enable(true);
+      }
     });
 
     this.tabsEls = tabsEls;
