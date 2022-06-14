@@ -1,5 +1,4 @@
 import { Component, Host, h, Event, EventEmitter, State, Prop } from '@stencil/core';
-import { DatepickerIntervalInterface } from '@src/components/ftb-datepicker/ftb-datepicker-interval.interface';
 import dayjs from 'dayjs';
 import range from 'lodash-es/range';
 import ArrowIcon from '../../assets/icons/arrow.svg';
@@ -20,7 +19,7 @@ dayjs().weekday(-5);
 export class FtbDatepicker {
   @Prop({ mutable: true }) from;
   @Prop({ mutable: true }) to;
-  @Event() dateSelected: EventEmitter<DatepickerIntervalInterface>;
+  @Event() dateSelected: EventEmitter;
   @State() month: number = dayjs().month() + 1;
   @State() year: number = dayjs().year();
 
