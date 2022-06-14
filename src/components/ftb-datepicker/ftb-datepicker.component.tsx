@@ -3,7 +3,6 @@ import { DatepickerIntervalInterface } from '@src/components/ftb-datepicker/ftb-
 import dayjs from 'dayjs';
 import range from 'lodash-es/range';
 import localeData from 'dayjs/plugin/localeData';
-import { translations, userState } from 'ftb-models';
 dayjs.extend(localeData);
 
 @Component({
@@ -39,12 +38,22 @@ export class FtbDatepicker {
   onSlotClick(idx) {
     const date = dayjs(this.year + '-' + this.month + '-' + (idx + 1));
 
-    console.log(date);
+    if (!this.from) {
+      this.from = date;
+    } else {
+      this.to = date;
+    }
+    if (this.to < this.from) {
+      [this.to, this.from] = [this.from, this.to];
+    }
+
+    if (this.to && this.from) {
+      this.dateSelected.emit({ from: this.from, to: this.to });
+    }
   }
 
   render() {
     const firstDay = dayjs(this.year + '-' + this.month + '-01');
-
     return (
       <Host>
         <div class="calendar">
@@ -62,16 +71,24 @@ export class FtbDatepicker {
             {range(firstDay.day()).map(() => (
               <div class="slot empty" />
             ))}
-            {range(firstDay.daysInMonth()).map(idx => (
-              <button class="slot" onClick={() => this.onSlotClick(idx)}>
-                {idx + 1}
-              </button>
-            ))}
+            {range(firstDay.daysInMonth()).map(idx => {
+              const day = dayjs(this.year + '-' + this.month + '-' + (idx + 1));
+              return (
+                <button
+                  class={{
+                    'slot': true,
+                    'active-from': this.from?.isSame(day),
+                    'active-to': this.to?.isSame(day),
+                    'active-between': this.from && this.to && day > this.from && day < this.to,
+                  }}
+                  onClick={() => this.onSlotClick(idx)}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
           </div>
         </div>
-        <button onClick={() => this.dateSelected.emit({ from: this.from, to: this.to })} class="submit-button">
-          {translations.navigation.done[userState.language]}
-        </button>
       </Host>
     );
   }

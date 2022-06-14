@@ -37,6 +37,19 @@ ftb-datepicker-stories {
             cursor: pointer;
             background: rgba(200, 200, 200, 0.15);
           }
+          &.active-from {
+            background: #8c3636;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+          &.active-to {
+            background: #8c3636;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+          &.active-between {
+            background: rgba(140, 54, 54, 0.2);
+          }
         }
       }
     }
@@ -50,6 +63,16 @@ ftb-datepicker-stories {
       outline: none;
       font-weight: 700;
       cursor: pointer;
+    }
+  }
+  .selected {
+    padding-top: 20px;
+    span {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    button {
+      margin-right: 10px;
     }
   }
 }
