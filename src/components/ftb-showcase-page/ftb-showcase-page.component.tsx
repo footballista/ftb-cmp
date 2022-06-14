@@ -46,7 +46,7 @@ export class FtbShowcasePage {
       ],
     },
     { title: 'Advertisement', items: ['ftb-partner-banner'] },
-    { title: 'Other', items: ['ftb-icon', 'ftb-spinner'] },
+    { title: 'Other', items: ['ftb-icon', 'ftb-spinner', 'ftb-datepicker'] },
   ];
 
   componentWillLoad() {

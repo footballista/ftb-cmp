@@ -1,0 +1,55 @@
+ftb-datepicker-stories {
+  display: block;
+  padding: 20px;
+  ftb-datepicker {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    background: #fafafa;
+    overflow: hidden;
+
+    .calendar {
+      font-size: 13px;
+
+      .month-row {
+        height: 40px;
+        padding: 0 4px;
+      }
+
+      .days-row {
+        background: rgba(0, 0, 0, 0.2);
+        grid-gap: 1px;
+        font-weight: 600;
+      }
+      .day-name {
+        height: 40px;
+      }
+      .slots {
+        grid-gap: 1px;
+        padding: 1px 0;
+        .slot {
+          height: 35px;
+          &:not(.empty) {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            background: rgba(200, 200, 200, 0.15);
+          }
+        }
+      }
+    }
+
+    .submit-button {
+      height: 40px;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      outline: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
