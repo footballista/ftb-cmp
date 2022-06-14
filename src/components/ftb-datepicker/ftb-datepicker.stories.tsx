@@ -1,4 +1,5 @@
 import { Component, h, Host, State } from '@stencil/core';
+import dayjs from 'dayjs';
 
 @Component({
   tag: 'ftb-datepicker-stories',
@@ -8,10 +9,28 @@ import { Component, h, Host, State } from '@stencil/core';
 export class FtbStageCupNetStories {
   @State() from;
   @State() to;
+  @State() locale = 'ru';
+
+  componentWillLoad() {
+    dayjs.locale(this.locale);
+  }
+
+  toggleLocale() {
+    if (this.locale == 'ru') {
+      this.locale = 'en';
+    } else {
+      this.locale = 'ru';
+    }
+    dayjs.locale(this.locale);
+  }
+
   render() {
     return (
       <Host>
+        <h1>Datepicker</h1>
+        <p>Locale-sensitive date picker to select dates interval</p>
         <ftb-datepicker
+          key={this.locale}
           onDateSelected={e => {
             this.from = e.detail.from;
             this.to = e.detail.to;
@@ -20,6 +39,11 @@ export class FtbStageCupNetStories {
           to={this.to}
         />
         <div class="selected">
+          <div>
+            <b>Locale:</b>
+            <span>{this.locale}</span>
+            <button onClick={() => this.toggleLocale()}>toggle</button>
+          </div>
           <div>
             <b>FROM:</b> <span>{this.from?.format('DD MMM YYYY') || '--'}</span>
             {this.from && <button onClick={() => (this.from = null)}>X</button>}

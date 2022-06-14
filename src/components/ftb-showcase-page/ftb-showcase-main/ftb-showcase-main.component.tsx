@@ -29,6 +29,14 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.8.0</b>
+          <span class="date">14 June 2022</span>
+          <ul>
+            <li>Crated ftb-datepicker</li>
+            <li>Added gesture support in collapsible tabs</li>
+          </ul>
+        </div>
+        <div class="changelog-row">
           <b>3.7.2</b>
           <span class="date">06 June 2022</span>
           <ul>

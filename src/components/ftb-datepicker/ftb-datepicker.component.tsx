@@ -4,12 +4,8 @@ import range from 'lodash-es/range';
 import ArrowIcon from '../../assets/icons/arrow.svg';
 import localeData from 'dayjs/plugin/localeData';
 import weekday from 'dayjs/plugin/weekday';
-import 'dayjs/locale/ru';
 dayjs.extend(localeData);
 dayjs.extend(weekday);
-
-dayjs.locale('ru');
-dayjs().weekday(-5);
 
 @Component({
   tag: 'ftb-datepicker',
@@ -60,6 +56,8 @@ export class FtbDatepicker {
 
   render() {
     const firstDay = dayjs(this.year + '-' + this.month + '-01');
+    let dayShift = dayjs().weekday() - dayjs().date() + 1;
+    while (dayShift < 0) dayShift += 7;
 
     return (
       <Host>
@@ -68,7 +66,7 @@ export class FtbDatepicker {
             <button class="prev-btn" onClick={() => this.prevMonth()}>
               <ftb-icon svg={ArrowIcon} />
             </button>
-            {firstDay.format('MMMM')}
+            {firstDay.format('MMMM YYYY')}
             <button class="next-btn" onClick={() => this.nextMonth()}>
               <ftb-icon svg={ArrowIcon} />
             </button>
@@ -79,7 +77,7 @@ export class FtbDatepicker {
             })}
           </div>
           <div class="slots">
-            {range(firstDay.day()).map(() => (
+            {range(dayShift).map(() => (
               <div class="slot empty" />
             ))}
             {range(firstDay.daysInMonth()).map(idx => {
