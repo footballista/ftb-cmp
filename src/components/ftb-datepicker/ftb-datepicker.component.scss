@@ -7,6 +7,15 @@ ftb-datepicker {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      button {
+        &.prev-btn {
+          transform: rotate(90deg);
+        }
+        &.next-btn {
+          transform: rotate(-90deg);
+        }
+      }
     }
     .days-row {
       display: grid;

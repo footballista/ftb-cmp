@@ -2,8 +2,15 @@ import { Component, Host, h, Event, EventEmitter, State, Prop } from '@stencil/c
 import { DatepickerIntervalInterface } from '@src/components/ftb-datepicker/ftb-datepicker-interval.interface';
 import dayjs from 'dayjs';
 import range from 'lodash-es/range';
+import ArrowIcon from '../../assets/icons/arrow.svg';
 import localeData from 'dayjs/plugin/localeData';
+import weekday from 'dayjs/plugin/weekday';
+import 'dayjs/locale/ru';
 dayjs.extend(localeData);
+dayjs.extend(weekday);
+
+dayjs.locale('ru');
+dayjs().weekday(-5);
 
 @Component({
   tag: 'ftb-datepicker',
@@ -54,16 +61,21 @@ export class FtbDatepicker {
 
   render() {
     const firstDay = dayjs(this.year + '-' + this.month + '-01');
+
     return (
       <Host>
         <div class="calendar">
           <div class="month-row">
-            <button onClick={() => this.prevMonth()}>prev</button>
+            <button class="prev-btn" onClick={() => this.prevMonth()}>
+              <ftb-icon svg={ArrowIcon} />
+            </button>
             {firstDay.format('MMMM')}
-            <button onClick={() => this.nextMonth()}>next</button>
+            <button class="next-btn" onClick={() => this.nextMonth()}>
+              <ftb-icon svg={ArrowIcon} />
+            </button>
           </div>
           <div class="days-row">
-            {dayjs.weekdaysMin().map(day => {
+            {dayjs.weekdaysMin(true).map(day => {
               return <div class="day-name">{day}</div>;
             })}
           </div>
