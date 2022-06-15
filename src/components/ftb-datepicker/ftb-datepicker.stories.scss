@@ -52,12 +52,12 @@ ftb-datepicker-stories {
             background: rgba(200, 200, 200, 0.15);
           }
           &.active-from {
-            background: #8c3636;
+            background: #8c3636 !important;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
           }
           &.active-to {
-            background: #8c3636;
+            background: #8c3636 !important;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
           }

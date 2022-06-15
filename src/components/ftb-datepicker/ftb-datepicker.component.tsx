@@ -87,8 +87,8 @@ export class FtbDatepicker {
                 <button
                   class={{
                     'slot': true,
-                    'active-from': this.from?.isSame(day),
-                    'active-to': this.to?.isSame(day),
+                    'active-from': this.from?.isSame(day, 'day'),
+                    'active-to': this.to?.isSame(day, 'day'),
                     'active-between': this.from && this.to && day > this.from && day < this.to,
                   }}
                   onClick={() => this.onSlotClick(idx)}
