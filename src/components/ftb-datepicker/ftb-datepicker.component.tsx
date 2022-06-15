@@ -15,7 +15,7 @@ dayjs.extend(weekday);
 export class FtbDatepicker {
   @Prop({ mutable: true }) from;
   @Prop({ mutable: true }) to;
-  @Prop() currentField: 'from' | 'to';
+  @Prop({ mutable: true }) currentField: 'from' | 'to';
   @Event() dateSelected: EventEmitter;
   @State() month: number = dayjs().month() + 1;
   @State() year: number = dayjs().year();
@@ -41,7 +41,7 @@ export class FtbDatepicker {
   onSlotClick(idx) {
     const date = dayjs(this.year + '-' + this.month + '-' + (idx + 1));
 
-    if (this.currentField == 'from' || !this.from) {
+    if (this.currentField == 'from') {
       this.from = date;
     } else {
       this.to = date;
@@ -52,6 +52,10 @@ export class FtbDatepicker {
 
     if (this.to && this.from) {
       this.dateSelected.emit({ from: this.from, to: this.to });
+    } else if (!this.to) {
+      this.currentField = 'to';
+    } else if (!this.from) {
+      this.currentField = 'from';
     }
   }
 

@@ -48,12 +48,25 @@ export class FtbStageCupNetStories {
           </div>
           <div>
             <b>FROM:</b> <span>{this.from?.format('DD MMM YYYY') || '--'}</span>
-            {this.from && <button onClick={() => (this.currentField = 'from')}>X</button>}
+            {this.from && (
+              <button
+                onClick={() => (this.currentField = 'from')}
+                class={{ 'active-button': this.currentField == 'from' }}
+              >
+                change
+              </button>
+            )}
+            {this.from && <button onClick={() => (this.from = null)}>x</button>}
           </div>
           <div>
             <b>TO:</b>
             <span>{this.to?.format('DD MMM YYYY') || '--'}</span>
-            {this.to && <button onClick={() => (this.currentField = 'to')}>X</button>}
+            {this.to && (
+              <button onClick={() => (this.currentField = 'to')} class={{ 'active-button': this.currentField == 'to' }}>
+                change
+              </button>
+            )}
+            {this.to && <button onClick={() => (this.to = null)}>x</button>}
           </div>
         </div>
       </Host>

@@ -1,5 +1,10 @@
 ftb-datepicker-stories {
   display: block;
+
+  .active-button {
+    background: #b9f0fa;
+  }
+
   ftb-datepicker {
     display: block;
     width: 100%;
