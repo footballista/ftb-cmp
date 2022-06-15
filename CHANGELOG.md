@@ -1,3 +1,12 @@
+## [3.8.1](https://github.com/footballista/ftb-cmp/compare/3.8.0...3.8.1) (2022-06-15)
+
+
+### Features
+
+* current field for ftb-datepicker ([#13](https://github.com/footballista/ftb-cmp/issues/13)) ([aef675f](https://github.com/footballista/ftb-cmp/commit/aef675fdde91d255df5cdf415ba845e22f63293d))
+
+
+
 # [3.8.0](https://github.com/footballista/ftb-cmp/compare/3.7.18...3.8.0) (2022-06-14)
 
 
