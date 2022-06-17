@@ -26,20 +26,20 @@
   "dependencies": {
     "@capacitor/cli": "^3.5.1",
     "@capacitor/core": "^3.5.1",
-    "@ionic/core": "^6.1.5",
-    "@stencil/core": "^2.15.2",
+    "@ionic/core": "^6.1.10",
+    "@stencil/core": "^2.16.1",
     "colorthief": "^2.3.2",
     "file-saver": "^2.0.5",
-    "firebase": "9.8.1",
-    "ftb-models": "^3.27.1",
+    "firebase": "9.8.3",
+    "ftb-models": "^3.27.5",
     "highlight.js": "^11.5.1",
     "lodash-es": "^4.17.21",
-    "npm": "^8.10.0",
+    "npm": "^8.12.2",
     "photoswipe": "^4.1.3",
     "rxjs": "^7.5.5",
     "smoothscroll-polyfill": "^0.4.4",
     "stencil-router-v2": "^0.6.0",
-    "swiper": "^8.1.5"
+    "swiper": "^8.2.4"
   },
   "license": "MIT",
   "devDependencies": {
@@ -48,8 +48,8 @@
     "@types/rx": "^4.1.2",
     "conventional-changelog-cli": "^2.2.2",
     "inquirer": "^8.2.4",
-    "npm-check-updates": "^12.5.11",
-    "prettier": "^2.6.2",
+    "npm-check-updates": "^14.0.1",
+    "prettier": "^2.7.1",
     "semver": "^7.3.7",
     "simple-git": "^3.7.1",
     "stencil-inline-svg": "^1.1.0"
