@@ -61,8 +61,6 @@ export class FtbDatepicker {
 
   render() {
     const firstDay = dayjs(this.year + '-' + this.month + '-01');
-    let dayShift = dayjs().weekday() - dayjs().date() + 1;
-    while (dayShift < 0) dayShift += 7;
 
     return (
       <Host>
@@ -82,7 +80,7 @@ export class FtbDatepicker {
             })}
           </div>
           <div class="slots">
-            {range(dayShift).map(() => (
+            {range(firstDay.weekday()).map(() => (
               <div class="slot empty" />
             ))}
             {range(firstDay.daysInMonth()).map(idx => {

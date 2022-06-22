@@ -1,5 +1,6 @@
 import { Component, h, Host, State } from '@stencil/core';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 
 @Component({
   tag: 'ftb-datepicker-stories',
