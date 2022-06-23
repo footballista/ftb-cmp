@@ -2,8 +2,6 @@ import { Component, Host, h, Prop, writeTask, Watch, Method } from '@stencil/cor
 import fromPairs from 'lodash-es/fromPairs';
 import Swiper from 'swiper';
 import smoothscroll from 'smoothscroll-polyfill';
-import { createGesture, Gesture } from '@ionic/core';
-import { envState } from 'ftb-models';
 
 interface TabInterface {
   title: () => string;
@@ -23,18 +21,21 @@ export class FtbCollapsibleTabsComponent {
   @Prop({ mutable: true }) navKey?: string = 'tabs';
   @Prop() collapsedPadding = 50;
   isCollapsed: boolean;
-  tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement; wheel: 0; gesture: Gesture }> = [];
+  tabsEls: Array<{ headerEl: HTMLElement; bodyEl: HTMLElement; wheel: 0 }> = [];
   selectedTab?: { title: () => string; body: () => string; key: string };
   headerEl;
   bodyEl;
   swiperEl;
   swiper;
   gesture;
+  touchStartY;
 
   constructor() {
     this.onHashChange = this.onHashChange.bind(this);
     this.onTabScroll = this.onTabScroll.bind(this);
     this.onTabWheel = this.onTabWheel.bind(this);
+    this.onTabTouchStart = this.onTabTouchStart.bind(this);
+    this.onTabTouchMove = this.onTabTouchMove.bind(this);
   }
 
   @Watch('tabs') onTabsChange() {
@@ -63,9 +64,10 @@ export class FtbCollapsibleTabsComponent {
         const vsEl = el.querySelector('ftb-virtual-scroll') || el;
         vsEl.removeEventListener('scroll', this.onTabScroll);
         vsEl.removeEventListener('wheel', this.onTabWheel);
+        vsEl.removeEventListener('touchstart', this.onTabTouchStart);
+        vsEl.removeEventListener('touchmove', this.onTabTouchMove);
       },
     );
-    this.tabsEls.forEach(el => el.gesture.destroy());
   }
 
   componentDidLoad() {
@@ -93,87 +95,16 @@ export class FtbCollapsibleTabsComponent {
       tabsEls.push({ headerEl: headerEls[i], bodyEl: bodyEls[i] });
     }
 
-    bodyEls.forEach((el, idx) => {
+    bodyEls.forEach(el => {
       const vsEl = el.querySelector('ftb-virtual-scroll') || el;
       vsEl.removeEventListener('scroll', this.onTabScroll);
       vsEl.addEventListener('scroll', this.onTabScroll);
       vsEl.removeEventListener('wheel', this.onTabWheel);
       vsEl.addEventListener('wheel', this.onTabWheel);
-
-      if (envState.platform == 'web') {
-        tabsEls[idx].gesture = createGesture({
-          el,
-          gestureName: 'refresher',
-          gesturePriority: 31,
-          direction: 'y',
-          threshold: 20,
-          passive: false,
-          onMove: e => {
-            if (e.deltaY < 0) {
-              for (const idx in this.tabsEls) {
-                this.tabsEls[idx].wheel = 0;
-              }
-            } else {
-              if (el.scrollTop == 0) {
-                this.tabsEls[idx].wheel += e.deltaY;
-                if (this.tabsEls[idx].wheel > 100) {
-                  this.expand();
-                  this.tabsEls.forEach(e => (e.wheel = 0));
-                }
-              }
-            }
-          },
-        });
-        tabsEls[idx].gesture.enable(true);
-      } else if (envState.platform == 'android') {
-        tabsEls[idx].gesture = createGesture({
-          el,
-          gestureName: 'refresher',
-          gesturePriority: 31,
-          direction: 'y',
-          threshold: 5,
-          onMove: e => {
-            if (e.deltaY < 0) {
-              for (const idx in this.tabsEls) {
-                this.tabsEls[idx].wheel = 0;
-              }
-            } else {
-              if (el.scrollTop == 0) {
-                this.tabsEls[idx].wheel += e.deltaY;
-                if (this.tabsEls[idx].wheel > 100) {
-                  this.expand();
-                  this.tabsEls.forEach(e => (e.wheel = 0));
-                }
-              }
-            }
-          },
-        });
-        tabsEls[idx].gesture.enable(true);
-      } else if (envState.platform == 'ios') {
-        tabsEls[idx].gesture = createGesture({
-          el,
-          gestureName: 'refresher',
-          gesturePriority: 31,
-          direction: 'y',
-          threshold: 5,
-          onMove: e => {
-            if (e.deltaY < 0) {
-              for (const idx in this.tabsEls) {
-                this.tabsEls[idx].wheel = 0;
-              }
-            } else {
-              if (el.scrollTop == 0) {
-                this.tabsEls[idx].wheel += e.deltaY;
-                if (this.tabsEls[idx].wheel > 100) {
-                  this.expand();
-                  this.tabsEls.forEach(e => (e.wheel = 0));
-                }
-              }
-            }
-          },
-        });
-        tabsEls[idx].gesture.enable(true);
-      }
+      vsEl.removeEventListener('touchstart', this.onTabTouchStart);
+      vsEl.addEventListener('touchstart', this.onTabTouchStart);
+      vsEl.removeEventListener('touchmove', this.onTabTouchMove);
+      vsEl.addEventListener('touchmove', this.onTabTouchMove);
     });
 
     this.tabsEls = tabsEls;
@@ -206,6 +137,17 @@ export class FtbCollapsibleTabsComponent {
           this.tabsEls.forEach(e => (e.wheel = 0));
         }
       }
+    }
+  }
+
+  onTabTouchStart(e) {
+    this.touchStartY = e.targetTouches[0].clientY;
+  }
+
+  onTabTouchMove(e) {
+    const diff = this.touchStartY - e.targetTouches[0].clientY;
+    if (diff < -20) {
+      this.expand();
     }
   }
 
