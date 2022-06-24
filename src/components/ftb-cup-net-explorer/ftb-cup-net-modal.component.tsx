@@ -14,7 +14,8 @@ export class FtbCupNetModal {
   // @Prop() highlightTeam?: Team;
   // @Prop() highlightTeams?: Team[];
   // @Prop() splitSidesThreshold?: number;
-  @Event() closed: EventEmitter<HTMLElement>;
+  @Event()
+  closed: EventEmitter<HTMLElement>;
   @Element() el: HTMLElement;
   netEl: HTMLElement;
 
@@ -63,17 +64,22 @@ export class FtbCupNetModal {
     this.netEl.style.transition = 'all 0.3s ease-in-out';
     setTimeout(() => {
       imgLayerEl.style.opacity = '1';
-      const { height: netHeight, width: netWidth } = this.netEl.querySelector('ftb-cup-net').getBoundingClientRect();
-
+      // const { height: netHeight, width: netWidth } = this.netEl.querySelector('ftb-cup-net').getBoundingClientRect();
       const SAFETY_PADDING = 40;
       const { innerHeight: windowHeight, innerWidth: windowWidth } = window;
-      const modalWidth = Math.min(windowWidth * 0.9, netWidth + SAFETY_PADDING);
-      const modalHeight = Math.min(windowHeight * 0.9, netHeight + SAFETY_PADDING);
+      this.netEl.style.top = SAFETY_PADDING + 'px';
+      this.netEl.style.left = SAFETY_PADDING + 'px';
+      this.netEl.style.right = SAFETY_PADDING + 'px';
+      this.netEl.style.bottom = SAFETY_PADDING + 'px';
+      this.netEl.style.height = windowHeight - SAFETY_PADDING * 2 + 'px';
+      this.netEl.style.width = windowWidth - SAFETY_PADDING * 2 + 'px';
 
-      this.netEl.style.top = (windowHeight - modalHeight) / 2 + 'px';
-      this.netEl.style.left = (windowWidth - modalWidth) / 2 + 'px';
-      this.netEl.style.height = modalHeight + 'px';
-      this.netEl.style.width = modalWidth + 'px';
+      // const modalWidth = Math.min(windowWidth * 0.9, netWidth + SAFETY_PADDING);
+      // const modalHeight = Math.min(windowHeight * 0.9, netHeight + SAFETY_PADDING);
+      // this.netEl.style.top = (windowHeight - modalHeight) / 2 + 'px';
+      // this.netEl.style.left = (windowWidth - modalWidth) / 2 + 'px';
+      // this.netEl.style.height = modalHeight + 'px';
+      // this.netEl.style.width = modalWidth + 'px';
     }, 50);
   }
 

@@ -85,6 +85,9 @@ export class FtbStageCupNetStories {
 
         <h2>Small net</h2>
         <p>For small nets modal size will be reduced to fit net size.</p>
+        <p>
+          <i>⚠️Temporary disabled</i>
+        </p>
         <ftb-cup-net-explorer stage={createStage('final', '1/2', '1/2')} />
       </Host>
     );
