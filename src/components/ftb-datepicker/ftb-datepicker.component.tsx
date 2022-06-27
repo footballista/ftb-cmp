@@ -16,7 +16,7 @@ dayjs.extend(weekday);
 export class FtbDatepicker {
   @Prop({ mutable: true }) from;
   @Prop({ mutable: true }) to;
-  @Prop({ mutable: true }) currentField: 'from' | 'to';
+  @Prop({ mutable: true }) currentField: 'from' | 'to' = 'from';
   @Event() dateSelected: EventEmitter;
   @State() month: number = dayjs().month() + 1;
   @State() year: number = dayjs().year();
