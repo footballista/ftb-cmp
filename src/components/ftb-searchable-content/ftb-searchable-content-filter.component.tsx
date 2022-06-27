@@ -46,6 +46,8 @@ export class FtbSearchableContentFilter {
           }}
           mode="ios"
           isOpen={this.isOpen}
+          breakpoints={[0.6, 1]}
+          initialBreakpoint={0.6}
           class={'ftb-searchable-content-filter-modal ' + this.el.classList.toString()}
         >
           <div class={'options-container mobile ' + (this.isOpen ? 'open' : '')}>
