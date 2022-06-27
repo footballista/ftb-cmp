@@ -1,3 +1,12 @@
+## [3.8.6](https://github.com/footballista/ftb-cmp/compare/3.8.5...3.8.6) (2022-06-27)
+
+
+### Features
+
+* updated ftb-searchable-content-filter ([#14](https://github.com/footballista/ftb-cmp/issues/14)) ([5bbbcd5](https://github.com/footballista/ftb-cmp/commit/5bbbcd5fc13e8b3f188d9b6db06ae93c38f11d60))
+
+
+
 ## [3.8.5](https://github.com/footballista/ftb-cmp/compare/3.8.4...3.8.5) (2022-06-24)
 
 
