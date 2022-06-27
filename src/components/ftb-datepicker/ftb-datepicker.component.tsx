@@ -4,6 +4,7 @@ import range from 'lodash-es/range';
 import ArrowIcon from '../../assets/icons/arrow.svg';
 import localeData from 'dayjs/plugin/localeData';
 import weekday from 'dayjs/plugin/weekday';
+import { translations, userState } from 'ftb-models';
 dayjs.extend(localeData);
 dayjs.extend(weekday);
 
@@ -15,7 +16,7 @@ dayjs.extend(weekday);
 export class FtbDatepicker {
   @Prop({ mutable: true }) from;
   @Prop({ mutable: true }) to;
-  @Prop({ mutable: true }) currentField: 'from' | 'to';
+  @Prop({ mutable: true }) currentField: 'from' | 'to' = 'from';
   @Event() dateSelected: EventEmitter;
   @State() month: number = dayjs().month() + 1;
   @State() year: number = dayjs().year();
@@ -65,6 +66,22 @@ export class FtbDatepicker {
     return (
       <Host>
         <div class="calendar">
+          <div class="button-group">
+            <div
+              class={{ 'button': true, 'button-from': true, 'active': this.currentField == 'from' }}
+              onClick={() => (this.currentField = 'from')}
+            >
+              <p class="title">{translations.calendar.from[userState.language]}</p>
+              <p class="date">{this.from?.format('DD MMM YYYY') || '--'}</p>
+            </div>
+            <div
+              class={{ 'button': true, 'button-to': true, 'active': this.currentField == 'to' }}
+              onClick={() => (this.currentField = 'to')}
+            >
+              <p class="title">{translations.calendar.to[userState.language]}</p>
+              <p class="date">{this.to?.format('DD MMM YYYY') || '--'}</p>
+            </div>
+          </div>
           <div class="month-row">
             <button class="prev-btn" onClick={() => this.prevMonth()}>
               <ftb-icon svg={ArrowIcon} />

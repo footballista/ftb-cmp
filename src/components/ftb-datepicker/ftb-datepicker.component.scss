@@ -3,6 +3,11 @@ ftb-datepicker {
   flex-direction: column;
   .calendar {
     flex: 1;
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     .month-row {
       display: flex;
       align-items: center;

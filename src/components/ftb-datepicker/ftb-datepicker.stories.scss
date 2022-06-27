@@ -18,6 +18,33 @@ ftb-datepicker-stories {
     .calendar {
       font-size: 13px;
 
+      .button-group {
+        .button {
+          height: 50px;
+          width: 50%;
+          padding-left: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          background: #efefef;
+
+          &.button-from {
+            border-right: 1px solid #fff;
+          }
+
+          &.active {
+            background: rgba(0, 0, 0, 0.2);
+          }
+
+          p {
+            margin: 0;
+            &.title {
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+
       .month-row {
         height: 40px;
         padding: 0 4px;
