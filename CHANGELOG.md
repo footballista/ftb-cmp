@@ -1,3 +1,12 @@
+## [3.8.7](https://github.com/footballista/ftb-cmp/compare/3.8.6...3.8.7) (2022-06-27)
+
+
+### Features
+
+* added controllers for datepicker ([#15](https://github.com/footballista/ftb-cmp/issues/15)) ([31de20e](https://github.com/footballista/ftb-cmp/commit/31de20e61ec8c34d94c8470132bdb44bd538e3b4))
+
+
+
 ## [3.8.6](https://github.com/footballista/ftb-cmp/compare/3.8.5...3.8.6) (2022-06-27)
 
 
