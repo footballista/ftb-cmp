@@ -53,11 +53,9 @@ export class FtbDatepicker {
 
     if (this.to && this.from) {
       this.dateSelected.emit({ from: this.from, to: this.to });
-    } else if (!this.to) {
-      this.currentField = 'to';
-    } else if (!this.from) {
-      this.currentField = 'from';
     }
+
+    this.currentField = this.currentField == 'from' ? 'to' : 'from';
   }
 
   render() {
