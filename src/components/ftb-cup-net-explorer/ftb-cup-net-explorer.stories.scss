@@ -181,6 +181,19 @@ ftb-cup-net-explorer {
 
 ftb-cup-net-explorer,
 ftb-cup-net-modal {
+  .close-button {
+    box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    width: 50px;
+    top: 40px;
+    right: 40px;
+    border: none;
+    ftb-icon {
+      height: 12px;
+      width: 12px;
+      fill: rgba(0, 0, 0, 0.6);
+    }
+  }
   .net-wrapper {
     width: calc(100% - 30px);
     height: 300px;
@@ -189,19 +202,6 @@ ftb-cup-net-modal {
     box-shadow: inset 0px 0px 15px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-    .close-button {
-      box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.1);
-      height: 50px;
-      width: 50px;
-      top: 40px;
-      right: 40px;
-      border: none;
-      ftb-icon {
-        height: 12px;
-        width: 12px;
-        fill: rgba(0, 0, 0, 0.6);
-      }
-    }
   }
 }
 

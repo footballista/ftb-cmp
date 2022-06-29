@@ -29,6 +29,14 @@ export class FtbShowcasePage {
         </p>
         <h2>Changelog</h2>
         <div class="changelog-row">
+          <b>3.9.0</b>
+          <span class="date">29 June 2022</span>
+          <ul>
+            <li>Crated ftb-partner-banner</li>
+            <li>Added close button to cup net explorer</li>
+          </ul>
+        </div>
+        <div class="changelog-row">
           <b>3.8.0</b>
           <span class="date">14 June 2022</span>
           <ul>

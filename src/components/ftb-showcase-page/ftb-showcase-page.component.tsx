@@ -28,6 +28,7 @@ export class FtbShowcasePage {
         'ftb-league-sports-icon',
         'ftb-flag',
         'ftb-partner-photo',
+        'ftb-partner-banner',
         'ftb-country-photo',
       ],
     },
