@@ -10,6 +10,7 @@ import { Headers } from 'node-fetch';
 export class FtbPartnerBanner {
   @Prop() slotCode!: BannerSlotCode;
   @Prop() leagueId: number;
+  @Prop() origin: string;
   @State() loaded = false;
   private banner: Banner;
   private httpClient: HttpClient;
@@ -35,7 +36,7 @@ export class FtbPartnerBanner {
         body: {
           slotCode: this.slotCode,
           appKey: envState.appKey,
-          origin: envState.localHost,
+          origin: this.origin,
           leagueId: this.leagueId,
         },
       }),
