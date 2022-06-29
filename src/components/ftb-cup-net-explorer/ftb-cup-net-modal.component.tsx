@@ -1,5 +1,5 @@
 import { Component, Host, h, Method, Element, Event, EventEmitter } from '@stencil/core';
-
+import CloseIcon from '../../assets/icons/close.svg';
 // import { Component, Prop, Host, h, Element, Method, Event, EventEmitter } from '@stencil/core';
 // import { Stage, Team } from 'ftb-models';
 // import CollapseIcon from '../../assets/icons/collapse.svg';
@@ -115,6 +115,9 @@ export class FtbCupNetModal {
   render() {
     return (
       <Host>
+        <button onClick={() => this.close()} class="close-button">
+          <ftb-icon svg={CloseIcon} />
+        </button>
         <div onClick={e => this.onBackdropClick(e)} class="backdrop" />
       </Host>
     );
