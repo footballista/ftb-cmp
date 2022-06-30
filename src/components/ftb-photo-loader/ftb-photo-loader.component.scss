@@ -6,6 +6,9 @@ ftb-photo-loader {
     left: 0;
     overflow: hidden;
   }
+  .hidden {
+    opacity: 0;
+  }
   .frame {
     position: relative;
 

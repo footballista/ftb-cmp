@@ -23,10 +23,10 @@ export class FtbPhotoLoader {
   renderFrame() {
     return (
       <div class={'frame ' + (this.modeButtonsOpen ? 'mode-open' : '')}>
-        <div class="slot">
+        <div class={'slot ' + (this.img ? 'hidden' : '')}>
           <slot />
         </div>
-        <img class={'new-img ' + (this.img ? 'visible' : '')} src={this.img} />
+        <img class={'new-img ' + (!this.img ? 'hidden' : 'visible')} src={this.img} />
         <div class="frame-backdrop" />
         <button
           onClick={() => (this.modeButtonsOpen = !this.modeButtonsOpen)}

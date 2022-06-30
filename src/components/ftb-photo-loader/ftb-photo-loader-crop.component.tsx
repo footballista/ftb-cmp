@@ -46,16 +46,12 @@ export class FtbPhotoLoader {
   cropImage() {
     const canvas = document.createElement('canvas');
     const { left, top, height, width } = this.cropFrameEl.getBoundingClientRect();
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    canvas.setAttribute('height', window.innerHeight + '');
-    canvas.setAttribute('width', window.innerWidth + '');
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(this.img, this.translateX - left, this.translateY - top, width, height);
     canvas.height = height;
     canvas.width = width;
     canvas.setAttribute('height', height + '');
     canvas.setAttribute('width', width + '');
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(this.img, this.translateX - left, this.translateY - top);
     this.crop.emit(canvas.toDataURL());
   }
 
