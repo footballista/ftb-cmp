@@ -1,0 +1,68 @@
+ftb-photo-loader-stories {
+  .slot {
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+  }
+  .frame {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    .frame-backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      transition: opacity 0.3s ease-in-out;
+    }
+    button {
+      height: 50px;
+      width: 50px;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+    .mode-select-button {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      cursor: pointer;
+      ftb-icon {
+        height: 12px;
+        width: 12px;
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+    .mode-button {
+      bottom: 0;
+      left: 50%;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+      transform: translate(-50%, 50%);
+      ftb-icon {
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    &.mode-open {
+      .mode-select-button {
+        ftb-icon {
+          transform: rotate(405deg);
+        }
+      }
+      .mode-button.camera {
+        transform: translate(-150%, -50%);
+      }
+      .mode-button.gallery {
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+}
+
+ftb-photo-loader-crop {
+  transition: opacity 0.3s ease-in-out;
+  .workbench {
+    background: white;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,61 @@
+ftb-photo-loader {
+  .slot {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  .frame {
+    position: relative;
+
+    .new-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      &.visible {
+        opacity: 1;
+      }
+    }
+    .frame-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 2;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+    }
+    button {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mode-select-button {
+      z-index: 4;
+    }
+    .mode-button {
+      z-index: 3;
+      pointer-events: none;
+    }
+    &.mode-open {
+      .mode-button {
+        pointer-events: auto;
+      }
+      .frame-backdrop {
+        pointer-events: auto;
+        opacity: 1;
+      }
+    }
+  }
+}
