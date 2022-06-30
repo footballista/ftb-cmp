@@ -23,6 +23,10 @@ ftb-photo-loader-crop {
     pointer-events: none;
   }
 
+  .new-img {
+    border-radius: 10px;
+  }
+
   .workbench {
     position: absolute;
     top: 50%;
@@ -40,7 +44,7 @@ ftb-photo-loader-crop {
       position: absolute;
       top: 0;
       left: 0;
-      background: gold;
+      background: black;
     }
     .crop-frame {
       position: absolute;

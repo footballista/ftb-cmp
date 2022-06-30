@@ -28,6 +28,14 @@ export class FtbShowcasePage {
           <a href="https://storybook.footballista.ru">here</a>
         </p>
         <h2>Changelog</h2>
+
+        <div class="changelog-row">
+          <b>3.10.0</b>
+          <span class="date">30 June 2022</span>
+          <ul>
+            <li>Crated ftb-photo-loader component</li>
+          </ul>
+        </div>
         <div class="changelog-row">
           <b>3.9.0</b>
           <span class="date">29 June 2022</span>
