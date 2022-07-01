@@ -72,57 +72,8 @@ export class FtbPhotoGallery {
   render() {
     if (!this.game) return;
 
-    return (
-      <Host>
-        {this.renderSlider()}
-        {/*{this.renderHelperImages()}*/}
-      </Host>
-    );
+    return <Host>{this.renderSlider()}</Host>;
   }
-
-  // private renderHelperImages() {
-  //   if (!this.gallery) return;
-  //   const currIdx = this.gallery.getCurrentIndex();
-  //
-  //   const getIdx = idx => {
-  //     if (idx < 0) return this.game.photoset.photos.items.length + idx;
-  //     if (idx >= this.game.photoset.photos.items.length) return idx - this.game.photoset.photos.items.length;
-  //     return idx;
-  //   };
-  //
-  //   const onImgLoad = (index, size) => {
-  //     if (this.gallery) {
-  //       if (size === 'hd') {
-  //         this.gallery.items[index].currSize = size;
-  //         this.gallery.items[index].src = this.game.photoset.photos.items[index].hd.url;
-  //         this.gallery.invalidateCurrItems();
-  //         this.gallery.updateSize(true);
-  //       } else if (size === 'full' && this.gallery.items[index].currSize !== 'hd') {
-  //         this.gallery.items[index].currSize = size;
-  //         this.gallery.items[index].src = this.game.photoset.photos.items[index].full.url;
-  //         this.gallery.invalidateCurrItems();
-  //         this.gallery.updateSize(true);
-  //       }
-  //     }
-  //   };
-  //
-  //   return (
-  //     <div class="help-images">
-  //       {[getIdx(currIdx - 1), getIdx(currIdx), getIdx(currIdx + 1)].map(i => {
-  //         const photo = this.game.photoset.photos.items[i];
-  //         return (
-  //           <div>
-  //             {this.game.photoset.photos.items[i].hd &&
-  //               (this.pswpEl.offsetWidth > photo.full.width || this.pswpEl.offsetHeight > photo.full.height) && (
-  //                 <img src={this.game.photoset.photos.items[i].hd.url} onLoad={() => onImgLoad(i, 'hd')} />
-  //               )}
-  //             <img src={this.game.photoset.photos.items[i].full?.url} onLoad={() => onImgLoad(i, 'full')} />
-  //           </div>
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // }
 
   private renderSlider() {
     return (

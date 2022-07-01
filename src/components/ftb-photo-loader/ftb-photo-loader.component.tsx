@@ -59,7 +59,25 @@ export class FtbPhotoLoader {
     this.modeButtonsOpen = false;
     if (!this.processingPhoto) {
       this.processingPhoto = true;
+      const el = document.createElement('ftb-photo-loader-crop');
+      el.addEventListener(
+        'crop',
+        e => {
+          this.img = e['detail'];
+          el.classList.add('closed');
+          el.addEventListener('transitionend', () => el.remove(), { once: true });
+          this.newImg.emit(e['detail']);
+        },
+        { once: true },
+      );
+      document.body.appendChild(el);
+
       try {
+        setTimeout(() => {
+          this.processingPhoto = false;
+          console.log('processing photo');
+        }, 1000); // promise isn't resolved when user clicks "cancel" while picking photo
+
         const img = (
           await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
@@ -69,19 +87,7 @@ export class FtbPhotoLoader {
           })
         ).dataUrl;
 
-        const el = document.createElement('ftb-photo-loader-crop');
         Object.assign(el, { base64: img });
-        el.addEventListener(
-          'crop',
-          e => {
-            this.img = e['detail'];
-            el.classList.add('closed');
-            el.addEventListener('transitionend', () => el.remove(), { once: true });
-            this.newImg.emit(e['detail']);
-          },
-          { once: true },
-        );
-        document.body.appendChild(el);
       } catch (e) {
         console.error(e);
       } finally {

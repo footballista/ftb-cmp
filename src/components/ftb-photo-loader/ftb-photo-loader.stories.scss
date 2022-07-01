@@ -19,6 +19,7 @@ ftb-photo-loader-stories {
       width: 50px;
       border: 2px solid black;
       border-radius: 10px;
+      background: lightblue;
     }
     .mode-select-button {
       bottom: 0;
@@ -61,8 +62,4 @@ ftb-photo-loader-stories {
 
 ftb-photo-loader-crop {
   transition: opacity 0.3s ease-in-out;
-  .workbench {
-    background: white;
-    border-radius: 10px;
-  }
 }

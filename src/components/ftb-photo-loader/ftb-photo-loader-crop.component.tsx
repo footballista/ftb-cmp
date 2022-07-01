@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Host, Prop, Element } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, Element, Watch, forceUpdate, State } from '@stencil/core';
 import { translations, userState } from 'ftb-models';
 import CloseIcon from '../../assets/icons/close.svg';
 import CheckmarkIcon from '../../assets/icons/checkmark.svg';
@@ -10,6 +10,7 @@ import CheckmarkIcon from '../../assets/icons/checkmark.svg';
 })
 export class FtbPhotoLoader {
   @Prop() base64: string;
+  @State() loading = true;
   @Event() crop: EventEmitter<string>;
   @Element() el;
   lastMoveX: number;
@@ -24,18 +25,28 @@ export class FtbPhotoLoader {
   translateY = 0;
   scale = 1;
 
+  @Watch('base64') onBase64Change() {
+    if (this.base64) {
+      this.loading = false;
+      forceUpdate(this.el);
+    }
+  }
+
   initCanvas(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+
+    this.canvas.height = window.innerHeight;
+    this.canvas.width = window.innerWidth;
+    this.canvas.setAttribute('height', window.innerHeight + '');
+    this.canvas.setAttribute('width', window.innerWidth + '');
+
     this.img = new Image();
     this.img.src = this.base64;
-    this.canvas = canvas;
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    canvas.setAttribute('height', window.innerHeight);
-    canvas.setAttribute('width', window.innerWidth);
-    this.ctx = canvas.getContext('2d');
     this.img.addEventListener('load', () => {
-      this.ctx.drawImage(this.img, 0, 0);
+      this.applyTransformations();
     });
+
     canvas.addEventListener('touchstart', e => {
       this.onTouchStart(e);
     });
@@ -56,8 +67,8 @@ export class FtbPhotoLoader {
       this.img,
       this.translateX - left,
       this.translateY - top,
-      this.canvas.width * this.scale,
-      this.canvas.height * this.scale,
+      this.img.width * this.scale,
+      this.img.height * this.scale,
     );
     this.crop.emit(canvas.toDataURL());
   }
@@ -66,10 +77,7 @@ export class FtbPhotoLoader {
     return (
       <Host>
         <div class="backdrop" onClick={() => this.crop.emit(null)} />
-        <div class="workbench">
-          <canvas ref={e => this.initCanvas(e)} />
-          <div class="crop-frame" ref={el => (this.cropFrameEl = el)} />
-        </div>
+        <div class="workbench">{this.renderCanvas()}</div>
         <div class="control-panel">
           <button onClick={() => this.crop.emit(null)}>
             <ftb-icon svg={CloseIcon} />
@@ -82,6 +90,22 @@ export class FtbPhotoLoader {
         </div>
       </Host>
     );
+  }
+
+  renderCanvas() {
+    if (this.loading) {
+      return <ftb-spinner />;
+    } else {
+      return [
+        <canvas ref={e => this.initCanvas(e)} />,
+        <div class="crop-frame" ref={el => (this.cropFrameEl = el)}>
+          <div class="rail h" />
+          <div class="rail h" />
+          <div class="rail v" />
+          <div class="rail v" />
+        </div>,
+      ];
+    }
   }
 
   onTouchStart(e) {
@@ -150,8 +174,8 @@ export class FtbPhotoLoader {
       this.img,
       this.translateX,
       this.translateY,
-      this.canvas.width * this.scale,
-      this.canvas.height * this.scale,
+      this.img.width * this.scale,
+      this.img.height * this.scale,
     );
   }
 }
