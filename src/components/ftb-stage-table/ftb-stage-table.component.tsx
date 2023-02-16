@@ -4,7 +4,6 @@ import {
   TableRow,
   translations,
   userState,
-  Sports,
   GameState,
   Team,
   createEntityRoute,
@@ -115,50 +114,52 @@ export class FtbStageTable {
       name: false,
       games: true,
       chess: false,
-      wdl: false,
+      wdl: true,
       wl: false,
-      gd: false,
+      gd: true,
       points: true,
       form: false,
       winPercent: false,
     };
 
-    const containerWidth = this.el.clientWidth;
-    const getTypeWidth = (key: string): number => {
-      if (key == 'chess') return this.W[key] * this.stage.table.length;
-      return this.W[key];
-    };
-    const currentWidth = () =>
-      Object.keys(structure)
-        .filter(k => structure[k])
-        .reduce((sum, k) => sum + getTypeWidth(k), 0);
-    const sports = this.stage.league.sports;
+    // код внизу - валидный, но лень в нём разбираться, тк либа уже нигде не будет использоваться. хардкодим структуру чтобы показывать только вид для мобилки в футболе
 
-    structure.label = this.stage.table.some(t => t.label);
-    if (sports == Sports.basketball) {
-      structure.winPercent = currentWidth() + this.W.winPercent < containerWidth;
-    }
-    if ([Sports.football, Sports.water_polo].includes(sports)) {
-      structure.wdl = currentWidth() + this.W.wdl < containerWidth;
-    }
-    if ([Sports.beach_soccer, Sports.volleyball, Sports.basketball].includes(sports)) {
-      structure.wl = currentWidth() + this.W.wl < containerWidth;
-    }
-    structure.gd = currentWidth() + this.W.gd < containerWidth;
-
-    if (this.showChess) {
-      structure.chess = currentWidth() + getTypeWidth('chess') < containerWidth;
-    }
-
-    structure.form = currentWidth() + this.W.form < containerWidth;
-
-    if (currentWidth() - this.W.shortName + this.W.fullName < containerWidth) {
-      structure.name = true;
-      structure.shortName = false;
-    } else {
-      structure.shortName = true;
-      structure.name = false;
-    }
+   // const containerWidth = this.el.clientWidth;
+    // const getTypeWidth = (key: string): number => {
+    //   if (key == 'chess') return this.W[key] * this.stage.table.length;
+    //   return this.W[key];
+    // };
+    // const currentWidth = () =>
+    //   Object.keys(structure)
+    //     .filter(k => structure[k])
+    //     .reduce((sum, k) => sum + getTypeWidth(k), 0);
+    // const sports = this.stage.league.sports;
+    //
+    // structure.label = this.stage.table.some(t => t.label);
+    // if (sports == Sports.basketball) {
+    //   structure.winPercent = currentWidth() + this.W.winPercent < containerWidth;
+    // }
+    // if ([Sports.football, Sports.water_polo].includes(sports)) {
+    //   structure.wdl = currentWidth() + this.W.wdl < containerWidth;
+    // }
+    // if ([Sports.beach_soccer, Sports.volleyball, Sports.basketball].includes(sports)) {
+    //   structure.wl = currentWidth() + this.W.wl < containerWidth;
+    // }
+    // structure.gd = currentWidth() + this.W.gd < containerWidth;
+    //
+    // if (this.showChess) {
+    //   structure.chess = currentWidth() + getTypeWidth('chess') < containerWidth;
+    // }
+    //
+    // structure.form = currentWidth() + this.W.form < containerWidth;
+    //
+    // if (currentWidth() - this.W.shortName + this.W.fullName < containerWidth) {
+    //   structure.name = true;
+    //   structure.shortName = false;
+    // } else {
+    //   structure.shortName = true;
+    //   structure.name = false;
+    // }
     this.structure = structure;
   }
 
