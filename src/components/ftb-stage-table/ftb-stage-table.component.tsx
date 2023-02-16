@@ -1,14 +1,5 @@
 import { Component, h, Host, Prop, State, Element, Build } from '@stencil/core';
-import {
-  Stage,
-  TableRow,
-  translations,
-  userState,
-  GameState,
-  Team,
-  createEntityRoute,
-  routingState,
-} from 'ftb-models';
+import { Stage, TableRow, translations, userState, GameState, Team, createEntityRoute, routingState } from 'ftb-models';
 import Chevron from '../../assets/icons/chevron-down.svg';
 import ChampionsLeague from '../../assets/icons/champions-league.svg';
 import EuropaLeague from '../../assets/icons/europa-league.svg';
@@ -124,7 +115,7 @@ export class FtbStageTable {
 
     // код внизу - валидный, но лень в нём разбираться, тк либа уже нигде не будет использоваться. хардкодим структуру чтобы показывать только вид для мобилки в футболе
 
-   // const containerWidth = this.el.clientWidth;
+    // const containerWidth = this.el.clientWidth;
     // const getTypeWidth = (key: string): number => {
     //   if (key == 'chess') return this.W[key] * this.stage.table.length;
     //   return this.W[key];
