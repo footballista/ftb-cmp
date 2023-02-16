@@ -165,6 +165,7 @@ export class FtbStageTable {
   }
 
   private renderHead() {
+    console.log(this.structure);
     return (
       <div class="head">
         {this.structure.label && <div class="label" style={this.getFieldStyle('label')} />}
